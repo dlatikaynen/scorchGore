@@ -38,7 +38,7 @@
             this.ScorchGore = new System.Windows.Forms.Label();
             this.Copyright = new System.Windows.Forms.TextBox();
             this.PlayerNames = new System.Windows.Forms.Label();
-            this.SchussEingabefeld = new System.Windows.Forms.Panel();
+            this.SchussEingabefeld = new Durchsichtig();
             this.Ladung = new System.Windows.Forms.TextBox();
             this.Winkel = new System.Windows.Forms.TextBox();
             this.NameDesDranSeienden = new System.Windows.Forms.Label();
@@ -220,6 +220,7 @@
             // 
             // NameDesDranSeienden
             // 
+            this.NameDesDranSeienden.BackColor = System.Drawing.Color.Transparent;
             this.NameDesDranSeienden.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameDesDranSeienden.ForeColor = System.Drawing.Color.Yellow;
             this.NameDesDranSeienden.Location = new System.Drawing.Point(3, 0);
@@ -233,6 +234,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(3, 98);
             this.label5.Name = "label5";
@@ -243,12 +245,14 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(3, 39);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(157, 28);
             this.label6.TabIndex = 0;
             this.label6.Text = "Winkel Alter";
+            this.label6.UseMnemonic = false;
             // 
             // Main
             // 
@@ -273,7 +277,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Scorch Gore";
-            this.Load += new System.EventHandler(this.Main_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
             this.WeltErzeugen.ResumeLayout(false);
             this.WeltErzeugen.PerformLayout();
@@ -299,7 +302,7 @@
         private System.Windows.Forms.Label ScorchGore;
         private System.Windows.Forms.TextBox Copyright;
         private System.Windows.Forms.Label PlayerNames;
-        private System.Windows.Forms.Panel SchussEingabefeld;
+        private Durchsichtig SchussEingabefeld;
         private System.Windows.Forms.Label NameDesDranSeienden;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;

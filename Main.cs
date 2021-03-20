@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScorchGore.Klassen;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +24,7 @@ namespace ScorchGore
         private Spieler spielerEins;
         private Spieler spielerZwei;
         private Spieler dranSeiender;
+        private Audio Audio = new Audio();
 
         public Main()
         {
@@ -46,6 +48,8 @@ namespace ScorchGore
                 Y = Main.spielerBasisHoehe
             };
         }
+
+        internal Spieler Gegner => object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? this.spielerZwei : this.spielerEins;
 
         private void Main_KeyDown(object sender, KeyEventArgs e)
         {
@@ -147,8 +151,6 @@ namespace ScorchGore
                     var himmelsFarbe = this.levelBild.GetPixel(1, 1);
                     while (weiterFallen)
                     {
-                        this.SpielerZeichnen(zeichenFlaeche, fallenderSpieler);
-                        this.Refresh();
                         for (
                             var schauenX = fallenderSpieler.X - Main.spielerHalbeBreite;
                             schauenX <= fallenderSpieler.X + Main.spielerHalbeBreite;
@@ -158,14 +160,17 @@ namespace ScorchGore
                             if (this.levelBild.GetPixel(schauenX, fallenderSpieler.Y + 1) != himmelsFarbe)
                             {
                                 weiterFallen = false;
-                                break;
+                                return;
                             }
                         }
 
                         if (weiterFallen)
                         {
                             fallenderSpieler.Y += 2;
-                        }                        
+                        }
+
+                        this.SpielerZeichnen(zeichenFlaeche, fallenderSpieler);
+                        this.Refresh();
                     }
                 }
             }
@@ -251,17 +256,23 @@ namespace ScorchGore
             var schussErgebnis = this.Schiessen(schussEingabe);
 
             /* wenn keiner getroffen wurde, rollen tauschen,
-                * der andere spieler ist dran */
-            if (schussErgebnis != SchussErgebnis.GegnerGekillt)
+             * der andere spieler ist dran */
+            if (schussErgebnis == SchussErgebnis.GegnerGekillt)
             {
-                this.dranSeiender = object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? this.spielerZwei : this.spielerEins;
+                this.Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
+            }
+            else
+            {
                 /* falls ein berg getroffen wurde, kann es sein, dass der andere spieler
                  * den boden unter sich verloren hat, und tiefer fällt */
                 if (schussErgebnis == SchussErgebnis.BergGetroffen)
                 {
-                    this.SpielerFallen(dranSeiender);
+                    Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
+                    this.SpielerFallen(this.Gegner);
                 }
 
+                /* spieler wechseln sich jetzt ab */
+                this.dranSeiender = this.Gegner;
                 this.RundeVorbereiten();
             }
         }
@@ -282,51 +293,72 @@ namespace ScorchGore
         {
             /* schiessen wir nach rechts (spieler 1) oder nach links (spieler 2)? */
             var schussRichtung = object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? 1 : -1;
+            var v = (float)schussEingabe.SchussKraft;
+            var vSkaliert = 1.0f / (v * 0.5f); 
+            var mathWinkel = Math.PI * (float)(180 - schussEingabe.SchussWinkel) / 180f;
+            var muendungVerlassen = false;
+            var behandeltePixel = new List<long>();
 
             /* von hier nach dort x laufen lassen */
-            var zeitFaktor = 0f;
             for (
-                var x = this.dranSeiender.X;
-                (schussRichtung == 1 && x < this.Width) || (schussRichtung == -1 && x >= 0);
-                x += 2 * schussRichtung
+                var t = 0.0f;
+                ;
+                t += vSkaliert
             )
             {
                 /* formel für die schuss-parabel mit schwerkraft
-                 * (quadratische gleichung):
-                 * 
-                 * y = v0 * sin(θ) * t − 4.9 * t²
-                 *
-                 */
-                var mathWinkel = Math.PI * (float)((schussRichtung == 1 ? 0 : 0) + schussEingabe.SchussWinkel) / 180f;
-                var y = (float)schussEingabe.SchussKraft * Math.Sin(mathWinkel) * zeitFaktor - 4.9f * zeitFaktor * zeitFaktor;
-                zeitFaktor += 0.05f;
+
+                    x = v * cos(angle) * t;
+                    y = v * sin(angle) * t - 0.5 * g * t²;
+
+                */
+                var x = v * Math.Cos(mathWinkel) * t;
+                var y = v * Math.Sin(mathWinkel) * t - 4.9 * t * t;
 
                 /* schuss zeichnen */
+                var pixelX = this.dranSeiender.X - (int)x * schussRichtung;
                 var pixelY = this.dranSeiender.Y - (int)y;
-                if (pixelY > 0 && pixelY < this.levelBild.Height)
+                if (pixelY > 0 && pixelY < this.levelBild.Height && pixelX > 0 && pixelX < this.levelBild.Width)
                 {
-                    this.levelBild.SetPixel(x, pixelY, ((SolidBrush)this.dranSeiender.Farbe).Color);
+                    var pixelFach = ((long)pixelY << 32) + (long)pixelX;
+                    if (!behandeltePixel.Contains(pixelFach))
+                    {
+                        var hitColor = this.levelBild.GetPixel(pixelX, pixelY).ToArgb();
+                        if (muendungVerlassen == false)
+                        {
+                            if (hitColor != ((SolidBrush)this.dranSeiender.Farbe).Color.ToArgb())
+                            {
+                                this.Audio.GeraeuschAbspielen(Geraeusche.SchussStart);
+                                muendungVerlassen = true;
+                            }
+                        }
+                        else
+                        {
+                            if (hitColor == ((SolidBrush)this.Gegner.Farbe).Color.ToArgb())
+                            {
+                                return SchussErgebnis.GegnerGekillt;
+                            }
+                            else if (hitColor != Color.DarkSlateGray.ToArgb())
+                            {
+                                return SchussErgebnis.BergGetroffen;
+                            }
+
+                            this.levelBild.SetPixel(pixelX, pixelY, ((SolidBrush)this.dranSeiender.Farbe).Color);
+                            behandeltePixel.Add(pixelFach);
+                        }
+                    }
                 }
 
                 this.Refresh();
+
+                /* schuss ist links, rechts, oder unten rausgeflogen */
+                if (pixelY > this.levelBild.Height || pixelX < 0 || pixelX > this.levelBild.Width)
+                {
+                    break;
+                }
             }
 
-            return SchussErgebnis.NichtGeschossen;
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Main_Load(object sender, EventArgs e)
-        {
-
+            return SchussErgebnis.NixGetroffen;
         }
     }
 }
