@@ -54,11 +54,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SchussEingabe.cs" />
-    <Compile Include="SchussErgebnis.cs" />
-    <Compile Include="Spieler.cs" />
-    <Compile Include="SpielerNamen.cs" />
-    <Compile Include="SpielPhase.cs" />
+    <Compile Include="Klassen\SchussEingabe.cs" />
+    <Compile Include="Aufzaehlungen\SchussErgebnis.cs" />
+    <Compile Include="Klassen\Spieler.cs" />
+    <Compile Include="Aufzaehlungen\SpielerNamen.cs" />
+    <Compile Include="Aufzaehlungen\SpielPhase.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
