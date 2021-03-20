@@ -207,7 +207,6 @@
             this.Ladung.Name = "Ladung";
             this.Ladung.Size = new System.Drawing.Size(221, 24);
             this.Ladung.TabIndex = 4;
-            this.Ladung.Text = "90";
             // 
             // Winkel
             // 
@@ -218,7 +217,6 @@
             this.Winkel.Name = "Winkel";
             this.Winkel.Size = new System.Drawing.Size(221, 24);
             this.Winkel.TabIndex = 3;
-            this.Winkel.Text = "30";
             // 
             // NameDesDranSeienden
             // 

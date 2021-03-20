@@ -59,8 +59,10 @@ namespace ScorchGore
                 }                
                 else if(this.spielPhase == SpielPhase.Schusseingabe)
                 {
-                    this.RundeAustragen();
+                    this.SchussEingeben();
                 }
+
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
 
@@ -188,7 +190,7 @@ namespace ScorchGore
             zeichenFlaeche.FillPie(
                 gezeichneterSpieler.Farbe,
                 gezeichneterSpieler.X - Main.spielerHalbeBreite,
-                gezeichneterSpieler.Y - Main.spielerBasisHoehe,
+                gezeichneterSpieler.Y - Main.spielerBasisHoehe + 1,
                 Main.spielerBreite,
                 2 * Main.spielerBasisHoehe,
                 0f,
@@ -206,7 +208,36 @@ namespace ScorchGore
         {
             this.NameDesDranSeienden.Text = $"{ (object.ReferenceEquals(this.spielerEins,this.dranSeiender) ? "← " : string.Empty) }{ this.dranSeiender.Name }{ (object.ReferenceEquals(this.spielerZwei,this.dranSeiender) ? " →" : string.Empty) }";
             this.spielPhase = SpielPhase.Schusseingabe;
+            this.Winkel.Text = this.Ladung.Text = string.Empty;
             this.SchussEingabefeld.Show();
+            this.Winkel.Focus();
+        }
+
+        private void SchussEingeben()
+        {
+            if (int.TryParse(this.Winkel.Text, out int winkelWert)
+                && int.TryParse(this.Ladung.Text, out int ladungWert)
+                && winkelWert >= 0
+                && winkelWert < 90
+                && ladungWert > 0
+                && ladungWert <= 200
+            )
+            {
+                this.RundeAustragen();
+            }
+            else
+            {
+                if (this.Winkel.ContainsFocus)
+                {
+                    this.Ladung.Focus();
+                    this.Ladung.SelectAll();
+                }
+                else
+                {
+                    this.Winkel.Focus();
+                    this.Winkel.SelectAll();
+                }
+            }
         }
 
         private void RundeAustragen()
@@ -249,7 +280,36 @@ namespace ScorchGore
 
         private SchussErgebnis Schiessen(SchussEingabe schussEingabe)
         {
+            /* schiessen wir nach rechts (spieler 1) oder nach links (spieler 2)? */
+            var schussRichtung = object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? 1 : -1;
 
+            /* von hier nach dort x laufen lassen */
+            var zeitFaktor = 0f;
+            for (
+                var x = this.dranSeiender.X;
+                (schussRichtung == 1 && x < this.Width) || (schussRichtung == -1 && x >= 0);
+                x += 2 * schussRichtung
+            )
+            {
+                /* formel für die schuss-parabel mit schwerkraft
+                 * (quadratische gleichung):
+                 * 
+                 * y = v0 * sin(θ) * t − 4.9 * t²
+                 *
+                 */
+                var mathWinkel = Math.PI * (float)((schussRichtung == 1 ? 0 : 0) + schussEingabe.SchussWinkel) / 180f;
+                var y = (float)schussEingabe.SchussKraft * Math.Sin(mathWinkel) * zeitFaktor - 4.9f * zeitFaktor * zeitFaktor;
+                zeitFaktor += 0.05f;
+
+                /* schuss zeichnen */
+                var pixelY = this.dranSeiender.Y - (int)y;
+                if (pixelY > 0 && pixelY < this.levelBild.Height)
+                {
+                    this.levelBild.SetPixel(x, pixelY, ((SolidBrush)this.dranSeiender.Farbe).Color);
+                }
+
+                this.Refresh();
+            }
 
             return SchussErgebnis.NichtGeschossen;
         }
