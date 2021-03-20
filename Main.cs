@@ -25,6 +25,7 @@ namespace ScorchGore
         private Spieler spielerZwei;
         private Spieler dranSeiender;
         private Audio Audio = new Audio();
+        private Bitmap ausgangsZustand;
 
         public Main()
         {
@@ -79,6 +80,7 @@ namespace ScorchGore
             this.PlayerNames.Show();
             this.SchussEingabefeld.Left = this.Width / 2 - this.SchussEingabefeld.Width / 2;
             this.levelBild = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
+            this.ausgangsZustand = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
             this.BackgroundImage = this.levelBild;
             /* berg-steilheit und rauhheit und höhenprofil mit zufallszahlen bestimmen */
             var verfuegbareBergHoehe = this.Height - Main.obererRand;
@@ -253,6 +255,7 @@ namespace ScorchGore
             var schussEingabe = this.SchussAbfrage();
 
             /* den schuss ausführen und schauen (ob) was getroffen wurde */
+            this.AusgangszustandSichern();
             var schussErgebnis = this.Schiessen(schussEingabe);
 
             /* wenn keiner getroffen wurde, rollen tauschen,
@@ -263,6 +266,8 @@ namespace ScorchGore
             }
             else
             {
+                this.AusgangszustandWiederherstellen();
+
                 /* falls ein berg getroffen wurde, kann es sein, dass der andere spieler
                  * den boden unter sich verloren hat, und tiefer fällt */
                 if (schussErgebnis == SchussErgebnis.BergGetroffen)
@@ -340,7 +345,14 @@ namespace ScorchGore
                             }
                             else if (hitColor != Color.DarkSlateGray.ToArgb())
                             {
-                                return SchussErgebnis.BergGetroffen;
+                                if (hitColor == ((SolidBrush)this.dranSeiender.Farbe).Color.ToArgb())
+                                {
+                                    return SchussErgebnis.SelbstErschossen;
+                                }
+                                else
+                                {
+                                    return SchussErgebnis.BergGetroffen;
+                                }
                             }
 
                             this.levelBild.SetPixel(pixelX, pixelY, ((SolidBrush)this.dranSeiender.Farbe).Color);
@@ -359,6 +371,22 @@ namespace ScorchGore
             }
 
             return SchussErgebnis.NixGetroffen;
+        }
+
+        private void AusgangszustandSichern()
+        {
+            using (var bildKopieren = Graphics.FromImage(this.ausgangsZustand))
+            {
+                bildKopieren.DrawImageUnscaled(this.levelBild, 0, 0);
+            }
+        }
+
+        private void AusgangszustandWiederherstellen()
+        {
+            using (var bildKopieren = Graphics.FromImage(this.levelBild))
+            {
+                bildKopieren.DrawImageUnscaled(this.ausgangsZustand, 0, 0);
+            }
         }
     }
 }
