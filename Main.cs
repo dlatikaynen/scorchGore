@@ -18,6 +18,7 @@ namespace ScorchGore
         private const int spielerBreite = 30;
         private const int spielerBasisHoehe = 15;
         private const int spielerHalbeBreite = Main.spielerBreite / 2;
+        private const float schwerkraftFaktor = 9.81f / 2.0f;
 
         private SpielPhase spielPhase;
         private Bitmap levelBild;
@@ -267,6 +268,7 @@ namespace ScorchGore
             else
             {
                 this.AusgangszustandWiederherstellen();
+                this.Refresh();
 
                 /* falls ein berg getroffen wurde, kann es sein, dass der andere spieler
                  * den boden unter sich verloren hat, und tiefer fällt */
@@ -313,12 +315,12 @@ namespace ScorchGore
             {
                 /* formel für die schuss-parabel mit schwerkraft
 
-                    x = v * cos(angle) * t;
-                    y = v * sin(angle) * t - 0.5 * g * t²;
+                    x = v * cos(winkel) * t;
+                    y = v * sin(winkel) * t - 0.5g * t²;
 
                 */
                 var x = v * Math.Cos(mathWinkel) * t;
-                var y = v * Math.Sin(mathWinkel) * t - 4.9 * t * t;
+                var y = v * Math.Sin(mathWinkel) * t - Main.schwerkraftFaktor * t * t;
 
                 /* schuss zeichnen */
                 var pixelX = this.dranSeiender.X - (int)x * schussRichtung;
