@@ -1,10 +1,7 @@
 ﻿using ScorchGore.Aufzaehlungen;
 using ScorchGore.Klassen;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ScorchGore.OnlineMultiplayer
@@ -12,6 +9,7 @@ namespace ScorchGore.OnlineMultiplayer
     internal class MultiplayerCloud
     {
         private const string cloudBaseUrl = "https://scorchgore.azurewebsites.net/api/MitspielerFinden?code=eFNAC9zQeVCnpJ7WaDtoG5aWfMR2plCtKl3saUninKMJ/cOsj/fPNA==";
+        private const string cloudPlayUrl = "https://scorchgore.azurewebsites.net/api/RundeAustragen?code=AXMVyTiXtQZkCvL8zzNb8IHFaGpsMglpzeN66iMfr1sRp/EneLHWsg==";
 
         private Guid ownPlayerID;
         private Guid joinedSessionID;
@@ -27,12 +25,43 @@ namespace ScorchGore.OnlineMultiplayer
         internal int BergZufallszahl { get; set; }
         internal bool IsOnlineGame { get; private set; }
 
+        private Guid SitzungsID => this.joinedSessionID.Equals(Guid.Empty) ? this.ownPlayerID : this.joinedSessionID;
+
+        internal async Task<SchussEingabe> AufGegnerSchussWarten()
+        {
+            var gegnerischeEingabe = new SchussEingabe();
+            var weiterWarten = true;
+            do
+            {
+                var wartenAntwort = await this.RoundTrip(
+                    MultiplayerCloud.cloudPlayUrl,
+                    "P",
+                    new Tuple<string, string>("s", this.SitzungsID.ToString("N").ToLowerInvariant())
+                );
+
+                if (wartenAntwort.ToLower() == "warten")
+                {
+                    await Task.Delay(1000);
+                }
+                else
+                {
+                    weiterWarten = false;
+                    var schussEingabe = wartenAntwort.Split(',');
+                    gegnerischeEingabe.SchussWinkel = int.Parse(schussEingabe[0]);
+                    gegnerischeEingabe.SchussKraft = int.Parse(schussEingabe[1]);
+                }
+            } while (weiterWarten);
+
+            return gegnerischeEingabe;
+        }
+
         internal async Task<LevelBeschreibung> MitspielerFinden(LevelBeschreibung meineLevelBeschreibung)
         {
             /* reihenfolge der levelbecshreibungs-werte und rückgabewerte:
              * siehe MitspielerFinden.csx cloud function skript */
             var levelParameter = $@"{ meineLevelBeschreibung.BergZufallszahl },{ meineLevelBeschreibung.BergMinHoeheProzent },{ meineLevelBeschreibung.BergMaxHoeheProzent },{ meineLevelBeschreibung.BergRauhheitProzent }";
             var findenAntwort = await this.RoundTrip(
+                MultiplayerCloud.cloudBaseUrl,
                 "HELO",
                 new Tuple<string, string>("u", this.ownPlayerID.ToString("N").ToLowerInvariant()),
                 new Tuple<string, string>("lp", levelParameter)
@@ -71,7 +100,17 @@ namespace ScorchGore.OnlineMultiplayer
             return meineLevelBeschreibung;
         }
 
-        private async Task<string> RoundTrip(string verb, params Tuple<string,string>[] parameters)
+        internal async Task SchussMelden(int winkelWert, int staerkeWert)
+        {
+            var meldenAntwort = await this.RoundTrip(
+                MultiplayerCloud.cloudPlayUrl,
+                "S",
+                new Tuple<string, string>("s", this.SitzungsID.ToString("N").ToLowerInvariant()),
+                new Tuple<string, string>("sp", $"{ winkelWert },{ staerkeWert }")
+            );
+        }
+
+        private async Task<string> RoundTrip(string aufrufUrl, string verb, params Tuple<string,string>[] parameters)
         {
             var parameterString = string.Empty;
             foreach(var parameter in parameters)
@@ -79,8 +118,7 @@ namespace ScorchGore.OnlineMultiplayer
                 parameterString = $@"{ parameterString }&{ parameter.Item1 }={ parameter.Item2 }";
             }
 
-            return await new WebClient().DownloadStringTaskAsync($@"{ MultiplayerCloud.cloudBaseUrl }&v={ verb }{ parameterString }");
+            return await new WebClient().DownloadStringTaskAsync($@"{ aufrufUrl }&v={ verb }{ parameterString }");
         }
-
     }
 }

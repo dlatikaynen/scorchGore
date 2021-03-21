@@ -8,6 +8,7 @@
         WeltWirdErzeugt,
         SpielerFallenRundeBeginnt, 
         Schusseingabe,
-        SpielrundeAktiv
+        SpielrundeAktiv,
+        AufOnlineSchussWarten
     }
 }

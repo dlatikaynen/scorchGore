@@ -58,7 +58,7 @@ namespace ScorchGore
 
         internal Spieler Gegner => object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? this.spielerZwei : this.spielerEins;
 
-        private void Main_KeyDown(object sender, KeyEventArgs e)
+        private async void Main_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Modifiers == Keys.None && (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return))
             {
@@ -68,7 +68,7 @@ namespace ScorchGore
                 }                
                 else if(this.spielPhase == SpielPhase.Schusseingabe)
                 {
-                    this.SchussEingeben();
+                    await this.SchussEingeben();
                 }
 
                 e.Handled = e.SuppressKeyPress = true;
@@ -284,13 +284,21 @@ namespace ScorchGore
         private void RundeVorbereiten()
         {
             this.NameDesDranSeienden.Text = $"{ (object.ReferenceEquals(this.spielerEins,this.dranSeiender) ? "← " : string.Empty) }{ this.dranSeiender.Name }{ (object.ReferenceEquals(this.spielerZwei,this.dranSeiender) ? " →" : string.Empty) }";
-            this.spielPhase = SpielPhase.Schusseingabe;
             this.Winkel.Text = this.Ladung.Text = string.Empty;
-            this.SchussEingabefeld.Show();
-            this.Winkel.Focus();
+            if (this.meinSpieler == null || this.dranSeiender == this.meinSpieler)
+            {
+                this.spielPhase = SpielPhase.Schusseingabe;
+                this.SchussEingabefeld.Show();
+                this.Winkel.Focus();
+            }
+            else
+            {
+                this.spielPhase = SpielPhase.AufOnlineSchussWarten;
+                this.RundeAustragen();
+            }
         }
 
-        private void SchussEingeben()
+        private async Task SchussEingeben()
         {
             if (int.TryParse(this.Winkel.Text, out int winkelWert)
                 && int.TryParse(this.Ladung.Text, out int ladungWert)
@@ -300,6 +308,11 @@ namespace ScorchGore
                 && ladungWert <= 200
             )
             {
+                if(this.MultiplayerCloud.IsOnlineGame)
+                {
+                    await this.MultiplayerCloud.SchussMelden(winkelWert, ladungWert);
+                }
+
                 this.RundeAustragen();
             }
             else
@@ -317,12 +330,23 @@ namespace ScorchGore
             }
         }
 
-        private void RundeAustragen()
+        private async void RundeAustragen()
         {
-            this.spielPhase = SpielPhase.SpielrundeAktiv;
+            SchussEingabe schussEingabe;
+            if (this.spielPhase == SpielPhase.AufOnlineSchussWarten)
+            {
+                /* warten, bis der andere spieler online was gemacht hat */
+                this.AufGegnerWarten.Show();
+                schussEingabe = await this.MultiplayerCloud.AufGegnerSchussWarten();
+                this.AufGegnerWarten.Hide();
+            }
+            else
+            {
+                /* den dran seienden spieler nach winkel und stärke fragen */
+                schussEingabe = this.SchussAbfrage();
+            }
 
-            /* den dran seienden spieler nach winkel und stärke fragen */
-            var schussEingabe = this.SchussAbfrage();
+            this.spielPhase = SpielPhase.SpielrundeAktiv;
 
             /* den schuss ausführen und schauen (ob) was getroffen wurde */
             this.AusgangszustandSichern();

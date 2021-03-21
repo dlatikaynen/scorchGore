@@ -81,6 +81,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="OnlineMultiplayer\MitspielerFinden.csx" />
+    <None Include="OnlineMultiplayer\RundeAustragen.csx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

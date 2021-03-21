@@ -51,14 +51,19 @@ namespace ScorchGore
             this.label6 = new System.Windows.Forms.Label();
             this.CloudVerbindung = new Durchsichtig();
             this.MitspielerFindenFortschritt = new System.Windows.Forms.ProgressBar();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.AufGegnerWarten = new Durchsichtig();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.WeltErzeugen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RauheitsfaktorProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HoechstHoeheProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MindesthoeheProzent)).BeginInit();
             this.SchussEingabefeld.SuspendLayout();
             this.CloudVerbindung.SuspendLayout();
+            this.AufGegnerWarten.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -297,8 +302,8 @@ namespace ScorchGore
             this.CloudVerbindung.BackColor = System.Drawing.Color.LightSkyBlue;
             this.CloudVerbindung.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.CloudVerbindung.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CloudVerbindung.Controls.Add(this.MitspielerFindenFortschritt);
             this.CloudVerbindung.Controls.Add(this.pictureBox1);
+            this.CloudVerbindung.Controls.Add(this.MitspielerFindenFortschritt);
             this.CloudVerbindung.Controls.Add(this.label4);
             this.CloudVerbindung.Location = new System.Drawing.Point(731, 28);
             this.CloudVerbindung.Name = "CloudVerbindung";
@@ -316,15 +321,6 @@ namespace ScorchGore
             this.MitspielerFindenFortschritt.TabIndex = 2;
             this.MitspielerFindenFortschritt.Value = 99;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 278);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(119, 82);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -337,12 +333,56 @@ namespace ScorchGore
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label4.UseMnemonic = false;
             // 
+            // AufGegnerWarten
+            // 
+            this.AufGegnerWarten.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.AufGegnerWarten.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.AufGegnerWarten.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AufGegnerWarten.Controls.Add(this.pictureBox2);
+            this.AufGegnerWarten.Controls.Add(this.label7);
+            this.AufGegnerWarten.Location = new System.Drawing.Point(372, 368);
+            this.AufGegnerWarten.Name = "AufGegnerWarten";
+            this.AufGegnerWarten.Size = new System.Drawing.Size(119, 138);
+            this.AufGegnerWarten.TabIndex = 7;
+            this.AufGegnerWarten.Visible = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.Location = new System.Drawing.Point(-1, 58);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(119, 82);
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(3, 6);
+            this.label7.Name = "label7";
+            this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label7.Size = new System.Drawing.Size(111, 47);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "waiting   for   other player\'s move";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label7.UseMnemonic = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(-1, 278);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(119, 82);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(862, 518);
+            this.Controls.Add(this.AufGegnerWarten);
             this.Controls.Add(this.CloudVerbindung);
             this.Controls.Add(this.SchussEingabefeld);
             this.Controls.Add(this.PlayerNames);
@@ -368,6 +408,8 @@ namespace ScorchGore
             this.SchussEingabefeld.ResumeLayout(false);
             this.SchussEingabefeld.PerformLayout();
             this.CloudVerbindung.ResumeLayout(false);
+            this.AufGegnerWarten.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -396,8 +438,11 @@ namespace ScorchGore
         private System.Windows.Forms.Button StartOffline;
         private System.Windows.Forms.Label label4;
         private Durchsichtig CloudVerbindung;
-        private PictureBox pictureBox1;
         private ProgressBar MitspielerFindenFortschritt;
+        private PictureBox pictureBox1;
+        private Durchsichtig AufGegnerWarten;
+        private PictureBox pictureBox2;
+        private Label label7;
     }
 }
 
