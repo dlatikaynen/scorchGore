@@ -11,5 +11,5 @@ What critics have to say:
 "*A master class in color use, layout, composition, and everything*" - Prof. Y.T. Space, ACME School of Graphic Design  
 "*Truly a masterpiece - brilliantly engineered, form follows function*" - everyone and their dog  
 "*Whoever said Times New Roman was dead - this game proves them wrong*" - anonymous former MS employee  
-"*No game loop, no framerate, the pinnacle of late eighties arcade*" - Consolidated Messenger
-"*Our grandchildren play it*" - Minge & Bracket
+"*No game loop, no framerate, the pinnacle of late eighties arcade*" - Consolidated Messenger  
+"*Our grandchildren play it, too*" - Minge & Bracket
