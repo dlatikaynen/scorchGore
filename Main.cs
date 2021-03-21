@@ -411,6 +411,9 @@ namespace ScorchGore
                     x = v * cos(winkel) * t;
                     y = v * sin(winkel) * t - 0.5g * t²;
 
+                    x --> t² und y --> t³ macht eine coole, brauchbare,
+                    akzelerierende hyperbolische flugbahn!
+
                 */
                 var x = v * Math.Cos(mathWinkel) * t;
                 var y = v * Math.Sin(mathWinkel) * t - Main.schwerkraftFaktor * t * t;

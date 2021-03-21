@@ -104,7 +104,7 @@
     <EmbeddedResource Include="Zeug\decay-crumble.wav" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Gestaltung\a-truly-painful-design.png" />
+    <None Include="Gestaltung\a-truly-painful-design.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

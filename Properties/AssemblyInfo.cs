@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("The Brutal Scorch Gore Death Ray Shooter Game")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("llatikay")]
-[assembly: AssemblyProduct("ScorchGore")]
+[assembly: AssemblyProduct("The Scorch Gore Game")]
 [assembly: AssemblyCopyright("Copyright © 2021 Lukas Sascha Latikaynen")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
