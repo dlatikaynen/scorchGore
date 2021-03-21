@@ -50,21 +50,21 @@ namespace ScorchGore
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.CloudVerbindung = new Durchsichtig();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MitspielerFindenFortschritt = new System.Windows.Forms.ProgressBar();
             this.label4 = new System.Windows.Forms.Label();
             this.AufGegnerWarten = new Durchsichtig();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.WeltErzeugen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RauheitsfaktorProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HoechstHoeheProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MindesthoeheProzent)).BeginInit();
             this.SchussEingabefeld.SuspendLayout();
             this.CloudVerbindung.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.AufGegnerWarten.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // WeltErzeugen
@@ -122,7 +122,7 @@ namespace ScorchGore
             this.RauheitsfaktorProzent.SmallChange = 5;
             this.RauheitsfaktorProzent.TabIndex = 6;
             this.RauheitsfaktorProzent.TickFrequency = 10;
-            this.RauheitsfaktorProzent.Value = 30;
+            this.RauheitsfaktorProzent.Value = 26;
             // 
             // HoechstHoeheProzent
             // 
@@ -135,7 +135,7 @@ namespace ScorchGore
             this.HoechstHoeheProzent.SmallChange = 5;
             this.HoechstHoeheProzent.TabIndex = 5;
             this.HoechstHoeheProzent.TickFrequency = 10;
-            this.HoechstHoeheProzent.Value = 80;
+            this.HoechstHoeheProzent.Value = 65;
             // 
             // MindesthoeheProzent
             // 
@@ -148,7 +148,7 @@ namespace ScorchGore
             this.MindesthoeheProzent.SmallChange = 5;
             this.MindesthoeheProzent.TabIndex = 4;
             this.MindesthoeheProzent.TickFrequency = 10;
-            this.MindesthoeheProzent.Value = 8;
+            this.MindesthoeheProzent.Value = 5;
             // 
             // label3
             // 
@@ -311,6 +311,15 @@ namespace ScorchGore
             this.CloudVerbindung.TabIndex = 6;
             this.CloudVerbindung.Visible = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(-1, 278);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(119, 82);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // MitspielerFindenFortschritt
             // 
             this.MitspielerFindenFortschritt.ForeColor = System.Drawing.Color.Azure;
@@ -367,15 +376,6 @@ namespace ScorchGore
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label7.UseMnemonic = false;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 278);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(119, 82);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -408,9 +408,9 @@ namespace ScorchGore
             this.SchussEingabefeld.ResumeLayout(false);
             this.SchussEingabefeld.PerformLayout();
             this.CloudVerbindung.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.AufGegnerWarten.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

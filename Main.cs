@@ -199,6 +199,7 @@ namespace ScorchGore
                     /* berg zeichnen */
                     var pixelHoehe = minimumHoehe + Convert.ToInt32(aktuelleHoehe);
                     zeichenFlaeche.FillRectangle(Brushes.SlateBlue, bergX, (float)this.Height - pixelHoehe, 2f, (float)this.Height);
+                    zeichenFlaeche.FillRectangle(Brushes.Snow, bergX, (float)this.Height - pixelHoehe - 7f, 2f, 7f);
 
                     /* zacken in den berg machen */
                     if (--unveraenderteSteigung <= 0)
