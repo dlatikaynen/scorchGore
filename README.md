@@ -1,6 +1,5 @@
-# scorchGore
-The Scorch Gore Game
-
+# The Scorch Gore Game
+  
 #intentionallyugly  
 Recommended for kids age 12 and up (pixel violence, not so mild language)  
 
