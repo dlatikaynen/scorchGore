@@ -1,7 +1,7 @@
 # scorchGore
 The Scorch Gore Game
 
-#intentionallyugly
+#intentionallyugly  
 Recommended for kids age 12 and up (pixel violence, not so mild language)  
 
 The game with the most consistent user interface on the planet.
