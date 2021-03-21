@@ -340,29 +340,17 @@ namespace ScorchGore
         {
             var schussEingabe = new SchussEingabe();
             var winkelText = this.Winkel.Text.Trim().ToLowerInvariant();
-            if(winkelText.StartsWith("c"))
+            if(schussEingabe.Deserialisieren($"{ winkelText },{ this.Ladung.Text }"))
             {
-                schussEingabe.Trajektorie = TrajektorienArt.Kubisch;
-                winkelText = winkelText.Substring(1);
-            }
-
-            if (int.TryParse(winkelText, out int winkelWert)
-                && int.TryParse(this.Ladung.Text, out int ladungWert)
-                && winkelWert >= 0
-                && winkelWert < 90
-                && ladungWert > 0
-                && ladungWert <= 200
-            )
-            {
-                schussEingabe.SchussWinkel = winkelWert;
-                schussEingabe.SchussKraft = ladungWert;
                 return schussEingabe;
             }
-
-            return null;
+            else
+            {
+                return null;
+            }
         }
 
-        private async void RundeAustragen(SchussEingabe schussEingabe)
+        private void RundeAustragen(SchussEingabe schussEingabe)
         {
             this.spielPhase = SpielPhase.SpielrundeAktiv;
 
@@ -436,6 +424,12 @@ namespace ScorchGore
                 */
                 switch(schussEingabe.Trajektorie)
                 {
+                    case TrajektorienArt.SinusDaempfer:
+                        var powPow = Math.Pow(t, t);
+                        x = v * -t;
+                        y = v * Math.Sin(powPow) / Math.Pow(2, (powPow - Math.PI / 2.0));
+                        break;
+
                     case TrajektorienArt.Kubisch:
                         var tQuadrat = t * t;
                         x = v * Math.Cos(mathWinkel) * tQuadrat;

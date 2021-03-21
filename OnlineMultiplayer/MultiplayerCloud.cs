@@ -46,9 +46,7 @@ namespace ScorchGore.OnlineMultiplayer
                 else
                 {
                     weiterWarten = false;
-                    var schussEingabe = wartenAntwort.Split(',');
-                    gegnerischeEingabe.SchussWinkel = int.Parse(schussEingabe[0]);
-                    gegnerischeEingabe.SchussKraft = int.Parse(schussEingabe[1]);
+                    gegnerischeEingabe.Deserialisieren(wartenAntwort);
                 }
             } while (weiterWarten);
 
