@@ -100,13 +100,13 @@ namespace ScorchGore.OnlineMultiplayer
             return meineLevelBeschreibung;
         }
 
-        internal async Task SchussMelden(int winkelWert, int staerkeWert)
+        internal async Task SchussMelden(SchussEingabe schussEingabe)
         {
             var meldenAntwort = await this.RoundTrip(
                 MultiplayerCloud.cloudPlayUrl,
                 "S",
                 new Tuple<string, string>("s", this.SitzungsID.ToString("N").ToLowerInvariant()),
-                new Tuple<string, string>("sp", $"{ winkelWert },{ staerkeWert }")
+                new Tuple<string, string>("sp", schussEingabe.Serialisieren())
             );
         }
 

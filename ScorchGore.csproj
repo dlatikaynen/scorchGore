@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aufzaehlungen\MitspielerFindenStatus.cs" />
+    <Compile Include="Aufzaehlungen\TrajektorienArt.cs" />
     <Compile Include="Klassen\Audio.cs" />
     <Compile Include="Klassen\Geraeusche.cs" />
     <Compile Include="Klassen\LevelBeschreibung.cs" />

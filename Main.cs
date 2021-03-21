@@ -68,7 +68,11 @@ namespace ScorchGore
                 }                
                 else if(this.spielPhase == SpielPhase.Schusseingabe)
                 {
-                    await this.SchussEingeben();
+                    var schussEingabe = await this.SchussEingeben();
+                    if (schussEingabe != null)
+                    {
+                        this.RundeAustragen(schussEingabe);
+                    }
                 }
 
                 e.Handled = e.SuppressKeyPress = true;
@@ -281,7 +285,7 @@ namespace ScorchGore
             this.RundeVorbereiten();
         }
 
-        private void RundeVorbereiten()
+        private async void RundeVorbereiten()
         {
             this.NameDesDranSeienden.Text = $"{ (object.ReferenceEquals(this.spielerEins,this.dranSeiender) ? "← " : string.Empty) }{ this.dranSeiender.Name }{ (object.ReferenceEquals(this.spielerZwei,this.dranSeiender) ? " →" : string.Empty) }";
             this.Winkel.Text = this.Ladung.Text = string.Empty;
@@ -293,30 +297,21 @@ namespace ScorchGore
             }
             else
             {
+                /* warten, bis der andere spieler online was gemacht hat */
                 this.spielPhase = SpielPhase.AufOnlineSchussWarten;
-                this.RundeAustragen();
+                this.AufGegnerWarten.Show();
+                var schussEingabe = await this.MultiplayerCloud.AufGegnerSchussWarten();
+                this.AufGegnerWarten.Hide();
+                this.RundeAustragen(schussEingabe);
             }
         }
 
-        private async Task SchussEingeben()
+        private async Task<SchussEingabe> SchussEingeben()
         {
-            if (int.TryParse(this.Winkel.Text, out int winkelWert)
-                && int.TryParse(this.Ladung.Text, out int ladungWert)
-                && winkelWert >= 0
-                && winkelWert < 90
-                && ladungWert > 0
-                && ladungWert <= 200
-            )
+            var schussEingabe = this.SchussBefehlLesen();
+            if (schussEingabe == null)
             {
-                if(this.MultiplayerCloud.IsOnlineGame)
-                {
-                    await this.MultiplayerCloud.SchussMelden(winkelWert, ladungWert);
-                }
-
-                this.RundeAustragen();
-            }
-            else
-            {
+                /* eingabe zweifelhaft, feld wechseln */
                 if (this.Winkel.ContainsFocus)
                 {
                     this.Ladung.Focus();
@@ -328,24 +323,47 @@ namespace ScorchGore
                     this.Winkel.SelectAll();
                 }
             }
-        }
-
-        private async void RundeAustragen()
-        {
-            SchussEingabe schussEingabe;
-            if (this.spielPhase == SpielPhase.AufOnlineSchussWarten)
-            {
-                /* warten, bis der andere spieler online was gemacht hat */
-                this.AufGegnerWarten.Show();
-                schussEingabe = await this.MultiplayerCloud.AufGegnerSchussWarten();
-                this.AufGegnerWarten.Hide();
-            }
             else
             {
-                /* den dran seienden spieler nach winkel und stärke fragen */
-                schussEingabe = this.SchussAbfrage();
+                /* eingabe gültig, weiter gehts */
+                this.SchussEingabefeld.Hide();
+                if (this.MultiplayerCloud.IsOnlineGame)
+                {
+                    await this.MultiplayerCloud.SchussMelden(schussEingabe);
+                }
             }
 
+            return schussEingabe;
+        }
+
+        private SchussEingabe SchussBefehlLesen()
+        {
+            var schussEingabe = new SchussEingabe();
+            var winkelText = this.Winkel.Text.Trim().ToLowerInvariant();
+            if(winkelText.StartsWith("c"))
+            {
+                schussEingabe.Trajektorie = TrajektorienArt.Kubisch;
+                winkelText = winkelText.Substring(1);
+            }
+
+            if (int.TryParse(winkelText, out int winkelWert)
+                && int.TryParse(this.Ladung.Text, out int ladungWert)
+                && winkelWert >= 0
+                && winkelWert < 90
+                && ladungWert > 0
+                && ladungWert <= 200
+            )
+            {
+                schussEingabe.SchussWinkel = winkelWert;
+                schussEingabe.SchussKraft = ladungWert;
+                return schussEingabe;
+            }
+
+            return null;
+        }
+
+        private async void RundeAustragen(SchussEingabe schussEingabe)
+        {
             this.spielPhase = SpielPhase.SpielrundeAktiv;
 
             /* den schuss ausführen und schauen (ob) was getroffen wurde */
@@ -379,7 +397,6 @@ namespace ScorchGore
 
         private SchussEingabe SchussAbfrage()
         {
-            this.SchussEingabefeld.Hide();
             int.TryParse(this.Winkel.Text, out int winkelWert);
             int.TryParse(this.Ladung.Text, out int ladungWert);
             return new SchussEingabe
@@ -391,6 +408,8 @@ namespace ScorchGore
 
         private SchussErgebnis Schiessen(SchussEingabe schussEingabe)
         {
+            double x, y;
+
             /* schiessen wir nach rechts (spieler 1) oder nach links (spieler 2)? */
             var schussRichtung = object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? 1 : -1;
             var v = (float)schussEingabe.SchussKraft;
@@ -415,8 +434,19 @@ namespace ScorchGore
                     akzelerierende hyperbolische flugbahn!
 
                 */
-                var x = v * Math.Cos(mathWinkel) * t;
-                var y = v * Math.Sin(mathWinkel) * t - Main.schwerkraftFaktor * t * t;
+                switch(schussEingabe.Trajektorie)
+                {
+                    case TrajektorienArt.Kubisch:
+                        var tQuadrat = t * t;
+                        x = v * Math.Cos(mathWinkel) * tQuadrat;
+                        y = v * Math.Sin(mathWinkel) * t - Main.schwerkraftFaktor * tQuadrat * t;
+                        break;
+
+                    default:
+                        x = v * Math.Cos(mathWinkel) * t;
+                        y = v * Math.Sin(mathWinkel) * t - Main.schwerkraftFaktor * t * t;
+                        break;
+                }
 
                 /* schuss zeichnen */
                 var pixelX = this.dranSeiender.X - (int)x * schussRichtung;
