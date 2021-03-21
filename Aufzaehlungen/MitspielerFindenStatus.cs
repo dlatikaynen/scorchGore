@@ -8,6 +8,7 @@ namespace ScorchGore.Aufzaehlungen
 {
     internal enum MitspielerFindenStatus
     {
+        OfflineSpiel,
         HeloGesagt,
         Wartend,
         AndererNimmtBeiMirTeil,

@@ -1,4 +1,5 @@
 ﻿using ScorchGore.Aufzaehlungen;
+using ScorchGore.Klassen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,35 +20,55 @@ namespace ScorchGore.OnlineMultiplayer
         {
             this.ownPlayerID = Guid.NewGuid();
             this.joinedSessionID = Guid.Empty;
+            this.BergZufallszahl = (int)(DateTime.Now.Ticks % (long)int.MaxValue);
+            this.IsOnlineGame = false;
         }
 
-        internal async Task<MitspielerFindenStatus> MitspielerFinden()
+        internal int BergZufallszahl { get; set; }
+        internal bool IsOnlineGame { get; private set; }
+
+        internal async Task<LevelBeschreibung> MitspielerFinden(LevelBeschreibung meineLevelBeschreibung)
         {
+            /* reihenfolge der levelbecshreibungs-werte und rückgabewerte:
+             * siehe MitspielerFinden.csx cloud function skript */
+            var levelParameter = $@"{ meineLevelBeschreibung.BergZufallszahl },{ meineLevelBeschreibung.BergMinHoeheProzent },{ meineLevelBeschreibung.BergMaxHoeheProzent },{ meineLevelBeschreibung.BergRauhheitProzent }";
             var findenAntwort = await this.RoundTrip(
                 "HELO",
-                new Tuple<string, string>("u", this.ownPlayerID.ToString("N").ToLowerInvariant())
+                new Tuple<string, string>("u", this.ownPlayerID.ToString("N").ToLowerInvariant()),
+                new Tuple<string, string>("lp", levelParameter)
             );
 
-            // siehe MitspielerFinden.csx cloud function script
             switch(findenAntwort.ToLowerInvariant())
             {
                 case "heloed":
-                    return MitspielerFindenStatus.HeloGesagt;
+                    meineLevelBeschreibung.MitspielerStatus = MitspielerFindenStatus.HeloGesagt;
+                    break;
 
                 case "waiting":
-                    return MitspielerFindenStatus.Wartend;
-
-                case "joined":
-                    return MitspielerFindenStatus.AndererNimmtBeiMirTeil;
+                    meineLevelBeschreibung.MitspielerStatus = MitspielerFindenStatus.Wartend;
+                    break;
+                    
+                case "allured":
+                    meineLevelBeschreibung.MitspielerStatus = MitspielerFindenStatus.AndererNimmtBeiMirTeil;
+                    break;
             }
 
             if(findenAntwort.StartsWith("joined,"))
             {
-                this.joinedSessionID = Guid.Parse(findenAntwort.Split(',')[1]);
-                return MitspielerFindenStatus.IchNehmeBeiAnderemTeil;
+                /* in dem fall müssen wir die berg-erzeugungswerte vom anderen übernehmen,
+                 * damit unsere level gleich ausschauen */
+                var bestandTeile = findenAntwort.Split(',');
+                meineLevelBeschreibung.MitspielerStatus = MitspielerFindenStatus.IchNehmeBeiAnderemTeil;
+                this.joinedSessionID = Guid.Parse(bestandTeile[1]);
+                meineLevelBeschreibung.BergZufallszahl = int.Parse(bestandTeile[2]);
+                meineLevelBeschreibung.BergMinHoeheProzent = int.Parse(bestandTeile[3]);
+                meineLevelBeschreibung.BergMaxHoeheProzent = int.Parse(bestandTeile[4]);
+                meineLevelBeschreibung.BergRauhheitProzent = int.Parse(bestandTeile[5]);
             }
 
-            return MitspielerFindenStatus.Wartend;
+            this.IsOnlineGame = meineLevelBeschreibung.MitspielerStatus == MitspielerFindenStatus.AndererNimmtBeiMirTeil || meineLevelBeschreibung.MitspielerStatus == MitspielerFindenStatus.IchNehmeBeiAnderemTeil;
+
+            return meineLevelBeschreibung;
         }
 
         private async Task<string> RoundTrip(string verb, params Tuple<string,string>[] parameters)

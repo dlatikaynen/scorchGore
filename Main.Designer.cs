@@ -50,9 +50,9 @@ namespace ScorchGore
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.CloudVerbindung = new Durchsichtig();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MitspielerFindenFortschritt = new System.Windows.Forms.ProgressBar();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.WeltErzeugen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RauheitsfaktorProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HoechstHoeheProzent)).BeginInit();
@@ -152,9 +152,9 @@ namespace ScorchGore
             this.label3.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(3, 123);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(251, 28);
+            this.label3.Size = new System.Drawing.Size(255, 28);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Rauheitsfaktor Alter";
+            this.label3.Text = "Mountainosity factor";
             // 
             // label2
             // 
@@ -162,9 +162,9 @@ namespace ScorchGore
             this.label2.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 63);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(215, 28);
+            this.label2.Size = new System.Drawing.Size(209, 28);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Höchsthöhe Alter";
+            this.label2.Text = "Maximum height";
             // 
             // label1
             // 
@@ -172,9 +172,9 @@ namespace ScorchGore
             this.label1.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(227, 28);
+            this.label1.Size = new System.Drawing.Size(236, 28);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Mindesthöhe Alter";
+            this.label1.Text = "Minimum elevation";
             // 
             // ScorchGore
             // 
@@ -199,8 +199,8 @@ namespace ScorchGore
             this.Copyright.Size = new System.Drawing.Size(315, 100);
             this.Copyright.TabIndex = 2;
             this.Copyright.TabStop = false;
-            this.Copyright.Text = "Copyright (C)2021 All Rights Reserved\r\nAfter an idea of Daniel Latikaynen\r\nDesign" +
-    ": Jonas Mika Latikaynen\r\nProgramming: Lukas Sascha Latikaynen";
+            this.Copyright.Text = "Copyright (C)2021 All Rights Reserved\r\nGameplay: Jonas & Lukas Latikaynen\r\nProgra" +
+    "mming: Daniel Latikaynen\r\nAdditional code: Lukas Latikaynen";
             this.Copyright.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Copyright.WordWrap = false;
             // 
@@ -276,9 +276,9 @@ namespace ScorchGore
             this.label5.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(3, 98);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(161, 28);
+            this.label5.Size = new System.Drawing.Size(150, 28);
             this.label5.TabIndex = 1;
-            this.label5.Text = "Ladung Alter";
+            this.label5.Text = "Oomph, ok?";
             // 
             // label6
             // 
@@ -287,9 +287,9 @@ namespace ScorchGore
             this.label6.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(3, 39);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(157, 28);
+            this.label6.Size = new System.Drawing.Size(168, 28);
             this.label6.TabIndex = 0;
-            this.label6.Text = "Winkel Alter";
+            this.label6.Text = "Angle, mkay?";
             this.label6.UseMnemonic = false;
             // 
             // CloudVerbindung
@@ -306,6 +306,25 @@ namespace ScorchGore
             this.CloudVerbindung.TabIndex = 6;
             this.CloudVerbindung.Visible = false;
             // 
+            // MitspielerFindenFortschritt
+            // 
+            this.MitspielerFindenFortschritt.ForeColor = System.Drawing.Color.Azure;
+            this.MitspielerFindenFortschritt.Location = new System.Drawing.Point(27, 5);
+            this.MitspielerFindenFortschritt.Name = "MitspielerFindenFortschritt";
+            this.MitspielerFindenFortschritt.Size = new System.Drawing.Size(87, 249);
+            this.MitspielerFindenFortschritt.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.MitspielerFindenFortschritt.TabIndex = 2;
+            this.MitspielerFindenFortschritt.Value = 99;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(-1, 278);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(119, 82);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -318,32 +337,12 @@ namespace ScorchGore
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label4.UseMnemonic = false;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 278);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(119, 82);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
-            // MitspielerFindenFortschritt
-            // 
-            this.MitspielerFindenFortschritt.ForeColor = System.Drawing.Color.Azure;
-            this.MitspielerFindenFortschritt.Location = new System.Drawing.Point(27, 5);
-            this.MitspielerFindenFortschritt.Name = "MitspielerFindenFortschritt";
-            this.MitspielerFindenFortschritt.Size = new System.Drawing.Size(87, 249);
-            this.MitspielerFindenFortschritt.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.MitspielerFindenFortschritt.TabIndex = 2;
-            this.MitspielerFindenFortschritt.Value = 99;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(862, 518);
-            this.ControlBox = false;
             this.Controls.Add(this.CloudVerbindung);
             this.Controls.Add(this.SchussEingabefeld);
             this.Controls.Add(this.PlayerNames);
@@ -359,7 +358,6 @@ namespace ScorchGore
             this.Name = "Main";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Scorch Gore";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
             this.WeltErzeugen.ResumeLayout(false);

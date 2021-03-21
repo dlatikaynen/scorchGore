@@ -27,8 +27,10 @@ namespace ScorchGore
         private Spieler spielerEins;
         private Spieler spielerZwei;
         private Spieler dranSeiender;
+        private Spieler meinSpieler;
         private Audio Audio = new Audio();
         private MultiplayerCloud MultiplayerCloud = new MultiplayerCloud();
+        
         private Bitmap ausgangsZustand;
 
         public Main()
@@ -84,8 +86,17 @@ namespace ScorchGore
             var mitspielerGefunden = false;
             do
             {
-                var warteZustand = await this.MultiplayerCloud.MitspielerFinden();
-                switch(warteZustand)
+                var warteZustand = new LevelBeschreibung
+                {
+                    MitspielerStatus = MitspielerFindenStatus.Wartend,
+                    BergZufallszahl = this.MultiplayerCloud.BergZufallszahl,
+                    BergMinHoeheProzent = this.MindesthoeheProzent.Value,
+                    BergMaxHoeheProzent = this.HoechstHoeheProzent.Value,
+                    BergRauhheitProzent = this.RauheitsfaktorProzent.Value
+                };
+
+                warteZustand = await this.MultiplayerCloud.MitspielerFinden(warteZustand);
+                switch(warteZustand.MitspielerStatus)
                 {
                     case MitspielerFindenStatus.HeloGesagt:
                         this.MitspielerFindenFortschritt.Value = 0;
@@ -97,15 +108,25 @@ namespace ScorchGore
                         break;
 
                     case MitspielerFindenStatus.AndererNimmtBeiMirTeil:
-                    case MitspielerFindenStatus.IchNehmeBeiAnderemTeil:
                         mitspielerGefunden = true;
+                        this.meinSpieler = this.spielerEins;
+                        break;
+
+                    case MitspielerFindenStatus.IchNehmeBeiAnderemTeil:
+                        /* in dem fall müssen wir die werte vom anderen übernehmen,
+                         * damit wir das gleiche level haben wir er */
+                        mitspielerGefunden = true;
+                        this.meinSpieler = this.spielerZwei;
+                        this.MultiplayerCloud.BergZufallszahl = warteZustand.BergZufallszahl;
+                        this.MindesthoeheProzent.Value = warteZustand.BergMinHoeheProzent;
+                        this.HoechstHoeheProzent.Value = warteZustand.BergMaxHoeheProzent;
+                        this.RauheitsfaktorProzent.Value = warteZustand.BergRauhheitProzent;
                         break;
                 }
-
-
             } while (!mitspielerGefunden);
 
             this.CloudVerbindung.Hide();
+            this.KampfStarten();
         }
 
         private void KampfStarten()
@@ -137,7 +158,7 @@ namespace ScorchGore
             var maximumHoehe = Convert.ToInt32(Convert.ToDecimal(verfuegbareBergHoehe) * Convert.ToDecimal(this.HoechstHoeheProzent.Value) / 100M);
             var steilHeit = Convert.ToInt32(5 + this.RauheitsfaktorProzent.Value);
             var rauhHeit = 10M - Convert.ToDecimal(this.RauheitsfaktorProzent.Value / 20M);
-            var zufallsZahl = new Random();
+            var zufallsZahl = new Random(MultiplayerCloud.BergZufallszahl);
             var maximumHoehenunterschied = maximumHoehe - minimumHoehe;
             var aktuelleHoehe = Convert.ToDecimal(minimumHoehe + zufallsZahl.Next(maximumHoehenunterschied));
             var aktuelleRichtung = (zufallsZahl.Next(100) % 2) == 0;
