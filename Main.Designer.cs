@@ -204,8 +204,8 @@ namespace ScorchGore
             this.Copyright.Size = new System.Drawing.Size(315, 100);
             this.Copyright.TabIndex = 2;
             this.Copyright.TabStop = false;
-            this.Copyright.Text = "Copyright (C)2021 All Rights Reserved\r\nGameplay: Jonas & Lukas Latikaynen\r\nProgra" +
-    "mming: Daniel Latikaynen\r\nAdditional code: Lukas Latikaynen";
+            this.Copyright.Text = "Copyright (C)2021. All Rights Reserved\r\nGameplay: Jonas & Lukas Latikaynen\r\nProgr" +
+    "amming: Daniel Latikaynen\r\nAdditional code: Lukas Latikaynen";
             this.Copyright.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Copyright.WordWrap = false;
             // 
@@ -279,7 +279,7 @@ namespace ScorchGore
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 98);
+            this.label5.Location = new System.Drawing.Point(5, 98);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(150, 28);
             this.label5.TabIndex = 1;
@@ -290,7 +290,7 @@ namespace ScorchGore
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(3, 39);
+            this.label6.Location = new System.Drawing.Point(5, 39);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(168, 28);
             this.label6.TabIndex = 0;
