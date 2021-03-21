@@ -1,4 +1,6 @@
-﻿using ScorchGore.Klassen;
+﻿using ScorchGore.Aufzaehlungen;
+using ScorchGore.Klassen;
+using ScorchGore.OnlineMultiplayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +28,7 @@ namespace ScorchGore
         private Spieler spielerZwei;
         private Spieler dranSeiender;
         private Audio Audio = new Audio();
+        private MultiplayerCloud MultiplayerCloud = new MultiplayerCloud();
         private Bitmap ausgangsZustand;
 
         public Main()
@@ -59,9 +62,7 @@ namespace ScorchGore
             {
                 if (this.spielPhase == SpielPhase.WeltErzeugen)
                 {
-                    this.spielPhase = SpielPhase.WeltWirdErzeugt;
-                    this.ErzeugeDieWelt();
-                    this.LevelSpielen();
+                    this.KampfStarten();
                 }                
                 else if(this.spielPhase == SpielPhase.Schusseingabe)
                 {
@@ -72,13 +73,60 @@ namespace ScorchGore
             }
         }
 
+        private void StartOffline_Click(object sender, EventArgs e) => this.KampfStarten();
+
+        private async void StartCloud_Click(object sender, EventArgs e)
+        {
+            this.spielPhase = SpielPhase.AufMitspielerWarten;
+            this.WeltErzeugen.Hide();
+            this.SpielerNamenZeigen();
+            this.CloudVerbindung.Show();
+            var mitspielerGefunden = false;
+            do
+            {
+                var warteZustand = await this.MultiplayerCloud.MitspielerFinden();
+                switch(warteZustand)
+                {
+                    case MitspielerFindenStatus.HeloGesagt:
+                        this.MitspielerFindenFortschritt.Value = 0;
+                        break;
+
+                    case MitspielerFindenStatus.Wartend:
+                        this.MitspielerFindenFortschritt.Value = new Random().Next(this.MitspielerFindenFortschritt.Maximum);
+                        await Task.Delay(1500);
+                        break;
+
+                    case MitspielerFindenStatus.AndererNimmtBeiMirTeil:
+                    case MitspielerFindenStatus.IchNehmeBeiAnderemTeil:
+                        mitspielerGefunden = true;
+                        break;
+                }
+
+
+            } while (!mitspielerGefunden);
+
+            this.CloudVerbindung.Hide();
+        }
+
+        private void KampfStarten()
+        {
+            this.spielPhase = SpielPhase.WeltWirdErzeugt;
+            this.ErzeugeDieWelt();
+            this.LevelSpielen();
+        }
+
+        private void SpielerNamenZeigen()
+        {
+            this.PlayerNames.Text = $"{ this.spielerEins.Name } & { this.spielerZwei.Name }";
+            this.PlayerNames.Show();
+        }
+
         private void ErzeugeDieWelt()
         {
             this.WeltErzeugen.Hide();
             this.ScorchGore.Hide();
             this.Copyright.Hide();
-            this.PlayerNames.Text = $"{ this.spielerEins.Name } & { this.spielerZwei.Name }";
-            this.PlayerNames.Show();
+            this.SpielerNamenZeigen();
             this.SchussEingabefeld.Left = this.Width / 2 - this.SchussEingabefeld.Width / 2;
             this.levelBild = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
             this.ausgangsZustand = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
@@ -389,6 +437,6 @@ namespace ScorchGore
             {
                 bildKopieren.DrawImageUnscaled(this.ausgangsZustand, 0, 0);
             }
-        }
+        } 
     }
 }

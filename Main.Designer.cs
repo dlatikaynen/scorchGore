@@ -1,4 +1,6 @@
-﻿namespace ScorchGore
+﻿using System.Windows.Forms;
+
+namespace ScorchGore
 {
     partial class Main
     {
@@ -28,7 +30,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.WeltErzeugen = new System.Windows.Forms.Panel();
+            this.StartCloud = new System.Windows.Forms.Button();
+            this.StartOffline = new System.Windows.Forms.Button();
             this.RauheitsfaktorProzent = new System.Windows.Forms.TrackBar();
             this.HoechstHoeheProzent = new System.Windows.Forms.TrackBar();
             this.MindesthoeheProzent = new System.Windows.Forms.TrackBar();
@@ -44,17 +49,25 @@
             this.NameDesDranSeienden = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.CloudVerbindung = new Durchsichtig();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.MitspielerFindenFortschritt = new System.Windows.Forms.ProgressBar();
             this.WeltErzeugen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RauheitsfaktorProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HoechstHoeheProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MindesthoeheProzent)).BeginInit();
             this.SchussEingabefeld.SuspendLayout();
+            this.CloudVerbindung.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // WeltErzeugen
             // 
             this.WeltErzeugen.BackColor = System.Drawing.Color.Tomato;
             this.WeltErzeugen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.WeltErzeugen.Controls.Add(this.StartCloud);
+            this.WeltErzeugen.Controls.Add(this.StartOffline);
             this.WeltErzeugen.Controls.Add(this.RauheitsfaktorProzent);
             this.WeltErzeugen.Controls.Add(this.HoechstHoeheProzent);
             this.WeltErzeugen.Controls.Add(this.MindesthoeheProzent);
@@ -64,9 +77,34 @@
             this.WeltErzeugen.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.WeltErzeugen.Location = new System.Drawing.Point(282, 160);
             this.WeltErzeugen.Name = "WeltErzeugen";
-            this.WeltErzeugen.Size = new System.Drawing.Size(299, 198);
+            this.WeltErzeugen.Size = new System.Drawing.Size(299, 240);
             this.WeltErzeugen.TabIndex = 0;
             this.WeltErzeugen.Visible = false;
+            // 
+            // StartCloud
+            // 
+            this.StartCloud.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.StartCloud.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartCloud.Location = new System.Drawing.Point(184, 204);
+            this.StartCloud.Margin = new System.Windows.Forms.Padding(2);
+            this.StartCloud.Name = "StartCloud";
+            this.StartCloud.Size = new System.Drawing.Size(102, 23);
+            this.StartCloud.TabIndex = 8;
+            this.StartCloud.Text = "CLOUD";
+            this.StartCloud.UseVisualStyleBackColor = false;
+            this.StartCloud.Click += new System.EventHandler(this.StartCloud_Click);
+            // 
+            // StartOffline
+            // 
+            this.StartOffline.BackColor = System.Drawing.Color.Magenta;
+            this.StartOffline.Location = new System.Drawing.Point(8, 204);
+            this.StartOffline.Margin = new System.Windows.Forms.Padding(2);
+            this.StartOffline.Name = "StartOffline";
+            this.StartOffline.Size = new System.Drawing.Size(102, 23);
+            this.StartOffline.TabIndex = 7;
+            this.StartOffline.Text = "O f f l i n e";
+            this.StartOffline.UseVisualStyleBackColor = false;
+            this.StartOffline.Click += new System.EventHandler(this.StartOffline_Click);
             // 
             // RauheitsfaktorProzent
             // 
@@ -254,6 +292,51 @@
             this.label6.Text = "Winkel Alter";
             this.label6.UseMnemonic = false;
             // 
+            // CloudVerbindung
+            // 
+            this.CloudVerbindung.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.CloudVerbindung.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.CloudVerbindung.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CloudVerbindung.Controls.Add(this.MitspielerFindenFortschritt);
+            this.CloudVerbindung.Controls.Add(this.pictureBox1);
+            this.CloudVerbindung.Controls.Add(this.label4);
+            this.CloudVerbindung.Location = new System.Drawing.Point(731, 28);
+            this.CloudVerbindung.Name = "CloudVerbindung";
+            this.CloudVerbindung.Size = new System.Drawing.Size(119, 361);
+            this.CloudVerbindung.TabIndex = 6;
+            this.CloudVerbindung.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 5);
+            this.label4.Name = "label4";
+            this.label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label4.Size = new System.Drawing.Size(18, 249);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "waiting   for   other";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label4.UseMnemonic = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(-1, 278);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(119, 82);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // MitspielerFindenFortschritt
+            // 
+            this.MitspielerFindenFortschritt.ForeColor = System.Drawing.Color.Azure;
+            this.MitspielerFindenFortschritt.Location = new System.Drawing.Point(27, 5);
+            this.MitspielerFindenFortschritt.Name = "MitspielerFindenFortschritt";
+            this.MitspielerFindenFortschritt.Size = new System.Drawing.Size(87, 249);
+            this.MitspielerFindenFortschritt.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.MitspielerFindenFortschritt.TabIndex = 2;
+            this.MitspielerFindenFortschritt.Value = 99;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,6 +344,7 @@
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(862, 518);
             this.ControlBox = false;
+            this.Controls.Add(this.CloudVerbindung);
             this.Controls.Add(this.SchussEingabefeld);
             this.Controls.Add(this.PlayerNames);
             this.Controls.Add(this.Copyright);
@@ -285,6 +369,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.MindesthoeheProzent)).EndInit();
             this.SchussEingabefeld.ResumeLayout(false);
             this.SchussEingabefeld.PerformLayout();
+            this.CloudVerbindung.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,6 +394,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox Ladung;
         private System.Windows.Forms.TextBox Winkel;
+        private System.Windows.Forms.Button StartCloud;
+        private System.Windows.Forms.Button StartOffline;
+        private System.Windows.Forms.Label label4;
+        private Durchsichtig CloudVerbindung;
+        private PictureBox pictureBox1;
+        private ProgressBar MitspielerFindenFortschritt;
     }
 }
 

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aufzaehlungen\MitspielerFindenStatus.cs" />
     <Compile Include="Klassen\Audio.cs" />
     <Compile Include="Klassen\Geraeusche.cs" />
     <Compile Include="Main.cs">
@@ -54,6 +55,7 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="OnlineMultiplayer\MultiplayerCloud.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Klassen\SchussEingabe.cs" />

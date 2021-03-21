@@ -4,6 +4,7 @@
     {
         StartBildschirm,
         WeltErzeugen,
+        AufMitspielerWarten,
         WeltWirdErzeugt,
         SpielerFallenRundeBeginnt, 
         Schusseingabe,
