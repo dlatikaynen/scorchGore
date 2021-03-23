@@ -1,73 +1,28 @@
 ﻿using System;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ScorchGore
 {
     public class SpielerNamen
     {
-        private static string[] namensPaare = {
-            "Laurel",   "Hardy",
-            "Minge",    "Bracket",
-            "Sherlock", "Watson",
-            "Phineas",  "Ferb",
-            "Finn",     "Jake",
-            "Lukas",    "Jonas",
-            "Noob",     "Soos",
-            "Jürgen",   "Rüdiger",
-            "Dörte",    "Eberhard",
-            "CASE",     "TARS",
-            "Mac",      "Cheese",
-            "Alice",    "Bob",
-            "Batman",   "Robin",
-            "Marlin",   "Dory",
-            "Kelvin",   "Celsius",
-            "Tesla",    "Edison",
-            "Fast",     "Furious",
-            "Romeo",    "Juliet",
-            "Homer",    "Ulysses",
-            "Donald",   "Daisy",
-            "Sculder",  "Molly",
-            "Mick",     "Rorty",
-            "Doctor",   "Amy",
-            "Feet",     "Meter",
-            "Anna",     "Elsa",
-            "Scritchy", "Atchy",
-            "Thelma",   "Louise",
-            "Stan",     "Kyle",
-            "Link",     "Ravioli",
-            "Sakura",   "Sasuke",
-            "Cynthia",  "Henry",
-            "Hermes",   "Salmacis",
-            "Marie",    "Pierre",
-            "Peter",    "Paul",
-            "Bojack",   "Carolyn",
-            "Venus",    "Serena",
-            "Orville",  "Wilbur",
-            "Adolf",    "Josef",
-            "Nicolae",  "Elena",
-            "Elisa",    "Madeleine",
-            "David",    "Goliath",
-            "Cain",     "Abel",
-            "Eve",      "Adam",
-            "Lot",      "Edith",
-            "Mei",      "Satsuki",
-            "Sophie",   "Haku",
-            "Bart",     "Lisa",
-            "Yin",      "Yang",
-            "Feng",     "Shui",
-            "Hund",     "Katze",
-            "Rose",     "Jack",
-            "Cathy",    "Heathcliff",
-            "Sally",    "Angie",
-            "Elephant", "Castle"
-        };
+        private static string roheNamensPaare = @"TGF1cmVsSGFyZHlNaW5nZUJyYWNrZXRTaGVybG9ja1dhdHNvblBoaW5lYXNGZXJiRmlubkpha2VMdWthc0pvbmFzTm9vYlNvb3NKw7xyZ2VuUsO8ZGlnZXJEw7ZydGVFYmVyaGFyZENhc2VUYXJzTWFjQ2hlZXNlQWxpY2VCb2JCYXRtYW5Sb2Jpbk1hcmxpbkRvcnlLZWx2aW5DZWxzaXVzVGVzbGFFZGlzb25GYXN0RnVyaW91c1JvbWVvSnVsaWV0SG9tZXJVbHlzc2VzRG9uYWxkRGFpc3lTY3VsZGVyTW9sbHlNaWNrUm9ydHlEb2N0b3JBbXlGZWV0TWV0ZXJBbm5hRWxzYVNjcml0Y2h5QXRjaHlUaGVsbWFMb3Vpc2VTdGFuS3lsZUxpbmtSYXZpb2xpU2FrdXJhU2FzdWtlQ3ludGhpYUhlbnJ5SGVybWVzU2FsbWFjaXNNYXJpZVBpZXJyZVBldGVyUGF1bEJvamFja0Nhcm9seW5WZW51c1NlcmVuYU9ydmlsbGVXaWxidXJBZG9sZkpvc2VmTmljb2xhZUVsZW5hRWxpc2FNYWRlbGVpbmVEYXZpZEdvbGlhdGhDYWluQWJlbEV2ZUFkYW1Mb3RFZGl0aE1laVNhdHN1a2lTb3BoaWVIYWt1QmFydExpc2FZaW5ZYW5nRmVuZ1NodWlIdW5kS2F0emVSb3NlSmFja0NhdGh5SGVhdGhjbGlmZlNhbGx5QW5naWVFbGVwaGFudENhc3RsZQ==";
+
+        protected static string[] namensPaare = SpielerNamen.AlsFeldvariable(
+            Encoding.UTF8.GetString(Convert.FromBase64String(SpielerNamen.roheNamensPaare))
+        );
 
         protected static int AnzahlNamenspaare => SpielerNamen.namensPaare.Length / 2;
 
-        public static Tuple<string, string> ZufallsNamenspaar => SpielerNamen.NamensPaar(new Random().Next(SpielerNamen.AnzahlNamenspaare));
+        public static Tuple<string, string> ZufallsNamenspaar => SpielerNamen.NamensPaar(
+            new Random().Next(SpielerNamen.AnzahlNamenspaare)
+        );
 
         private static Tuple<string, string> NamensPaar(int namensIndex) => new Tuple<string, string>(
             SpielerNamen.namensPaare[namensIndex * 2],
             SpielerNamen.namensPaare[namensIndex * 2 + 1]
         );
+
+        private static string[] AlsFeldvariable(string rohString) => Regex.Split(rohString, @"(?<!^)(?=[A-Z])");
     }
 }
