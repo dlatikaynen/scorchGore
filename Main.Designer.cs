@@ -400,6 +400,9 @@ namespace ScorchGore
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Scorch Gore";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Main_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Main_MouseUp);
             this.WeltErzeugen.ResumeLayout(false);
             this.WeltErzeugen.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RauheitsfaktorProzent)).EndInit();

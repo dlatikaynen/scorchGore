@@ -22,6 +22,9 @@ namespace ScorchGore
         private const int spielerHalbeBreite = Main.spielerBreite / 2;
         private const float schwerkraftFaktor = 9.81f / 2.0f;
 
+        private bool mitMausVerschieben;
+        private Point mitMausVerschiebenAnfang;
+
         private SpielPhase spielPhase;
         private Bitmap levelBild;
         private Spieler spielerEins;
@@ -510,6 +513,30 @@ namespace ScorchGore
             {
                 bildKopieren.DrawImageUnscaled(this.ausgangsZustand, 0, 0);
             }
-        } 
+        }
+
+        private void Main_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.mitMausVerschieben = true;
+            this.mitMausVerschiebenAnfang = e.Location;
+        }
+
+        private void Main_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.mitMausVerschieben)
+            {
+                this.Location = new Point(
+                    (this.Location.X - this.mitMausVerschiebenAnfang.X) + e.X,
+                    (this.Location.Y - this.mitMausVerschiebenAnfang.Y) + e.Y
+                );
+
+                this.Update();
+            }
+        }
+
+        private void Main_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.mitMausVerschieben = false;
+        }
     }
 }
