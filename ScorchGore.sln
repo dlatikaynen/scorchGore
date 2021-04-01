@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1300
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScorchGore", "ScorchGore.csproj", "{E24CEA5F-26E2-41E7-83AA-CC5B6EFE4C10}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scorchGore", "scorchGore.csproj", "{E24CEA5F-26E2-41E7-83AA-CC5B6EFE4C10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
