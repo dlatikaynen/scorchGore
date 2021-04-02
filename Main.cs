@@ -64,8 +64,8 @@ namespace ScorchGore
                 if (this.spielPhase == SpielPhase.WeltErzeugen)
                 {
                     this.KampfStarten();
-                }                
-                else if(this.spielPhase == SpielPhase.Schusseingabe)
+                }
+                else if (this.spielPhase == SpielPhase.Schusseingabe)
                 {
                     var schussEingabe = await this.SchussEingeben();
                     if (schussEingabe != null)
@@ -75,6 +75,26 @@ namespace ScorchGore
                 }
 
                 e.Handled = e.SuppressKeyPress = true;
+
+            }
+            else if (e.KeyCode == Keys.Left && this.spielPhase == SpielPhase.SpielrundeAktiv)
+            {
+                this.fahrenspieler(-1);
+            }
+            else if (e.KeyCode == Keys.Right && this.spielPhase == SpielPhase.SpielrundeAktiv)
+            {
+                this.fahrenspieler(1);
+            }
+        }
+
+        private void fahrenspieler(int richtung)
+        {
+            this.dranSeiender.X += richtung;
+            using (var zeichnung = Graphics.FromImage(this.levelBild))
+            {
+                this.SpielerZeichnen(zeichnung, this.dranSeiender);
+                this.SpielerFallen(this.dranSeiender);
+                this.Refresh();
             }
         }
 
@@ -393,7 +413,8 @@ namespace ScorchGore
             var mathWinkel = Math.PI * (float)(180 - schussEingabe.SchussWinkel) / 180f;
             var muendungVerlassen = false;
             var behandeltePixel = new List<long>();
-
+            var ausgangsPunktx = this.dranSeiender.X;
+            var ausgangsPunkty = this.dranSeiender.Y;
             /* von hier nach dort x laufen lassen */
             for (
                 var t = 0.0f;
@@ -431,8 +452,8 @@ namespace ScorchGore
                 }
 
                 /* schuss zeichnen */
-                var pixelX = this.dranSeiender.X - (int)x * schussRichtung;
-                var pixelY = this.dranSeiender.Y - (int)y;
+                var pixelX = ausgangsPunktx - (int)x * schussRichtung;
+                var pixelY = ausgangsPunkty - (int)y;
                 if (pixelY > 0 && pixelY < this.levelBild.Height && pixelX > 0 && pixelX < this.levelBild.Width)
                 {
                     var pixelFach = ((long)pixelY << 32) + (long)pixelX;
@@ -472,6 +493,7 @@ namespace ScorchGore
                     }
                 }
 
+                Application.DoEvents();
                 this.Refresh();
 
                 /* schuss ist links, rechts, oder unten rausgeflogen */
