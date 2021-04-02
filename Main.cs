@@ -3,12 +3,8 @@ using ScorchGore.Klassen;
 using ScorchGore.OnlineMultiplayer;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,12 +23,12 @@ namespace ScorchGore
 
         private SpielPhase spielPhase;
         private Bitmap levelBild;
-        private Spieler spielerEins;
-        private Spieler spielerZwei;
+        private readonly Spieler spielerEins;
+        private readonly Spieler spielerZwei;
         private Spieler dranSeiender;
         private Spieler meinSpieler;
-        private Audio Audio = new Audio();
-        private MultiplayerCloud MultiplayerCloud = new MultiplayerCloud();
+        private readonly Audio Audio = new Audio();
+        private readonly MultiplayerCloud MultiplayerCloud = new MultiplayerCloud();
         
         private Bitmap ausgangsZustand;
 
@@ -385,17 +381,6 @@ namespace ScorchGore
                 this.dranSeiender = this.Gegner;
                 this.RundeVorbereiten();
             }
-        }
-
-        private SchussEingabe SchussAbfrage()
-        {
-            int.TryParse(this.Winkel.Text, out int winkelWert);
-            int.TryParse(this.Ladung.Text, out int ladungWert);
-            return new SchussEingabe
-            {
-                SchussWinkel = winkelWert,
-                SchussKraft = ladungWert
-            };
         }
 
         private SchussErgebnis Schiessen(SchussEingabe schussEingabe)
