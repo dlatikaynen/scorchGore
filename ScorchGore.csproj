@@ -51,6 +51,7 @@
     <Compile Include="Aufzaehlungen\TrajektorienArt.cs" />
     <Compile Include="Klassen\Audio.cs" />
     <Compile Include="Klassen\Geraeusche.cs" />
+    <Compile Include="Klassen\Hangrutschung.cs" />
     <Compile Include="Klassen\LevelBeschreibung.cs" />
     <Compile Include="Klassen\Treffer.cs" />
     <Compile Include="Main.cs">

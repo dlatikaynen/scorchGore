@@ -58,7 +58,7 @@ namespace ScorchGore
 
         internal Spieler Gegner => object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? this.spielerZwei : this.spielerEins;
 
-        private async void Main_KeyDown(object sender, KeyEventArgs e)
+        private void Main_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Modifiers == Keys.None && (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return))
             {
@@ -535,20 +535,33 @@ namespace ScorchGore
 
         private void Noobsplosion(int pixelX, int pixelY)
         {
+            const int explosionsRadius = 50;
+            var hangRutschung = new Hangrutschung(this);
             using (var zeichnung = Graphics.FromImage(this.levelBild))
             {
-                for (var radius = 1; radius < 100; radius += 2)
+                var durchMesser = 2 * explosionsRadius;
+                for (var explosionsBreite = 1; explosionsBreite < durchMesser; explosionsBreite += 2)
                 {
-                    zeichnung.DrawEllipse(Pens.Red, pixelX - radius / 2, pixelY - radius / 2, radius, radius);
+                    zeichnung.DrawEllipse(Pens.Red, pixelX - explosionsBreite / 2, pixelY - explosionsBreite / 2, explosionsBreite, explosionsBreite);
                     this.Refresh();
                 }
 
                 zeichnung.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
+                hangRutschung.Bergsturz(
+                    this.levelBild, 
+                    pixelX - explosionsRadius, 
+                    pixelX + explosionsRadius, 
+                    pixelY, 
+                    explosionsRadius
+                );
+
+                hangRutschung.Zeichnen(zeichnung, mitAnimation: true);
             }
 
             using (var bildKopieren = Graphics.FromImage(this.ausgangsZustand))
             {
                 bildKopieren.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
+                hangRutschung.Zeichnen(bildKopieren, mitAnimation: false);
             }
         }
 
