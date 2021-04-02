@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ScorchGore.Klassen
@@ -18,7 +15,6 @@ namespace ScorchGore.Klassen
         private int startPixelX;
         private int endetPixelX;
         private int einschlagY;
-        private int sprengRadius;
 
         public Hangrutschung(Control woBinIch)
         {
@@ -34,7 +30,6 @@ namespace ScorchGore.Klassen
             this.startPixelX = startX;
             this.endetPixelX = endetX;
             this.einschlagY = einschlagY;
-            this.sprengRadius = sprengRadius;
             var xRichtung = this.startPixelX <= this.endetPixelX ? 1 : -1;
             for (
                 int x = this.startPixelX, i = 0, kreisX = -sprengRadius;
