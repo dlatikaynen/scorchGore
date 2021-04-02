@@ -83,24 +83,6 @@ namespace ScorchGore
         }
 
         private void StartOffline_Click(object sender, EventArgs e) => this.KampfStarten();
-        private void noobsplosion(int pixelX, int pixelY)
-        {
-            using (var Zeichnung =
-                Graphics.FromImage(this.levelBild)) {
-                for (var Radius = 1; Radius < 100; Radius += 2)
-                {
-                    Zeichnung.DrawEllipse(Pens.Red, pixelX - Radius / 2, pixelY - Radius / 2, Radius, Radius);
-                    this.Refresh();
-                }
-
-                Zeichnung.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);            
-            }
-
-            using (var bildKopieren = Graphics.FromImage(this.ausgangsZustand))
-            {
-                bildKopieren.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
-            }
-        }
 
         private async void StartCloud_Click(object sender, EventArgs e)
         {
@@ -495,7 +477,7 @@ namespace ScorchGore
                                 }
                                 else
                                 {
-                                    this.noobsplosion(pixelX, pixelY);
+                                    this.Noobsplosion(pixelX, pixelY);
                                     return SchussErgebnis.BergGetroffen;
                                 }
                             }
@@ -531,6 +513,25 @@ namespace ScorchGore
             using (var bildKopieren = Graphics.FromImage(this.levelBild))
             {
                 bildKopieren.DrawImageUnscaled(this.ausgangsZustand, 0, 0);
+            }
+        }
+
+        private void Noobsplosion(int pixelX, int pixelY)
+        {
+            using (var zeichnung = Graphics.FromImage(this.levelBild))
+            {
+                for (var radius = 1; radius < 100; radius += 2)
+                {
+                    zeichnung.DrawEllipse(Pens.Red, pixelX - radius / 2, pixelY - radius / 2, radius, radius);
+                    this.Refresh();
+                }
+
+                zeichnung.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
+            }
+
+            using (var bildKopieren = Graphics.FromImage(this.ausgangsZustand))
+            {
+                bildKopieren.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
             }
         }
 
