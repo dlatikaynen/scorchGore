@@ -35,6 +35,7 @@ namespace ScorchGore
         public Main()
         {
             this.InitializeComponent();
+            this.Audio.AlleAudiosVorbereiten();
             this.spielPhase = SpielPhase.WeltErzeugen;
             this.WeltErzeugen.Show();
             var spielerNamen = SpielerNamen.ZufallsNamenspaar;
@@ -61,33 +62,35 @@ namespace ScorchGore
         {
             if (e.Modifiers == Keys.None && (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return))
             {
-                if (this.spielPhase == SpielPhase.WeltErzeugen)
-                {
-                    this.KampfStarten();
-                }
-                else if (this.spielPhase == SpielPhase.Schusseingabe)
-                {
-                    var schussEingabe = await this.SchussEingeben();
-                    if (schussEingabe != null)
-                    {
-                        this.RundeAustragen(schussEingabe);
-                    }
-                }
-
                 e.Handled = e.SuppressKeyPress = true;
-
+                this.BeginInvoke(new Action(async () => 
+                {
+                    /* im invoke, damit die kacke nicht immer so nervtötend piepst */
+                    if (this.spielPhase == SpielPhase.WeltErzeugen)
+                    {
+                        this.KampfStarten();
+                    }
+                    else if (this.spielPhase == SpielPhase.Schusseingabe)
+                    {
+                        var schussEingabe = await this.SchussEingeben();
+                        if (schussEingabe != null)
+                        {
+                            this.RundeAustragen(schussEingabe);
+                        }
+                    }
+                }));
             }
             else if (e.KeyCode == Keys.Left && this.spielPhase == SpielPhase.SpielrundeAktiv)
             {
-                this.fahrenspieler(-1);
+                this.FahrenSpieler(-1);
             }
             else if (e.KeyCode == Keys.Right && this.spielPhase == SpielPhase.SpielrundeAktiv)
             {
-                this.fahrenspieler(1);
+                this.FahrenSpieler(1);
             }
         }
 
-        private void fahrenspieler(int richtung)
+        private void FahrenSpieler(int richtung)
         {
             this.dranSeiender.X += richtung;
             using (var zeichnung = Graphics.FromImage(this.levelBild))
@@ -379,21 +382,28 @@ namespace ScorchGore
 
             /* wenn keiner getroffen wurde, rollen tauschen,
              * der andere spieler ist dran */
-            if (schussErgebnis == SchussErgebnis.GegnerGekillt)
+            if (schussErgebnis.Ergebnis == SchussErgebnis.GegnerGekillt)
             {
                 this.Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
             }
             else
             {
-                this.AusgangszustandWiederherstellen();
-                this.Refresh();
-
                 /* falls ein berg getroffen wurde, kann es sein, dass der andere spieler
                  * den boden unter sich verloren hat, und tiefer fällt */
-                if (schussErgebnis == SchussErgebnis.BergGetroffen)
+                var koennteFallen = false;
+                if (schussErgebnis.Ergebnis == SchussErgebnis.BergGetroffen)
                 {
                     Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
+                    this.Noobsplosion(schussErgebnis.EinschlagsKoordinateX, schussErgebnis.EinschlagsKoordinateY);
+                    koennteFallen = true;
+                }
+
+                this.AusgangszustandWiederherstellen();
+                this.Refresh();
+                if(koennteFallen)
+                {
                     this.SpielerFallen(this.Gegner);
+                    this.SpielerFallen(this.dranSeiender);
                 }
 
                 /* spieler wechseln sich jetzt ab */
@@ -402,7 +412,7 @@ namespace ScorchGore
             }
         }
 
-        private SchussErgebnis Schiessen(SchussEingabe schussEingabe)
+        private Treffer Schiessen(SchussEingabe schussEingabe)
         {
             double x, y;
 
@@ -415,6 +425,8 @@ namespace ScorchGore
             var behandeltePixel = new List<long>();
             var ausgangsPunktx = this.dranSeiender.X;
             var ausgangsPunkty = this.dranSeiender.Y;
+            var schussErgebnis = new Treffer { Ergebnis = SchussErgebnis.NixGetroffen };
+
             /* von hier nach dort x laufen lassen */
             for (
                 var t = 0.0f;
@@ -472,18 +484,17 @@ namespace ScorchGore
                         {
                             if (hitColor == ((SolidBrush)this.Gegner.Farbe).Color.ToArgb())
                             {
-                                return SchussErgebnis.GegnerGekillt;
+                                return schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.GegnerGekillt);
                             }
                             else if (hitColor != Color.DarkSlateGray.ToArgb())
                             {
                                 if (hitColor == ((SolidBrush)this.dranSeiender.Farbe).Color.ToArgb())
                                 {
-                                    return SchussErgebnis.SelbstErschossen;
+                                    return schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.SelbstErschossen);
                                 }
                                 else
                                 {
-                                    this.Noobsplosion(pixelX, pixelY);
-                                    return SchussErgebnis.BergGetroffen;
+                                    return schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.BergGetroffen);
                                 }
                             }
 
@@ -503,7 +514,7 @@ namespace ScorchGore
                 }
             }
 
-            return SchussErgebnis.NixGetroffen;
+            return schussErgebnis;
         }
 
         private void AusgangszustandSichern()
