@@ -3,12 +3,8 @@ using ScorchGore.Klassen;
 using ScorchGore.OnlineMultiplayer;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,12 +23,12 @@ namespace ScorchGore
 
         private SpielPhase spielPhase;
         private Bitmap levelBild;
-        private Spieler spielerEins;
-        private Spieler spielerZwei;
+        private readonly Spieler spielerEins;
+        private readonly Spieler spielerZwei;
         private Spieler dranSeiender;
         private Spieler meinSpieler;
-        private Audio Audio = new Audio();
-        private MultiplayerCloud MultiplayerCloud = new MultiplayerCloud();
+        private readonly Audio Audio = new Audio();
+        private readonly MultiplayerCloud MultiplayerCloud = new MultiplayerCloud();
         
         private Bitmap ausgangsZustand;
 
@@ -83,24 +79,6 @@ namespace ScorchGore
         }
 
         private void StartOffline_Click(object sender, EventArgs e) => this.KampfStarten();
-        private void noobsplosion(int pixelX, int pixelY)
-        {
-            using (var Zeichnung =
-                Graphics.FromImage(this.levelBild)) {
-                for (var Radius = 1; Radius < 100; Radius += 2)
-                {
-                    Zeichnung.DrawEllipse(Pens.Red, pixelX - Radius / 2, pixelY - Radius / 2, Radius, Radius);
-                    this.Refresh();
-                }
-
-                Zeichnung.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);            
-            }
-
-            using (var bildKopieren = Graphics.FromImage(this.ausgangsZustand))
-            {
-                bildKopieren.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
-            }
-        }
 
         private async void StartCloud_Click(object sender, EventArgs e)
         {
@@ -404,17 +382,6 @@ namespace ScorchGore
             }
         }
 
-        private SchussEingabe SchussAbfrage()
-        {
-            int.TryParse(this.Winkel.Text, out int winkelWert);
-            int.TryParse(this.Ladung.Text, out int ladungWert);
-            return new SchussEingabe
-            {
-                SchussWinkel = winkelWert,
-                SchussKraft = ladungWert
-            };
-        }
-
         private SchussErgebnis Schiessen(SchussEingabe schussEingabe)
         {
             double x, y;
@@ -494,7 +461,7 @@ namespace ScorchGore
                                 }
                                 else
                                 {
-                                    this.noobsplosion(pixelX, pixelY);
+                                    this.Noobsplosion(pixelX, pixelY);
                                     return SchussErgebnis.BergGetroffen;
                                 }
                             }
@@ -530,6 +497,25 @@ namespace ScorchGore
             using (var bildKopieren = Graphics.FromImage(this.levelBild))
             {
                 bildKopieren.DrawImageUnscaled(this.ausgangsZustand, 0, 0);
+            }
+        }
+
+        private void Noobsplosion(int pixelX, int pixelY)
+        {
+            using (var zeichnung = Graphics.FromImage(this.levelBild))
+            {
+                for (var radius = 1; radius < 100; radius += 2)
+                {
+                    zeichnung.DrawEllipse(Pens.Red, pixelX - radius / 2, pixelY - radius / 2, radius, radius);
+                    this.Refresh();
+                }
+
+                zeichnung.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
+            }
+
+            using (var bildKopieren = Graphics.FromImage(this.ausgangsZustand))
+            {
+                bildKopieren.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
             }
         }
 
