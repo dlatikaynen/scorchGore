@@ -74,6 +74,7 @@
     <Compile Include="Klassen\Spieler.cs" />
     <Compile Include="Aufzaehlungen\SpielerNamen.cs" />
     <Compile Include="Aufzaehlungen\SpielPhase.cs" />
+    <Compile Include="Steuerelemente\ControlExtensions.cs" />
     <Compile Include="Steuerelemente\Durchsichtig.cs">
       <SubType>Component</SubType>
     </Compile>

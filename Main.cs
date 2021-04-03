@@ -1,6 +1,7 @@
 ﻿using ScorchGore.Aufzaehlungen;
 using ScorchGore.Klassen;
 using ScorchGore.OnlineMultiplayer;
+using ScorchGore.Steuerelemente;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -40,6 +41,7 @@ namespace ScorchGore
             this.Audio.AlleAudiosVorbereiten();
             this.Goodies.AlleGoodiesVorbereiten();
             this.spielPhase = SpielPhase.WeltErzeugen;
+            this.WeltErzeugen.Center(this);
             this.WeltErzeugen.Show();
             this.levelBild = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
             var spielerNamen = SpielerNamen.ZufallsNamenspaar;

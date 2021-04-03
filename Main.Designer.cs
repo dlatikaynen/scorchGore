@@ -37,34 +37,34 @@ namespace ScorchGore
             this.RauheitsfaktorProzent = new System.Windows.Forms.TrackBar();
             this.HoechstHoeheProzent = new System.Windows.Forms.TrackBar();
             this.MindesthoeheProzent = new System.Windows.Forms.TrackBar();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.MountainosityFactorLabel = new System.Windows.Forms.Label();
+            this.MaximumElevationLabel = new System.Windows.Forms.Label();
+            this.MinimumElevationLabel = new System.Windows.Forms.Label();
             this.ScorchGore = new System.Windows.Forms.Label();
             this.Copyright = new System.Windows.Forms.TextBox();
             this.PlayerNames = new System.Windows.Forms.Label();
+            this.AufGegnerWarten = new Durchsichtig();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.CloudVerbindung = new Durchsichtig();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.MitspielerFindenFortschritt = new System.Windows.Forms.ProgressBar();
+            this.label4 = new System.Windows.Forms.Label();
             this.SchussEingabefeld = new Durchsichtig();
             this.Ladung = new System.Windows.Forms.TextBox();
             this.Winkel = new System.Windows.Forms.TextBox();
             this.NameDesDranSeienden = new System.Windows.Forms.Label();
             this.OomphLabel = new DurchsichtigesLabel();
             this.CommandLabel = new DurchsichtigesLabel();
-            this.CloudVerbindung = new Durchsichtig();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.MitspielerFindenFortschritt = new System.Windows.Forms.ProgressBar();
-            this.label4 = new System.Windows.Forms.Label();
-            this.AufGegnerWarten = new Durchsichtig();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.WeltErzeugen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RauheitsfaktorProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HoechstHoeheProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MindesthoeheProzent)).BeginInit();
-            this.SchussEingabefeld.SuspendLayout();
-            this.CloudVerbindung.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.AufGegnerWarten.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.CloudVerbindung.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SchussEingabefeld.SuspendLayout();
             this.SuspendLayout();
             // 
             // WeltErzeugen
@@ -76,11 +76,11 @@ namespace ScorchGore
             this.WeltErzeugen.Controls.Add(this.RauheitsfaktorProzent);
             this.WeltErzeugen.Controls.Add(this.HoechstHoeheProzent);
             this.WeltErzeugen.Controls.Add(this.MindesthoeheProzent);
-            this.WeltErzeugen.Controls.Add(this.label3);
-            this.WeltErzeugen.Controls.Add(this.label2);
-            this.WeltErzeugen.Controls.Add(this.label1);
+            this.WeltErzeugen.Controls.Add(this.MountainosityFactorLabel);
+            this.WeltErzeugen.Controls.Add(this.MaximumElevationLabel);
+            this.WeltErzeugen.Controls.Add(this.MinimumElevationLabel);
             this.WeltErzeugen.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.WeltErzeugen.Location = new System.Drawing.Point(282, 160);
+            this.WeltErzeugen.Location = new System.Drawing.Point(12, 88);
             this.WeltErzeugen.Name = "WeltErzeugen";
             this.WeltErzeugen.Size = new System.Drawing.Size(299, 240);
             this.WeltErzeugen.TabIndex = 0;
@@ -150,36 +150,36 @@ namespace ScorchGore
             this.MindesthoeheProzent.TickFrequency = 10;
             this.MindesthoeheProzent.Value = 5;
             // 
-            // label3
+            // MountainosityFactorLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Tomato;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 123);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(255, 28);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Mountainosity factor";
+            this.MountainosityFactorLabel.AutoSize = true;
+            this.MountainosityFactorLabel.BackColor = System.Drawing.Color.Tomato;
+            this.MountainosityFactorLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MountainosityFactorLabel.Location = new System.Drawing.Point(3, 123);
+            this.MountainosityFactorLabel.Name = "MountainosityFactorLabel";
+            this.MountainosityFactorLabel.Size = new System.Drawing.Size(255, 28);
+            this.MountainosityFactorLabel.TabIndex = 3;
+            this.MountainosityFactorLabel.Text = "Mountainosity factor";
             // 
-            // label2
+            // MaximumElevationLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(209, 28);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Maximum height";
+            this.MaximumElevationLabel.AutoSize = true;
+            this.MaximumElevationLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaximumElevationLabel.Location = new System.Drawing.Point(3, 63);
+            this.MaximumElevationLabel.Name = "MaximumElevationLabel";
+            this.MaximumElevationLabel.Size = new System.Drawing.Size(209, 28);
+            this.MaximumElevationLabel.TabIndex = 1;
+            this.MaximumElevationLabel.Text = "Maximum height";
             // 
-            // label1
+            // MinimumElevationLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(236, 28);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Minimum elevation";
+            this.MinimumElevationLabel.AutoSize = true;
+            this.MinimumElevationLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MinimumElevationLabel.Location = new System.Drawing.Point(3, 0);
+            this.MinimumElevationLabel.Name = "MinimumElevationLabel";
+            this.MinimumElevationLabel.Size = new System.Drawing.Size(236, 28);
+            this.MinimumElevationLabel.TabIndex = 0;
+            this.MinimumElevationLabel.Text = "Minimum elevation";
             // 
             // ScorchGore
             // 
@@ -225,6 +225,85 @@ namespace ScorchGore
             this.PlayerNames.UseMnemonic = false;
             this.PlayerNames.Visible = false;
             // 
+            // AufGegnerWarten
+            // 
+            this.AufGegnerWarten.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.AufGegnerWarten.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.AufGegnerWarten.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AufGegnerWarten.Controls.Add(this.pictureBox2);
+            this.AufGegnerWarten.Controls.Add(this.label7);
+            this.AufGegnerWarten.Location = new System.Drawing.Point(372, 368);
+            this.AufGegnerWarten.Name = "AufGegnerWarten";
+            this.AufGegnerWarten.Size = new System.Drawing.Size(119, 138);
+            this.AufGegnerWarten.TabIndex = 7;
+            this.AufGegnerWarten.Visible = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.Location = new System.Drawing.Point(-1, 58);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(119, 82);
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(3, 6);
+            this.label7.Name = "label7";
+            this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label7.Size = new System.Drawing.Size(111, 47);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "waiting   for   other player\'s move";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label7.UseMnemonic = false;
+            // 
+            // CloudVerbindung
+            // 
+            this.CloudVerbindung.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.CloudVerbindung.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.CloudVerbindung.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CloudVerbindung.Controls.Add(this.pictureBox1);
+            this.CloudVerbindung.Controls.Add(this.MitspielerFindenFortschritt);
+            this.CloudVerbindung.Controls.Add(this.label4);
+            this.CloudVerbindung.Location = new System.Drawing.Point(731, 28);
+            this.CloudVerbindung.Name = "CloudVerbindung";
+            this.CloudVerbindung.Size = new System.Drawing.Size(119, 361);
+            this.CloudVerbindung.TabIndex = 6;
+            this.CloudVerbindung.Visible = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(-1, 278);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(119, 82);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
+            // MitspielerFindenFortschritt
+            // 
+            this.MitspielerFindenFortschritt.ForeColor = System.Drawing.Color.Azure;
+            this.MitspielerFindenFortschritt.Location = new System.Drawing.Point(27, 5);
+            this.MitspielerFindenFortschritt.Name = "MitspielerFindenFortschritt";
+            this.MitspielerFindenFortschritt.Size = new System.Drawing.Size(87, 249);
+            this.MitspielerFindenFortschritt.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.MitspielerFindenFortschritt.TabIndex = 2;
+            this.MitspielerFindenFortschritt.Value = 99;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 5);
+            this.label4.Name = "label4";
+            this.label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label4.Size = new System.Drawing.Size(18, 249);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "waiting   for   other";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label4.UseMnemonic = false;
+            // 
             // SchussEingabefeld
             // 
             this.SchussEingabefeld.BackColor = System.Drawing.Color.Peru;
@@ -237,6 +316,7 @@ namespace ScorchGore
             this.SchussEingabefeld.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.SchussEingabefeld.Location = new System.Drawing.Point(30, 334);
             this.SchussEingabefeld.Name = "SchussEingabefeld";
+            this.SchussEingabefeld.Opacity = 30;
             this.SchussEingabefeld.Size = new System.Drawing.Size(244, 172);
             this.SchussEingabefeld.TabIndex = 5;
             this.SchussEingabefeld.Visible = false;
@@ -299,98 +379,19 @@ namespace ScorchGore
             this.CommandLabel.Transparent = true;
             this.CommandLabel.UseMnemonic = false;
             // 
-            // CloudVerbindung
-            // 
-            this.CloudVerbindung.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.CloudVerbindung.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.CloudVerbindung.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CloudVerbindung.Controls.Add(this.pictureBox1);
-            this.CloudVerbindung.Controls.Add(this.MitspielerFindenFortschritt);
-            this.CloudVerbindung.Controls.Add(this.label4);
-            this.CloudVerbindung.Location = new System.Drawing.Point(731, 28);
-            this.CloudVerbindung.Name = "CloudVerbindung";
-            this.CloudVerbindung.Size = new System.Drawing.Size(119, 361);
-            this.CloudVerbindung.TabIndex = 6;
-            this.CloudVerbindung.Visible = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 278);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(119, 82);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
-            // MitspielerFindenFortschritt
-            // 
-            this.MitspielerFindenFortschritt.ForeColor = System.Drawing.Color.Azure;
-            this.MitspielerFindenFortschritt.Location = new System.Drawing.Point(27, 5);
-            this.MitspielerFindenFortschritt.Name = "MitspielerFindenFortschritt";
-            this.MitspielerFindenFortschritt.Size = new System.Drawing.Size(87, 249);
-            this.MitspielerFindenFortschritt.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.MitspielerFindenFortschritt.TabIndex = 2;
-            this.MitspielerFindenFortschritt.Value = 99;
-            // 
-            // label4
-            // 
-            this.label4.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 5);
-            this.label4.Name = "label4";
-            this.label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label4.Size = new System.Drawing.Size(18, 249);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "waiting   for   other";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label4.UseMnemonic = false;
-            // 
-            // AufGegnerWarten
-            // 
-            this.AufGegnerWarten.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.AufGegnerWarten.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.AufGegnerWarten.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AufGegnerWarten.Controls.Add(this.pictureBox2);
-            this.AufGegnerWarten.Controls.Add(this.label7);
-            this.AufGegnerWarten.Location = new System.Drawing.Point(372, 368);
-            this.AufGegnerWarten.Name = "AufGegnerWarten";
-            this.AufGegnerWarten.Size = new System.Drawing.Size(119, 138);
-            this.AufGegnerWarten.TabIndex = 7;
-            this.AufGegnerWarten.Visible = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.Location = new System.Drawing.Point(-1, 58);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(119, 82);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            // 
-            // label7
-            // 
-            this.label7.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 6);
-            this.label7.Name = "label7";
-            this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label7.Size = new System.Drawing.Size(111, 47);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "waiting   for   other player\'s move";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label7.UseMnemonic = false;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(862, 518);
+            this.Controls.Add(this.WeltErzeugen);
             this.Controls.Add(this.AufGegnerWarten);
             this.Controls.Add(this.CloudVerbindung);
             this.Controls.Add(this.SchussEingabefeld);
             this.Controls.Add(this.PlayerNames);
             this.Controls.Add(this.Copyright);
             this.Controls.Add(this.ScorchGore);
-            this.Controls.Add(this.WeltErzeugen);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
@@ -410,12 +411,12 @@ namespace ScorchGore
             ((System.ComponentModel.ISupportInitialize)(this.RauheitsfaktorProzent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HoechstHoeheProzent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MindesthoeheProzent)).EndInit();
-            this.SchussEingabefeld.ResumeLayout(false);
-            this.SchussEingabefeld.PerformLayout();
-            this.CloudVerbindung.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.AufGegnerWarten.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.CloudVerbindung.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.SchussEingabefeld.ResumeLayout(false);
+            this.SchussEingabefeld.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -427,9 +428,9 @@ namespace ScorchGore
         private System.Windows.Forms.TrackBar RauheitsfaktorProzent;
         private System.Windows.Forms.TrackBar HoechstHoeheProzent;
         private System.Windows.Forms.TrackBar MindesthoeheProzent;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label MountainosityFactorLabel;
+        private System.Windows.Forms.Label MaximumElevationLabel;
+        private System.Windows.Forms.Label MinimumElevationLabel;
         private System.Windows.Forms.Label ScorchGore;
         private System.Windows.Forms.TextBox Copyright;
         private System.Windows.Forms.Label PlayerNames;
