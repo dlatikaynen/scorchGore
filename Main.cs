@@ -25,6 +25,7 @@ namespace ScorchGore
         private Point mitMausVerschiebenAnfang;
 
         private SpielPhase spielPhase;
+        private Hauptmenuepunkt hauptMenuePunkt = Hauptmenuepunkt.StartMission;
         private Bitmap levelBild;
         private readonly Spieler spielerEins;
         private readonly Spieler spielerZwei;
@@ -58,6 +59,8 @@ namespace ScorchGore
                 X = this.Width - Main.spielerBreite,
                 Y = Main.spielerBasisHoehe
             };
+
+            this.spielPhase = SpielPhase.StartBildschirm;
         }
 
         internal Spieler Gegner => object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? this.spielerZwei : this.spielerEins;
@@ -138,10 +141,14 @@ namespace ScorchGore
             if (e.Modifiers == Keys.None && (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return))
             {
                 e.Handled = e.SuppressKeyPress = true;
-                this.BeginInvoke(new Action(async () => 
+                this.BeginInvoke(new Action(async () =>
                 {
                     /* im invoke, damit die kacke nicht immer so nervtötend piepst */
-                    if (this.spielPhase == SpielPhase.WeltErzeugen)
+                    if (this.spielPhase == SpielPhase.StartBildschirm)
+                    {
+                        this.HauptMenueAuswahl();
+                    }
+                    else if (this.spielPhase == SpielPhase.WeltErzeugen)
                     {
                         this.KampfStarten();
                     }
@@ -162,6 +169,70 @@ namespace ScorchGore
             else if (e.KeyCode == Keys.Right && this.spielPhase == SpielPhase.SpielrundeAktiv)
             {
                 this.FahrenSpieler(1);
+            }
+            else if (e.KeyCode == Keys.Up && this.spielPhase == SpielPhase.StartBildschirm)
+            {
+                --this.hauptMenuePunkt;
+                if (this.hauptMenuePunkt == Hauptmenuepunkt.UNTERLAUF)
+                {
+                    this.hauptMenuePunkt = Hauptmenuepunkt.UEBERLAUF - 1;
+                }
+
+                this.MenueSchlangeSetzen();
+            }
+            else if (e.KeyCode == Keys.Down && this.spielPhase == SpielPhase.StartBildschirm)
+            {
+                ++this.hauptMenuePunkt;
+                if (this.hauptMenuePunkt == Hauptmenuepunkt.UEBERLAUF)
+                {
+                    this.hauptMenuePunkt = Hauptmenuepunkt.UNTERLAUF + 1;
+                }
+
+                this.MenueSchlangeSetzen();
+            }
+        }
+
+        private void MenueSchlangeSetzen()
+        {
+            switch(this.hauptMenuePunkt)
+            {
+                case Hauptmenuepunkt.StartUebung:
+                    this.SetzeSchlange(this.MenueUebungsspielSchlange);
+                    break;
+
+                case Hauptmenuepunkt.StartMission:
+                    this.SetzeSchlange(this.MenueMissionSchlange);
+                    break;
+
+                case Hauptmenuepunkt.Einstellungen:
+                    this.SetzeSchlange(this.MenueEinstellungenSchlange);
+                    break;
+
+                case Hauptmenuepunkt.Beenden:
+                    this.SetzeSchlange(this.MenueBeendenSchlange);
+                    break;
+            }
+        }
+
+        private void HauptMenueAuswahl()
+        {
+            switch (this.hauptMenuePunkt)
+            {
+                case Hauptmenuepunkt.StartUebung:
+                    this.MenueUebungsspielSchlange_Click(this, null);
+                    break;
+
+                case Hauptmenuepunkt.StartMission:
+                    this.MenueMissionSchlange_Click(this, null);
+                    break;
+
+                case Hauptmenuepunkt.Einstellungen:
+                    this.MenueEinstellungenSchlange_Click(this, null);
+                    break;
+
+                case Hauptmenuepunkt.Beenden:
+                    this.MenueBeendenSchlange_Click(this, null);
+                    break;
             }
         }
 

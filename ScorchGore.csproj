@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aufzaehlungen\GoodieWirkung.cs" />
+    <Compile Include="Aufzaehlungen\Hauptmenuepunkt.cs" />
     <Compile Include="Aufzaehlungen\MitspielerFindenStatus.cs" />
     <Compile Include="Aufzaehlungen\TrajektorienArt.cs" />
     <Compile Include="Klassen\Audio.cs" />
