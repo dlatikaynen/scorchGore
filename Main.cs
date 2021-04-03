@@ -250,6 +250,7 @@ namespace ScorchGore
 
         private void SpielerFallen(Spieler fallenderSpieler)
         {
+            const int fallProFrame = 2;
             try
             {
                 using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
@@ -273,10 +274,14 @@ namespace ScorchGore
 
                         if (weiterFallen)
                         {
-                            fallenderSpieler.Y += 2;
+                            fallenderSpieler.Y += fallProFrame;
+                            this.SpielerZeichnen(zeichenFlaeche, fallenderSpieler, fallProFrame);
+                        }
+                        else
+                        {
+                            this.SpielerZeichnen(zeichenFlaeche, fallenderSpieler);
                         }
 
-                        this.SpielerZeichnen(zeichenFlaeche, fallenderSpieler);
                         this.Refresh();
                     }
                 }
@@ -287,15 +292,16 @@ namespace ScorchGore
             }
         }
 
-        private void SpielerZeichnen(Graphics zeichenFlaeche, Spieler gezeichneterSpieler)
+        private void SpielerZeichnen(Graphics zeichenFlaeche, Spieler gezeichneterSpieler, int ausFallHoehe = 0)
         {
             /* das über dem spieler, wo er gefallen ist, wieder mit himmelsfarbe übermalen */
+            var ueberMalenVonY = Math.Max(0, gezeichneterSpieler.Y - Main.spielerBasisHoehe - ausFallHoehe);
             zeichenFlaeche.FillRectangle(
                 Farbverwaltung.Himmelsbuerste,
                 gezeichneterSpieler.X - Main.spielerHalbeBreite,
-                0,
+                ueberMalenVonY,
                 Main.spielerBreite,
-                gezeichneterSpieler.Y
+                gezeichneterSpieler.Y - ueberMalenVonY + 1
             );
 
             /* den spieler selbst neu zeichnen: ein gefüllter halbkreis mit rundung oben */
