@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ScorchGore.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,6 +61,8 @@
     <Compile Include="Klassen\Goodies.cs" />
     <Compile Include="Klassen\Hangrutschung.cs" />
     <Compile Include="Klassen\LevelBeschreibung.cs" />
+    <Compile Include="Klassen\LevelSequenzierer.cs" />
+    <Compile Include="Klassen\LevelZeichner.cs" />
     <Compile Include="Klassen\Sprite.cs" />
     <Compile Include="Klassen\Treffer.cs" />
     <Compile Include="Klassen\ZeugFallenlassen.cs" />
@@ -120,7 +125,9 @@
   <ItemGroup>
     <None Include="Gestaltung\a-truly-painful-design.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Benutzeroberflaeche\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Zeug\Goodies\chel-cr.png" />
   </ItemGroup>

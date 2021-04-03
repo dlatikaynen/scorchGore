@@ -16,8 +16,8 @@ namespace ScorchGore
     {
         internal const int spielerBreite = 30;
         internal const int spielerBasisHoehe = 15;
+        internal const int obererRand = 15;
 
-        private const int obererRand = 15;
         private const int spielerHalbeBreite = Main.spielerBreite / 2;
         private const float schwerkraftFaktor = 9.81f / 2.0f;
 
@@ -27,6 +27,7 @@ namespace ScorchGore
         private SpielPhase spielPhase;
         private Hauptmenuepunkt hauptMenuePunkt = Hauptmenuepunkt.StartMission;
         private Bitmap levelBild;
+        private int aktuelleLevelNummer;
         private readonly Spieler spielerEins;
         private readonly Spieler spielerZwei;
         private Spieler dranSeiender;
@@ -61,6 +62,7 @@ namespace ScorchGore
             };
 
             this.spielPhase = SpielPhase.StartBildschirm;
+            this.aktuelleLevelNummer = 0;
         }
 
         internal Spieler Gegner => object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? this.spielerZwei : this.spielerEins;
@@ -111,6 +113,50 @@ namespace ScorchGore
             this.MenueUebungsspielSchlange.Image = object.ReferenceEquals(schlangenMenue, this.MenueUebungsspielSchlange) ? schlangenBild : null;
         }
 
+        private void MenueSchlangeSetzen()
+        {
+            switch (this.hauptMenuePunkt)
+            {
+                case Hauptmenuepunkt.StartUebung:
+                    this.SetzeSchlange(this.MenueUebungsspielSchlange);
+                    break;
+
+                case Hauptmenuepunkt.StartMission:
+                    this.SetzeSchlange(this.MenueMissionSchlange);
+                    break;
+
+                case Hauptmenuepunkt.Einstellungen:
+                    this.SetzeSchlange(this.MenueEinstellungenSchlange);
+                    break;
+
+                case Hauptmenuepunkt.Beenden:
+                    this.SetzeSchlange(this.MenueBeendenSchlange);
+                    break;
+            }
+        }
+
+        private void HauptMenueAuswahl()
+        {
+            switch (this.hauptMenuePunkt)
+            {
+                case Hauptmenuepunkt.StartUebung:
+                    this.MenueUebungsspielSchlange_Click(this, null);
+                    break;
+
+                case Hauptmenuepunkt.StartMission:
+                    this.MenueMissionSchlange_Click(this, null);
+                    break;
+
+                case Hauptmenuepunkt.Einstellungen:
+                    this.MenueEinstellungenSchlange_Click(this, null);
+                    break;
+
+                case Hauptmenuepunkt.Beenden:
+                    this.MenueBeendenSchlange_Click(this, null);
+                    break;
+            }
+        }
+
         private void MenueWegraeumen()
         {
             this.MenueStartUebungsspielLabel.Hide();
@@ -127,12 +173,15 @@ namespace ScorchGore
         private void UebungsspielVorbereiten()
         {
             this.spielPhase = SpielPhase.WeltErzeugen;
+            this.aktuelleLevelNummer = 0;
             this.WeltErzeugen.Center(this);
             this.WeltErzeugen.Show();
         }
 
         private void MissionVorbereiten()
         {
+            this.spielPhase = SpielPhase.WeltErzeugen;
+            this.aktuelleLevelNummer = 1;
 
         }
 
@@ -189,50 +238,6 @@ namespace ScorchGore
                 }
 
                 this.MenueSchlangeSetzen();
-            }
-        }
-
-        private void MenueSchlangeSetzen()
-        {
-            switch(this.hauptMenuePunkt)
-            {
-                case Hauptmenuepunkt.StartUebung:
-                    this.SetzeSchlange(this.MenueUebungsspielSchlange);
-                    break;
-
-                case Hauptmenuepunkt.StartMission:
-                    this.SetzeSchlange(this.MenueMissionSchlange);
-                    break;
-
-                case Hauptmenuepunkt.Einstellungen:
-                    this.SetzeSchlange(this.MenueEinstellungenSchlange);
-                    break;
-
-                case Hauptmenuepunkt.Beenden:
-                    this.SetzeSchlange(this.MenueBeendenSchlange);
-                    break;
-            }
-        }
-
-        private void HauptMenueAuswahl()
-        {
-            switch (this.hauptMenuePunkt)
-            {
-                case Hauptmenuepunkt.StartUebung:
-                    this.MenueUebungsspielSchlange_Click(this, null);
-                    break;
-
-                case Hauptmenuepunkt.StartMission:
-                    this.MenueMissionSchlange_Click(this, null);
-                    break;
-
-                case Hauptmenuepunkt.Einstellungen:
-                    this.MenueEinstellungenSchlange_Click(this, null);
-                    break;
-
-                case Hauptmenuepunkt.Beenden:
-                    this.MenueBeendenSchlange_Click(this, null);
-                    break;
             }
         }
 
@@ -323,60 +328,26 @@ namespace ScorchGore
             this.SchussEingabefeld.Left = this.Width / 2 - this.SchussEingabefeld.Width / 2;
             this.ausgangsZustand = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
             this.BackgroundImage = this.levelBild;
-            /* berg-steilheit und rauhheit und höhenprofil mit zufallszahlen bestimmen */
-            var verfuegbareBergHoehe = this.Height - Main.obererRand;
-            var minimumHoehe = Convert.ToInt32(Convert.ToDecimal(verfuegbareBergHoehe) * Convert.ToDecimal(this.MindesthoeheProzent.Value) / 100M);
-            var maximumHoehe = Convert.ToInt32(Convert.ToDecimal(verfuegbareBergHoehe) * Convert.ToDecimal(this.HoechstHoeheProzent.Value) / 100M);
-            var steilHeit = Convert.ToInt32(5 + this.RauheitsfaktorProzent.Value);
-            var rauhHeit = 10M - Convert.ToDecimal(this.RauheitsfaktorProzent.Value / 20M);
-            var zufallsZahl = new Random(MultiplayerCloud.BergZufallszahl);
-            var maximumHoehenunterschied = maximumHoehe - minimumHoehe;
-            var aktuelleHoehe = Convert.ToDecimal(minimumHoehe + zufallsZahl.Next(maximumHoehenunterschied));
-            var aktuelleRichtung = (zufallsZahl.Next(100) % 2) == 0;
-            var aktuelleSteilheit = Convert.ToDecimal(Math.Max(1, zufallsZahl.Next(steilHeit)) * 0.22);
-            var unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
-            using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
-            {                
-                zeichenFlaeche.FillRectangle(Farbverwaltung.Himmelsbuerste, zeichenFlaeche.ClipBounds);
-                for (var bergX = 0; bergX < this.Width; bergX += 2)
+            LevelBeschreibung levelBeschreibung;
+            if (this.aktuelleLevelNummer == 0)
+            {
+                /* berg-steilheit und rauhheit und höhenprofil mit zufallszahlen bestimmen */
+                levelBeschreibung = new LevelBeschreibung
                 {
-                    /* berg höhenänderung berechnen */
-                    var hoehenAenderung = 0M;
-                    if (aktuelleRichtung)
-                    {
-                        hoehenAenderung += aktuelleSteilheit;
-                    }
-                    else
-                    {
-                        hoehenAenderung -= aktuelleSteilheit;
-                    }
+                    BergZufallszahl = MultiplayerCloud.BergZufallszahl,
+                    BergMinHoeheProzent = this.MindesthoeheProzent.Value,
+                    BergMaxHoeheProzent = this.HoechstHoeheProzent.Value,
+                    BergRauhheitProzent = this.RauheitsfaktorProzent.Value
+                };
+            }
+            else
+            {
+                levelBeschreibung = LevelSequenzierer.ErzeugeLevelBeschreibung(this.aktuelleLevelNummer);
+            }
 
-                    aktuelleHoehe += hoehenAenderung;
-                    if (aktuelleHoehe < 0)
-                    {
-                        aktuelleRichtung = true;
-                        aktuelleHoehe = aktuelleSteilheit / 2M;
-                    }
-                    else if (aktuelleHoehe > maximumHoehenunterschied)
-                    {
-                        aktuelleRichtung = false;
-                        aktuelleHoehe = maximumHoehenunterschied - aktuelleSteilheit / 2M;
-                    }
-
-                    /* berg zeichnen */
-                    var pixelHoehe = minimumHoehe + Convert.ToInt32(aktuelleHoehe);
-                    zeichenFlaeche.FillRectangle(Farbverwaltung.Bergbuerste, bergX, (float)this.Height - pixelHoehe, 2f, (float)this.Height);
-
-                    /* zacken in den berg machen */
-                    if (--unveraenderteSteigung <= 0)
-                    {
-                        this.Refresh();
-                        aktuelleRichtung = (zufallsZahl.Next(100) % 2) == 0;
-                        aktuelleSteilheit = Convert.ToDecimal(Math.Max(1, zufallsZahl.Next(steilHeit)) * 0.22);
-                        unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
-                    }
-                }
-
+            using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
+            {
+                LevelZeichner.Zeichne(this, this.levelBild, levelBeschreibung, zeichenFlaeche);
                 var goodie = new Goodie(this, this.levelBild, this.Goodies, GoodieWirkung.Chrom_Dreifachschuss)
                 {
                     X = 166
