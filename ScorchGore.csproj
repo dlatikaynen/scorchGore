@@ -55,6 +55,7 @@
     <Compile Include="Aufzaehlungen\MitspielerFindenStatus.cs" />
     <Compile Include="Aufzaehlungen\TrajektorienArt.cs" />
     <Compile Include="Klassen\Audio.cs" />
+    <Compile Include="Klassen\Explosion.cs" />
     <Compile Include="Klassen\Farbverwaltung.cs" />
     <Compile Include="Klassen\Geraeusche.cs" />
     <Compile Include="Klassen\Goodie.cs" />

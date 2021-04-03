@@ -374,6 +374,7 @@ namespace ScorchGore
             this.OomphLabel.AutoSize = true;
             this.OomphLabel.BackColor = System.Drawing.Color.Transparent;
             this.OomphLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OomphLabel.ForeColor = System.Drawing.Color.Honeydew;
             this.OomphLabel.Location = new System.Drawing.Point(5, 98);
             this.OomphLabel.Name = "OomphLabel";
             this.OomphLabel.Size = new System.Drawing.Size(95, 28);
@@ -386,6 +387,7 @@ namespace ScorchGore
             this.CommandLabel.AutoSize = true;
             this.CommandLabel.BackColor = System.Drawing.Color.Transparent;
             this.CommandLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CommandLabel.ForeColor = System.Drawing.Color.Honeydew;
             this.CommandLabel.Location = new System.Drawing.Point(5, 39);
             this.CommandLabel.Name = "CommandLabel";
             this.CommandLabel.Size = new System.Drawing.Size(128, 28);
