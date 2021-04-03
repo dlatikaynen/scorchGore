@@ -64,6 +64,7 @@
     <Compile Include="Klassen\LevelBeschreibung.cs" />
     <Compile Include="Klassen\LevelSequenzierer.cs" />
     <Compile Include="Klassen\LevelZeichner.cs" />
+    <Compile Include="Klassen\Plateau.cs" />
     <Compile Include="Klassen\Sprite.cs" />
     <Compile Include="Klassen\Treffer.cs" />
     <Compile Include="Klassen\ZeugFallenlassen.cs" />
@@ -131,6 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Zeug\Goodies\chel-cr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Gestaltung\truly-a-painful-design.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -49,7 +49,7 @@ namespace ScorchGore
             {
                 Name = spielerNamen.Item1,
                 Farbe = Brushes.YellowGreen,
-                X = Main.spielerBreite,
+                X = this.StandardSpielerEinsX,
                 Y = Main.spielerBasisHoehe
             };
 
@@ -57,7 +57,7 @@ namespace ScorchGore
             {
                 Name = spielerNamen.Item2,
                 Farbe = Brushes.MistyRose,
-                X = this.Width - Main.spielerBreite,
+                X = this.StandardSpielerZweiX,
                 Y = Main.spielerBasisHoehe
             };
 
@@ -66,6 +66,9 @@ namespace ScorchGore
         }
 
         internal Spieler Gegner => object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? this.spielerZwei : this.spielerEins;
+
+        private int StandardSpielerEinsX => Main.spielerBreite;
+        private int StandardSpielerZweiX => this.Width - Main.spielerBreite;
 
         #region Menue
         private async void MenueStartUebungsspielLabel_Click(object sender, EventArgs e)
@@ -321,6 +324,12 @@ namespace ScorchGore
             this.PlayerNames.Show();
         }
 
+        private void LevelNamenZeigen(LevelBeschreibung levelBeschreibung)
+        {
+            this.PlayerNames.Text = $"{ levelBeschreibung.MissionsNummer }-{ levelBeschreibung.LevelNummerInMission }: { levelBeschreibung.LevelName }";
+            this.PlayerNames.Show();
+        }
+
         private void ErzeugeDieWelt()
         {
             this.WeltErzeugen.Hide();
@@ -345,23 +354,31 @@ namespace ScorchGore
             else
             {
                 levelBeschreibung = LevelSequenzierer.ErzeugeLevelBeschreibung(this.aktuelleLevelNummer);
+                this.LevelNamenZeigen(levelBeschreibung);
             }
 
             using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
             {
                 LevelZeichner.Zeichne(this, this.levelBild, levelBeschreibung, zeichenFlaeche);
-                var goodie = new Goodie(this, this.levelBild, this.Goodies, GoodieWirkung.Chrom_Dreifachschuss)
-                {
-                    X = 166
-                };
 
-                goodie.FallenLassen(zeichenFlaeche);
+                /* nur zum test für fallenlassen / fallschirm! */
+                if (this.aktuelleLevelNummer == 0)
+                {
+                    var goodie = new Goodie(this, this.levelBild, this.Goodies, GoodieWirkung.Chrom_Dreifachschuss)
+                    {
+                        X = 166
+                    };
+
+                    goodie.FallenLassen(zeichenFlaeche);
+                }
             }
 
             this.Refresh();
             this.spielPhase = SpielPhase.SpielerFallenRundeBeginnt;
             this.AusgangszustandSichern();
+            this.spielerEins.Positionieren(levelBeschreibung.SpielerPosition1, this.StandardSpielerEinsX);
             this.SpielerFallen(this.spielerEins);
+            this.spielerZwei.Positionieren(levelBeschreibung.SpielerPosition2, this.StandardSpielerZweiX);
             this.SpielerFallen(this.spielerZwei);
         }
 

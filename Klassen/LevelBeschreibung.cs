@@ -1,10 +1,19 @@
 ﻿using ScorchGore.Aufzaehlungen;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace ScorchGore.Klassen
 {
     internal class LevelBeschreibung
     {
+        public LevelBeschreibung()
+        {
+            this.SpielerPosition1 = Point.Empty;
+            this.SpielerPosition2 = Point.Empty;
+            this.Plateaus = new Dictionary<int, Plateau>();
+        }
+
         /// <summary>
         /// Laufzeit-Tracking für das Online-Zusammenspiel
         /// </summary>
@@ -22,6 +31,9 @@ namespace ScorchGore.Klassen
         public int HoehleMaxHoeheProzent { get; set; }
         public int HoehleRauhheitProzent { get; set; }
 
+        /* Besonderheiten der Topologie */
+        public Dictionary<int, Plateau> Plateaus { get; private set; }
+
         /* Beschreibung für ein Missionslevel */
         public int MissionsNummer { get; set; }
         public string MissionsName { get; set; }
@@ -30,7 +42,12 @@ namespace ScorchGore.Klassen
         public int LevelNummerInMission { get; set; }
         public string LevelName { get; set; }
 
+        public Point SpielerPosition1 { get; set; }
+        public Point SpielerPosition2 { get; set; }
+
         internal void MisisonsnameSetzen() => this.MissionsName = this.MissionsnameBestimmen(this.MissionsNummer);
+
+        internal void Plateau(int bodenHoehe, int startX, int endetX) => this.Plateaus.Add(startX, new Plateau { Elevation = bodenHoehe, StartX = startX, EndetX = endetX });
 
         private string MissionsnameBestimmen(int missionsNummer)
         {

@@ -37,5 +37,19 @@ namespace ScorchGore
                 -180f
             );
         }
+
+        internal void Positionieren(Point spielerPosition, int standardX)
+        {
+            if(spielerPosition.IsEmpty)
+            {
+                this.X = standardX;
+                this.Y = Main.spielerBasisHoehe;
+            }
+            else
+            {
+                this.X = spielerPosition.X;
+                this.Y = spielerPosition.Y;
+            }
+        }
     }
 }

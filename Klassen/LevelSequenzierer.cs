@@ -1,6 +1,7 @@
 ﻿using ScorchGore.OnlineMultiplayer;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,10 @@ namespace ScorchGore.Klassen
                     levelBeschreibung.BergMaxHoeheProzent = 48;
                     levelBeschreibung.BergRauhheitProzent = 21;
                     levelBeschreibung.BergZufallszahl = LevelSequenzierer.zufallsZahlenGenerator;
+                    levelBeschreibung.Plateau(645 - 460, 82, 200);
+                    levelBeschreibung.SpielerPosition1 = new Point(112, Main.spielerBasisHoehe);
+                    levelBeschreibung.Plateau(645 - 415, 638, 700);
+                    levelBeschreibung.SpielerPosition2 = new Point(673, Main.spielerBasisHoehe);
                     break;
             }
 

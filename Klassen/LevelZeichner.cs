@@ -21,6 +21,7 @@ namespace ScorchGore.Klassen
             var unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
             
             zeichenFlaeche.FillRectangle(Farbverwaltung.Himmelsbuerste, zeichenFlaeche.ClipBounds);
+            Plateau binInPlateau = null;
             for (var bergX = 0; bergX < woBinIch.Width; bergX += 2)
             {
                 /* berg höhenänderung berechnen */
@@ -48,6 +49,27 @@ namespace ScorchGore.Klassen
 
                 /* berg zeichnen */
                 var pixelHoehe = minimumHoehe + Convert.ToInt32(aktuelleHoehe);
+                if(binInPlateau == null)
+                {
+                    if(levelBeschreibung.Plateaus.ContainsKey(bergX))
+                    {
+                        binInPlateau = levelBeschreibung.Plateaus[bergX];
+                    }
+                }
+
+                if (binInPlateau != null)
+                {
+                    if (binInPlateau.EndetX < bergX)
+                    {
+                        zeichenFlaeche.DrawLine(Pens.Red, (float)binInPlateau.StartX, (float)woBinIch.Height-binInPlateau.Elevation, (float)binInPlateau.EndetX, (float)woBinIch.Height - binInPlateau.Elevation);
+                        binInPlateau = null;
+                    }
+                    else
+                    {
+                        pixelHoehe = binInPlateau.Elevation;
+                    }
+                }
+
                 zeichenFlaeche.FillRectangle(Farbverwaltung.Bergbuerste, bergX, (float)woBinIch.Height - pixelHoehe, 2f, (float)woBinIch.Height);
 
                 /* zacken in den berg machen */
