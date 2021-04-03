@@ -5,6 +5,10 @@ using System.Windows.Forms;
 
 namespace ScorchGore.Klassen
 {
+    /// <summary>
+    /// Damit kann man ein Stück zerschossenen Berg abrutschen lassen
+    /// (überhängende Teile stürzen linienweise in den Noobsplosionskrater)
+    /// </summary>
     internal class Hangrutschung
     {
         private readonly Control woBinIch;
@@ -80,7 +84,7 @@ namespace ScorchGore.Klassen
                     var linieNr = linienIndex++;
                     zeichnung.DrawLine(Farbverwaltung.Bergstift, x, this.gebirgsLinien[linieNr].oberesY, x, this.gebirgsLinien[linieNr].unteresY);
                     zeichnung.DrawLine(Farbverwaltung.Himmelsstift, x, this.himmelsLinien[linieNr].oberesY, x, this.himmelsLinien[linieNr].unteresY);
-                    if (mitAnimation && i % 2 == 0 && woBinIch != null)
+                    if (mitAnimation && i % 2 == 0 && this.woBinIch != null)
                     {
                         woBinIch.Refresh();
                     }
@@ -88,6 +92,9 @@ namespace ScorchGore.Klassen
             }
         }
 
+        /// <summary>
+        /// Beschreibt eine 1 Pixel breite, senkrechte Linie in der Welt
+        /// </summary>
         private class Linie
         {
             public int oberesY;

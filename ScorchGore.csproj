@@ -53,10 +53,13 @@
     <Compile Include="Klassen\Audio.cs" />
     <Compile Include="Klassen\Farbverwaltung.cs" />
     <Compile Include="Klassen\Geraeusche.cs" />
+    <Compile Include="Klassen\Goodie.cs" />
     <Compile Include="Klassen\Goodies.cs" />
     <Compile Include="Klassen\Hangrutschung.cs" />
     <Compile Include="Klassen\LevelBeschreibung.cs" />
+    <Compile Include="Klassen\Sprite.cs" />
     <Compile Include="Klassen\Treffer.cs" />
+    <Compile Include="Klassen\ZeugFallenlassen.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

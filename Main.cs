@@ -12,9 +12,10 @@ namespace ScorchGore
 {
     public partial class Main : Form
     {
+        internal const int spielerBreite = 30;
+        internal const int spielerBasisHoehe = 15;
+
         private const int obererRand = 15;
-        private const int spielerBreite = 30;
-        private const int spielerBasisHoehe = 15;
         private const int spielerHalbeBreite = Main.spielerBreite / 2;
         private const float schwerkraftFaktor = 9.81f / 2.0f;
 
@@ -97,7 +98,7 @@ namespace ScorchGore
             this.dranSeiender.X += richtung;
             using (var zeichnung = Graphics.FromImage(this.levelBild))
             {
-                this.SpielerZeichnen(zeichnung, this.dranSeiender);
+                this.dranSeiender.Zeichnen(zeichnung);
                 this.SpielerFallen(this.dranSeiender);
                 this.Refresh();
             }
@@ -250,70 +251,17 @@ namespace ScorchGore
 
         private void SpielerFallen(Spieler fallenderSpieler)
         {
-            const int fallProFrame = 2;
             try
             {
                 using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
                 {
-                    var weiterFallen = true;
-                    var himmelsFarbe = this.levelBild.GetPixel(1, 1);
-                    while (weiterFallen)
-                    {
-                        for (
-                            var schauenX = fallenderSpieler.X - Main.spielerHalbeBreite;
-                            schauenX <= fallenderSpieler.X + Main.spielerHalbeBreite;
-                            schauenX += 3
-                        )
-                        {
-                            if (this.levelBild.GetPixel(schauenX, fallenderSpieler.Y + 1) != himmelsFarbe)
-                            {
-                                weiterFallen = false;
-                                return;
-                            }
-                        }
-
-                        if (weiterFallen)
-                        {
-                            fallenderSpieler.Y += fallProFrame;
-                            this.SpielerZeichnen(zeichenFlaeche, fallenderSpieler, fallProFrame);
-                        }
-                        else
-                        {
-                            this.SpielerZeichnen(zeichenFlaeche, fallenderSpieler);
-                        }
-
-                        this.Refresh();
-                    }
+                    fallenderSpieler.FallenLassen(this, this.levelBild, zeichenFlaeche);
                 }
             }
             finally
             {
                 this.Refresh();
             }
-        }
-
-        private void SpielerZeichnen(Graphics zeichenFlaeche, Spieler gezeichneterSpieler, int ausFallHoehe = 0)
-        {
-            /* das über dem spieler, wo er gefallen ist, wieder mit himmelsfarbe übermalen */
-            var ueberMalenVonY = Math.Max(0, gezeichneterSpieler.Y - Main.spielerBasisHoehe - ausFallHoehe);
-            zeichenFlaeche.FillRectangle(
-                Farbverwaltung.Himmelsbuerste,
-                gezeichneterSpieler.X - Main.spielerHalbeBreite,
-                ueberMalenVonY,
-                Main.spielerBreite,
-                gezeichneterSpieler.Y - ueberMalenVonY + 1
-            );
-
-            /* den spieler selbst neu zeichnen: ein gefüllter halbkreis mit rundung oben */
-            zeichenFlaeche.FillPie(
-                gezeichneterSpieler.Farbe,
-                gezeichneterSpieler.X - Main.spielerHalbeBreite,
-                gezeichneterSpieler.Y - Main.spielerBasisHoehe + 1,
-                Main.spielerBreite,
-                2 * Main.spielerBasisHoehe,
-                0f,
-                -180f
-            );
         }
 
         private void LevelSpielen()
@@ -417,8 +365,8 @@ namespace ScorchGore
                 {
                     using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
                     {
-                        this.SpielerZeichnen(zeichenFlaeche, this.dranSeiender);
-                        this.SpielerZeichnen(zeichenFlaeche, this.Gegner);
+                        this.dranSeiender.Zeichnen(zeichenFlaeche);
+                        this.Gegner.Zeichnen(zeichenFlaeche);
                     }
 
                     this.SpielerFallen(this.Gegner);
