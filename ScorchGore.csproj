@@ -47,11 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aufzaehlungen\GoodieWirkung.cs" />
+    <Compile Include="Aufzaehlungen\Hauptmenuepunkt.cs" />
     <Compile Include="Aufzaehlungen\MitspielerFindenStatus.cs" />
     <Compile Include="Aufzaehlungen\TrajektorienArt.cs" />
     <Compile Include="Klassen\Audio.cs" />
+    <Compile Include="Klassen\Farbverwaltung.cs" />
     <Compile Include="Klassen\Geraeusche.cs" />
+    <Compile Include="Klassen\Goodie.cs" />
+    <Compile Include="Klassen\Goodies.cs" />
+    <Compile Include="Klassen\Hangrutschung.cs" />
     <Compile Include="Klassen\LevelBeschreibung.cs" />
+    <Compile Include="Klassen\Sprite.cs" />
+    <Compile Include="Klassen\Treffer.cs" />
+    <Compile Include="Klassen\ZeugFallenlassen.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,7 +75,11 @@
     <Compile Include="Klassen\Spieler.cs" />
     <Compile Include="Aufzaehlungen\SpielerNamen.cs" />
     <Compile Include="Aufzaehlungen\SpielPhase.cs" />
+    <Compile Include="Steuerelemente\ControlExtensions.cs" />
     <Compile Include="Steuerelemente\Durchsichtig.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Steuerelemente\DurchsichtigesLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Zeug\RessourcenKlasse.cs" />
@@ -99,13 +112,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Zeug\projectile-fired.wav" />
+    <EmbeddedResource Include="Zeug\Geraeusche\projectile-fired.wav" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Zeug\decay-crumble.wav" />
+    <EmbeddedResource Include="Zeug\Geraeusche\decay-crumble.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Gestaltung\a-truly-painful-design.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Zeug\Goodies\chel-cr.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

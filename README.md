@@ -1,10 +1,13 @@
-# The Scorch Gore Game
+# The Scorch Gore Game 2021-04-01
   
 #intentionallyugly  
 Recommended for kids age 12 and up (use of obscene fonts, and mild language)  
+Honestly, this game is not recommended for anyone, really.
 
-The game with the most consistent user interface on the planet.
-
+The game with the most consistent user interface on the planet.  
+  
+Don't submit feedback of any kind, we can't be bothered.  
+  
 ![](https://raw.githubusercontent.com/dlatikaynen/scorchGore/master/Gestaltung/a-truly-painful-design.png)
 
 What critics have to say:  

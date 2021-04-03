@@ -1,8 +1,10 @@
 ﻿using ScorchGore.Aufzaehlungen;
 using ScorchGore.Klassen;
 using ScorchGore.OnlineMultiplayer;
+using ScorchGore.Steuerelemente;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
@@ -12,9 +14,10 @@ namespace ScorchGore
 {
     public partial class Main : Form
     {
+        internal const int spielerBreite = 30;
+        internal const int spielerBasisHoehe = 15;
+
         private const int obererRand = 15;
-        private const int spielerBreite = 30;
-        private const int spielerBasisHoehe = 15;
         private const int spielerHalbeBreite = Main.spielerBreite / 2;
         private const float schwerkraftFaktor = 9.81f / 2.0f;
 
@@ -22,12 +25,14 @@ namespace ScorchGore
         private Point mitMausVerschiebenAnfang;
 
         private SpielPhase spielPhase;
+        private Hauptmenuepunkt hauptMenuePunkt = Hauptmenuepunkt.StartMission;
         private Bitmap levelBild;
         private readonly Spieler spielerEins;
         private readonly Spieler spielerZwei;
         private Spieler dranSeiender;
         private Spieler meinSpieler;
         private readonly Audio Audio = new Audio();
+        private readonly Goodies Goodies = new Goodies();
         private readonly MultiplayerCloud MultiplayerCloud = new MultiplayerCloud();
         
         private Bitmap ausgangsZustand;
@@ -35,10 +40,11 @@ namespace ScorchGore
         public Main()
         {
             this.InitializeComponent();
-            this.spielPhase = SpielPhase.WeltErzeugen;
-            this.WeltErzeugen.Show();
+            this.Audio.AlleAudiosVorbereiten();
+            this.Goodies.AlleGoodiesVorbereiten();
+            this.levelBild = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
             var spielerNamen = SpielerNamen.ZufallsNamenspaar;
-            this.spielerEins = new Spieler
+            this.spielerEins = new Spieler(this, this.levelBild)
             {
                 Name = spielerNamen.Item1,
                 Farbe = Brushes.YellowGreen,
@@ -46,53 +52,196 @@ namespace ScorchGore
                 Y = Main.spielerBasisHoehe
             };
 
-            this.spielerZwei = new Spieler
+            this.spielerZwei = new Spieler(this, this.levelBild)
             {
                 Name = spielerNamen.Item2,
                 Farbe = Brushes.MistyRose,
                 X = this.Width - Main.spielerBreite,
                 Y = Main.spielerBasisHoehe
             };
+
+            this.spielPhase = SpielPhase.StartBildschirm;
         }
 
         internal Spieler Gegner => object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? this.spielerZwei : this.spielerEins;
 
-        private async void Main_KeyDown(object sender, KeyEventArgs e)
+        #region Menue
+        private async void MenueStartUebungsspielLabel_Click(object sender, EventArgs e)
+        {
+            this.SetzeSchlange(this.MenueUebungsspielSchlange);
+            await Task.Delay(150);
+            this.MenueWegraeumen();
+            this.UebungsspielVorbereiten();
+        }
+
+        private async void MenueStartMissionLabel_Click(object sender, EventArgs e)
+        {
+            this.SetzeSchlange(this.MenueMissionSchlange);
+            await Task.Delay(150);
+            this.MenueWegraeumen();
+            this.MissionVorbereiten();
+        }
+
+        private async void MenueEinstellungenLabel_Click(object sender, EventArgs e)
+        {
+            this.SetzeSchlange(this.MenueEinstellungenSchlange);
+            await Task.Delay(150);
+
+        }
+
+        private async void MenueBeendenLabel_Click(object sender, EventArgs e)
+        {
+            this.SetzeSchlange(this.MenueBeendenSchlange);
+            await Task.Delay(150);
+            Application.Exit();
+        }
+
+        private void MenueUebungsspielSchlange_Click(object sender, EventArgs e) => this.MenueStartUebungsspielLabel_Click(sender, e);
+        private void MenueMissionSchlange_Click(object sender, EventArgs e) => this.MenueStartMissionLabel_Click(sender, e);
+        private void MenueEinstellungenSchlange_Click(object sender, EventArgs e) => this.MenueEinstellungenLabel_Click(sender, e);
+        private void MenueBeendenSchlange_Click(object sender, EventArgs e) => this.MenueBeendenLabel_Click(sender, e);
+
+        private void SetzeSchlange(PictureBox schlangenMenue)
+        {
+            var bildQuelle = new ComponentResourceManager(typeof(Main));
+            var schlangenBild = ((Image)(bildQuelle.GetObject($"{ nameof(MenueMissionSchlange) }.{ nameof(Image) }")));
+            this.MenueBeendenSchlange.Image = object.ReferenceEquals(schlangenMenue, this.MenueBeendenSchlange) ? schlangenBild : null;
+            this.MenueEinstellungenSchlange.Image = object.ReferenceEquals(schlangenMenue, this.MenueEinstellungenSchlange) ? schlangenBild : null;
+            this.MenueMissionSchlange.Image = object.ReferenceEquals(schlangenMenue, this.MenueMissionSchlange) ? schlangenBild : null;
+            this.MenueUebungsspielSchlange.Image = object.ReferenceEquals(schlangenMenue, this.MenueUebungsspielSchlange) ? schlangenBild : null;
+        }
+
+        private void MenueWegraeumen()
+        {
+            this.MenueStartUebungsspielLabel.Hide();
+            this.MenueStartMissionLabel.Hide();
+            this.MenueEinstellungenLabel.Hide();
+            this.MenueBeendenLabel.Hide();
+            this.MenueUebungsspielSchlange.Hide();
+            this.MenueMissionSchlange.Hide();
+            this.MenueEinstellungenSchlange.Hide();
+            this.MenueBeendenSchlange.Hide();
+        }
+        #endregion
+
+        private void UebungsspielVorbereiten()
+        {
+            this.spielPhase = SpielPhase.WeltErzeugen;
+            this.WeltErzeugen.Center(this);
+            this.WeltErzeugen.Show();
+        }
+
+        private void MissionVorbereiten()
+        {
+
+        }
+
+        private void Main_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Modifiers == Keys.None && (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return))
             {
-                if (this.spielPhase == SpielPhase.WeltErzeugen)
-                {
-                    this.KampfStarten();
-                }
-                else if (this.spielPhase == SpielPhase.Schusseingabe)
-                {
-                    var schussEingabe = await this.SchussEingeben();
-                    if (schussEingabe != null)
-                    {
-                        this.RundeAustragen(schussEingabe);
-                    }
-                }
-
                 e.Handled = e.SuppressKeyPress = true;
-
+                this.BeginInvoke(new Action(async () =>
+                {
+                    /* im invoke, damit die kacke nicht immer so nervtötend piepst */
+                    if (this.spielPhase == SpielPhase.StartBildschirm)
+                    {
+                        this.HauptMenueAuswahl();
+                    }
+                    else if (this.spielPhase == SpielPhase.WeltErzeugen)
+                    {
+                        this.KampfStarten();
+                    }
+                    else if (this.spielPhase == SpielPhase.Schusseingabe)
+                    {
+                        var schussEingabe = await this.SchussEingeben();
+                        if (schussEingabe != null)
+                        {
+                            this.RundeAustragen(schussEingabe);
+                        }
+                    }
+                }));
             }
             else if (e.KeyCode == Keys.Left && this.spielPhase == SpielPhase.SpielrundeAktiv)
             {
-                this.fahrenspieler(-1);
+                this.FahrenSpieler(-1);
             }
             else if (e.KeyCode == Keys.Right && this.spielPhase == SpielPhase.SpielrundeAktiv)
             {
-                this.fahrenspieler(1);
+                this.FahrenSpieler(1);
+            }
+            else if (e.KeyCode == Keys.Up && this.spielPhase == SpielPhase.StartBildschirm)
+            {
+                --this.hauptMenuePunkt;
+                if (this.hauptMenuePunkt == Hauptmenuepunkt.UNTERLAUF)
+                {
+                    this.hauptMenuePunkt = Hauptmenuepunkt.UEBERLAUF - 1;
+                }
+
+                this.MenueSchlangeSetzen();
+            }
+            else if (e.KeyCode == Keys.Down && this.spielPhase == SpielPhase.StartBildschirm)
+            {
+                ++this.hauptMenuePunkt;
+                if (this.hauptMenuePunkt == Hauptmenuepunkt.UEBERLAUF)
+                {
+                    this.hauptMenuePunkt = Hauptmenuepunkt.UNTERLAUF + 1;
+                }
+
+                this.MenueSchlangeSetzen();
             }
         }
 
-        private void fahrenspieler(int richtung)
+        private void MenueSchlangeSetzen()
+        {
+            switch(this.hauptMenuePunkt)
+            {
+                case Hauptmenuepunkt.StartUebung:
+                    this.SetzeSchlange(this.MenueUebungsspielSchlange);
+                    break;
+
+                case Hauptmenuepunkt.StartMission:
+                    this.SetzeSchlange(this.MenueMissionSchlange);
+                    break;
+
+                case Hauptmenuepunkt.Einstellungen:
+                    this.SetzeSchlange(this.MenueEinstellungenSchlange);
+                    break;
+
+                case Hauptmenuepunkt.Beenden:
+                    this.SetzeSchlange(this.MenueBeendenSchlange);
+                    break;
+            }
+        }
+
+        private void HauptMenueAuswahl()
+        {
+            switch (this.hauptMenuePunkt)
+            {
+                case Hauptmenuepunkt.StartUebung:
+                    this.MenueUebungsspielSchlange_Click(this, null);
+                    break;
+
+                case Hauptmenuepunkt.StartMission:
+                    this.MenueMissionSchlange_Click(this, null);
+                    break;
+
+                case Hauptmenuepunkt.Einstellungen:
+                    this.MenueEinstellungenSchlange_Click(this, null);
+                    break;
+
+                case Hauptmenuepunkt.Beenden:
+                    this.MenueBeendenSchlange_Click(this, null);
+                    break;
+            }
+        }
+
+        private void FahrenSpieler(int richtung)
         {
             this.dranSeiender.X += richtung;
             using (var zeichnung = Graphics.FromImage(this.levelBild))
             {
-                this.SpielerZeichnen(zeichnung, this.dranSeiender);
+                this.dranSeiender.Zeichnen(zeichnung);
                 this.SpielerFallen(this.dranSeiender);
                 this.Refresh();
             }
@@ -172,7 +321,6 @@ namespace ScorchGore
             this.Copyright.Hide();
             this.SpielerNamenZeigen();
             this.SchussEingabefeld.Left = this.Width / 2 - this.SchussEingabefeld.Width / 2;
-            this.levelBild = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
             this.ausgangsZustand = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
             this.BackgroundImage = this.levelBild;
             /* berg-steilheit und rauhheit und höhenprofil mit zufallszahlen bestimmen */
@@ -189,7 +337,7 @@ namespace ScorchGore
             var unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
             using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
             {                
-                zeichenFlaeche.FillRectangle(Brushes.DarkSlateGray, zeichenFlaeche.ClipBounds);
+                zeichenFlaeche.FillRectangle(Farbverwaltung.Himmelsbuerste, zeichenFlaeche.ClipBounds);
                 for (var bergX = 0; bergX < this.Width; bergX += 2)
                 {
                     /* berg höhenänderung berechnen */
@@ -217,7 +365,7 @@ namespace ScorchGore
 
                     /* berg zeichnen */
                     var pixelHoehe = minimumHoehe + Convert.ToInt32(aktuelleHoehe);
-                    zeichenFlaeche.FillRectangle(Brushes.SlateBlue, bergX, (float)this.Height - pixelHoehe, 2f, (float)this.Height);
+                    zeichenFlaeche.FillRectangle(Farbverwaltung.Bergbuerste, bergX, (float)this.Height - pixelHoehe, 2f, (float)this.Height);
 
                     /* zacken in den berg machen */
                     if (--unveraenderteSteigung <= 0)
@@ -228,10 +376,18 @@ namespace ScorchGore
                         unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
                     }
                 }
+
+                var goodie = new Goodie(this, this.levelBild, this.Goodies, GoodieWirkung.Chrom_Dreifachschuss)
+                {
+                    X = 166
+                };
+
+                goodie.FallenLassen(zeichenFlaeche);
             }
 
             this.Refresh();
             this.spielPhase = SpielPhase.SpielerFallenRundeBeginnt;
+            this.AusgangszustandSichern();
             this.SpielerFallen(this.spielerEins);
             this.SpielerFallen(this.spielerZwei);
         }
@@ -242,60 +398,13 @@ namespace ScorchGore
             {
                 using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
                 {
-                    var weiterFallen = true;
-                    var himmelsFarbe = this.levelBild.GetPixel(1, 1);
-                    while (weiterFallen)
-                    {
-                        for (
-                            var schauenX = fallenderSpieler.X - Main.spielerHalbeBreite;
-                            schauenX <= fallenderSpieler.X + Main.spielerHalbeBreite;
-                            schauenX += 3
-                        )
-                        {
-                            if (this.levelBild.GetPixel(schauenX, fallenderSpieler.Y + 1) != himmelsFarbe)
-                            {
-                                weiterFallen = false;
-                                return;
-                            }
-                        }
-
-                        if (weiterFallen)
-                        {
-                            fallenderSpieler.Y += 2;
-                        }
-
-                        this.SpielerZeichnen(zeichenFlaeche, fallenderSpieler);
-                        this.Refresh();
-                    }
+                    fallenderSpieler.FallenLassen(zeichenFlaeche);
                 }
             }
             finally
             {
                 this.Refresh();
             }
-        }
-
-        private void SpielerZeichnen(Graphics zeichenFlaeche, Spieler gezeichneterSpieler)
-        {
-            /* das über dem spieler, wo er gefallen ist, wieder mit himmelsfarbe übermalen */
-            zeichenFlaeche.FillRectangle(
-                Brushes.DarkSlateGray,
-                gezeichneterSpieler.X - Main.spielerHalbeBreite,
-                0,
-                Main.spielerBreite,
-                gezeichneterSpieler.Y
-            );
-
-            /* den spieler selbst neu zeichnen: ein gefüllter halbkreis mit rundung oben */
-            zeichenFlaeche.FillPie(
-                gezeichneterSpieler.Farbe,
-                gezeichneterSpieler.X - Main.spielerHalbeBreite,
-                gezeichneterSpieler.Y - Main.spielerBasisHoehe + 1,
-                Main.spielerBreite,
-                2 * Main.spielerBasisHoehe,
-                0f,
-                -180f
-            );
         }
 
         private void LevelSpielen()
@@ -374,26 +483,41 @@ namespace ScorchGore
             this.spielPhase = SpielPhase.SpielrundeAktiv;
 
             /* den schuss ausführen und schauen (ob) was getroffen wurde */
-            this.AusgangszustandSichern();
             var schussErgebnis = this.Schiessen(schussEingabe);
 
             /* wenn keiner getroffen wurde, rollen tauschen,
              * der andere spieler ist dran */
-            if (schussErgebnis == SchussErgebnis.GegnerGekillt)
+            if (schussErgebnis.Ergebnis == SchussErgebnis.GegnerGekillt)
             {
                 this.Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
             }
             else
             {
-                this.AusgangszustandWiederherstellen();
-                this.Refresh();
-
                 /* falls ein berg getroffen wurde, kann es sein, dass der andere spieler
                  * den boden unter sich verloren hat, und tiefer fällt */
-                if (schussErgebnis == SchussErgebnis.BergGetroffen)
+                var koennteFallen = false;
+                if (schussErgebnis.Ergebnis == SchussErgebnis.BergGetroffen)
                 {
                     Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
+                    this.Noobsplosion(schussErgebnis.EinschlagsKoordinateX, schussErgebnis.EinschlagsKoordinateY);
+                    koennteFallen = true;
+                }
+
+                this.AusgangszustandWiederherstellen();
+                if(koennteFallen)
+                {
+                    using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
+                    {
+                        this.dranSeiender.Zeichnen(zeichenFlaeche);
+                        this.Gegner.Zeichnen(zeichenFlaeche);
+                    }
+
                     this.SpielerFallen(this.Gegner);
+                    this.SpielerFallen(this.dranSeiender);
+                }
+                else
+                {
+                    this.Refresh();
                 }
 
                 /* spieler wechseln sich jetzt ab */
@@ -402,7 +526,7 @@ namespace ScorchGore
             }
         }
 
-        private SchussErgebnis Schiessen(SchussEingabe schussEingabe)
+        private Treffer Schiessen(SchussEingabe schussEingabe)
         {
             double x, y;
 
@@ -415,6 +539,8 @@ namespace ScorchGore
             var behandeltePixel = new List<long>();
             var ausgangsPunktx = this.dranSeiender.X;
             var ausgangsPunkty = this.dranSeiender.Y;
+            var schussErgebnis = new Treffer { Ergebnis = SchussErgebnis.NixGetroffen };
+
             /* von hier nach dort x laufen lassen */
             for (
                 var t = 0.0f;
@@ -472,18 +598,17 @@ namespace ScorchGore
                         {
                             if (hitColor == ((SolidBrush)this.Gegner.Farbe).Color.ToArgb())
                             {
-                                return SchussErgebnis.GegnerGekillt;
+                                return schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.GegnerGekillt);
                             }
-                            else if (hitColor != Color.DarkSlateGray.ToArgb())
+                            else if (hitColor != Farbverwaltung.HimmelsfarbeAlsInt)
                             {
                                 if (hitColor == ((SolidBrush)this.dranSeiender.Farbe).Color.ToArgb())
                                 {
-                                    return SchussErgebnis.SelbstErschossen;
+                                    return schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.SelbstErschossen);
                                 }
                                 else
                                 {
-                                    this.Noobsplosion(pixelX, pixelY);
-                                    return SchussErgebnis.BergGetroffen;
+                                    return schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.BergGetroffen);
                                 }
                             }
 
@@ -503,7 +628,7 @@ namespace ScorchGore
                 }
             }
 
-            return SchussErgebnis.NixGetroffen;
+            return schussErgebnis;
         }
 
         private void AusgangszustandSichern()
@@ -524,20 +649,33 @@ namespace ScorchGore
 
         private void Noobsplosion(int pixelX, int pixelY)
         {
+            const int explosionsRadius = 50;
+            var hangRutschung = new Hangrutschung(this);
             using (var zeichnung = Graphics.FromImage(this.levelBild))
             {
-                for (var radius = 1; radius < 100; radius += 2)
+                var durchMesser = 2 * explosionsRadius;
+                for (var explosionsBreite = 1; explosionsBreite < durchMesser; explosionsBreite += 2)
                 {
-                    zeichnung.DrawEllipse(Pens.Red, pixelX - radius / 2, pixelY - radius / 2, radius, radius);
+                    zeichnung.DrawEllipse(Pens.Red, pixelX - explosionsBreite / 2, pixelY - explosionsBreite / 2, explosionsBreite, explosionsBreite);
                     this.Refresh();
                 }
 
-                zeichnung.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
+                zeichnung.FillEllipse(Farbverwaltung.Himmelsbuerste, pixelX - 50, pixelY - 50, 100, 100);
+                hangRutschung.Bergsturz(
+                    this.levelBild, 
+                    pixelX - explosionsRadius, 
+                    pixelX + explosionsRadius, 
+                    pixelY, 
+                    explosionsRadius
+                );
+
+                hangRutschung.Zeichnen(zeichnung, mitAnimation: true);
             }
 
             using (var bildKopieren = Graphics.FromImage(this.ausgangsZustand))
             {
-                bildKopieren.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
+                bildKopieren.FillEllipse(Farbverwaltung.Himmelsbuerste, pixelX - 50, pixelY - 50, 100, 100);
+                hangRutschung.Zeichnen(bildKopieren, mitAnimation: false);
             }
         }
 

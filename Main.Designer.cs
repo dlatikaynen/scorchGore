@@ -37,34 +37,46 @@ namespace ScorchGore
             this.RauheitsfaktorProzent = new System.Windows.Forms.TrackBar();
             this.HoechstHoeheProzent = new System.Windows.Forms.TrackBar();
             this.MindesthoeheProzent = new System.Windows.Forms.TrackBar();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.MountainosityFactorLabel = new System.Windows.Forms.Label();
+            this.MaximumElevationLabel = new System.Windows.Forms.Label();
+            this.MinimumElevationLabel = new System.Windows.Forms.Label();
             this.ScorchGore = new System.Windows.Forms.Label();
             this.Copyright = new System.Windows.Forms.TextBox();
             this.PlayerNames = new System.Windows.Forms.Label();
-            this.SchussEingabefeld = new Durchsichtig();
-            this.Ladung = new System.Windows.Forms.TextBox();
-            this.Winkel = new System.Windows.Forms.TextBox();
-            this.NameDesDranSeienden = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.AufGegnerWarten = new Durchsichtig();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.CloudVerbindung = new Durchsichtig();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MitspielerFindenFortschritt = new System.Windows.Forms.ProgressBar();
             this.label4 = new System.Windows.Forms.Label();
-            this.AufGegnerWarten = new Durchsichtig();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.SchussEingabefeld = new Durchsichtig();
+            this.Ladung = new System.Windows.Forms.TextBox();
+            this.Winkel = new System.Windows.Forms.TextBox();
+            this.NameDesDranSeienden = new System.Windows.Forms.Label();
+            this.OomphLabel = new DurchsichtigesLabel();
+            this.CommandLabel = new DurchsichtigesLabel();
+            this.MenueBeendenLabel = new DurchsichtigesLabel();
+            this.MenueEinstellungenLabel = new DurchsichtigesLabel();
+            this.MenueStartUebungsspielLabel = new DurchsichtigesLabel();
+            this.MenueStartMissionLabel = new DurchsichtigesLabel();
+            this.MenueMissionSchlange = new System.Windows.Forms.PictureBox();
+            this.MenueUebungsspielSchlange = new System.Windows.Forms.PictureBox();
+            this.MenueEinstellungenSchlange = new System.Windows.Forms.PictureBox();
+            this.MenueBeendenSchlange = new System.Windows.Forms.PictureBox();
             this.WeltErzeugen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RauheitsfaktorProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HoechstHoeheProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MindesthoeheProzent)).BeginInit();
-            this.SchussEingabefeld.SuspendLayout();
-            this.CloudVerbindung.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.AufGegnerWarten.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.CloudVerbindung.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SchussEingabefeld.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueMissionSchlange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueUebungsspielSchlange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueEinstellungenSchlange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueBeendenSchlange)).BeginInit();
             this.SuspendLayout();
             // 
             // WeltErzeugen
@@ -76,11 +88,11 @@ namespace ScorchGore
             this.WeltErzeugen.Controls.Add(this.RauheitsfaktorProzent);
             this.WeltErzeugen.Controls.Add(this.HoechstHoeheProzent);
             this.WeltErzeugen.Controls.Add(this.MindesthoeheProzent);
-            this.WeltErzeugen.Controls.Add(this.label3);
-            this.WeltErzeugen.Controls.Add(this.label2);
-            this.WeltErzeugen.Controls.Add(this.label1);
+            this.WeltErzeugen.Controls.Add(this.MountainosityFactorLabel);
+            this.WeltErzeugen.Controls.Add(this.MaximumElevationLabel);
+            this.WeltErzeugen.Controls.Add(this.MinimumElevationLabel);
             this.WeltErzeugen.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.WeltErzeugen.Location = new System.Drawing.Point(282, 160);
+            this.WeltErzeugen.Location = new System.Drawing.Point(12, 88);
             this.WeltErzeugen.Name = "WeltErzeugen";
             this.WeltErzeugen.Size = new System.Drawing.Size(299, 240);
             this.WeltErzeugen.TabIndex = 0;
@@ -150,36 +162,36 @@ namespace ScorchGore
             this.MindesthoeheProzent.TickFrequency = 10;
             this.MindesthoeheProzent.Value = 5;
             // 
-            // label3
+            // MountainosityFactorLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Tomato;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 123);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(255, 28);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Mountainosity factor";
+            this.MountainosityFactorLabel.AutoSize = true;
+            this.MountainosityFactorLabel.BackColor = System.Drawing.Color.Tomato;
+            this.MountainosityFactorLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MountainosityFactorLabel.Location = new System.Drawing.Point(3, 123);
+            this.MountainosityFactorLabel.Name = "MountainosityFactorLabel";
+            this.MountainosityFactorLabel.Size = new System.Drawing.Size(255, 28);
+            this.MountainosityFactorLabel.TabIndex = 3;
+            this.MountainosityFactorLabel.Text = "Mountainosity factor";
             // 
-            // label2
+            // MaximumElevationLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(209, 28);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Maximum height";
+            this.MaximumElevationLabel.AutoSize = true;
+            this.MaximumElevationLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaximumElevationLabel.Location = new System.Drawing.Point(3, 63);
+            this.MaximumElevationLabel.Name = "MaximumElevationLabel";
+            this.MaximumElevationLabel.Size = new System.Drawing.Size(209, 28);
+            this.MaximumElevationLabel.TabIndex = 1;
+            this.MaximumElevationLabel.Text = "Maximum height";
             // 
-            // label1
+            // MinimumElevationLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(236, 28);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Minimum elevation";
+            this.MinimumElevationLabel.AutoSize = true;
+            this.MinimumElevationLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MinimumElevationLabel.Location = new System.Drawing.Point(3, 0);
+            this.MinimumElevationLabel.Name = "MinimumElevationLabel";
+            this.MinimumElevationLabel.Size = new System.Drawing.Size(236, 28);
+            this.MinimumElevationLabel.TabIndex = 0;
+            this.MinimumElevationLabel.Text = "Minimum elevation";
             // 
             // ScorchGore
             // 
@@ -197,10 +209,13 @@ namespace ScorchGore
             this.Copyright.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Copyright.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.Copyright.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Copyright.Enabled = false;
             this.Copyright.Font = new System.Drawing.Font("Segoe Print", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Copyright.Location = new System.Drawing.Point(535, 406);
             this.Copyright.Multiline = true;
             this.Copyright.Name = "Copyright";
+            this.Copyright.ReadOnly = true;
+            this.Copyright.ShortcutsEnabled = false;
             this.Copyright.Size = new System.Drawing.Size(315, 100);
             this.Copyright.TabIndex = 2;
             this.Copyright.TabStop = false;
@@ -225,77 +240,39 @@ namespace ScorchGore
             this.PlayerNames.UseMnemonic = false;
             this.PlayerNames.Visible = false;
             // 
-            // SchussEingabefeld
+            // AufGegnerWarten
             // 
-            this.SchussEingabefeld.BackColor = System.Drawing.Color.Peru;
-            this.SchussEingabefeld.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SchussEingabefeld.Controls.Add(this.Ladung);
-            this.SchussEingabefeld.Controls.Add(this.Winkel);
-            this.SchussEingabefeld.Controls.Add(this.NameDesDranSeienden);
-            this.SchussEingabefeld.Controls.Add(this.label5);
-            this.SchussEingabefeld.Controls.Add(this.label6);
-            this.SchussEingabefeld.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.SchussEingabefeld.Location = new System.Drawing.Point(30, 334);
-            this.SchussEingabefeld.Name = "SchussEingabefeld";
-            this.SchussEingabefeld.Size = new System.Drawing.Size(244, 172);
-            this.SchussEingabefeld.TabIndex = 5;
-            this.SchussEingabefeld.Visible = false;
+            this.AufGegnerWarten.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.AufGegnerWarten.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.AufGegnerWarten.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AufGegnerWarten.Controls.Add(this.pictureBox2);
+            this.AufGegnerWarten.Controls.Add(this.label7);
+            this.AufGegnerWarten.Location = new System.Drawing.Point(372, 368);
+            this.AufGegnerWarten.Name = "AufGegnerWarten";
+            this.AufGegnerWarten.Size = new System.Drawing.Size(119, 138);
+            this.AufGegnerWarten.TabIndex = 7;
+            this.AufGegnerWarten.Visible = false;
             // 
-            // Ladung
+            // pictureBox2
             // 
-            this.Ladung.BackColor = System.Drawing.Color.Crimson;
-            this.Ladung.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Ladung.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.Ladung.Location = new System.Drawing.Point(8, 130);
-            this.Ladung.Name = "Ladung";
-            this.Ladung.Size = new System.Drawing.Size(221, 24);
-            this.Ladung.TabIndex = 4;
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.Location = new System.Drawing.Point(-1, 58);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(119, 82);
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
             // 
-            // Winkel
+            // label7
             // 
-            this.Winkel.BackColor = System.Drawing.Color.Crimson;
-            this.Winkel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Winkel.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.Winkel.Location = new System.Drawing.Point(8, 70);
-            this.Winkel.Name = "Winkel";
-            this.Winkel.Size = new System.Drawing.Size(221, 24);
-            this.Winkel.TabIndex = 3;
-            // 
-            // NameDesDranSeienden
-            // 
-            this.NameDesDranSeienden.BackColor = System.Drawing.Color.Transparent;
-            this.NameDesDranSeienden.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameDesDranSeienden.ForeColor = System.Drawing.Color.Yellow;
-            this.NameDesDranSeienden.Location = new System.Drawing.Point(3, 0);
-            this.NameDesDranSeienden.Name = "NameDesDranSeienden";
-            this.NameDesDranSeienden.Size = new System.Drawing.Size(233, 22);
-            this.NameDesDranSeienden.TabIndex = 2;
-            this.NameDesDranSeienden.Text = "spielerName";
-            this.NameDesDranSeienden.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.NameDesDranSeienden.UseMnemonic = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 98);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(150, 28);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Oomph, ok?";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(5, 39);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(168, 28);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Angle, mkay?";
-            this.label6.UseMnemonic = false;
+            this.label7.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(3, 6);
+            this.label7.Name = "label7";
+            this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label7.Size = new System.Drawing.Size(111, 47);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "waiting   for   other player\'s move";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label7.UseMnemonic = false;
             // 
             // CloudVerbindung
             // 
@@ -342,39 +319,189 @@ namespace ScorchGore
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label4.UseMnemonic = false;
             // 
-            // AufGegnerWarten
+            // SchussEingabefeld
             // 
-            this.AufGegnerWarten.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.AufGegnerWarten.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.AufGegnerWarten.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AufGegnerWarten.Controls.Add(this.pictureBox2);
-            this.AufGegnerWarten.Controls.Add(this.label7);
-            this.AufGegnerWarten.Location = new System.Drawing.Point(372, 368);
-            this.AufGegnerWarten.Name = "AufGegnerWarten";
-            this.AufGegnerWarten.Size = new System.Drawing.Size(119, 138);
-            this.AufGegnerWarten.TabIndex = 7;
-            this.AufGegnerWarten.Visible = false;
+            this.SchussEingabefeld.BackColor = System.Drawing.Color.Peru;
+            this.SchussEingabefeld.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SchussEingabefeld.Controls.Add(this.Ladung);
+            this.SchussEingabefeld.Controls.Add(this.Winkel);
+            this.SchussEingabefeld.Controls.Add(this.NameDesDranSeienden);
+            this.SchussEingabefeld.Controls.Add(this.OomphLabel);
+            this.SchussEingabefeld.Controls.Add(this.CommandLabel);
+            this.SchussEingabefeld.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.SchussEingabefeld.Location = new System.Drawing.Point(30, 334);
+            this.SchussEingabefeld.Name = "SchussEingabefeld";
+            this.SchussEingabefeld.Opacity = 30;
+            this.SchussEingabefeld.Size = new System.Drawing.Size(244, 172);
+            this.SchussEingabefeld.TabIndex = 5;
+            this.SchussEingabefeld.Visible = false;
             // 
-            // pictureBox2
+            // Ladung
             // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.Location = new System.Drawing.Point(-1, 58);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(119, 82);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
+            this.Ladung.BackColor = System.Drawing.Color.Crimson;
+            this.Ladung.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Ladung.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.Ladung.Location = new System.Drawing.Point(8, 130);
+            this.Ladung.Name = "Ladung";
+            this.Ladung.Size = new System.Drawing.Size(221, 24);
+            this.Ladung.TabIndex = 4;
             // 
-            // label7
+            // Winkel
             // 
-            this.label7.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 6);
-            this.label7.Name = "label7";
-            this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label7.Size = new System.Drawing.Size(111, 47);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "waiting   for   other player\'s move";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label7.UseMnemonic = false;
+            this.Winkel.BackColor = System.Drawing.Color.Crimson;
+            this.Winkel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Winkel.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.Winkel.Location = new System.Drawing.Point(8, 70);
+            this.Winkel.Name = "Winkel";
+            this.Winkel.Size = new System.Drawing.Size(221, 24);
+            this.Winkel.TabIndex = 3;
+            // 
+            // NameDesDranSeienden
+            // 
+            this.NameDesDranSeienden.BackColor = System.Drawing.Color.Transparent;
+            this.NameDesDranSeienden.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NameDesDranSeienden.ForeColor = System.Drawing.Color.Yellow;
+            this.NameDesDranSeienden.Location = new System.Drawing.Point(3, 0);
+            this.NameDesDranSeienden.Name = "NameDesDranSeienden";
+            this.NameDesDranSeienden.Size = new System.Drawing.Size(233, 22);
+            this.NameDesDranSeienden.TabIndex = 2;
+            this.NameDesDranSeienden.Text = "spielerName";
+            this.NameDesDranSeienden.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.NameDesDranSeienden.UseMnemonic = false;
+            // 
+            // OomphLabel
+            // 
+            this.OomphLabel.AutoSize = true;
+            this.OomphLabel.BackColor = System.Drawing.Color.Transparent;
+            this.OomphLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OomphLabel.Location = new System.Drawing.Point(5, 98);
+            this.OomphLabel.Name = "OomphLabel";
+            this.OomphLabel.Size = new System.Drawing.Size(95, 28);
+            this.OomphLabel.TabIndex = 1;
+            this.OomphLabel.Text = "Oomph";
+            this.OomphLabel.Transparent = true;
+            // 
+            // CommandLabel
+            // 
+            this.CommandLabel.AutoSize = true;
+            this.CommandLabel.BackColor = System.Drawing.Color.Transparent;
+            this.CommandLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CommandLabel.Location = new System.Drawing.Point(5, 39);
+            this.CommandLabel.Name = "CommandLabel";
+            this.CommandLabel.Size = new System.Drawing.Size(128, 28);
+            this.CommandLabel.TabIndex = 0;
+            this.CommandLabel.Text = "Command";
+            this.CommandLabel.Transparent = true;
+            this.CommandLabel.UseMnemonic = false;
+            // 
+            // MenueBeendenLabel
+            // 
+            this.MenueBeendenLabel.AutoSize = true;
+            this.MenueBeendenLabel.BackColor = System.Drawing.Color.Transparent;
+            this.MenueBeendenLabel.Font = new System.Drawing.Font("Tahoma", 27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MenueBeendenLabel.ForeColor = System.Drawing.Color.Black;
+            this.MenueBeendenLabel.Location = new System.Drawing.Point(374, 347);
+            this.MenueBeendenLabel.Name = "MenueBeendenLabel";
+            this.MenueBeendenLabel.Size = new System.Drawing.Size(136, 43);
+            this.MenueBeendenLabel.TabIndex = 8;
+            this.MenueBeendenLabel.Text = "carper";
+            this.MenueBeendenLabel.Transparent = true;
+            this.MenueBeendenLabel.UseMnemonic = false;
+            this.MenueBeendenLabel.Click += new System.EventHandler(this.MenueBeendenLabel_Click);
+            // 
+            // MenueEinstellungenLabel
+            // 
+            this.MenueEinstellungenLabel.AutoSize = true;
+            this.MenueEinstellungenLabel.BackColor = System.Drawing.Color.Transparent;
+            this.MenueEinstellungenLabel.Font = new System.Drawing.Font("Tahoma", 27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MenueEinstellungenLabel.ForeColor = System.Drawing.Color.Black;
+            this.MenueEinstellungenLabel.Location = new System.Drawing.Point(374, 278);
+            this.MenueEinstellungenLabel.Name = "MenueEinstellungenLabel";
+            this.MenueEinstellungenLabel.Size = new System.Drawing.Size(146, 43);
+            this.MenueEinstellungenLabel.TabIndex = 9;
+            this.MenueEinstellungenLabel.Text = "ettings";
+            this.MenueEinstellungenLabel.Transparent = true;
+            this.MenueEinstellungenLabel.UseMnemonic = false;
+            this.MenueEinstellungenLabel.Click += new System.EventHandler(this.MenueEinstellungenLabel_Click);
+            // 
+            // MenueStartUebungsspielLabel
+            // 
+            this.MenueStartUebungsspielLabel.AutoSize = true;
+            this.MenueStartUebungsspielLabel.BackColor = System.Drawing.Color.Transparent;
+            this.MenueStartUebungsspielLabel.Font = new System.Drawing.Font("Tahoma", 27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MenueStartUebungsspielLabel.ForeColor = System.Drawing.Color.Black;
+            this.MenueStartUebungsspielLabel.Location = new System.Drawing.Point(371, 212);
+            this.MenueStartUebungsspielLabel.Name = "MenueStartUebungsspielLabel";
+            this.MenueStartUebungsspielLabel.Size = new System.Drawing.Size(244, 43);
+            this.MenueStartUebungsspielLabel.TabIndex = 10;
+            this.MenueStartUebungsspielLabel.Text = "tart practice";
+            this.MenueStartUebungsspielLabel.Transparent = true;
+            this.MenueStartUebungsspielLabel.UseMnemonic = false;
+            this.MenueStartUebungsspielLabel.Click += new System.EventHandler(this.MenueStartUebungsspielLabel_Click);
+            // 
+            // MenueStartMissionLabel
+            // 
+            this.MenueStartMissionLabel.AutoSize = true;
+            this.MenueStartMissionLabel.BackColor = System.Drawing.Color.Transparent;
+            this.MenueStartMissionLabel.Font = new System.Drawing.Font("Tahoma", 27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MenueStartMissionLabel.ForeColor = System.Drawing.Color.Black;
+            this.MenueStartMissionLabel.Location = new System.Drawing.Point(371, 142);
+            this.MenueStartMissionLabel.Name = "MenueStartMissionLabel";
+            this.MenueStartMissionLabel.Size = new System.Drawing.Size(237, 43);
+            this.MenueStartMissionLabel.TabIndex = 11;
+            this.MenueStartMissionLabel.Text = "tart mission";
+            this.MenueStartMissionLabel.Transparent = true;
+            this.MenueStartMissionLabel.UseMnemonic = false;
+            this.MenueStartMissionLabel.Click += new System.EventHandler(this.MenueStartMissionLabel_Click);
+            // 
+            // MenueMissionSchlange
+            // 
+            this.MenueMissionSchlange.BackColor = System.Drawing.Color.Transparent;
+            this.MenueMissionSchlange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenueMissionSchlange.Image = ((System.Drawing.Image)(resources.GetObject("MenueMissionSchlange.Image")));
+            this.MenueMissionSchlange.Location = new System.Drawing.Point(342, 113);
+            this.MenueMissionSchlange.Margin = new System.Windows.Forms.Padding(0);
+            this.MenueMissionSchlange.Name = "MenueMissionSchlange";
+            this.MenueMissionSchlange.Size = new System.Drawing.Size(35, 68);
+            this.MenueMissionSchlange.TabIndex = 12;
+            this.MenueMissionSchlange.TabStop = false;
+            this.MenueMissionSchlange.Click += new System.EventHandler(this.MenueMissionSchlange_Click);
+            // 
+            // MenueUebungsspielSchlange
+            // 
+            this.MenueUebungsspielSchlange.BackColor = System.Drawing.Color.Transparent;
+            this.MenueUebungsspielSchlange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenueUebungsspielSchlange.Location = new System.Drawing.Point(342, 183);
+            this.MenueUebungsspielSchlange.Margin = new System.Windows.Forms.Padding(0);
+            this.MenueUebungsspielSchlange.Name = "MenueUebungsspielSchlange";
+            this.MenueUebungsspielSchlange.Size = new System.Drawing.Size(35, 68);
+            this.MenueUebungsspielSchlange.TabIndex = 13;
+            this.MenueUebungsspielSchlange.TabStop = false;
+            this.MenueUebungsspielSchlange.Click += new System.EventHandler(this.MenueUebungsspielSchlange_Click);
+            // 
+            // MenueEinstellungenSchlange
+            // 
+            this.MenueEinstellungenSchlange.BackColor = System.Drawing.Color.Transparent;
+            this.MenueEinstellungenSchlange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenueEinstellungenSchlange.Location = new System.Drawing.Point(342, 251);
+            this.MenueEinstellungenSchlange.Margin = new System.Windows.Forms.Padding(0);
+            this.MenueEinstellungenSchlange.Name = "MenueEinstellungenSchlange";
+            this.MenueEinstellungenSchlange.Size = new System.Drawing.Size(35, 68);
+            this.MenueEinstellungenSchlange.TabIndex = 14;
+            this.MenueEinstellungenSchlange.TabStop = false;
+            this.MenueEinstellungenSchlange.Click += new System.EventHandler(this.MenueEinstellungenSchlange_Click);
+            // 
+            // MenueBeendenSchlange
+            // 
+            this.MenueBeendenSchlange.BackColor = System.Drawing.Color.Transparent;
+            this.MenueBeendenSchlange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenueBeendenSchlange.Location = new System.Drawing.Point(342, 319);
+            this.MenueBeendenSchlange.Margin = new System.Windows.Forms.Padding(0);
+            this.MenueBeendenSchlange.Name = "MenueBeendenSchlange";
+            this.MenueBeendenSchlange.Size = new System.Drawing.Size(35, 68);
+            this.MenueBeendenSchlange.TabIndex = 15;
+            this.MenueBeendenSchlange.TabStop = false;
+            this.MenueBeendenSchlange.Click += new System.EventHandler(this.MenueBeendenSchlange_Click);
             // 
             // Main
             // 
@@ -382,13 +509,21 @@ namespace ScorchGore
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(862, 518);
+            this.Controls.Add(this.MenueBeendenSchlange);
+            this.Controls.Add(this.MenueEinstellungenSchlange);
+            this.Controls.Add(this.MenueUebungsspielSchlange);
+            this.Controls.Add(this.MenueMissionSchlange);
+            this.Controls.Add(this.MenueStartMissionLabel);
+            this.Controls.Add(this.MenueStartUebungsspielLabel);
+            this.Controls.Add(this.MenueEinstellungenLabel);
+            this.Controls.Add(this.MenueBeendenLabel);
+            this.Controls.Add(this.WeltErzeugen);
             this.Controls.Add(this.AufGegnerWarten);
             this.Controls.Add(this.CloudVerbindung);
             this.Controls.Add(this.SchussEingabefeld);
             this.Controls.Add(this.PlayerNames);
             this.Controls.Add(this.Copyright);
             this.Controls.Add(this.ScorchGore);
-            this.Controls.Add(this.WeltErzeugen);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
@@ -408,12 +543,16 @@ namespace ScorchGore
             ((System.ComponentModel.ISupportInitialize)(this.RauheitsfaktorProzent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HoechstHoeheProzent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MindesthoeheProzent)).EndInit();
-            this.SchussEingabefeld.ResumeLayout(false);
-            this.SchussEingabefeld.PerformLayout();
-            this.CloudVerbindung.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.AufGegnerWarten.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.CloudVerbindung.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.SchussEingabefeld.ResumeLayout(false);
+            this.SchussEingabefeld.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueMissionSchlange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueUebungsspielSchlange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueEinstellungenSchlange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueBeendenSchlange)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -425,16 +564,16 @@ namespace ScorchGore
         private System.Windows.Forms.TrackBar RauheitsfaktorProzent;
         private System.Windows.Forms.TrackBar HoechstHoeheProzent;
         private System.Windows.Forms.TrackBar MindesthoeheProzent;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label MountainosityFactorLabel;
+        private System.Windows.Forms.Label MaximumElevationLabel;
+        private System.Windows.Forms.Label MinimumElevationLabel;
         private System.Windows.Forms.Label ScorchGore;
         private System.Windows.Forms.TextBox Copyright;
         private System.Windows.Forms.Label PlayerNames;
         private Durchsichtig SchussEingabefeld;
         private System.Windows.Forms.Label NameDesDranSeienden;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private DurchsichtigesLabel OomphLabel;
+        private DurchsichtigesLabel CommandLabel;
         private System.Windows.Forms.TextBox Ladung;
         private System.Windows.Forms.TextBox Winkel;
         private System.Windows.Forms.Button StartCloud;
@@ -446,6 +585,14 @@ namespace ScorchGore
         private Durchsichtig AufGegnerWarten;
         private PictureBox pictureBox2;
         private Label label7;
+        private DurchsichtigesLabel MenueBeendenLabel;
+        private DurchsichtigesLabel MenueEinstellungenLabel;
+        private DurchsichtigesLabel MenueStartUebungsspielLabel;
+        private DurchsichtigesLabel MenueStartMissionLabel;
+        private PictureBox MenueMissionSchlange;
+        private PictureBox MenueUebungsspielSchlange;
+        private PictureBox MenueEinstellungenSchlange;
+        private PictureBox MenueBeendenSchlange;
     }
 }
 
