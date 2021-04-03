@@ -1,4 +1,4 @@
-# The Scorch Gore Game
+# The Scorch Gore Game 2021-04-01
   
 #intentionallyugly  
 Recommended for kids age 12 and up (use of obscene fonts, and mild language)  
