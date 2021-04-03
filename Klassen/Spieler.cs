@@ -1,6 +1,7 @@
 ﻿using ScorchGore.Klassen;
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace ScorchGore
 {
@@ -10,6 +11,8 @@ namespace ScorchGore
         public Brush Farbe;
 
         public override int Breite => Main.spielerBreite;
+
+        public Spieler(Control woBinIch, Bitmap woSchaueIch) : base(woBinIch, woSchaueIch) { }
 
         public override void Zeichnen(Graphics zeichenFlaeche, int fallProFrame = 0)
         {

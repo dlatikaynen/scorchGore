@@ -11,20 +11,37 @@ namespace ScorchGore.Klassen
 {
     internal class Goodie : Sprite
     {
-        private readonly Control woBinIch;
         private readonly GoodieWirkung welchesGoodie;
+        private readonly Goodies goodieSpeicher;
 
-        public Goodie(Control woBinIch, GoodieWirkung welchesGoodie)
+        public Goodie(Control woBinIch, Bitmap woSchaueIch, Goodies goodieSpeicher, GoodieWirkung welchesGoodie) : base(woBinIch,woSchaueIch)
         {
-            this.woBinIch = woBinIch;
+            this.goodieSpeicher = goodieSpeicher;
             this.welchesGoodie = welchesGoodie;
         }
 
-        public override int Breite => 24;
+        public override int Breite => 33;
+
+        protected int Hoehe => this.Breite;
 
         public override void Zeichnen(Graphics zeichenFlaeche, int fallProFrame = 0)
         {
-            throw new NotImplementedException();
+            /* das über dem spieler, wo er gefallen ist, wieder mit himmelsfarbe übermalen */
+            var ueberMalenVonY = Math.Max(0, this.Y - this.Hoehe - fallProFrame);
+            zeichenFlaeche.FillRectangle(
+                Farbverwaltung.Himmelsbuerste,
+                this.X - this.HalbeBreite,
+                ueberMalenVonY,
+                this.Breite,
+                this.Y - ueberMalenVonY + 1
+            );
+
+            /* das goodie selbst zeichnen */
+            zeichenFlaeche.DrawImageUnscaled(
+                this.goodieSpeicher.BildHolen(this.welchesGoodie),
+                this.X - this.HalbeBreite,
+                this.Y - this.Hoehe
+            );
         }
     }
 }

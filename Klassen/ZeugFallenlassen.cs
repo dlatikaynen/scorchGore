@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ScorchGore.Klassen
@@ -6,6 +7,7 @@ namespace ScorchGore.Klassen
     internal static class ZeugFallenlassen
     {
         private const int fallProFrame = 2;
+        private const int augenDioptrien = 3;
 
         public static void FallZuBoden(Control woBinIch, Bitmap woSchaueIch, Graphics zeichenFlaeche, Sprite fallendesObjekt)
         {
@@ -14,9 +16,9 @@ namespace ScorchGore.Klassen
             while (weiterFallen)
             {
                 for (
-                    var schauenX = fallendesObjekt.X - fallendesObjekt.HalbeBreite;
-                    schauenX <= fallendesObjekt.X + fallendesObjekt.HalbeBreite;
-                    schauenX += 3
+                    var schauenX = Math.Max(0, fallendesObjekt.X - fallendesObjekt.HalbeBreite);
+                    schauenX <= fallendesObjekt.X + fallendesObjekt.HalbeBreite && schauenX < woSchaueIch.Width;
+                    schauenX += ZeugFallenlassen.augenDioptrien
                 )
                 {
                     if (woSchaueIch.GetPixel(schauenX, fallendesObjekt.Y + 1).ToArgb() != himmelsFarbe)

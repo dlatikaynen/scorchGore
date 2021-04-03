@@ -41,8 +41,9 @@ namespace ScorchGore
             this.Goodies.AlleGoodiesVorbereiten();
             this.spielPhase = SpielPhase.WeltErzeugen;
             this.WeltErzeugen.Show();
+            this.levelBild = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
             var spielerNamen = SpielerNamen.ZufallsNamenspaar;
-            this.spielerEins = new Spieler
+            this.spielerEins = new Spieler(this, this.levelBild)
             {
                 Name = spielerNamen.Item1,
                 Farbe = Brushes.YellowGreen,
@@ -50,7 +51,7 @@ namespace ScorchGore
                 Y = Main.spielerBasisHoehe
             };
 
-            this.spielerZwei = new Spieler
+            this.spielerZwei = new Spieler(this, this.levelBild)
             {
                 Name = spielerNamen.Item2,
                 Farbe = Brushes.MistyRose,
@@ -178,7 +179,6 @@ namespace ScorchGore
             this.Copyright.Hide();
             this.SpielerNamenZeigen();
             this.SchussEingabefeld.Left = this.Width / 2 - this.SchussEingabefeld.Width / 2;
-            this.levelBild = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
             this.ausgangsZustand = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
             this.BackgroundImage = this.levelBild;
             /* berg-steilheit und rauhheit und höhenprofil mit zufallszahlen bestimmen */
@@ -235,11 +235,12 @@ namespace ScorchGore
                     }
                 }
 
-                zeichenFlaeche.DrawImageUnscaled(
-                    this.Goodies.BildHolen(GoodieWirkung.Chrom_Dreifachschuss),
-                    90,
-                    30
-                );
+                var goodie = new Goodie(this, this.levelBild, this.Goodies, GoodieWirkung.Chrom_Dreifachschuss)
+                {
+                    X = 166
+                };
+
+                goodie.FallenLassen(zeichenFlaeche);
             }
 
             this.Refresh();
@@ -255,7 +256,7 @@ namespace ScorchGore
             {
                 using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
                 {
-                    fallenderSpieler.FallenLassen(this, this.levelBild, zeichenFlaeche);
+                    fallenderSpieler.FallenLassen(zeichenFlaeche);
                 }
             }
             finally
