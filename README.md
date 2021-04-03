@@ -9,7 +9,9 @@ The game with the most consistent user interface on the planet.
 Don't submit feedback of any kind, we can't be bothered.  
   
 ![](https://raw.githubusercontent.com/dlatikaynen/scorchGore/master/Gestaltung/a-truly-painful-design.png)
-
+  
+![](https://raw.githubusercontent.com/dlatikaynen/scorchGore/master/Gestaltung/truly-a-painful-design.png)
+  
 What critics have to say:  
 "*A master class in color use, layout, composition, and everything*" - Prof. Y.T. Space, ACME School of Graphic Design  
 "*Truly a masterpiece - brilliantly engineered, form follows function*" - everyone and their dog  
