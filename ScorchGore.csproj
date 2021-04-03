@@ -77,6 +77,9 @@
     <Compile Include="Steuerelemente\Durchsichtig.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Steuerelemente\DurchsichtigesLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Zeug\RessourcenKlasse.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

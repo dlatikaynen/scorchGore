@@ -47,8 +47,8 @@ namespace ScorchGore
             this.Ladung = new System.Windows.Forms.TextBox();
             this.Winkel = new System.Windows.Forms.TextBox();
             this.NameDesDranSeienden = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.OomphLabel = new DurchsichtigesLabel();
+            this.CommandLabel = new DurchsichtigesLabel();
             this.CloudVerbindung = new Durchsichtig();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MitspielerFindenFortschritt = new System.Windows.Forms.ProgressBar();
@@ -232,8 +232,8 @@ namespace ScorchGore
             this.SchussEingabefeld.Controls.Add(this.Ladung);
             this.SchussEingabefeld.Controls.Add(this.Winkel);
             this.SchussEingabefeld.Controls.Add(this.NameDesDranSeienden);
-            this.SchussEingabefeld.Controls.Add(this.label5);
-            this.SchussEingabefeld.Controls.Add(this.label6);
+            this.SchussEingabefeld.Controls.Add(this.OomphLabel);
+            this.SchussEingabefeld.Controls.Add(this.CommandLabel);
             this.SchussEingabefeld.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.SchussEingabefeld.Location = new System.Drawing.Point(30, 334);
             this.SchussEingabefeld.Name = "SchussEingabefeld";
@@ -274,28 +274,30 @@ namespace ScorchGore
             this.NameDesDranSeienden.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.NameDesDranSeienden.UseMnemonic = false;
             // 
-            // label5
+            // OomphLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 98);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(150, 28);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Oomph, ok?";
+            this.OomphLabel.AutoSize = true;
+            this.OomphLabel.BackColor = System.Drawing.Color.Transparent;
+            this.OomphLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OomphLabel.Location = new System.Drawing.Point(5, 98);
+            this.OomphLabel.Name = "OomphLabel";
+            this.OomphLabel.Size = new System.Drawing.Size(95, 28);
+            this.OomphLabel.TabIndex = 1;
+            this.OomphLabel.Text = "Oomph";
+            this.OomphLabel.Transparent = true;
             // 
-            // label6
+            // CommandLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(5, 39);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(168, 28);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Angle, mkay?";
-            this.label6.UseMnemonic = false;
+            this.CommandLabel.AutoSize = true;
+            this.CommandLabel.BackColor = System.Drawing.Color.Transparent;
+            this.CommandLabel.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CommandLabel.Location = new System.Drawing.Point(5, 39);
+            this.CommandLabel.Name = "CommandLabel";
+            this.CommandLabel.Size = new System.Drawing.Size(128, 28);
+            this.CommandLabel.TabIndex = 0;
+            this.CommandLabel.Text = "Command";
+            this.CommandLabel.Transparent = true;
+            this.CommandLabel.UseMnemonic = false;
             // 
             // CloudVerbindung
             // 
@@ -433,8 +435,8 @@ namespace ScorchGore
         private System.Windows.Forms.Label PlayerNames;
         private Durchsichtig SchussEingabefeld;
         private System.Windows.Forms.Label NameDesDranSeienden;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private DurchsichtigesLabel OomphLabel;
+        private DurchsichtigesLabel CommandLabel;
         private System.Windows.Forms.TextBox Ladung;
         private System.Windows.Forms.TextBox Winkel;
         private System.Windows.Forms.Button StartCloud;

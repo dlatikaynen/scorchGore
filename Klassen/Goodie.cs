@@ -24,10 +24,12 @@ namespace ScorchGore.Klassen
 
         protected int Hoehe => this.Breite;
 
+        protected override bool HatEinenFallschirm => true;
+
         public override void Zeichnen(Graphics zeichenFlaeche, int fallProFrame = 0)
         {
             /* das über dem spieler, wo er gefallen ist, wieder mit himmelsfarbe übermalen */
-            var ueberMalenVonY = Math.Max(0, this.Y - this.Hoehe - fallProFrame);
+            var ueberMalenVonY = Math.Max(0, this.Y - (this.Hoehe * (this.HatEinenFallschirm ? 3 : 1)) - fallProFrame);
             zeichenFlaeche.FillRectangle(
                 Farbverwaltung.Himmelsbuerste,
                 this.X - this.HalbeBreite,
@@ -42,6 +44,12 @@ namespace ScorchGore.Klassen
                 this.X - this.HalbeBreite,
                 this.Y - this.Hoehe
             );
+
+            /* den fallschirm, an dem es haengt */
+            if(this.HatEinenFallschirm)
+            {
+                Sprite.FallschirmZeichnen(zeichenFlaeche, this.X, this.Y - this.Hoehe * 3, this.Breite * 2, fallProFrame);
+            }
         }
     }
 }
