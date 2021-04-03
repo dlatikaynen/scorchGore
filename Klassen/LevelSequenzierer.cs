@@ -22,7 +22,11 @@ namespace ScorchGore.Klassen
                 case 1:
                     levelBeschreibung.MissionsNummer = 1;
                     levelBeschreibung.LevelNummerInMission = 1;
-                    levelBeschreibung.LevelName = "The Blue Mountain";
+                    levelBeschreibung.LevelName = "The Blue Mountains";
+                    levelBeschreibung.BergMinHoeheProzent = 13;
+                    levelBeschreibung.BergMaxHoeheProzent = 48;
+                    levelBeschreibung.BergRauhheitProzent = 21;
+                    levelBeschreibung.BergZufallszahl = LevelSequenzierer.zufallsZahlenGenerator;
                     break;
             }
 

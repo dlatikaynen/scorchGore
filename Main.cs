@@ -182,7 +182,9 @@ namespace ScorchGore
         {
             this.spielPhase = SpielPhase.WeltErzeugen;
             this.aktuelleLevelNummer = 1;
-
+            this.spielPhase = SpielPhase.WeltWirdErzeugt;
+            this.ErzeugeDieWelt();
+            this.LevelSpielen();
         }
 
         private void Main_KeyDown(object sender, KeyEventArgs e)

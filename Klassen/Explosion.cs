@@ -45,7 +45,7 @@ namespace ScorchGore.Klassen
 
             using (var bildKopieren = Graphics.FromImage(eingefrorenerBerg))
             {
-                bildKopieren.FillEllipse(Farbverwaltung.Himmelsbuerste, pixelX - 50, pixelY - 50, 100, 100);
+                bildKopieren.FillEllipse(Farbverwaltung.Himmelsbuerste, pixelX - this.radius, pixelY - this.radius, 2 * this.radius, 2 * this.radius);
                 hangRutschung.Zeichnen(bildKopieren, mitAnimation: false);
             }
         }
