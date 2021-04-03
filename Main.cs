@@ -505,14 +505,14 @@ namespace ScorchGore
                 }
 
                 this.AusgangszustandWiederherstellen();
-                if(koennteFallen)
+                using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
                 {
-                    using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
-                    {
-                        this.dranSeiender.Zeichnen(zeichenFlaeche);
-                        this.Gegner.Zeichnen(zeichenFlaeche);
-                    }
+                    this.dranSeiender.Zeichnen(zeichenFlaeche);
+                    this.Gegner.Zeichnen(zeichenFlaeche);
+                }
 
+                if (koennteFallen)
+                {
                     this.SpielerFallen(this.Gegner);
                     this.SpielerFallen(this.dranSeiender);
                 }
