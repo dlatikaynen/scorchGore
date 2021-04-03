@@ -235,6 +235,7 @@ namespace ScorchGore
 
             this.Refresh();
             this.spielPhase = SpielPhase.SpielerFallenRundeBeginnt;
+            this.AusgangszustandSichern();
             this.SpielerFallen(this.spielerEins);
             this.SpielerFallen(this.spielerZwei);
         }
@@ -377,7 +378,6 @@ namespace ScorchGore
             this.spielPhase = SpielPhase.SpielrundeAktiv;
 
             /* den schuss ausführen und schauen (ob) was getroffen wurde */
-            this.AusgangszustandSichern();
             var schussErgebnis = this.Schiessen(schussEingabe);
 
             /* wenn keiner getroffen wurde, rollen tauschen,
@@ -399,11 +399,20 @@ namespace ScorchGore
                 }
 
                 this.AusgangszustandWiederherstellen();
-                this.Refresh();
                 if(koennteFallen)
                 {
+                    using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
+                    {
+                        this.SpielerZeichnen(zeichenFlaeche, this.dranSeiender);
+                        this.SpielerZeichnen(zeichenFlaeche, this.Gegner);
+                    }
+
                     this.SpielerFallen(this.Gegner);
                     this.SpielerFallen(this.dranSeiender);
+                }
+                else
+                {
+                    this.Refresh();
                 }
 
                 /* spieler wechseln sich jetzt ab */

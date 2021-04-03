@@ -27,14 +27,14 @@ namespace ScorchGore.Klassen
         public void Bergsturz(Bitmap levelBild, int startX, int endetX, int einschlagY, int sprengRadius)
         {
             var bergFarbe = Color.SlateBlue.ToArgb();
-            this.startPixelX = startX;
-            this.endetPixelX = endetX;
+            this.startPixelX = Math.Max(0, startX);
+            this.endetPixelX = Math.Min(levelBild.Width, endetX);
             this.einschlagY = einschlagY;
             var xRichtung = this.startPixelX <= this.endetPixelX ? 1 : -1;
             for (
                 int x = this.startPixelX, i = 0, kreisX = -sprengRadius;
-                x <= this.endetPixelX; x += xRichtung,
-                ++i, ++kreisX
+                x <= this.endetPixelX;
+                x += xRichtung, ++i, ++kreisX
             )
             {
                 /* kreisgleichung:
