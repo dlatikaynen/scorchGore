@@ -498,7 +498,7 @@ namespace ScorchGore
 
                 /* schuss ist links, rechts, oder unten rausgeflogen */
                 if (pixelY > this.levelBild.Height || pixelX < 0 || pixelX > this.levelBild.Width)
-                {
+                {                  
                     break;
                 }
             }
