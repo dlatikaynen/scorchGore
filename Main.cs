@@ -490,6 +490,7 @@ namespace ScorchGore
             if (schussErgebnis.Ergebnis == SchussErgebnis.GegnerGekillt)
             {
                 this.Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
+                new Explosion(Color.FromArgb(new Random().Next(int.MaxValue)), 175).Noobsplosion(this, this.levelBild, this.ausgangsZustand, schussErgebnis.EinschlagsKoordinateX, schussErgebnis.EinschlagsKoordinateY);
             }
             else
             {
@@ -498,9 +499,9 @@ namespace ScorchGore
                 var koennteFallen = false;
                 if (schussErgebnis.Ergebnis == SchussErgebnis.BergGetroffen)
                 {
-                    Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
-                    this.Noobsplosion(schussErgebnis.EinschlagsKoordinateX, schussErgebnis.EinschlagsKoordinateY);
-                    koennteFallen = true;
+                    Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);                
+                    new Explosion(Color.FromArgb(new Random().Next(int.MaxValue)), 50).Noobsplosion(this, this.levelBild, this.ausgangsZustand, schussErgebnis.EinschlagsKoordinateX, schussErgebnis.EinschlagsKoordinateY);
+                    koennteFallen = true;                    
                 }
 
                 this.AusgangszustandWiederherstellen();
@@ -647,38 +648,7 @@ namespace ScorchGore
             }
         }
 
-        private void Noobsplosion(int pixelX, int pixelY)
-        {
-            const int explosionsRadius = 50;
-            var hangRutschung = new Hangrutschung(this);
-            using (var zeichnung = Graphics.FromImage(this.levelBild))
-            {
-                var durchMesser = 2 * explosionsRadius;
-                for (var explosionsBreite = 1; explosionsBreite < durchMesser; explosionsBreite += 2)
-                {
-                    zeichnung.DrawEllipse(Pens.Red, pixelX - explosionsBreite / 2, pixelY - explosionsBreite / 2, explosionsBreite, explosionsBreite);
-                    this.Refresh();
-                }
-
-                zeichnung.FillEllipse(Farbverwaltung.Himmelsbuerste, pixelX - 50, pixelY - 50, 100, 100);
-                hangRutschung.Bergsturz(
-                    this.levelBild, 
-                    pixelX - explosionsRadius, 
-                    pixelX + explosionsRadius, 
-                    pixelY, 
-                    explosionsRadius
-                );
-
-                hangRutschung.Zeichnen(zeichnung, mitAnimation: true);
-            }
-
-            using (var bildKopieren = Graphics.FromImage(this.ausgangsZustand))
-            {
-                bildKopieren.FillEllipse(Farbverwaltung.Himmelsbuerste, pixelX - 50, pixelY - 50, 100, 100);
-                hangRutschung.Zeichnen(bildKopieren, mitAnimation: false);
-            }
-        }
-
+        
         private void Main_MouseDown(object sender, MouseEventArgs e)
         {
             this.mitMausVerschieben = true;
