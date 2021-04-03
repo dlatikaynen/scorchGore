@@ -28,6 +28,7 @@ namespace ScorchGore
         private Spieler dranSeiender;
         private Spieler meinSpieler;
         private readonly Audio Audio = new Audio();
+        private readonly Goodies Goodies = new Goodies();
         private readonly MultiplayerCloud MultiplayerCloud = new MultiplayerCloud();
         
         private Bitmap ausgangsZustand;
@@ -36,6 +37,7 @@ namespace ScorchGore
         {
             this.InitializeComponent();
             this.Audio.AlleAudiosVorbereiten();
+            this.Goodies.AlleGoodiesVorbereiten();
             this.spielPhase = SpielPhase.WeltErzeugen;
             this.WeltErzeugen.Show();
             var spielerNamen = SpielerNamen.ZufallsNamenspaar;

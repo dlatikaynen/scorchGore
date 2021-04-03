@@ -46,7 +46,11 @@ namespace ScorchGore.Klassen
             if (!this.geraeuschKatalog.ContainsKey(welchesGeraeusch))
             {
                 var audioDateiName = Audio.GetAudioDateiName(welchesGeraeusch);
-                var geraeuschDatei = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(RessourcenKlasse), audioDateiName);
+                var geraeuschDatei = Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                    typeof(RessourcenKlasse),
+                    $@"Geraeusche.{ audioDateiName }"
+                );
+
                 this.geraeuschKatalog.TryAdd(welchesGeraeusch, geraeuschDatei);
             }
         }
