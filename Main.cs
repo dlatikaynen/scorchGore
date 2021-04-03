@@ -4,6 +4,7 @@ using ScorchGore.OnlineMultiplayer;
 using ScorchGore.Steuerelemente;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
@@ -40,9 +41,6 @@ namespace ScorchGore
             this.InitializeComponent();
             this.Audio.AlleAudiosVorbereiten();
             this.Goodies.AlleGoodiesVorbereiten();
-            this.spielPhase = SpielPhase.WeltErzeugen;
-            this.WeltErzeugen.Center(this);
-            this.WeltErzeugen.Show();
             this.levelBild = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
             var spielerNamen = SpielerNamen.ZufallsNamenspaar;
             this.spielerEins = new Spieler(this, this.levelBild)
@@ -63,6 +61,77 @@ namespace ScorchGore
         }
 
         internal Spieler Gegner => object.ReferenceEquals(this.dranSeiender, this.spielerEins) ? this.spielerZwei : this.spielerEins;
+
+        #region Menue
+        private async void MenueStartUebungsspielLabel_Click(object sender, EventArgs e)
+        {
+            this.SetzeSchlange(this.MenueUebungsspielSchlange);
+            await Task.Delay(150);
+            this.MenueWegraeumen();
+            this.UebungsspielVorbereiten();
+        }
+
+        private async void MenueStartMissionLabel_Click(object sender, EventArgs e)
+        {
+            this.SetzeSchlange(this.MenueMissionSchlange);
+            await Task.Delay(150);
+            this.MenueWegraeumen();
+            this.MissionVorbereiten();
+        }
+
+        private async void MenueEinstellungenLabel_Click(object sender, EventArgs e)
+        {
+            this.SetzeSchlange(this.MenueEinstellungenSchlange);
+            await Task.Delay(150);
+
+        }
+
+        private async void MenueBeendenLabel_Click(object sender, EventArgs e)
+        {
+            this.SetzeSchlange(this.MenueBeendenSchlange);
+            await Task.Delay(150);
+            Application.Exit();
+        }
+
+        private void MenueUebungsspielSchlange_Click(object sender, EventArgs e) => this.MenueStartUebungsspielLabel_Click(sender, e);
+        private void MenueMissionSchlange_Click(object sender, EventArgs e) => this.MenueStartMissionLabel_Click(sender, e);
+        private void MenueEinstellungenSchlange_Click(object sender, EventArgs e) => this.MenueEinstellungenLabel_Click(sender, e);
+        private void MenueBeendenSchlange_Click(object sender, EventArgs e) => this.MenueBeendenLabel_Click(sender, e);
+
+        private void SetzeSchlange(PictureBox schlangenMenue)
+        {
+            var bildQuelle = new ComponentResourceManager(typeof(Main));
+            var schlangenBild = ((Image)(bildQuelle.GetObject($"{ nameof(MenueMissionSchlange) }.{ nameof(Image) }")));
+            this.MenueBeendenSchlange.Image = object.ReferenceEquals(schlangenMenue, this.MenueBeendenSchlange) ? schlangenBild : null;
+            this.MenueEinstellungenSchlange.Image = object.ReferenceEquals(schlangenMenue, this.MenueEinstellungenSchlange) ? schlangenBild : null;
+            this.MenueMissionSchlange.Image = object.ReferenceEquals(schlangenMenue, this.MenueMissionSchlange) ? schlangenBild : null;
+            this.MenueUebungsspielSchlange.Image = object.ReferenceEquals(schlangenMenue, this.MenueUebungsspielSchlange) ? schlangenBild : null;
+        }
+
+        private void MenueWegraeumen()
+        {
+            this.MenueStartUebungsspielLabel.Hide();
+            this.MenueStartMissionLabel.Hide();
+            this.MenueEinstellungenLabel.Hide();
+            this.MenueBeendenLabel.Hide();
+            this.MenueUebungsspielSchlange.Hide();
+            this.MenueMissionSchlange.Hide();
+            this.MenueEinstellungenSchlange.Hide();
+            this.MenueBeendenSchlange.Hide();
+        }
+        #endregion
+
+        private void UebungsspielVorbereiten()
+        {
+            this.spielPhase = SpielPhase.WeltErzeugen;
+            this.WeltErzeugen.Center(this);
+            this.WeltErzeugen.Show();
+        }
+
+        private void MissionVorbereiten()
+        {
+
+        }
 
         private void Main_KeyDown(object sender, KeyEventArgs e)
         {

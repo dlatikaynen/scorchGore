@@ -56,6 +56,14 @@ namespace ScorchGore
             this.NameDesDranSeienden = new System.Windows.Forms.Label();
             this.OomphLabel = new DurchsichtigesLabel();
             this.CommandLabel = new DurchsichtigesLabel();
+            this.MenueBeendenLabel = new DurchsichtigesLabel();
+            this.MenueEinstellungenLabel = new DurchsichtigesLabel();
+            this.MenueStartUebungsspielLabel = new DurchsichtigesLabel();
+            this.MenueStartMissionLabel = new DurchsichtigesLabel();
+            this.MenueMissionSchlange = new System.Windows.Forms.PictureBox();
+            this.MenueUebungsspielSchlange = new System.Windows.Forms.PictureBox();
+            this.MenueEinstellungenSchlange = new System.Windows.Forms.PictureBox();
+            this.MenueBeendenSchlange = new System.Windows.Forms.PictureBox();
             this.WeltErzeugen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RauheitsfaktorProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HoechstHoeheProzent)).BeginInit();
@@ -65,6 +73,10 @@ namespace ScorchGore
             this.CloudVerbindung.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SchussEingabefeld.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueMissionSchlange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueUebungsspielSchlange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueEinstellungenSchlange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueBeendenSchlange)).BeginInit();
             this.SuspendLayout();
             // 
             // WeltErzeugen
@@ -197,10 +209,13 @@ namespace ScorchGore
             this.Copyright.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Copyright.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.Copyright.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Copyright.Enabled = false;
             this.Copyright.Font = new System.Drawing.Font("Segoe Print", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Copyright.Location = new System.Drawing.Point(535, 406);
             this.Copyright.Multiline = true;
             this.Copyright.Name = "Copyright";
+            this.Copyright.ReadOnly = true;
+            this.Copyright.ShortcutsEnabled = false;
             this.Copyright.Size = new System.Drawing.Size(315, 100);
             this.Copyright.TabIndex = 2;
             this.Copyright.TabStop = false;
@@ -379,12 +394,129 @@ namespace ScorchGore
             this.CommandLabel.Transparent = true;
             this.CommandLabel.UseMnemonic = false;
             // 
+            // MenueBeendenLabel
+            // 
+            this.MenueBeendenLabel.AutoSize = true;
+            this.MenueBeendenLabel.BackColor = System.Drawing.Color.Transparent;
+            this.MenueBeendenLabel.Font = new System.Drawing.Font("Tahoma", 27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MenueBeendenLabel.ForeColor = System.Drawing.Color.Black;
+            this.MenueBeendenLabel.Location = new System.Drawing.Point(374, 347);
+            this.MenueBeendenLabel.Name = "MenueBeendenLabel";
+            this.MenueBeendenLabel.Size = new System.Drawing.Size(136, 43);
+            this.MenueBeendenLabel.TabIndex = 8;
+            this.MenueBeendenLabel.Text = "carper";
+            this.MenueBeendenLabel.Transparent = true;
+            this.MenueBeendenLabel.UseMnemonic = false;
+            this.MenueBeendenLabel.Click += new System.EventHandler(this.MenueBeendenLabel_Click);
+            // 
+            // MenueEinstellungenLabel
+            // 
+            this.MenueEinstellungenLabel.AutoSize = true;
+            this.MenueEinstellungenLabel.BackColor = System.Drawing.Color.Transparent;
+            this.MenueEinstellungenLabel.Font = new System.Drawing.Font("Tahoma", 27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MenueEinstellungenLabel.ForeColor = System.Drawing.Color.Black;
+            this.MenueEinstellungenLabel.Location = new System.Drawing.Point(374, 278);
+            this.MenueEinstellungenLabel.Name = "MenueEinstellungenLabel";
+            this.MenueEinstellungenLabel.Size = new System.Drawing.Size(146, 43);
+            this.MenueEinstellungenLabel.TabIndex = 9;
+            this.MenueEinstellungenLabel.Text = "ettings";
+            this.MenueEinstellungenLabel.Transparent = true;
+            this.MenueEinstellungenLabel.UseMnemonic = false;
+            this.MenueEinstellungenLabel.Click += new System.EventHandler(this.MenueEinstellungenLabel_Click);
+            // 
+            // MenueStartUebungsspielLabel
+            // 
+            this.MenueStartUebungsspielLabel.AutoSize = true;
+            this.MenueStartUebungsspielLabel.BackColor = System.Drawing.Color.Transparent;
+            this.MenueStartUebungsspielLabel.Font = new System.Drawing.Font("Tahoma", 27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MenueStartUebungsspielLabel.ForeColor = System.Drawing.Color.Black;
+            this.MenueStartUebungsspielLabel.Location = new System.Drawing.Point(371, 212);
+            this.MenueStartUebungsspielLabel.Name = "MenueStartUebungsspielLabel";
+            this.MenueStartUebungsspielLabel.Size = new System.Drawing.Size(244, 43);
+            this.MenueStartUebungsspielLabel.TabIndex = 10;
+            this.MenueStartUebungsspielLabel.Text = "tart practice";
+            this.MenueStartUebungsspielLabel.Transparent = true;
+            this.MenueStartUebungsspielLabel.UseMnemonic = false;
+            this.MenueStartUebungsspielLabel.Click += new System.EventHandler(this.MenueStartUebungsspielLabel_Click);
+            // 
+            // MenueStartMissionLabel
+            // 
+            this.MenueStartMissionLabel.AutoSize = true;
+            this.MenueStartMissionLabel.BackColor = System.Drawing.Color.Transparent;
+            this.MenueStartMissionLabel.Font = new System.Drawing.Font("Tahoma", 27F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MenueStartMissionLabel.ForeColor = System.Drawing.Color.Black;
+            this.MenueStartMissionLabel.Location = new System.Drawing.Point(371, 142);
+            this.MenueStartMissionLabel.Name = "MenueStartMissionLabel";
+            this.MenueStartMissionLabel.Size = new System.Drawing.Size(237, 43);
+            this.MenueStartMissionLabel.TabIndex = 11;
+            this.MenueStartMissionLabel.Text = "tart mission";
+            this.MenueStartMissionLabel.Transparent = true;
+            this.MenueStartMissionLabel.UseMnemonic = false;
+            this.MenueStartMissionLabel.Click += new System.EventHandler(this.MenueStartMissionLabel_Click);
+            // 
+            // MenueMissionSchlange
+            // 
+            this.MenueMissionSchlange.BackColor = System.Drawing.Color.Transparent;
+            this.MenueMissionSchlange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenueMissionSchlange.Image = ((System.Drawing.Image)(resources.GetObject("MenueMissionSchlange.Image")));
+            this.MenueMissionSchlange.Location = new System.Drawing.Point(342, 113);
+            this.MenueMissionSchlange.Margin = new System.Windows.Forms.Padding(0);
+            this.MenueMissionSchlange.Name = "MenueMissionSchlange";
+            this.MenueMissionSchlange.Size = new System.Drawing.Size(35, 68);
+            this.MenueMissionSchlange.TabIndex = 12;
+            this.MenueMissionSchlange.TabStop = false;
+            this.MenueMissionSchlange.Click += new System.EventHandler(this.MenueMissionSchlange_Click);
+            // 
+            // MenueUebungsspielSchlange
+            // 
+            this.MenueUebungsspielSchlange.BackColor = System.Drawing.Color.Transparent;
+            this.MenueUebungsspielSchlange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenueUebungsspielSchlange.Location = new System.Drawing.Point(342, 183);
+            this.MenueUebungsspielSchlange.Margin = new System.Windows.Forms.Padding(0);
+            this.MenueUebungsspielSchlange.Name = "MenueUebungsspielSchlange";
+            this.MenueUebungsspielSchlange.Size = new System.Drawing.Size(35, 68);
+            this.MenueUebungsspielSchlange.TabIndex = 13;
+            this.MenueUebungsspielSchlange.TabStop = false;
+            this.MenueUebungsspielSchlange.Click += new System.EventHandler(this.MenueUebungsspielSchlange_Click);
+            // 
+            // MenueEinstellungenSchlange
+            // 
+            this.MenueEinstellungenSchlange.BackColor = System.Drawing.Color.Transparent;
+            this.MenueEinstellungenSchlange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenueEinstellungenSchlange.Location = new System.Drawing.Point(342, 251);
+            this.MenueEinstellungenSchlange.Margin = new System.Windows.Forms.Padding(0);
+            this.MenueEinstellungenSchlange.Name = "MenueEinstellungenSchlange";
+            this.MenueEinstellungenSchlange.Size = new System.Drawing.Size(35, 68);
+            this.MenueEinstellungenSchlange.TabIndex = 14;
+            this.MenueEinstellungenSchlange.TabStop = false;
+            this.MenueEinstellungenSchlange.Click += new System.EventHandler(this.MenueEinstellungenSchlange_Click);
+            // 
+            // MenueBeendenSchlange
+            // 
+            this.MenueBeendenSchlange.BackColor = System.Drawing.Color.Transparent;
+            this.MenueBeendenSchlange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenueBeendenSchlange.Location = new System.Drawing.Point(342, 319);
+            this.MenueBeendenSchlange.Margin = new System.Windows.Forms.Padding(0);
+            this.MenueBeendenSchlange.Name = "MenueBeendenSchlange";
+            this.MenueBeendenSchlange.Size = new System.Drawing.Size(35, 68);
+            this.MenueBeendenSchlange.TabIndex = 15;
+            this.MenueBeendenSchlange.TabStop = false;
+            this.MenueBeendenSchlange.Click += new System.EventHandler(this.MenueBeendenSchlange_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(862, 518);
+            this.Controls.Add(this.MenueBeendenSchlange);
+            this.Controls.Add(this.MenueEinstellungenSchlange);
+            this.Controls.Add(this.MenueUebungsspielSchlange);
+            this.Controls.Add(this.MenueMissionSchlange);
+            this.Controls.Add(this.MenueStartMissionLabel);
+            this.Controls.Add(this.MenueStartUebungsspielLabel);
+            this.Controls.Add(this.MenueEinstellungenLabel);
+            this.Controls.Add(this.MenueBeendenLabel);
             this.Controls.Add(this.WeltErzeugen);
             this.Controls.Add(this.AufGegnerWarten);
             this.Controls.Add(this.CloudVerbindung);
@@ -417,6 +549,10 @@ namespace ScorchGore
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.SchussEingabefeld.ResumeLayout(false);
             this.SchussEingabefeld.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueMissionSchlange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueUebungsspielSchlange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueEinstellungenSchlange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MenueBeendenSchlange)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -449,6 +585,14 @@ namespace ScorchGore
         private Durchsichtig AufGegnerWarten;
         private PictureBox pictureBox2;
         private Label label7;
+        private DurchsichtigesLabel MenueBeendenLabel;
+        private DurchsichtigesLabel MenueEinstellungenLabel;
+        private DurchsichtigesLabel MenueStartUebungsspielLabel;
+        private DurchsichtigesLabel MenueStartMissionLabel;
+        private PictureBox MenueMissionSchlange;
+        private PictureBox MenueUebungsspielSchlange;
+        private PictureBox MenueEinstellungenSchlange;
+        private PictureBox MenueBeendenSchlange;
     }
 }
 
