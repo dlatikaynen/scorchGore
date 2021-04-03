@@ -194,7 +194,7 @@ namespace ScorchGore
             var unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
             using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
             {                
-                zeichenFlaeche.FillRectangle(Brushes.DarkSlateGray, zeichenFlaeche.ClipBounds);
+                zeichenFlaeche.FillRectangle(Farbverwaltung.Himmelsbuerste, zeichenFlaeche.ClipBounds);
                 for (var bergX = 0; bergX < this.Width; bergX += 2)
                 {
                     /* berg höhenänderung berechnen */
@@ -222,7 +222,7 @@ namespace ScorchGore
 
                     /* berg zeichnen */
                     var pixelHoehe = minimumHoehe + Convert.ToInt32(aktuelleHoehe);
-                    zeichenFlaeche.FillRectangle(Brushes.SlateBlue, bergX, (float)this.Height - pixelHoehe, 2f, (float)this.Height);
+                    zeichenFlaeche.FillRectangle(Farbverwaltung.Bergbuerste, bergX, (float)this.Height - pixelHoehe, 2f, (float)this.Height);
 
                     /* zacken in den berg machen */
                     if (--unveraenderteSteigung <= 0)
@@ -233,6 +233,12 @@ namespace ScorchGore
                         unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
                     }
                 }
+
+                zeichenFlaeche.DrawImageUnscaled(
+                    this.Goodies.BildHolen(GoodieWirkung.Chrom_Dreifachschuss),
+                    90,
+                    30
+                );
             }
 
             this.Refresh();
@@ -285,7 +291,7 @@ namespace ScorchGore
         {
             /* das über dem spieler, wo er gefallen ist, wieder mit himmelsfarbe übermalen */
             zeichenFlaeche.FillRectangle(
-                Brushes.DarkSlateGray,
+                Farbverwaltung.Himmelsbuerste,
                 gezeichneterSpieler.X - Main.spielerHalbeBreite,
                 0,
                 Main.spielerBreite,
@@ -497,7 +503,7 @@ namespace ScorchGore
                             {
                                 return schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.GegnerGekillt);
                             }
-                            else if (hitColor != Color.DarkSlateGray.ToArgb())
+                            else if (hitColor != Farbverwaltung.HimmelsfarbeAlsInt)
                             {
                                 if (hitColor == ((SolidBrush)this.dranSeiender.Farbe).Color.ToArgb())
                                 {
@@ -557,7 +563,7 @@ namespace ScorchGore
                     this.Refresh();
                 }
 
-                zeichnung.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
+                zeichnung.FillEllipse(Farbverwaltung.Himmelsbuerste, pixelX - 50, pixelY - 50, 100, 100);
                 hangRutschung.Bergsturz(
                     this.levelBild, 
                     pixelX - explosionsRadius, 
@@ -571,7 +577,7 @@ namespace ScorchGore
 
             using (var bildKopieren = Graphics.FromImage(this.ausgangsZustand))
             {
-                bildKopieren.FillEllipse(Brushes.DarkSlateGray, pixelX - 50, pixelY - 50, 100, 100);
+                bildKopieren.FillEllipse(Farbverwaltung.Himmelsbuerste, pixelX - 50, pixelY - 50, 100, 100);
                 hangRutschung.Zeichnen(bildKopieren, mitAnimation: false);
             }
         }

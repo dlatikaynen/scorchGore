@@ -26,7 +26,7 @@ namespace ScorchGore.Klassen
 
         public void Bergsturz(Bitmap levelBild, int startX, int endetX, int einschlagY, int sprengRadius)
         {
-            var bergFarbe = Color.SlateBlue.ToArgb();
+            var bergFarbe = Farbverwaltung.BergfarbeAlsInt;
             this.startPixelX = Math.Max(0, startX);
             this.endetPixelX = Math.Min(levelBild.Width, endetX);
             this.einschlagY = einschlagY;
@@ -78,8 +78,8 @@ namespace ScorchGore.Klassen
                 if (this.stuerzendeX.Contains(i))
                 {
                     var linieNr = linienIndex++;
-                    zeichnung.DrawLine(Pens.SlateBlue, x, this.gebirgsLinien[linieNr].oberesY, x, this.gebirgsLinien[linieNr].unteresY);
-                    zeichnung.DrawLine(Pens.DarkSlateGray, x, this.himmelsLinien[linieNr].oberesY, x, this.himmelsLinien[linieNr].unteresY);
+                    zeichnung.DrawLine(Farbverwaltung.Bergstift, x, this.gebirgsLinien[linieNr].oberesY, x, this.gebirgsLinien[linieNr].unteresY);
+                    zeichnung.DrawLine(Farbverwaltung.Himmelsstift, x, this.himmelsLinien[linieNr].oberesY, x, this.himmelsLinien[linieNr].unteresY);
                     if (mitAnimation && i % 2 == 0 && woBinIch != null)
                     {
                         woBinIch.Refresh();
