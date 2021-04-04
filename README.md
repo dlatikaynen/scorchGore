@@ -1,5 +1,7 @@
 # The Scorch Gore Game 2021-04-01
   
+Season 1 "Wrath of the Mild" 
+  
 #intentionallyugly  
 Recommended for kids age 12 and up (use of obscene fonts, and mild language)  
 Honestly, this game is not recommended for anyone, really.
