@@ -36,6 +36,9 @@
   <PropertyGroup>
     <StartupObject>ScorchGore.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>TAnk.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -137,6 +140,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Gestaltung\truly-a-painful-design.png" />
+    <Content Include="TAnk.ico" />
+    <Content Include="Zeug\TAnk.ico" />
     <EmbeddedResource Include="Zeug\Goodies\rechtsherz.png" />
     <EmbeddedResource Include="Zeug\Goodies\halbesherz.png" />
     <EmbeddedResource Include="Zeug\Goodies\ganzesherz.png" />
