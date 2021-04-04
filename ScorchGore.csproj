@@ -37,7 +37,7 @@
     <StartupObject>ScorchGore.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>TAnk.ico</ApplicationIcon>
+    <ApplicationIcon>Zeug\TAnk.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -97,6 +97,7 @@
     <Compile Include="Zeug\RessourcenKlasse.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -140,7 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Gestaltung\truly-a-painful-design.png" />
-    <Content Include="TAnk.ico" />
     <Content Include="Zeug\TAnk.ico" />
     <EmbeddedResource Include="Zeug\Goodies\rechtsherz.png" />
     <EmbeddedResource Include="Zeug\Goodies\halbesherz.png" />
