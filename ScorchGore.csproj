@@ -62,6 +62,7 @@
     <Compile Include="Klassen\Goodie.cs" />
     <Compile Include="Klassen\Goodies.cs" />
     <Compile Include="Klassen\Hangrutschung.cs" />
+    <Compile Include="Klassen\Herzen.cs" />
     <Compile Include="Klassen\LevelBeschreibung.cs" />
     <Compile Include="Klassen\LevelSequenzierer.cs" />
     <Compile Include="Klassen\LevelZeichner.cs" />
@@ -136,6 +137,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Gestaltung\truly-a-painful-design.png" />
+    <EmbeddedResource Include="Zeug\Goodies\rechtsherz.png" />
+    <EmbeddedResource Include="Zeug\Goodies\halbesherz.png" />
+    <EmbeddedResource Include="Zeug\Goodies\ganzesherz.png" />
+    <EmbeddedResource Include="Zeug\Goodies\hohlesherz.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

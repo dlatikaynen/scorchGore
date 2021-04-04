@@ -10,9 +10,15 @@ namespace ScorchGore
         public string Name;
         public Brush Farbe;
 
-        public override int Breite => Main.spielerBreite;
+        public Spieler(Control woBinIch, Bitmap woSchaueIch) : base(woBinIch, woSchaueIch)
+        {
+            /* jeder bekommt am anfang die hälfte der möglichen halbherzen,
+             * die jeweils halbherzig wachsen oder zugrunde gehen können */
+            this.Lebenspunkte = 3;
+        }
 
-        public Spieler(Control woBinIch, Bitmap woSchaueIch) : base(woBinIch, woSchaueIch) { }
+        public override int Breite => Main.spielerBreite;
+        public int Lebenspunkte { protected set; get; }
 
         public override void Zeichnen(Graphics zeichenFlaeche, int fallProFrame = 0)
         {

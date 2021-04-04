@@ -59,6 +59,12 @@ namespace ScorchGore.Klassen
             {
                 case GoodieWirkung.Chrom_Dreifachschuss:
                     return "chel-cr.png";
+
+                case GoodieWirkung.Hohlesherz:
+                case GoodieWirkung.HalbesHerz:
+                case GoodieWirkung.RechtsHerz:
+                case GoodieWirkung.GanzesHerz:
+                    return $"{ welchesGoodie.ToString().ToLowerInvariant() }.png";
             }
 
             return null;

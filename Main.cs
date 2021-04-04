@@ -30,6 +30,7 @@ namespace ScorchGore
         private int aktuelleLevelNummer;
         private readonly Spieler spielerEins;
         private readonly Spieler spielerZwei;
+        private readonly Herzen herzAnzeige;
         private Spieler dranSeiender;
         private Spieler meinSpieler;
         private readonly Audio Audio = new Audio();
@@ -44,6 +45,7 @@ namespace ScorchGore
             this.Audio.AlleAudiosVorbereiten();
             this.Goodies.AlleGoodiesVorbereiten();
             this.levelBild = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
+            this.herzAnzeige = new Herzen(this.Goodies);
             var spielerNamen = SpielerNamen.ZufallsNamenspaar;
             this.spielerEins = new Spieler(this, this.levelBild)
             {
@@ -184,7 +186,7 @@ namespace ScorchGore
         private void MissionVorbereiten()
         {
             this.spielPhase = SpielPhase.WeltErzeugen;
-            this.aktuelleLevelNummer = 2;
+            this.aktuelleLevelNummer = 1;
             this.spielPhase = SpielPhase.WeltWirdErzeugt;
             this.ErzeugeDieWelt();
             this.LevelSpielen();
@@ -370,6 +372,10 @@ namespace ScorchGore
                     };
 
                     goodie.FallenLassen(zeichenFlaeche);
+                }
+                else
+                {
+                    this.herzAnzeige.Zeichnen(this, zeichenFlaeche, this.spielerEins, this.spielerZwei);
                 }
             }
 
