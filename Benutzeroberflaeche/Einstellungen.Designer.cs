@@ -60,6 +60,7 @@ namespace ScorchGore.Benutzeroberflaeche
             // 
             // SpeichernKnopf
             // 
+            this.SpeichernKnopf.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.SpeichernKnopf.Location = new System.Drawing.Point(12, 355);
             this.SpeichernKnopf.Name = "SpeichernKnopf";
             this.SpeichernKnopf.Size = new System.Drawing.Size(79, 83);

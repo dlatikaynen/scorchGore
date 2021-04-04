@@ -64,6 +64,7 @@ namespace ScorchGore
             this.MenueUebungsspielSchlange = new System.Windows.Forms.PictureBox();
             this.MenueEinstellungenSchlange = new System.Windows.Forms.PictureBox();
             this.MenueBeendenSchlange = new System.Windows.Forms.PictureBox();
+            this.DerZornDerSanften = new System.Windows.Forms.Label();
             this.WeltErzeugen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RauheitsfaktorProzent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HoechstHoeheProzent)).BeginInit();
@@ -505,12 +506,24 @@ namespace ScorchGore
             this.MenueBeendenSchlange.TabStop = false;
             this.MenueBeendenSchlange.Click += new System.EventHandler(this.MenueBeendenSchlange_Click);
             // 
+            // DerZornDerSanften
+            // 
+            this.DerZornDerSanften.AutoSize = true;
+            this.DerZornDerSanften.Font = new System.Drawing.Font("Times New Roman", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DerZornDerSanften.ForeColor = System.Drawing.Color.Crimson;
+            this.DerZornDerSanften.Location = new System.Drawing.Point(21, 96);
+            this.DerZornDerSanften.Name = "DerZornDerSanften";
+            this.DerZornDerSanften.Size = new System.Drawing.Size(268, 36);
+            this.DerZornDerSanften.TabIndex = 16;
+            this.DerZornDerSanften.Text = "Wrath Of The Mild";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(862, 518);
+            this.Controls.Add(this.DerZornDerSanften);
             this.Controls.Add(this.MenueBeendenSchlange);
             this.Controls.Add(this.MenueEinstellungenSchlange);
             this.Controls.Add(this.MenueUebungsspielSchlange);
@@ -595,6 +608,7 @@ namespace ScorchGore
         private PictureBox MenueUebungsspielSchlange;
         private PictureBox MenueEinstellungenSchlange;
         private PictureBox MenueBeendenSchlange;
+        private Label DerZornDerSanften;
     }
 }
 

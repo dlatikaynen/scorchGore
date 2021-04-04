@@ -340,6 +340,7 @@ namespace ScorchGore
         {
             this.WeltErzeugen.Hide();
             this.ScorchGore.Hide();
+            this.DerZornDerSanften.Hide();
             this.Copyright.Hide();
             this.SpielerNamenZeigen();
             this.SchussEingabefeld.Left = this.Width / 2 - this.SchussEingabefeld.Width / 2;
