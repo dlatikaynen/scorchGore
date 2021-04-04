@@ -45,7 +45,7 @@ namespace ScorchGore
             this.Audio.AlleAudiosVorbereiten();
             this.Goodies.AlleGoodiesVorbereiten();
             this.levelBild = new Bitmap(this.Width, this.Height, PixelFormat.Format24bppRgb);
-            this.herzAnzeige = new Herzen(this.Goodies);
+            this.herzAnzeige = new Herzen(this, this.Goodies);
             var spielerNamen = SpielerNamen.ZufallsNamenspaar;
             this.spielerEins = new Spieler(this, this.levelBild)
             {

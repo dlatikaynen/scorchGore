@@ -18,7 +18,7 @@ namespace ScorchGore.Klassen
         private RectangleF[] positionsRasterLinks;
         private RectangleF[] positionsRasterRechts;
 
-        public Herzen(Goodies bilderVorladen)
+        public Herzen(Control woBinIch, Goodies bilderVorladen)
         {
             this.hohlesHerz = bilderVorladen.BildHolen(Aufzaehlungen.GoodieWirkung.Hohlesherz);
             this.halbesHerz = bilderVorladen.BildHolen(Aufzaehlungen.GoodieWirkung.HalbesHerz);
@@ -26,32 +26,63 @@ namespace ScorchGore.Klassen
             this.ganzesHerz = bilderVorladen.BildHolen(Aufzaehlungen.GoodieWirkung.GanzesHerz);
             var herzBreite = this.hohlesHerz.Width;
             var herzHoehe = this.hohlesHerz.Height;
-            this.positionsRasterLinks = new RectangleF[]
+            this.positionsRasterLinks = new RectangleF[3];
+            this.positionsRasterRechts = new RectangleF[3];
+            for(var i=0;i<this.positionsRasterLinks.Length;++i)
             {
-                new RectangleF(1,1,herzBreite,herzHoehe),
-                new RectangleF(1,1,herzBreite,herzHoehe),
-                new RectangleF(1,1,herzBreite,herzHoehe)
-            };
+                this.positionsRasterLinks[i] = new RectangleF(
+                    9 + i * (herzBreite + 3),
+                    4,
+                    herzBreite,
+                    herzHoehe
+                );
 
-            /* die rechtsseitigen herzen sind gespiegelt */
-            this.positionsRasterRechts = new RectangleF[this.positionsRasterLinks.Length];
-            for (var i = 0; i < this.positionsRasterRechts.Length; ++i)
-            {
+                /* die rechtsseitigen herzen sind gespiegelt */
                 this.positionsRasterRechts[i] = new RectangleF(
-                    0,
-                    0,
-                    this.positionsRasterLinks[i].Width,
-                    this.positionsRasterLinks[i].Height
+                    woBinIch.Width - this.positionsRasterLinks[i].X - herzBreite,
+                    this.positionsRasterLinks[i].Y,
+                    herzBreite,
+                    herzHoehe
                 );
             }
         }
 
         internal void Zeichnen(Control woBinIch, Graphics zeichnung, Spieler spielerLinks, Spieler spielerRechts)
         {
-            zeichnung.DrawImageUnscaled(this.ganzesHerz, 9, 4);
-            zeichnung.DrawImageUnscaled(this.halbesHerz, 9 + 19, 4);
-            zeichnung.DrawImageUnscaled(this.hohlesHerz, 9 + 2 * 19, 4);
-            zeichnung.DrawImageUnscaled(this.rechtsHerz, 9 + 3 * 19, 4);
+            var verbrauchtLinks = 0;
+            var verbrauchtRechts = 0;
+            for (var i = 0; i < this.positionsRasterLinks.Length; ++i)
+            {
+                if (spielerLinks != null)
+                {
+                    var linksUebrig = spielerLinks.Lebenspunkte - verbrauchtLinks;
+                    var herzFuerLinkes = this.FindePassendesHerz(linksUebrig);
+                    zeichnung.DrawImageUnscaled(herzFuerLinkes, (int)this.positionsRasterLinks[i].X, (int)this.positionsRasterLinks[i].Y);
+                    verbrauchtLinks += 2;
+                }
+
+                if (spielerRechts != null)
+                {
+                    var rechtsUebrig = spielerRechts.Lebenspunkte - verbrauchtRechts;
+                    var herzFuerRechts = this.FindePassendesHerz(rechtsUebrig, fuerRechts: true);
+                    zeichnung.DrawImageUnscaled(herzFuerRechts, (int)this.positionsRasterRechts[i].X, (int)this.positionsRasterRechts[i].Y);
+                    verbrauchtRechts += 2;
+                }
+            }
+        }
+
+        private Image FindePassendesHerz(int uebrigeLebenspunkte, bool fuerRechts = false)
+        {
+            if (uebrigeLebenspunkte <= 0)
+            {
+                return this.hohlesHerz;
+            }
+            else if (uebrigeLebenspunkte == 1)
+            {
+                return fuerRechts ? this.rechtsHerz : this.halbesHerz;
+            }
+
+            return this.ganzesHerz;
         }
     }
 }
