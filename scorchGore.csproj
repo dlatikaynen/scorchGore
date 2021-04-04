@@ -87,6 +87,7 @@
     <Compile Include="Klassen\Hangrutschung.cs" />
     <Compile Include="Klassen\Herzen.cs" />
     <Compile Include="Klassen\LevelBeschreibung.cs" />
+    <Compile Include="Klassen\LevelBeschreibungsSkript.cs" />
     <Compile Include="Klassen\LevelSequenzierer.cs" />
     <Compile Include="Klassen\LevelZeichner.cs" />
     <Compile Include="Klassen\Plateau.cs" />
@@ -149,6 +150,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Zeug\Levels\Level003.dat" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
