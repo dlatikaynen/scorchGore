@@ -57,6 +57,7 @@ namespace ScorchGore.Klassen
                 {
                     var linksUebrig = spielerLinks.Lebenspunkte - verbrauchtLinks;
                     var herzFuerLinkes = this.FindePassendesHerz(linksUebrig);
+                    zeichnung.FillRectangle(Farbverwaltung.Himmelsbuerste, this.positionsRasterLinks[i]);
                     zeichnung.DrawImageUnscaled(herzFuerLinkes, (int)this.positionsRasterLinks[i].X, (int)this.positionsRasterLinks[i].Y);
                     verbrauchtLinks += 2;
                 }
@@ -65,6 +66,7 @@ namespace ScorchGore.Klassen
                 {
                     var rechtsUebrig = spielerRechts.Lebenspunkte - verbrauchtRechts;
                     var herzFuerRechts = this.FindePassendesHerz(rechtsUebrig, fuerRechts: true);
+                    zeichnung.FillRectangle(Farbverwaltung.Himmelsbuerste, this.positionsRasterRechts[i]);
                     zeichnung.DrawImageUnscaled(herzFuerRechts, (int)this.positionsRasterRechts[i].X, (int)this.positionsRasterRechts[i].Y);
                     verbrauchtRechts += 2;
                 }

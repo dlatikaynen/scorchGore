@@ -9,16 +9,19 @@ namespace ScorchGore
     {
         public string Name;
         public Brush Farbe;
+        public Bewaffnung Waffe;
 
         public Spieler(Control woBinIch, Bitmap woSchaueIch) : base(woBinIch, woSchaueIch)
         {
             /* jeder bekommt am anfang die hälfte der möglichen halbherzen,
              * die jeweils halbherzig wachsen oder zugrunde gehen können */
             this.Lebenspunkte = 3;
+            this.Waffe = Bewaffnung.PixelKanone;
         }
 
         public override int Breite => Main.spielerBreite;
         public int Lebenspunkte { protected set; get; }
+        public bool Tot => this.Lebenspunkte == 0;
 
         public override void Zeichnen(Graphics zeichenFlaeche, int fallProFrame = 0)
         {
@@ -56,6 +59,12 @@ namespace ScorchGore
                 this.X = spielerPosition.X;
                 this.Y = spielerPosition.Y;
             }
+        }
+
+        internal void Schaden(int schadensPunkte)
+        {
+            var lebensPunkteNeu = this.Lebenspunkte - schadensPunkte;
+            this.Lebenspunkte = Math.Max(0, lebensPunkteNeu);
         }
     }
 }
