@@ -65,6 +65,18 @@
     <Compile Include="Benutzeroberflaeche\Einstellungen.Designer.cs">
       <DependentUpon>Einstellungen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Benutzeroberflaeche\LevelUebergang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Benutzeroberflaeche\LevelUebergang.Designer.cs">
+      <DependentUpon>LevelUebergang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Benutzeroberflaeche\UebungNocheinmal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Benutzeroberflaeche\UebungNocheinmal.Designer.cs">
+      <DependentUpon>UebungNocheinmal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Klassen\Audio.cs" />
     <Compile Include="Klassen\Bewaffnung.cs" />
     <Compile Include="Klassen\Explosion.cs" />
@@ -105,6 +117,12 @@
     <Compile Include="Zeug\RessourcenKlasse.cs" />
     <EmbeddedResource Include="Benutzeroberflaeche\Einstellungen.resx">
       <DependentUpon>Einstellungen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Benutzeroberflaeche\LevelUebergang.resx">
+      <DependentUpon>LevelUebergang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Benutzeroberflaeche\UebungNocheinmal.resx">
+      <DependentUpon>UebungNocheinmal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
