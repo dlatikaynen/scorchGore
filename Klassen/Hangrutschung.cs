@@ -32,7 +32,7 @@ namespace ScorchGore.Klassen
         {
             var bergFarbe = Farbverwaltung.BergfarbeAlsInt;
             this.startPixelX = Math.Max(0, startX);
-            this.endetPixelX = Math.Min(levelBild.Width, endetX);
+            this.endetPixelX = Math.Min(levelBild.Width - 1, endetX);
             this.einschlagY = einschlagY;
             var xRichtung = this.startPixelX <= this.endetPixelX ? 1 : -1;
             for (
