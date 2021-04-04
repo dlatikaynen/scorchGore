@@ -20,6 +20,10 @@ namespace ScorchGore.Klassen
             var levelBeschreibung = new LevelBeschreibung { LevelNummer = laufendeLevelNummer };
             switch(laufendeLevelNummer)
             {
+                case 0:
+                    /* das ist das übungslevel */
+                    break;
+
                 case 1:
                     levelBeschreibung.MissionsNummer = 1;
                     levelBeschreibung.LevelNummerInMission = 1;
@@ -50,6 +54,17 @@ namespace ScorchGore.Klassen
                     levelBeschreibung.SpielerPosition2 = new Point(800 - Main.spielerBreite, 300);
                     break;
 
+                case 3:
+                    levelBeschreibung.MissionsNummer = 1;
+                    levelBeschreibung.LevelNummerInMission = 3;
+                    levelBeschreibung.LevelName = "Dalí";
+                    levelBeschreibung.IstBerg = false;                    
+                    levelBeschreibung.BeschreibungsSkript = LevelBeschreibungsSkript.Laden(levelBeschreibung);
+                    break;
+
+                default:
+                    /* spielende */
+                    return null;
             }
 
             levelBeschreibung.MisisonsnameSetzen();

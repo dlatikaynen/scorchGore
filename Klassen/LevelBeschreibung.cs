@@ -12,6 +12,7 @@ namespace ScorchGore.Klassen
             this.SpielerPosition1 = Point.Empty;
             this.SpielerPosition2 = Point.Empty;
             this.Plateaus = new Dictionary<int, Plateau>();
+            this.IstBerg = true;
         }
 
         /// <summary>
@@ -26,13 +27,16 @@ namespace ScorchGore.Klassen
         public int BergRauhheitProzent { get; set; }
 
         /* Beschreibung des zweiten Höhenzugs im Falle eine Höhle */
+        public bool IstBerg { get; set; }
         public bool IstHoehle { get; set; }
+        public bool IstGeskriptet => this.BeschreibungsSkript != null;
         public int HoehleMinHoeheProzent { get; set; }
         public int HoehleMaxHoeheProzent { get; set; }
         public int HoehleRauhheitProzent { get; set; }
 
         /* Besonderheiten der Topologie */
-        public Dictionary<int, Plateau> Plateaus { get; private set; }
+        public Dictionary<int, Plateau> Plateaus { get; private set; }        
+        public LevelBeschreibungsSkript BeschreibungsSkript { get; set; }
 
         /* Beschreibung für ein Missionslevel */
         public int MissionsNummer { get; set; }
