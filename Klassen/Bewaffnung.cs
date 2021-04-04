@@ -20,7 +20,7 @@ namespace ScorchGore.Klassen
             switch(this.Gattung)
             {
                 case Waffengattung.Pixelkanone:
-                    this.SchadensPunkte = 2;
+                    this.SchadensPunkte = 3;
                     break;
             }
         }

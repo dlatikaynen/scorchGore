@@ -1,12 +1,4 @@
 ﻿using ScorchGore.Klassen;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ScorchGore.Benutzeroberflaeche
@@ -23,11 +15,11 @@ namespace ScorchGore.Benutzeroberflaeche
             this.ErgebnisGewonnen.Text = $@"{ rundenErgebnis.ObsiegenderSpieler.Name } won, { rundenErgebnis.ObsiegenderSpieler.Lebenspunkte } HP left";
             if (rundenErgebnis.Ergebnis == SchussErgebnis.SelbstErschossen)
             {
-                this.ErgebnisBesiegt.Text = $"{ rundenErgebnis.GetroffenerSpieler.Name } noobed themselves out";
+                this.ErgebnisBesiegt.Text = $"{ rundenErgebnis.GetroffenerSpieler.Name } n00bed themselves out";
             }
             else
             {
-                this.ErgebnisBesiegt.Text = $"{ rundenErgebnis.GetroffenerSpieler.Name } was defeated";
+                this.ErgebnisBesiegt.Text = $"{ rundenErgebnis.GetroffenerSpieler.Name } has been pwned";
             }
         }
     }

@@ -178,6 +178,30 @@ namespace ScorchGore
             this.MenueEinstellungenSchlange.Hide();
             this.MenueBeendenSchlange.Hide();
         }
+
+        private void ZurueckZumHauptmenu()
+        {
+            this.BackgroundImage = null;
+            this.ScorchGore.Show();
+            this.DerZornDerSanften.Show();
+            this.Copyright.Hide();
+            if (this.spielPhase == SpielPhase.WeltErzeugen)
+            {
+                this.WeltErzeugen.Show();
+            }
+            else
+            {
+                this.MenueStartUebungsspielLabel.Show();
+                this.MenueStartMissionLabel.Show();
+                this.MenueEinstellungenLabel.Show();
+                this.MenueBeendenLabel.Show();
+                this.MenueUebungsspielSchlange.Show();
+                this.MenueMissionSchlange.Show();
+                this.MenueEinstellungenSchlange.Show();
+                this.MenueBeendenSchlange.Show();
+            }
+        }
+
         #endregion
 
         private void UebungsspielVorbereiten()
@@ -192,6 +216,15 @@ namespace ScorchGore
         {
             this.spielPhase = SpielPhase.WeltErzeugen;
             this.aktuelleLevelNummer = 1;
+            this.spielPhase = SpielPhase.WeltWirdErzeugt;
+            this.ErzeugeDieWelt();
+            this.LevelSpielen();
+        }
+
+        private void MissionFortsetzen()
+        {            
+            this.spielPhase = SpielPhase.WeltErzeugen;
+            ++this.aktuelleLevelNummer;
             this.spielPhase = SpielPhase.WeltWirdErzeugt;
             this.ErzeugeDieWelt();
             this.LevelSpielen();
@@ -492,7 +525,28 @@ namespace ScorchGore
              * der andere spieler ist dran */
             if (schussErgebnis.Ergebnis == SchussErgebnis.GegnerGekillt || schussErgebnis.Ergebnis == SchussErgebnis.SelbstErschossen)
             {
-                this.SpielerWurdeGetroffen(schussErgebnis);
+                if (this.SpielerWurdeGetroffen(schussErgebnis))
+                {
+                    if (this.spielPhase == SpielPhase.WeltErzeugen)
+                    {
+                        if (this.TurnierModus)
+                        {
+                            schussErgebnis.GetroffenerSpieler.WiederAuferstehen();
+                            this.BeginInvoke(new Action(() => { this.MissionFortsetzen(); }));
+                            return;
+                        }
+                        else
+                        {
+
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    this.ZurueckZumHauptmenu();
+                    return;
+                }                               
             }
             else
             {
@@ -547,20 +601,29 @@ namespace ScorchGore
             }
 
             this.Refresh();
-            using (var weiterMachen = this.TurnierModus ? (Form)new LevelUebergang(schussErgebnis) : (Form)new UebungNocheinmal(schussErgebnis))
+            if (getroffenerSpieler.Tot)
             {
-                switch(weiterMachen.ShowDialog(this))
+                using (var weiterMachen = this.TurnierModus ? (Form)new LevelUebergang(schussErgebnis) : (Form)new UebungNocheinmal(schussErgebnis))
                 {
-                    case DialogResult.OK:
-                        return true;
+                    switch (weiterMachen.ShowDialog(this))
+                    {
+                        case DialogResult.OK:
+                            this.spielPhase = SpielPhase.WeltErzeugen;
+                            return true;
 
-                    case DialogResult.Retry:
+                        case DialogResult.Retry:
+                            this.spielPhase = SpielPhase.WeltErzeugen;
+                            return false;
 
-                        return false;
-
-                    case DialogResult.Abort:
-                        return false;
+                        case DialogResult.Abort:
+                            this.spielPhase = SpielPhase.StartBildschirm;
+                            return false;
+                    }
                 }
+            }
+            else
+            {
+                return true;
             }
 
             return false;

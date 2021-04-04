@@ -7,6 +7,8 @@ namespace ScorchGore
 {
     internal class Spieler : Sprite
     {
+        private const int initialeLebenspunkte = 3;
+
         public string Name;
         public Brush Farbe;
         public Bewaffnung Waffe;
@@ -15,7 +17,7 @@ namespace ScorchGore
         {
             /* jeder bekommt am anfang die hälfte der möglichen halbherzen,
              * die jeweils halbherzig wachsen oder zugrunde gehen können */
-            this.Lebenspunkte = 3;
+            this.Lebenspunkte = Spieler.initialeLebenspunkte;
             this.Waffe = Bewaffnung.PixelKanone;
         }
 
@@ -66,5 +68,7 @@ namespace ScorchGore
             var lebensPunkteNeu = this.Lebenspunkte - schadensPunkte;
             this.Lebenspunkte = Math.Max(0, lebensPunkteNeu);
         }
+
+        internal void WiederAuferstehen() => this.Lebenspunkte = Spieler.initialeLebenspunkte;
     }
 }
