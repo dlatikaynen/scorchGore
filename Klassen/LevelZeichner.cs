@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScorchGore.Aufzaehlungen;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -9,77 +10,97 @@ namespace ScorchGore.Klassen
         public static void Zeichne(Control woBinIch, Bitmap levelBild, LevelBeschreibung levelBeschreibung, Graphics zeichenFlaeche)
         {
             var verfuegbareBergHoehe = woBinIch.Height - Main.obererRand;
-            var minimumHoehe = Convert.ToInt32(Convert.ToDecimal(verfuegbareBergHoehe) * Convert.ToDecimal(levelBeschreibung.BergMinHoeheProzent) / 100M);
-            var maximumHoehe = Convert.ToInt32(Convert.ToDecimal(verfuegbareBergHoehe) * Convert.ToDecimal(levelBeschreibung.BergMaxHoeheProzent) / 100M);
-            var steilHeit = Convert.ToInt32(5 + levelBeschreibung.BergRauhheitProzent);
-            var rauhHeit = 10M - Convert.ToDecimal(levelBeschreibung.BergRauhheitProzent / 20M);
-            var zufallsZahl = new Random(levelBeschreibung.BergZufallszahl);
-            var maximumHoehenunterschied = maximumHoehe - minimumHoehe;
-            var aktuelleHoehe = Convert.ToDecimal(minimumHoehe + zufallsZahl.Next(maximumHoehenunterschied));
-            var aktuelleRichtung = (zufallsZahl.Next(100) % 2) == 0;
-            var aktuelleSteilheit = Convert.ToDecimal(Math.Max(1, zufallsZahl.Next(steilHeit)) * 0.22);
-            var unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
-            
-            zeichenFlaeche.FillRectangle(Farbverwaltung.Himmelsbuerste, zeichenFlaeche.ClipBounds);
-            Plateau binInPlateau = null;
-            for (var bergX = 0; bergX < woBinIch.Width; bergX += 2)
+            for (
+                var obenUnten = ObenUnten.BergTeil;
+                obenUnten <= (levelBeschreibung.IstHoehle ? ObenUnten.HoehlenTeil : ObenUnten.BergTeil);
+                ++obenUnten
+            )
             {
-                /* berg höhenänderung berechnen */
-                var hoehenAenderung = 0M;
-                if (aktuelleRichtung)
+                var minimumHoehe = Convert.ToInt32(Convert.ToDecimal(verfuegbareBergHoehe) * Convert.ToDecimal(levelBeschreibung.MinHoeheProzent(obenUnten)) / 100M);
+                var maximumHoehe = Convert.ToInt32(Convert.ToDecimal(verfuegbareBergHoehe) * Convert.ToDecimal(levelBeschreibung.MaxHoeheProzent(obenUnten)) / 100M);
+                var steilHeit = Convert.ToInt32(5 + levelBeschreibung.RauhheitProzent(obenUnten));
+                var rauhHeit = 10M - Convert.ToDecimal(levelBeschreibung.RauhheitProzent(obenUnten) / 20M);
+                var zufallsZahl = new Random(levelBeschreibung.BergZufallszahl);
+                var maximumHoehenunterschied = maximumHoehe - minimumHoehe;
+                var aktuelleHoehe = Convert.ToDecimal(minimumHoehe + zufallsZahl.Next(maximumHoehenunterschied));
+                var aktuelleRichtung = (zufallsZahl.Next(100) % 2) == 0;
+                var aktuelleSteilheit = Convert.ToDecimal(Math.Max(1, zufallsZahl.Next(steilHeit)) * 0.22);
+                var unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
+                var zeichenAbschnitt = zeichenFlaeche.BeginContainer();
+                if (obenUnten == ObenUnten.BergTeil)
                 {
-                    hoehenAenderung += aktuelleSteilheit;
+                    /* den himmel zeichnen wir nur beim ersten mal */
+                    zeichenFlaeche.FillRectangle(Farbverwaltung.Himmelsbuerste, zeichenFlaeche.ClipBounds);
                 }
                 else
                 {
-                    hoehenAenderung -= aktuelleSteilheit;
+                    /* unterscheidung oben und unten machen wir durch koordinatentransformation,
+                     * das ist bequemer als alles umdrehen */
+                    zeichenFlaeche.ScaleTransform(1f, -1f);
+                    zeichenFlaeche.TranslateTransform(0f, -(float)verfuegbareBergHoehe);
                 }
 
-                aktuelleHoehe += hoehenAenderung;
-                if (aktuelleHoehe < 0)
+                Plateau binInPlateau = null;
+                for (var bergX = 0; bergX < woBinIch.Width; bergX += 2)
                 {
-                    aktuelleRichtung = true;
-                    aktuelleHoehe = aktuelleSteilheit / 2M;
-                }
-                else if (aktuelleHoehe > maximumHoehenunterschied)
-                {
-                    aktuelleRichtung = false;
-                    aktuelleHoehe = maximumHoehenunterschied - aktuelleSteilheit / 2M;
-                }
-
-                /* berg zeichnen */
-                var pixelHoehe = minimumHoehe + Convert.ToInt32(aktuelleHoehe);
-                if(binInPlateau == null)
-                {
-                    if(levelBeschreibung.Plateaus.ContainsKey(bergX))
+                    /* berg/stalaktitten höhenänderung berechnen */
+                    var hoehenAenderung = 0M;
+                    if (aktuelleRichtung)
                     {
-                        binInPlateau = levelBeschreibung.Plateaus[bergX];
-                    }
-                }
-
-                if (binInPlateau != null)
-                {
-                    if (binInPlateau.EndetX < bergX)
-                    {
-                        zeichenFlaeche.DrawLine(Pens.Red, (float)binInPlateau.StartX, (float)woBinIch.Height-binInPlateau.Elevation, (float)binInPlateau.EndetX, (float)woBinIch.Height - binInPlateau.Elevation);
-                        binInPlateau = null;
+                        hoehenAenderung += aktuelleSteilheit;
                     }
                     else
                     {
-                        pixelHoehe = binInPlateau.Elevation;
+                        hoehenAenderung -= aktuelleSteilheit;
+                    }
+
+                    aktuelleHoehe += hoehenAenderung;
+                    if (aktuelleHoehe < 0)
+                    {
+                        aktuelleRichtung = true;
+                        aktuelleHoehe = aktuelleSteilheit / 2M;
+                    }
+                    else if (aktuelleHoehe > maximumHoehenunterschied)
+                    {
+                        aktuelleRichtung = false;
+                        aktuelleHoehe = maximumHoehenunterschied - aktuelleSteilheit / 2M;
+                    }
+
+                    /* berg/stalaktitten zeichnen */
+                    var pixelHoehe = minimumHoehe + Convert.ToInt32(aktuelleHoehe);
+                    if (binInPlateau == null)
+                    {
+                        if (levelBeschreibung.Plateaus.ContainsKey(bergX))
+                        {
+                            binInPlateau = levelBeschreibung.Plateaus[bergX];
+                        }
+                    }
+
+                    if (binInPlateau != null)
+                    {
+                        if (binInPlateau.EndetX < bergX)
+                        {
+                            binInPlateau = null;
+                        }
+                        else
+                        {
+                            pixelHoehe = binInPlateau.Elevation;
+                        }
+                    }
+
+                    zeichenFlaeche.FillRectangle(Farbverwaltung.Bergbuerste, bergX, (float)woBinIch.Height - pixelHoehe, 2f, (float)woBinIch.Height);
+
+                    /* zacken in den berg/in die stalaktitten machen */
+                    if (--unveraenderteSteigung <= 0)
+                    {
+                        woBinIch.Refresh();
+                        aktuelleRichtung = (zufallsZahl.Next(100) % 2) == 0;
+                        aktuelleSteilheit = Convert.ToDecimal(Math.Max(1, zufallsZahl.Next(steilHeit)) * 0.22);
+                        unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
                     }
                 }
 
-                zeichenFlaeche.FillRectangle(Farbverwaltung.Bergbuerste, bergX, (float)woBinIch.Height - pixelHoehe, 2f, (float)woBinIch.Height);
-
-                /* zacken in den berg machen */
-                if (--unveraenderteSteigung <= 0)
-                {
-                    woBinIch.Refresh();
-                    aktuelleRichtung = (zufallsZahl.Next(100) % 2) == 0;
-                    aktuelleSteilheit = Convert.ToDecimal(Math.Max(1, zufallsZahl.Next(steilHeit)) * 0.22);
-                    unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
-                }
+                zeichenFlaeche.EndContainer(zeichenAbschnitt);
             }
         }
     }

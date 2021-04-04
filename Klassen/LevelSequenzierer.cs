@@ -33,6 +33,23 @@ namespace ScorchGore.Klassen
                     levelBeschreibung.Plateau(645 - 415, 638, 700);
                     levelBeschreibung.SpielerPosition2 = new Point(673, Main.spielerBasisHoehe);
                     break;
+
+                case 2:
+                    levelBeschreibung.MissionsNummer = 1;
+                    levelBeschreibung.LevelNummerInMission = 2;
+                    levelBeschreibung.LevelName = "The Blue Cave";
+                    levelBeschreibung.BergMinHoeheProzent = 10;
+                    levelBeschreibung.BergMaxHoeheProzent = 39;
+                    levelBeschreibung.BergRauhheitProzent = 19;
+                    levelBeschreibung.HoehleMinHoeheProzent = 13;
+                    levelBeschreibung.HoehleMaxHoeheProzent = 48;
+                    levelBeschreibung.HoehleRauhheitProzent = 50;
+                    levelBeschreibung.IstHoehle = true;
+                    levelBeschreibung.BergZufallszahl = LevelSequenzierer.zufallsZahlenGenerator;
+                    levelBeschreibung.SpielerPosition1 = new Point(Main.spielerBreite, 300);
+                    levelBeschreibung.SpielerPosition2 = new Point(800 - Main.spielerBreite, 300);
+                    break;
+
             }
 
             levelBeschreibung.MisisonsnameSetzen();

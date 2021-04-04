@@ -49,6 +49,10 @@ namespace ScorchGore.Klassen
 
         internal void Plateau(int bodenHoehe, int startX, int endetX) => this.Plateaus.Add(startX, new Plateau { Elevation = bodenHoehe, StartX = startX, EndetX = endetX });
 
+        public int MinHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? this.HoehleMinHoeheProzent : this.BergMinHoeheProzent;
+        public int MaxHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? this.HoehleMaxHoeheProzent : this.BergMaxHoeheProzent;
+        public int RauhheitProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? this.HoehleRauhheitProzent : this.BergRauhheitProzent;
+
         private string MissionsnameBestimmen(int missionsNummer)
         {
             switch(missionsNummer)
