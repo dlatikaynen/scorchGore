@@ -1,4 +1,5 @@
 ﻿using ScorchGore.Aufzaehlungen;
+using ScorchGore.Benutzeroberflaeche;
 using ScorchGore.Klassen;
 using ScorchGore.OnlineMultiplayer;
 using ScorchGore.Steuerelemente;
@@ -93,7 +94,10 @@ namespace ScorchGore
         {
             this.SetzeSchlange(this.MenueEinstellungenSchlange);
             await Task.Delay(150);
-
+            using (var einstellungsFenster = new Einstellungen())
+            {
+                einstellungsFenster.ShowDialog(this);
+            }
         }
 
         private async void MenueBeendenLabel_Click(object sender, EventArgs e)

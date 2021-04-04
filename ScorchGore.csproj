@@ -58,6 +58,12 @@
     <Compile Include="Aufzaehlungen\MitspielerFindenStatus.cs" />
     <Compile Include="Aufzaehlungen\ObenUnten.cs" />
     <Compile Include="Aufzaehlungen\TrajektorienArt.cs" />
+    <Compile Include="Benutzeroberflaeche\Einstellungen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Benutzeroberflaeche\Einstellungen.Designer.cs">
+      <DependentUpon>Einstellungen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Klassen\Audio.cs" />
     <Compile Include="Klassen\Explosion.cs" />
     <Compile Include="Klassen\Farbverwaltung.cs" />
@@ -95,6 +101,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Zeug\RessourcenKlasse.cs" />
+    <EmbeddedResource Include="Benutzeroberflaeche\Einstellungen.resx">
+      <DependentUpon>Einstellungen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -133,9 +142,7 @@
   <ItemGroup>
     <None Include="Gestaltung\a-truly-painful-design.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Benutzeroberflaeche\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Zeug\Goodies\chel-cr.png" />
   </ItemGroup>
