@@ -72,6 +72,7 @@ namespace ScorchGore
 
         private int StandardSpielerEinsX => Main.spielerBreite;
         private int StandardSpielerZweiX => this.Width - Main.spielerBreite;
+        private bool TurnierModus => this.aktuelleLevelNummer > 0;
 
         #region Menue
         private async void MenueStartUebungsspielLabel_Click(object sender, EventArgs e)
@@ -488,10 +489,9 @@ namespace ScorchGore
 
             /* wenn keiner getroffen wurde, rollen tauschen,
              * der andere spieler ist dran */
-            if (schussErgebnis.Ergebnis == SchussErgebnis.GegnerGekillt)
+            if (schussErgebnis.Ergebnis == SchussErgebnis.GegnerGekillt || schussErgebnis.Ergebnis == SchussErgebnis.SelbstErschossen)
             {
-                this.Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
-                new Explosion(Color.FromArgb(new Random().Next(int.MaxValue)), 175).Noobsplosion(this, this.levelBild, this.ausgangsZustand, schussErgebnis.EinschlagsKoordinateX, schussErgebnis.EinschlagsKoordinateY);
+                this.SpielerWurdeGetroffen(schussErgebnis);
             }
             else
             {
@@ -526,6 +526,25 @@ namespace ScorchGore
                 this.dranSeiender = this.Gegner;
                 this.RundeVorbereiten();
             }
+        }
+
+        private void SpielerWurdeGetroffen(Treffer schussErgebnis)
+        {
+            this.Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
+            new Explosion(Color.FromArgb(new Random().Next(int.MaxValue)), 175).Noobsplosion(this, this.levelBild, this.ausgangsZustand, schussErgebnis.EinschlagsKoordinateX, schussErgebnis.EinschlagsKoordinateY);
+            var getroffenerSpieler = schussErgebnis.Ergebnis == SchussErgebnis.SelbstErschossen ? this.dranSeiender : this.Gegner;
+            getroffenerSpieler.Schaden(this.dranSeiender.Waffe.SchadensPunkte);
+            using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
+            {
+                this.herzAnzeige.Zeichnen(
+                    this,
+                    zeichenFlaeche,
+                    object.ReferenceEquals(getroffenerSpieler, this.spielerEins) ? getroffenerSpieler : null,
+                    object.ReferenceEquals(getroffenerSpieler, this.spielerZwei) ? getroffenerSpieler : null
+                );
+            }
+
+            this.Refresh();
         }
 
         private Treffer Schiessen(SchussEingabe schussEingabe)
@@ -625,7 +644,7 @@ namespace ScorchGore
 
                 /* schuss ist links, rechts, oder unten rausgeflogen */
                 if (pixelY > this.levelBild.Height || pixelX < 0 || pixelX > this.levelBild.Width)
-                {                  
+                {
                     break;
                 }
             }

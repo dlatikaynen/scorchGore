@@ -58,6 +58,7 @@
     <Compile Include="Aufzaehlungen\MitspielerFindenStatus.cs" />
     <Compile Include="Aufzaehlungen\ObenUnten.cs" />
     <Compile Include="Aufzaehlungen\TrajektorienArt.cs" />
+    <Compile Include="Aufzaehlungen\Waffengattung.cs" />
     <Compile Include="Benutzeroberflaeche\Einstellungen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +66,7 @@
       <DependentUpon>Einstellungen.cs</DependentUpon>
     </Compile>
     <Compile Include="Klassen\Audio.cs" />
+    <Compile Include="Klassen\Bewaffnung.cs" />
     <Compile Include="Klassen\Explosion.cs" />
     <Compile Include="Klassen\Farbverwaltung.cs" />
     <Compile Include="Klassen\Geraeusche.cs" />
