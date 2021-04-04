@@ -1,6 +1,6 @@
 ﻿namespace ScorchGore
 {
-    internal enum SchussErgebnis
+    public enum SchussErgebnis
     {
         NichtGeschossen = 0,
         NixGetroffen = 1,

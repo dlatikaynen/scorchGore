@@ -486,6 +486,7 @@ namespace ScorchGore
 
             /* den schuss ausführen und schauen (ob) was getroffen wurde */
             var schussErgebnis = this.Schiessen(schussEingabe);
+            var koennteFallen = false;
 
             /* wenn keiner getroffen wurde, rollen tauschen,
              * der andere spieler ist dran */
@@ -497,43 +498,44 @@ namespace ScorchGore
             {
                 /* falls ein berg getroffen wurde, kann es sein, dass der andere spieler
                  * den boden unter sich verloren hat, und tiefer fällt */
-                var koennteFallen = false;
                 if (schussErgebnis.Ergebnis == SchussErgebnis.BergGetroffen)
                 {
-                    Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);                
+                    Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
                     new Explosion(Color.FromArgb(new Random().Next(int.MaxValue)), 50).Noobsplosion(this, this.levelBild, this.ausgangsZustand, schussErgebnis.EinschlagsKoordinateX, schussErgebnis.EinschlagsKoordinateY);
-                    koennteFallen = true;                    
+                    koennteFallen = true;
                 }
-
-                this.AusgangszustandWiederherstellen();
-                using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
-                {
-                    this.dranSeiender.Zeichnen(zeichenFlaeche);
-                    this.Gegner.Zeichnen(zeichenFlaeche);
-                }
-
-                if (koennteFallen)
-                {
-                    this.SpielerFallen(this.Gegner);
-                    this.SpielerFallen(this.dranSeiender);
-                }
-                else
-                {
-                    this.Refresh();
-                }
-
-                /* spieler wechseln sich jetzt ab */
-                this.dranSeiender = this.Gegner;
-                this.RundeVorbereiten();
             }
+
+            this.AusgangszustandWiederherstellen();
+            using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
+            {
+                this.dranSeiender.Zeichnen(zeichenFlaeche);
+                this.Gegner.Zeichnen(zeichenFlaeche);
+            }
+
+            if (koennteFallen)
+            {
+                this.SpielerFallen(this.Gegner);
+                this.SpielerFallen(this.dranSeiender);
+            }
+            else
+            {
+                this.Refresh();
+            }
+
+            /* spieler wechseln sich jetzt ab */
+            this.dranSeiender = this.Gegner;
+            this.RundeVorbereiten();
         }
 
-        private void SpielerWurdeGetroffen(Treffer schussErgebnis)
+        private bool SpielerWurdeGetroffen(Treffer schussErgebnis)
         {
             this.Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
             new Explosion(Color.FromArgb(new Random().Next(int.MaxValue)), 175).Noobsplosion(this, this.levelBild, this.ausgangsZustand, schussErgebnis.EinschlagsKoordinateX, schussErgebnis.EinschlagsKoordinateY);
             var getroffenerSpieler = schussErgebnis.Ergebnis == SchussErgebnis.SelbstErschossen ? this.dranSeiender : this.Gegner;
             getroffenerSpieler.Schaden(this.dranSeiender.Waffe.SchadensPunkte);
+            schussErgebnis.GetroffenerSpieler = getroffenerSpieler;
+            schussErgebnis.ObsiegenderSpieler = object.ReferenceEquals(getroffenerSpieler, this.dranSeiender) ? this.Gegner : this.dranSeiender;
             using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
             {
                 this.herzAnzeige.Zeichnen(
@@ -545,6 +547,23 @@ namespace ScorchGore
             }
 
             this.Refresh();
+            using (var weiterMachen = this.TurnierModus ? (Form)new LevelUebergang(schussErgebnis) : (Form)new UebungNocheinmal(schussErgebnis))
+            {
+                switch(weiterMachen.ShowDialog(this))
+                {
+                    case DialogResult.OK:
+                        return true;
+
+                    case DialogResult.Retry:
+
+                        return false;
+
+                    case DialogResult.Abort:
+                        return false;
+                }
+            }
+
+            return false;
         }
 
         private Treffer Schiessen(SchussEingabe schussEingabe)
@@ -560,7 +579,11 @@ namespace ScorchGore
             var behandeltePixel = new List<long>();
             var ausgangsPunktx = this.dranSeiender.X;
             var ausgangsPunkty = this.dranSeiender.Y;
-            var schussErgebnis = new Treffer { Ergebnis = SchussErgebnis.NixGetroffen };
+            var schussErgebnis = new Treffer
+            {
+                GespieltesLevel = this.aktuelleLevelNummer,
+                Ergebnis = SchussErgebnis.NixGetroffen
+            };
 
             /* von hier nach dort x laufen lassen */
             for (

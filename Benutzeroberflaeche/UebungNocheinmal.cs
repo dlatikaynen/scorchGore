@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScorchGore.Klassen;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +15,20 @@ namespace ScorchGore.Benutzeroberflaeche
     {
         public UebungNocheinmal()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+        }
+
+        public UebungNocheinmal(Treffer rundenErgebnis) : this()
+        {
+            this.ErgebnisGewonnen.Text = $@"{ rundenErgebnis.ObsiegenderSpieler.Name } won, { rundenErgebnis.ObsiegenderSpieler.Lebenspunkte } HP left";
+            if (rundenErgebnis.Ergebnis == SchussErgebnis.SelbstErschossen)
+            {
+                this.ErgebnisBesiegt.Text = $"{ rundenErgebnis.GetroffenerSpieler.Name } noobed themselves out";
+            }
+            else
+            {
+                this.ErgebnisBesiegt.Text = $"{ rundenErgebnis.GetroffenerSpieler.Name } was defeated";
+            }
         }
     }
 }
