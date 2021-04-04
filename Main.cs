@@ -412,10 +412,6 @@ namespace ScorchGore
 
                     goodie.FallenLassen(zeichenFlaeche);
                 }
-                else
-                {
-                    this.herzAnzeige.Zeichnen(this, zeichenFlaeche, this.spielerEins, this.spielerZwei);
-                }
             }
 
             this.Refresh();
@@ -434,6 +430,12 @@ namespace ScorchGore
                 using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
                 {
                     fallenderSpieler.FallenLassen(zeichenFlaeche);
+                    this.herzAnzeige.Zeichnen(
+                        this,
+                        zeichenFlaeche,
+                        object.ReferenceEquals(fallenderSpieler, this.spielerEins) ? this.spielerEins : null,
+                        object.ReferenceEquals(fallenderSpieler, this.spielerZwei) ? this.spielerZwei : null
+                    );
                 }
             }
             finally
@@ -515,11 +517,9 @@ namespace ScorchGore
 
         private void RundeAustragen(SchussEingabe schussEingabe)
         {
-            this.spielPhase = SpielPhase.SpielrundeAktiv;
-
             /* den schuss ausführen und schauen (ob) was getroffen wurde */
-            var schussErgebnis = this.Schiessen(schussEingabe);
-            var koennteFallen = false;
+            this.spielPhase = SpielPhase.SpielrundeAktiv;
+            var schussErgebnis = this.Schiessen(schussEingabe);            
 
             /* wenn keiner getroffen wurde, rollen tauschen,
              * der andere spieler ist dran */
@@ -555,8 +555,7 @@ namespace ScorchGore
                 if (schussErgebnis.Ergebnis == SchussErgebnis.BergGetroffen)
                 {
                     Audio.GeraeuschAbspielen(Geraeusche.SchussEinschlag);
-                    new Explosion(Color.FromArgb(new Random().Next(int.MaxValue)), 50).Noobsplosion(this, this.levelBild, this.ausgangsZustand, schussErgebnis.EinschlagsKoordinateX, schussErgebnis.EinschlagsKoordinateY);
-                    koennteFallen = true;
+                    new Explosion(Color.FromArgb(new Random().Next(int.MaxValue)), 50).Noobsplosion(this, this.levelBild, this.ausgangsZustand, schussErgebnis.EinschlagsKoordinateX, schussErgebnis.EinschlagsKoordinateY);                    
                 }
             }
 
@@ -567,15 +566,9 @@ namespace ScorchGore
                 this.Gegner.Zeichnen(zeichenFlaeche);
             }
 
-            if (koennteFallen)
-            {
-                this.SpielerFallen(this.Gegner);
-                this.SpielerFallen(this.dranSeiender);
-            }
-            else
-            {
-                this.Refresh();
-            }
+            this.SpielerFallen(this.Gegner);
+            this.SpielerFallen(this.dranSeiender);
+            this.Refresh();
 
             /* spieler wechseln sich jetzt ab */
             this.dranSeiender = this.Gegner;
