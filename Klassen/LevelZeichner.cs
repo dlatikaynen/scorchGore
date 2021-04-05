@@ -34,74 +34,94 @@ namespace ScorchGore.Klassen
                 }
                 else
                 {
-                    /* unterscheidung oben und unten machen wir durch koordinatentransformation,
-                     * das ist bequemer als alles umdrehen */
-                    zeichenFlaeche.ScaleTransform(1f, -1f);
-                    zeichenFlaeche.TranslateTransform(0f, -(float)verfuegbareBergHoehe);
+                    LevelZeichner.ObenWirdUnten(woBinIch, zeichenFlaeche);
                 }
 
-                Plateau binInPlateau = null;
-                for (var bergX = 0; bergX < woBinIch.Width; bergX += 2)
+                if (levelBeschreibung.IstBerg || levelBeschreibung.IstHoehle)
                 {
-                    /* berg/stalaktitten höhenänderung berechnen */
-                    var hoehenAenderung = 0M;
-                    if (aktuelleRichtung)
+                    Plateau binInPlateau = null;
+                    for (var bergX = 0; bergX < woBinIch.Width; bergX += 2)
                     {
-                        hoehenAenderung += aktuelleSteilheit;
-                    }
-                    else
-                    {
-                        hoehenAenderung -= aktuelleSteilheit;
-                    }
-
-                    aktuelleHoehe += hoehenAenderung;
-                    if (aktuelleHoehe < 0)
-                    {
-                        aktuelleRichtung = true;
-                        aktuelleHoehe = aktuelleSteilheit / 2M;
-                    }
-                    else if (aktuelleHoehe > maximumHoehenunterschied)
-                    {
-                        aktuelleRichtung = false;
-                        aktuelleHoehe = maximumHoehenunterschied - aktuelleSteilheit / 2M;
-                    }
-
-                    /* berg/stalaktitten zeichnen */
-                    var pixelHoehe = minimumHoehe + Convert.ToInt32(aktuelleHoehe);
-                    if (binInPlateau == null)
-                    {
-                        if (levelBeschreibung.Plateaus.ContainsKey(bergX))
+                        /* berg/stalaktitten höhenänderung berechnen */
+                        var hoehenAenderung = 0M;
+                        if (aktuelleRichtung)
                         {
-                            binInPlateau = levelBeschreibung.Plateaus[bergX];
-                        }
-                    }
-
-                    if (binInPlateau != null)
-                    {
-                        if (binInPlateau.EndetX < bergX)
-                        {
-                            binInPlateau = null;
+                            hoehenAenderung += aktuelleSteilheit;
                         }
                         else
                         {
-                            pixelHoehe = binInPlateau.Elevation;
+                            hoehenAenderung -= aktuelleSteilheit;
                         }
-                    }
 
-                    zeichenFlaeche.FillRectangle(Farbverwaltung.Bergbuerste, bergX, (float)woBinIch.Height - pixelHoehe, 2f, (float)woBinIch.Height);
+                        aktuelleHoehe += hoehenAenderung;
+                        if (aktuelleHoehe < 0)
+                        {
+                            aktuelleRichtung = true;
+                            aktuelleHoehe = aktuelleSteilheit / 2M;
+                        }
+                        else if (aktuelleHoehe > maximumHoehenunterschied)
+                        {
+                            aktuelleRichtung = false;
+                            aktuelleHoehe = maximumHoehenunterschied - aktuelleSteilheit / 2M;
+                        }
 
-                    /* zacken in den berg/in die stalaktitten machen */
-                    if (--unveraenderteSteigung <= 0)
-                    {
-                        woBinIch.Refresh();
-                        aktuelleRichtung = (zufallsZahl.Next(100) % 2) == 0;
-                        aktuelleSteilheit = Convert.ToDecimal(Math.Max(1, zufallsZahl.Next(steilHeit)) * 0.22);
-                        unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
+                        /* berg/stalaktitten zeichnen */
+                        var pixelHoehe = minimumHoehe + Convert.ToInt32(aktuelleHoehe);
+                        if (binInPlateau == null)
+                        {
+                            if (levelBeschreibung.Plateaus.ContainsKey(bergX))
+                            {
+                                binInPlateau = levelBeschreibung.Plateaus[bergX];
+                            }
+                        }
+
+                        if (binInPlateau != null)
+                        {
+                            if (binInPlateau.EndetX < bergX)
+                            {
+                                binInPlateau = null;
+                            }
+                            else
+                            {
+                                pixelHoehe = binInPlateau.Elevation;
+                            }
+                        }
+
+                        zeichenFlaeche.FillRectangle(Farbverwaltung.Bergbuerste, bergX, (float)woBinIch.Height - pixelHoehe, 2f, (float)woBinIch.Height);
+
+                        /* zacken in den berg/in die stalaktitten machen */
+                        if (--unveraenderteSteigung <= 0)
+                        {
+                            woBinIch.Refresh();
+                            aktuelleRichtung = (zufallsZahl.Next(100) % 2) == 0;
+                            aktuelleSteilheit = Convert.ToDecimal(Math.Max(1, zufallsZahl.Next(steilHeit)) * 0.22);
+                            unveraenderteSteigung = Convert.ToInt32(zufallsZahl.NextDouble() * (double)rauhHeit);
+                        }
                     }
                 }
 
                 zeichenFlaeche.EndContainer(zeichenAbschnitt);
             }
+
+            if (levelBeschreibung.IstGeskriptet)
+            {
+                var zeichenAbschnitt = zeichenFlaeche.BeginContainer();
+                LevelZeichner.ObenWirdUnten(woBinIch, zeichenFlaeche);
+                foreach (var architekturPfad in levelBeschreibung.BeschreibungsSkript.Pfade)
+                {
+                    zeichenFlaeche.FillPath(Farbverwaltung.Bergbuerste, architekturPfad.AlsGrafikPfad());
+                }
+
+                zeichenFlaeche.EndContainer(zeichenAbschnitt);
+            }
+        }
+
+        private static void ObenWirdUnten(Control woBinIch, Graphics zeichenFlaeche)
+        {
+            /* unterscheidung oben und unten machen wir durch koordinatentransformation,
+             * das ist bequemer als alles umdrehen */
+            zeichenFlaeche.ScaleTransform(1f, -1f);
+            zeichenFlaeche.TranslateTransform(0f, -(float)woBinIch.Height);
         }
     }
 }

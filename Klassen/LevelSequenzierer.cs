@@ -58,7 +58,7 @@ namespace ScorchGore.Klassen
                     levelBeschreibung.MissionsNummer = 1;
                     levelBeschreibung.LevelNummerInMission = 3;
                     levelBeschreibung.LevelName = "Dalí";
-                    levelBeschreibung.IstBerg = false;                    
+                    levelBeschreibung.IstBerg = false;
                     levelBeschreibung.BeschreibungsSkript = LevelBeschreibungsSkript.Laden(levelBeschreibung);
                     break;
 

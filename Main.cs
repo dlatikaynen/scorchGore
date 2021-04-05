@@ -215,7 +215,11 @@ namespace ScorchGore
         private void MissionVorbereiten()
         {
             this.spielPhase = SpielPhase.WeltErzeugen;
+#if DEBUG
+            this.aktuelleLevelNummer = 3;
+#else
             this.aktuelleLevelNummer = 1;
+#endif
             this.spielPhase = SpielPhase.WeltWirdErzeugt;
             this.ErzeugeDieWelt();
             this.LevelSpielen();
