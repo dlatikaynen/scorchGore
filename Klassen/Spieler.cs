@@ -7,6 +7,8 @@ namespace ScorchGore
 {
     internal class Spieler : Sprite
     {
+        internal const int DurchSturzFallSchaden = 2;
+
         private const int initialeLebenspunkte = 3;
 
         public string Name;
@@ -63,10 +65,13 @@ namespace ScorchGore
             }
         }
 
-        internal void Schaden(int schadensPunkte)
+        public override void FallenLassen(Graphics zeichenFlaeche, Func<bool> durchGestuerzt = null) => ZeugFallenlassen.FallZuBoden(woBinIch, woSchaueIch, zeichenFlaeche, this, durchGestuerzt);
+
+        internal int Schaden(int schadensPunkte)
         {
             var lebensPunkteNeu = this.Lebenspunkte - schadensPunkte;
             this.Lebenspunkte = Math.Max(0, lebensPunkteNeu);
+            return this.Lebenspunkte;
         }
 
         internal void WiederAuferstehen() => this.Lebenspunkte = Spieler.initialeLebenspunkte;

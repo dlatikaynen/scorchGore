@@ -60,6 +60,8 @@ namespace ScorchGore.Klassen
                     levelBeschreibung.LevelName = "Dalí";
                     levelBeschreibung.IstBerg = false;
                     levelBeschreibung.BeschreibungsSkript = LevelBeschreibungsSkript.Laden(levelBeschreibung);
+                    levelBeschreibung.SpielerPosition1 = new Point(112, Main.spielerBasisHoehe);
+                    levelBeschreibung.SpielerPosition2 = new Point(673, Main.spielerBasisHoehe);
                     break;
 
                 default:

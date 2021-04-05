@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
@@ -26,7 +27,7 @@ namespace ScorchGore.Klassen
 
         public abstract void Zeichnen(Graphics zeichenFlaeche, int fallProFrame = 0);
 
-        public void FallenLassen(Graphics zeichenFlaeche) => ZeugFallenlassen.FallZuBoden(woBinIch, woSchaueIch, zeichenFlaeche, this);
+        public virtual void FallenLassen(Graphics zeichenFlaeche, Func<bool> durchGestuerzt = null) => ZeugFallenlassen.FallZuBoden(woBinIch, woSchaueIch, zeichenFlaeche, this, durchGestuerzt);
 
         protected static void FallschirmZeichnen(Graphics zeichenFlaeche, int xMitte, int yOben, int gesamtBreite, int fallProFrame = 0)
         {

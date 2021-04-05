@@ -9,7 +9,7 @@ namespace ScorchGore.Klassen
         private const int fallProFrame = 2;
         private const int augenDioptrien = 3;
 
-        public static void FallZuBoden(Control woBinIch, Bitmap woSchaueIch, Graphics zeichenFlaeche, Sprite fallendesObjekt)
+        public static void FallZuBoden(Control woBinIch, Bitmap woSchaueIch, Graphics zeichenFlaeche, Sprite fallendesObjekt, Func<bool> durchGestuerzt)
         {
             var weiterFallen = true;
             var himmelsFarbe = Farbverwaltung.HimmelsfarbeAlsInt;
@@ -21,7 +21,20 @@ namespace ScorchGore.Klassen
                     schauenX += ZeugFallenlassen.augenDioptrien
                 )
                 {
-                    if (woSchaueIch.GetPixel(schauenX, fallendesObjekt.Y + 1).ToArgb() != himmelsFarbe)
+                    var unterMir = fallendesObjekt.Y + 1;
+                    if (unterMir >= woBinIch.Height)
+                    {
+                        if ((unterMir - Main.spielerBasisHoehe) > woBinIch.Height)
+                        {
+                            if (durchGestuerzt != null && !durchGestuerzt())
+                            {
+                                return;
+                            }
+
+                            fallendesObjekt.Y = fallProFrame;
+                        }
+                    }
+                    else if (woSchaueIch.GetPixel(schauenX, unterMir).ToArgb() != himmelsFarbe)
                     {
                         weiterFallen = false;
                         return;

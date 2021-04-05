@@ -107,6 +107,10 @@ namespace ScorchGore.Klassen
             {
                 var zeichenAbschnitt = zeichenFlaeche.BeginContainer();
                 LevelZeichner.ObenWirdUnten(woBinIch, zeichenFlaeche);
+                zeichenFlaeche.ScaleTransform(2f, 2f);
+                zeichenFlaeche.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+                zeichenFlaeche.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                zeichenFlaeche.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
                 foreach (var architekturPfad in levelBeschreibung.BeschreibungsSkript.Pfade)
                 {
                     zeichenFlaeche.FillPath(Farbverwaltung.Bergbuerste, architekturPfad.AlsGrafikPfad());

@@ -429,23 +429,40 @@ namespace ScorchGore
 
         private void SpielerFallen(Spieler fallenderSpieler)
         {
-            try
+            var herzenAktualisiert = false;
+            using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
             {
-                using (var zeichenFlaeche = Graphics.FromImage(this.levelBild))
+                try
                 {
-                    fallenderSpieler.FallenLassen(zeichenFlaeche);
-                    this.herzAnzeige.Zeichnen(
-                        this,
-                        zeichenFlaeche,
-                        object.ReferenceEquals(fallenderSpieler, this.spielerEins) ? this.spielerEins : null,
-                        object.ReferenceEquals(fallenderSpieler, this.spielerZwei) ? this.spielerZwei : null
-                    );
+                    fallenderSpieler.FallenLassen(zeichenFlaeche, () =>
+                    {
+                        var verbleibendeLebenspunkte = fallenderSpieler.Schaden(Spieler.DurchSturzFallSchaden);
+                        this.HerzAnzeigeAktualisieren(zeichenFlaeche, fallenderSpieler);
+                        herzenAktualisiert = true;
+                        return verbleibendeLebenspunkte > 0;
+                    });
+
+                }
+                finally
+                {
+                    if(!herzenAktualisiert)
+                    {
+                        this.HerzAnzeigeAktualisieren(zeichenFlaeche, fallenderSpieler);
+                    }
+
+                    this.Refresh();
                 }
             }
-            finally
-            {
-                this.Refresh();
-            }
+        }
+
+        private void HerzAnzeigeAktualisieren(Graphics zeichenFlaeche, Spieler vonSpieler)
+        {
+            this.herzAnzeige.Zeichnen(
+                this,
+                zeichenFlaeche,
+                object.ReferenceEquals(vonSpieler, this.spielerEins) ? this.spielerEins : null,
+                object.ReferenceEquals(vonSpieler, this.spielerZwei) ? this.spielerZwei : null
+            );
         }
 
         private void LevelSpielen()
