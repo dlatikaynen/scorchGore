@@ -441,7 +441,6 @@ namespace ScorchGore
                         herzenAktualisiert = true;
                         return verbleibendeLebenspunkte > 0;
                     });
-
                 }
                 finally
                 {

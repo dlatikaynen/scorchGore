@@ -37,7 +37,7 @@
     <StartupObject>ScorchGore.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Zeug\TAnk.ico</ApplicationIcon>
+    <ApplicationIcon>Zeug\Tank.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -170,7 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Gestaltung\truly-a-painful-design.png" />
-    <Content Include="Zeug\TAnk.ico" />
+    <Content Include="Zeug\Tank.ico" />
     <EmbeddedResource Include="Zeug\Goodies\rechtsherz.png" />
     <EmbeddedResource Include="Zeug\Goodies\halbesherz.png" />
     <EmbeddedResource Include="Zeug\Goodies\ganzesherz.png" />
