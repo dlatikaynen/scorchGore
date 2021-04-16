@@ -55,10 +55,12 @@
   <ItemGroup>
     <Compile Include="Aufzaehlungen\GoodieWirkung.cs" />
     <Compile Include="Aufzaehlungen\Hauptmenuepunkt.cs" />
+    <Compile Include="Aufzaehlungen\Medium.cs" />
     <Compile Include="Aufzaehlungen\MitspielerFindenStatus.cs" />
     <Compile Include="Aufzaehlungen\ObenUnten.cs" />
     <Compile Include="Aufzaehlungen\TrajektorienArt.cs" />
     <Compile Include="Aufzaehlungen\Waffengattung.cs" />
+    <Compile Include="Aufzaehlungen\ZeichnungsBefehl.cs" />
     <Compile Include="Benutzeroberflaeche\Einstellungen.cs">
       <SubType>Form</SubType>
     </Compile>

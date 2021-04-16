@@ -12,6 +12,11 @@ namespace ScorchGore.Klassen
     internal class LevelBeschreibungsSkript
     {
         private const string kommentarPrefix = @"//";
+        private const string abschnittBERG = "BERG";
+        private const string abschnittGRAS = "GRAS";
+        private const string abschnittHIMMEL = "HIMMEL";
+        private const string abschnittSPIELER = "SPIELER";
+
 
         public List<LevelArchitekturPfad> Pfade { get; protected set; }
 
