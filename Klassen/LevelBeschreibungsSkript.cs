@@ -61,12 +61,20 @@ namespace ScorchGore.Klassen
 
             public LevelArchitekturPfad() => this.promilleKoordinaten = new List<Point>();
 
-            public GraphicsPath AlsGrafikPfad()
+            public GraphicsPath AlsGrafikPfad(int absoluteWidth, int absoluteHeight)
             {
                 var grafikPfad = new GraphicsPath();
+                var vorDividierteBreit = (float)absoluteWidth / 1000f;
+                var vorDividierteHoehe = (float)absoluteHeight / 1000f;
                 if (this.promilleKoordinaten.Any())
                 {
-                    grafikPfad.AddLines(this.promilleKoordinaten.ToArray());
+                    grafikPfad.AddLines(this.promilleKoordinaten.Select
+                    (
+                        pK => new Point(
+                            (int)(vorDividierteBreit * (float)pK.X),
+                            (int)(vorDividierteHoehe * (float)pK.Y)
+                        )
+                    ).ToArray());
                 }
 
                 grafikPfad.CloseAllFigures();

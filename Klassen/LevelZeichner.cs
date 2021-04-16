@@ -113,7 +113,10 @@ namespace ScorchGore.Klassen
                 zeichenFlaeche.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
                 foreach (var architekturPfad in levelBeschreibung.BeschreibungsSkript.Pfade)
                 {
-                    zeichenFlaeche.FillPath(Farbverwaltung.Bergbuerste, architekturPfad.AlsGrafikPfad());
+                    zeichenFlaeche.FillPath(Farbverwaltung.Bergbuerste, architekturPfad.AlsGrafikPfad(
+                        woBinIch.ClientSize.Width / 2, 
+                        woBinIch.ClientSize.Height / 2
+                    ));
                 }
 
                 zeichenFlaeche.EndContainer(zeichenAbschnitt);
