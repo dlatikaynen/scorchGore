@@ -1,4 +1,5 @@
-﻿using ScorchGore.Zeug;
+﻿using ScorchGore.Aufzaehlungen;
+using ScorchGore.Zeug;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,7 +17,6 @@ namespace ScorchGore.Klassen
         private const string abschnittGRAS = "GRAS";
         private const string abschnittHIMMEL = "HIMMEL";
         private const string abschnittSPIELER = "SPIELER";
-
 
         public List<LevelArchitekturPfad> Pfade { get; protected set; }
 
@@ -46,11 +46,21 @@ namespace ScorchGore.Klassen
                     using (var levelReader = new StreamReader(levelDatei))
                     {
                         string levelZeile;
+                        var aktuellesMaterial = Medium.Berg;
                         while(!string.IsNullOrEmpty((levelZeile = levelReader.ReadLine())))
                         {
-                            if (!levelZeile.Trim().StartsWith(kommentarPrefix))
+                            levelZeile = levelZeile.Trim();
+                            if (!levelZeile.StartsWith(kommentarPrefix))
                             {
-                                this.Pfade.Add(LevelArchitekturPfad.AusLevelDatei(levelZeile));
+                                var levelZeileTeile = levelZeile.Split(' ');
+                                if (Enum.TryParse<Medium>(levelZeileTeile[0], ignoreCase: true, out Medium neuesMedium))
+                                {
+                                    aktuellesMaterial = neuesMedium;
+                                }
+                                else
+                                {
+                                    this.Pfade.Add(LevelArchitekturPfad.AusLevelDatei(aktuellesMaterial, levelZeile));
+                                }
                             }
                         }
                     }
@@ -59,45 +69,5 @@ namespace ScorchGore.Klassen
         }
 
         private string GetLevelDateiname(int levelNummer) => $@"Level{ levelNummer.ToString().PadLeft(3, '0') }.dat";
-
-        internal class LevelArchitekturPfad
-        {
-            protected internal readonly List<Point> promilleKoordinaten;
-
-            public LevelArchitekturPfad() => this.promilleKoordinaten = new List<Point>();
-
-            public GraphicsPath AlsGrafikPfad(int absoluteWidth, int absoluteHeight)
-            {
-                var grafikPfad = new GraphicsPath();
-                var vorDividierteBreit = (float)absoluteWidth / 1000f;
-                var vorDividierteHoehe = (float)absoluteHeight / 1000f;
-                if (this.promilleKoordinaten.Any())
-                {
-                    grafikPfad.AddLines(this.promilleKoordinaten.Select
-                    (
-                        pK => new Point(
-                            (int)(vorDividierteBreit * (float)pK.X),
-                            (int)(vorDividierteHoehe * (float)pK.Y)
-                        )
-                    ).ToArray());
-                }
-
-                grafikPfad.CloseAllFigures();
-                return grafikPfad;
-            }
-
-            internal static LevelArchitekturPfad AusLevelDatei(string levelZeile)
-            {
-                var architekturPfad = new LevelArchitekturPfad();
-                var geleseneKoordinaten = levelZeile.Split(';').Select(koordinatenPaar =>
-                {
-                    var koordinatenTeile = koordinatenPaar.Split(',');
-                    return new Point(int.Parse(koordinatenTeile[0]), int.Parse(koordinatenTeile[1]));
-                });
-
-                architekturPfad.promilleKoordinaten.AddRange(geleseneKoordinaten);
-                return architekturPfad;
-            }
-        }
     }
 }
