@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using ScorchGore.Aufzaehlungen;
+using System;
+using System.Drawing;
 
 namespace ScorchGore.Klassen
 {
@@ -18,5 +20,38 @@ namespace ScorchGore.Klassen
 
         public static int HimmelsfarbeAlsInt => Farbverwaltung.Himmelsfarbe.ToArgb();
         public static Brush Himmelsbuerste => new SolidBrush(Farbverwaltung.Himmelsfarbe);
+
+        public static int StahlfarbeAlsInt => Farbverwaltung.Stahlfarbe.ToArgb();
+        public static Brush Stahlbuerste => new SolidBrush(Farbverwaltung.Stahlfarbe);
+
+        public static Brush BuersteVonMedium(Medium vonMedium)
+        {
+            switch(vonMedium)
+            {
+                case Medium.Berg:
+                    return Farbverwaltung.Bergbuerste;
+
+                case Medium.Stahl:
+                    return Farbverwaltung.Stahlbuerste;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(vonMedium), vonMedium, nameof(Medium));
+            }
+        }
+
+        public static Pen StiftVonMedium(Medium vonMedium)
+        {
+            switch (vonMedium)
+            {
+                case Medium.Berg:
+                    return Farbverwaltung.Bergstift;
+
+                case Medium.Stahl:
+                    return Farbverwaltung.Stahlstift;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(vonMedium), vonMedium, nameof(Medium));
+            }
+        }
     }
 }

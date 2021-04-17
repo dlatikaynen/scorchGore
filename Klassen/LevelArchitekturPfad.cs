@@ -8,11 +8,21 @@ namespace ScorchGore.Klassen
 {
     internal class LevelArchitekturPfad
     {
+        protected internal const string modifiziererRechteck = "B";
+        protected internal const string modifiziererFuellung = "F";
+        protected internal const string modifiziererVollesRechteck = "BF";
+
         protected internal readonly List<Point> promilleKoordinaten;
         protected internal Medium terrainMaterial = Medium.Berg;
         protected internal ZeichnungsBefehl zeichnungBefehl = ZeichnungsBefehl.Pfad;
+        protected internal bool wirdRechteck;
+        protected internal bool hatFuellung;
 
         public LevelArchitekturPfad() => this.promilleKoordinaten = new List<Point>();
+        public bool IstPunkt => this.promilleKoordinaten.Count() == 1;
+        public bool IstLinie => this.promilleKoordinaten.Count() == 2;
+        public bool IstRechteck => this.wirdRechteck;
+        public bool IstGefuellt => this.hatFuellung;
 
         public GraphicsPath AlsGrafikPfad(int absoluteWidth, int absoluteHeight)
         {
@@ -40,6 +50,28 @@ namespace ScorchGore.Klassen
             {
                 terrainMaterial = aktuellesMaterial
             };
+
+            if (levelZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererVollesRechteck))
+            {
+                architekturPfad.wirdRechteck = true;
+                architekturPfad.hatFuellung = true;
+                levelZeile = levelZeile.Substring(0, levelZeile.Length - LevelArchitekturPfad.modifiziererVollesRechteck.Length);
+            }
+            else if (levelZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererRechteck))
+            {
+                architekturPfad.wirdRechteck = true;
+                levelZeile = levelZeile.Substring(0, levelZeile.Length - LevelArchitekturPfad.modifiziererRechteck.Length);
+            }
+            else if(levelZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererFuellung))
+            {
+                architekturPfad.hatFuellung = true;
+                levelZeile = levelZeile.Substring(0, levelZeile.Length - LevelArchitekturPfad.modifiziererFuellung.Length);
+            }
+
+            if(levelZeile.EndsWith(";"))
+            {
+                levelZeile = levelZeile.Substring(0, levelZeile.Length - ";".Length);
+            }
 
             var geleseneKoordinaten = levelZeile.Split(';').Select(koordinatenPaar =>
             {

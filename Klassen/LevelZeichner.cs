@@ -119,15 +119,72 @@ namespace ScorchGore.Klassen
                         case ZeichnungsBefehl.Ellipse:
                         case ZeichnungsBefehl.Gummiband:
                         case ZeichnungsBefehl.Kurve:
-                        case ZeichnungsBefehl.Rechteck:
 
                             break;
 
                         default:
-                            zeichenFlaeche.FillPath(Farbverwaltung.Bergbuerste, architekturPfad.AlsGrafikPfad(
+                            var grafikPfad = architekturPfad.AlsGrafikPfad(
                                 woBinIch.ClientSize.Width / 2,
                                 woBinIch.ClientSize.Height / 2
-                            ));
+                            );
+
+                            if (architekturPfad.IstPunkt)
+                            {
+                                zeichenFlaeche.DrawLine(
+                                    Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial),
+                                    grafikPfad.PathPoints[0],
+                                    grafikPfad.PathPoints[0]
+                                );
+                            }
+                            else if (architekturPfad.IstLinie)
+                            {
+                                if (architekturPfad.IstRechteck)
+                                {
+                                    if (architekturPfad.IstGefuellt)
+                                    {
+                                        zeichenFlaeche.FillRectangle(
+                                            Farbverwaltung.BuersteVonMedium(architekturPfad.terrainMaterial),
+                                            grafikPfad.PathPoints[0].X,
+                                            grafikPfad.PathPoints[0].Y,
+                                            Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
+                                            Math.Abs(grafikPfad.PathPoints[1].Y - grafikPfad.PathPoints[0].Y) + 1
+                                        );
+                                    }
+
+                                    zeichenFlaeche.DrawRectangle(
+                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial),
+                                        grafikPfad.PathPoints[0].X,
+                                        grafikPfad.PathPoints[0].Y,
+                                        Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
+                                        Math.Abs(grafikPfad.PathPoints[1].Y - grafikPfad.PathPoints[0].Y) + 1
+                                    );
+                                }
+                                else
+                                {
+                                    zeichenFlaeche.DrawLine(
+                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial),
+                                        grafikPfad.PathPoints[0],
+                                        grafikPfad.PathPoints[1]
+                                    );
+                                }
+                            }
+                            else
+                            {
+                                if (architekturPfad.IstGefuellt)
+                                {
+                                    zeichenFlaeche.FillPath(
+                                        Farbverwaltung.BuersteVonMedium(architekturPfad.terrainMaterial),
+                                        grafikPfad
+                                    );
+                                }
+                                else
+                                {
+                                    zeichenFlaeche.DrawPath(
+                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial),
+                                        grafikPfad
+                                    );
+                                }
+                            }
 
                             break;
                     }
