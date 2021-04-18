@@ -1,4 +1,5 @@
 ﻿using ScorchGore.Aufzaehlungen;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -8,6 +9,8 @@ namespace ScorchGore.Klassen
 {
     internal class LevelArchitekturPfad
     {
+        protected internal const char kennzeichenFigur = ':';
+        protected internal const char kennzeichenDicke = '*';
         protected internal const string modifiziererRechteck = "B";
         protected internal const string modifiziererFuellung = "F";
         protected internal const string modifiziererVollesRechteck = "BF";
@@ -53,36 +56,51 @@ namespace ScorchGore.Klassen
                 terrainMaterial = aktuellesMaterial
             };
 
-            var kommandoTeile = levelZeile.Split('*');
-            if (kommandoTeile.Length > 1 && int.TryParse(kommandoTeile[1].Trim(), out int stiftDicke))
+            var kommandoTeile = levelZeile.Split(LevelArchitekturPfad.kennzeichenFigur);
+            string figurZeile;
+            if (kommandoTeile.Length == 1)
+            {
+                figurZeile = kommandoTeile[0].Trim();
+            }
+            else
+            {
+                figurZeile = kommandoTeile[1].Trim();
+                if (Enum.TryParse<ZeichnungsBefehl>(kommandoTeile[0], ignoreCase: true, out ZeichnungsBefehl zeichnungBefehl))
+                {
+                    architekturPfad.zeichnungBefehl = zeichnungBefehl;
+                }
+            }
+
+            var figurTeile = figurZeile.Split(LevelArchitekturPfad.kennzeichenDicke);
+            if (figurTeile.Length > 1 && int.TryParse(figurTeile[1].Trim(), out int stiftDicke))
             {
                 architekturPfad.stiftDicke = stiftDicke;
             }
 
-            var kommandoZeile = kommandoTeile[0].Trim();
-            if (kommandoZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererVollesRechteck))
+            var figurDefinition = figurTeile[0].Trim();
+            if (figurDefinition.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererVollesRechteck))
             {
                 architekturPfad.wirdRechteck = true;
                 architekturPfad.hatFuellung = true;
-                kommandoZeile = kommandoZeile.Substring(0, kommandoZeile.Length - LevelArchitekturPfad.modifiziererVollesRechteck.Length);
+                figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - LevelArchitekturPfad.modifiziererVollesRechteck.Length);
             }
-            else if (kommandoZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererRechteck))
+            else if (figurDefinition.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererRechteck))
             {
                 architekturPfad.wirdRechteck = true;
-                kommandoZeile = kommandoZeile.Substring(0, kommandoZeile.Length - LevelArchitekturPfad.modifiziererRechteck.Length);
+                figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - LevelArchitekturPfad.modifiziererRechteck.Length);
             }
-            else if(kommandoZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererFuellung))
+            else if(figurDefinition.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererFuellung))
             {
                 architekturPfad.hatFuellung = true;
-                kommandoZeile = kommandoZeile.Substring(0, kommandoZeile.Length - LevelArchitekturPfad.modifiziererFuellung.Length);
+                figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - LevelArchitekturPfad.modifiziererFuellung.Length);
             }
 
-            if(kommandoZeile.EndsWith(";"))
+            if(figurDefinition.EndsWith(";"))
             {
-                kommandoZeile = kommandoZeile.Substring(0, kommandoZeile.Length - ";".Length);
+                figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - ";".Length);
             }
 
-            var geleseneKoordinaten = kommandoZeile.Split(';').Select(koordinatenPaar =>
+            var geleseneKoordinaten = figurDefinition.Split(';').Select(koordinatenPaar =>
             {
                 var koordinatenTeile = koordinatenPaar.Split(',');
                 return new Point(int.Parse(koordinatenTeile[0]), int.Parse(koordinatenTeile[1]));

@@ -1,10 +1,4 @@
-﻿using ScorchGore.OnlineMultiplayer;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace ScorchGore.Klassen
 {
@@ -21,7 +15,7 @@ namespace ScorchGore.Klassen
             switch(laufendeLevelNummer)
             {
                 case 0:
-                    /* das ist das übungslevel */
+                    /* das ist (sind) das (die) übungslevel */
                     break;
 
                 case 1:
@@ -66,6 +60,13 @@ namespace ScorchGore.Klassen
                     levelBeschreibung.BeschreibungsSkript = LevelBeschreibungsSkript.Laden(levelBeschreibung);
                     levelBeschreibung.SpielerPosition1 = new Point(112, Main.spielerBasisHoehe);
                     levelBeschreibung.SpielerPosition2 = new Point(673, Main.spielerBasisHoehe);
+                    break;
+
+                case 4:
+                    levelBeschreibung.MissionsNummer = 2;
+                    levelBeschreibung.LevelNummerInMission = 1;
+                    levelBeschreibung.LevelName = "Vah Miaw";
+
                     break;
 
                 default:

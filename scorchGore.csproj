@@ -93,6 +93,7 @@
     <Compile Include="Klassen\LevelBeschreibungsSkript.cs" />
     <Compile Include="Klassen\LevelSequenzierer.cs" />
     <Compile Include="Klassen\LevelZeichner.cs" />
+    <Compile Include="Klassen\LinienFolger.cs" />
     <Compile Include="Klassen\Plateau.cs" />
     <Compile Include="Klassen\Sprite.cs" />
     <Compile Include="Klassen\Treffer.cs" />

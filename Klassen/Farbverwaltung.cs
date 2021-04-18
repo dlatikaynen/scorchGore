@@ -33,6 +33,9 @@ namespace ScorchGore.Klassen
 
                 case Medium.Stahl:
                     return Farbverwaltung.Stahlbuerste;
+                
+                case Medium.Himmel:
+                    return Farbverwaltung.Himmelsbuerste;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(vonMedium), vonMedium, nameof(Medium));
@@ -50,6 +53,10 @@ namespace ScorchGore.Klassen
 
                 case Medium.Stahl:
                     derStift = Farbverwaltung.Stahlstift;
+                    break;
+
+                case Medium.Himmel:
+                    derStift = Farbverwaltung.Himmelsstift;
                     break;
 
                 default:

@@ -13,7 +13,7 @@ namespace ScorchGore.Klassen
     /// </summary>
     internal class LinienFolger
     {
-        public IEnumerable<Point> Bresenham(int startX, int startY, int endX, int endY)
+        public static IEnumerable<Point> Bresenham(int startX, int startY, int endX, int endY)
         {
             var w = endX - startX;
             var h = endY - startY;

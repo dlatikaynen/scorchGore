@@ -1,6 +1,7 @@
 ﻿using ScorchGore.Aufzaehlungen;
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace ScorchGore.Klassen
@@ -113,80 +114,33 @@ namespace ScorchGore.Klassen
                 zeichenFlaeche.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
                 foreach (var architekturPfad in levelBeschreibung.BeschreibungsSkript.Pfade)
                 {
-                    switch (architekturPfad.zeichnungBefehl)
+                    if (architekturPfad.terrainMaterial == Medium.Gras)
                     {
-                        case ZeichnungsBefehl.Bogen:
-                        case ZeichnungsBefehl.Ellipse:
-                        case ZeichnungsBefehl.Gummiband:
-                        case ZeichnungsBefehl.Kurve:
+                        /* gras kann immer nur linien folgen */
+                        LevelZeichner.ZeichneGras(woBinIch, zeichenFlaeche, architekturPfad);
+                    }
+                    else
+                    {
+                        switch (architekturPfad.zeichnungBefehl)
+                        {
+                            case ZeichnungsBefehl.Bogen:
+                                break;
 
-                            break;
+                            case ZeichnungsBefehl.Gummiband:
+                                LevelZeichner.ZeichneGummiband(woBinIch, zeichenFlaeche, architekturPfad);
+                                break;
 
-                        default:
-                            var grafikPfad = architekturPfad.AlsGrafikPfad(
-                                woBinIch.ClientSize.Width / 2,
-                                woBinIch.ClientSize.Height / 2
-                            );
+                            case ZeichnungsBefehl.Kurva:
+                                break;
 
-                            if (architekturPfad.IstPunkt)
-                            {
-                                zeichenFlaeche.DrawLine(
-                                    Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
-                                    grafikPfad.PathPoints[0],
-                                    grafikPfad.PathPoints[0]
-                                );
-                            }
-                            else if (architekturPfad.IstLinie)
-                            {
-                                if (architekturPfad.IstRechteck)
-                                {
-                                    if (architekturPfad.IstGefuellt)
-                                    {
-                                        zeichenFlaeche.FillRectangle(
-                                            Farbverwaltung.BuersteVonMedium(architekturPfad.terrainMaterial),
-                                            grafikPfad.PathPoints[0].X,
-                                            grafikPfad.PathPoints[0].Y,
-                                            Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
-                                            Math.Abs(grafikPfad.PathPoints[1].Y - grafikPfad.PathPoints[0].Y) + 1
-                                        );
-                                    }
+                            case ZeichnungsBefehl.Ei:
+                                LevelZeichner.ZeichneEi(woBinIch, zeichenFlaeche, architekturPfad);
+                                break;
 
-                                    zeichenFlaeche.DrawRectangle(
-                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
-                                        grafikPfad.PathPoints[0].X,
-                                        grafikPfad.PathPoints[0].Y,
-                                        Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
-                                        Math.Abs(grafikPfad.PathPoints[1].Y - grafikPfad.PathPoints[0].Y) + 1
-                                    );
-                                }
-                                else
-                                {
-                                    zeichenFlaeche.DrawLine(
-                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
-                                        grafikPfad.PathPoints[0],
-                                        grafikPfad.PathPoints[1]
-                                    );
-                                }
-                            }
-                            else
-                            {
-                                if (architekturPfad.IstGefuellt)
-                                {
-                                    zeichenFlaeche.FillPath(
-                                        Farbverwaltung.BuersteVonMedium(architekturPfad.terrainMaterial),
-                                        grafikPfad
-                                    );
-                                }
-                                else
-                                {
-                                    zeichenFlaeche.DrawPath(
-                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
-                                        grafikPfad
-                                    );
-                                }
-                            }
-
-                            break;
+                            default:
+                                LevelZeichner.ZeichnePfad(woBinIch, zeichenFlaeche, architekturPfad);
+                                break;
+                        }
                     }
                 }
 
@@ -200,6 +154,150 @@ namespace ScorchGore.Klassen
              * das ist bequemer als alles umdrehen */
             zeichenFlaeche.ScaleTransform(1f, -1f);
             zeichenFlaeche.TranslateTransform(0f, -(float)woBinIch.Height);
+        }
+
+        private static void ZeichnePfad(Control woBinIch, Graphics zeichenFlaeche, LevelArchitekturPfad architekturPfad)
+        {
+            var grafikPfad = LevelZeichner.AlsPfad(woBinIch, architekturPfad);
+            if (architekturPfad.IstPunkt)
+            {
+                zeichenFlaeche.DrawLine(
+                    Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                    grafikPfad.PathPoints[0],
+                    grafikPfad.PathPoints[0]
+                );
+            }
+            else if (architekturPfad.IstLinie)
+            {
+                if (architekturPfad.IstRechteck)
+                {
+                    if (architekturPfad.IstGefuellt)
+                    {
+                        zeichenFlaeche.FillRectangle(
+                            Farbverwaltung.BuersteVonMedium(architekturPfad.terrainMaterial),
+                            grafikPfad.PathPoints[0].X,
+                            grafikPfad.PathPoints[0].Y,
+                            Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
+                            Math.Abs(grafikPfad.PathPoints[1].Y - grafikPfad.PathPoints[0].Y) + 1
+                        );
+                    }
+
+                    zeichenFlaeche.DrawRectangle(
+                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                        grafikPfad.PathPoints[0].X,
+                        grafikPfad.PathPoints[0].Y,
+                        Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
+                        Math.Abs(grafikPfad.PathPoints[1].Y - grafikPfad.PathPoints[0].Y) + 1
+                    );
+                }
+                else
+                {
+                    zeichenFlaeche.DrawLine(
+                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                        grafikPfad.PathPoints[0],
+                        grafikPfad.PathPoints[1]
+                    );
+                }
+            }
+            else
+            {
+                if (architekturPfad.IstGefuellt)
+                {
+                    zeichenFlaeche.FillPath(
+                        Farbverwaltung.BuersteVonMedium(architekturPfad.terrainMaterial),
+                        grafikPfad
+                    );
+                }
+                else
+                {
+                    zeichenFlaeche.DrawPath(
+                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                        grafikPfad
+                    );
+                }
+            }
+        }
+
+        private static void ZeichneEi(Control woBinIch, Graphics zeichenFlaeche, LevelArchitekturPfad architekturPfad)
+        {
+            var grafikPfad = LevelZeichner.AlsPfad(woBinIch, architekturPfad);
+            if (architekturPfad.IstGefuellt)
+            {
+                zeichenFlaeche.FillEllipse(
+                    Farbverwaltung.BuersteVonMedium(architekturPfad.terrainMaterial),
+                    grafikPfad.PathPoints[0].X,
+                    grafikPfad.PathPoints[0].Y,
+                    Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
+                    Math.Abs(grafikPfad.PathPoints[1].Y - grafikPfad.PathPoints[0].Y) + 1
+                );
+            }
+
+            zeichenFlaeche.DrawEllipse(
+                Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                grafikPfad.PathPoints[0].X,
+                grafikPfad.PathPoints[0].Y,
+                Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
+                Math.Abs(grafikPfad.PathPoints[1].Y - grafikPfad.PathPoints[0].Y) + 1
+            );
+        }
+
+        private static void ZeichneGummiband(Control woBinIch, Graphics zeichenFlaeche, LevelArchitekturPfad architekturPfad)
+        {
+            var grafikPfad = LevelZeichner.AlsPfad(woBinIch, architekturPfad);
+            if (architekturPfad.IstRechteck || architekturPfad.IstGefuellt)
+            {
+                /* gefüllt geht nur als geschlossene kurva */
+                if (architekturPfad.IstGefuellt)
+                {
+                    zeichenFlaeche.FillClosedCurve(
+                        Farbverwaltung.BuersteVonMedium(architekturPfad.terrainMaterial),
+                        grafikPfad.PathPoints,
+                        FillMode.Alternate,
+                        0.62f
+                    );
+                }
+
+                zeichenFlaeche.DrawClosedCurve(
+                    Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                    grafikPfad.PathPoints,
+                    0.62f,
+                    FillMode.Alternate
+                );
+            }
+            else
+            {
+                zeichenFlaeche.DrawCurve(
+                    Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                    grafikPfad.PathPoints,
+                    0.62f
+                );
+            }
+        }
+
+        private static void ZeichneGras(Control woBinIch, Graphics zeichenFlaeche, LevelArchitekturPfad architekturPfad)
+        {
+            var grafikPfad = LevelZeichner.AlsPfad(woBinIch, architekturPfad);
+            if (grafikPfad.PointCount == 2)
+            {
+                foreach(var grasPunkt in LinienFolger.Bresenham(
+                    (int)grafikPfad.PathPoints[0].X,
+                    (int)grafikPfad.PathPoints[0].Y,
+                    (int)grafikPfad.PathPoints[1].X,
+                    (int)grafikPfad.PathPoints[1].Y
+                ))
+                {
+                    zeichenFlaeche.DrawLine(Pens.OrangeRed, grasPunkt, new Point(grasPunkt.X, grasPunkt.Y + 10));
+
+                }
+            }
+        }
+
+        private static GraphicsPath AlsPfad(Control woBinIch, LevelArchitekturPfad architekturPfad)
+        {
+            return architekturPfad.AlsGrafikPfad(
+                woBinIch.ClientSize.Width / 2,
+                woBinIch.ClientSize.Height / 2
+            );
         }
     }
 }
