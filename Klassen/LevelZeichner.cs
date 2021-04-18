@@ -287,7 +287,17 @@ namespace ScorchGore.Klassen
                 ))
                 {
                     zeichenFlaeche.DrawLine(Pens.OrangeRed, grasPunkt, new Point(grasPunkt.X, grasPunkt.Y + 10));
+                    zeichenFlaeche.DrawBezier(
+                        Pens.YellowGreen,
+                        150,100,
+                        200,150,
+                        200,150,
+                        250,100
+                    );
 
+                    zeichenFlaeche.DrawEllipse(Pens.LightSalmon, 148, 98, 4, 4);
+                    zeichenFlaeche.DrawEllipse(Pens.LightSalmon, 198, 148, 4, 4);
+                    zeichenFlaeche.DrawEllipse(Pens.LightSalmon, 248, 98, 4, 4);
                 }
             }
         }
