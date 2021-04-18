@@ -58,7 +58,11 @@ namespace ScorchGore.Klassen
                     levelBeschreibung.MissionsNummer = 1;
                     levelBeschreibung.LevelNummerInMission = 3;
                     levelBeschreibung.LevelName = "Dalí";
-                    levelBeschreibung.IstBerg = false;
+                    levelBeschreibung.IstBerg = true;
+                    levelBeschreibung.BergZufallszahl = LevelSequenzierer.zufallsZahlenGenerator;
+                    levelBeschreibung.BergMinHoeheProzent = 3;
+                    levelBeschreibung.BergMaxHoeheProzent = 17;
+                    levelBeschreibung.BergRauhheitProzent = 8;
                     levelBeschreibung.BeschreibungsSkript = LevelBeschreibungsSkript.Laden(levelBeschreibung);
                     levelBeschreibung.SpielerPosition1 = new Point(112, Main.spielerBasisHoehe);
                     levelBeschreibung.SpielerPosition2 = new Point(673, Main.spielerBasisHoehe);

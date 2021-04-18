@@ -8,11 +8,12 @@
         /// eine linie ist ein pfad mit nur zwei koordinaten.
         /// ein rechteck ist ein pfad mit nur zwei koordinaten und B suffix.
         /// ein gefülltes rechteck ist ein pfad mit nur zwei koordinaten und F suffix.
+        /// ein kreis ist ein ei mit quadratischer umschreibung.
         /// </summary>
         Pfad, 
         Bogen,
-        Ellipse,
+        Ei,
         Gummiband,
-        Kurve        
+        Kurva
     }
 }

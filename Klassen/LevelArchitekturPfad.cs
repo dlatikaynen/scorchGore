@@ -17,12 +17,14 @@ namespace ScorchGore.Klassen
         protected internal ZeichnungsBefehl zeichnungBefehl = ZeichnungsBefehl.Pfad;
         protected internal bool wirdRechteck;
         protected internal bool hatFuellung;
+        protected internal int stiftDicke;
 
         public LevelArchitekturPfad() => this.promilleKoordinaten = new List<Point>();
         public bool IstPunkt => this.promilleKoordinaten.Count() == 1;
         public bool IstLinie => this.promilleKoordinaten.Count() == 2;
         public bool IstRechteck => this.wirdRechteck;
         public bool IstGefuellt => this.hatFuellung;
+        public int StiftDicke => this.stiftDicke;
 
         public GraphicsPath AlsGrafikPfad(int absoluteWidth, int absoluteHeight)
         {
@@ -51,29 +53,36 @@ namespace ScorchGore.Klassen
                 terrainMaterial = aktuellesMaterial
             };
 
-            if (levelZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererVollesRechteck))
+            var kommandoTeile = levelZeile.Split('*');
+            if (kommandoTeile.Length > 1 && int.TryParse(kommandoTeile[1].Trim(), out int stiftDicke))
+            {
+                architekturPfad.stiftDicke = stiftDicke;
+            }
+
+            var kommandoZeile = kommandoTeile[0].Trim();
+            if (kommandoZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererVollesRechteck))
             {
                 architekturPfad.wirdRechteck = true;
                 architekturPfad.hatFuellung = true;
-                levelZeile = levelZeile.Substring(0, levelZeile.Length - LevelArchitekturPfad.modifiziererVollesRechteck.Length);
+                kommandoZeile = kommandoZeile.Substring(0, kommandoZeile.Length - LevelArchitekturPfad.modifiziererVollesRechteck.Length);
             }
-            else if (levelZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererRechteck))
+            else if (kommandoZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererRechteck))
             {
                 architekturPfad.wirdRechteck = true;
-                levelZeile = levelZeile.Substring(0, levelZeile.Length - LevelArchitekturPfad.modifiziererRechteck.Length);
+                kommandoZeile = kommandoZeile.Substring(0, kommandoZeile.Length - LevelArchitekturPfad.modifiziererRechteck.Length);
             }
-            else if(levelZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererFuellung))
+            else if(kommandoZeile.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererFuellung))
             {
                 architekturPfad.hatFuellung = true;
-                levelZeile = levelZeile.Substring(0, levelZeile.Length - LevelArchitekturPfad.modifiziererFuellung.Length);
+                kommandoZeile = kommandoZeile.Substring(0, kommandoZeile.Length - LevelArchitekturPfad.modifiziererFuellung.Length);
             }
 
-            if(levelZeile.EndsWith(";"))
+            if(kommandoZeile.EndsWith(";"))
             {
-                levelZeile = levelZeile.Substring(0, levelZeile.Length - ";".Length);
+                kommandoZeile = kommandoZeile.Substring(0, kommandoZeile.Length - ";".Length);
             }
 
-            var geleseneKoordinaten = levelZeile.Split(';').Select(koordinatenPaar =>
+            var geleseneKoordinaten = kommandoZeile.Split(';').Select(koordinatenPaar =>
             {
                 var koordinatenTeile = koordinatenPaar.Split(',');
                 return new Point(int.Parse(koordinatenTeile[0]), int.Parse(koordinatenTeile[1]));

@@ -39,19 +39,33 @@ namespace ScorchGore.Klassen
             }
         }
 
-        public static Pen StiftVonMedium(Medium vonMedium)
+        public static Pen StiftVonMedium(Medium vonMedium, int stiftDicke = 0)
         {
+            Pen derStift;
             switch (vonMedium)
             {
                 case Medium.Berg:
-                    return Farbverwaltung.Bergstift;
+                    derStift = Farbverwaltung.Bergstift;
+                    break;
 
                 case Medium.Stahl:
-                    return Farbverwaltung.Stahlstift;
+                    derStift = Farbverwaltung.Stahlstift;
+                    break;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(vonMedium), vonMedium, nameof(Medium));
             }
+
+            if (stiftDicke > 1)
+            {
+                derStift.Width = (float)stiftDicke;
+            }
+            else
+            {
+                derStift.Width = 1f;
+            }
+
+            return derStift;
         }
     }
 }

@@ -131,7 +131,7 @@ namespace ScorchGore.Klassen
                             if (architekturPfad.IstPunkt)
                             {
                                 zeichenFlaeche.DrawLine(
-                                    Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial),
+                                    Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
                                     grafikPfad.PathPoints[0],
                                     grafikPfad.PathPoints[0]
                                 );
@@ -152,7 +152,7 @@ namespace ScorchGore.Klassen
                                     }
 
                                     zeichenFlaeche.DrawRectangle(
-                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial),
+                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
                                         grafikPfad.PathPoints[0].X,
                                         grafikPfad.PathPoints[0].Y,
                                         Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
@@ -162,7 +162,7 @@ namespace ScorchGore.Klassen
                                 else
                                 {
                                     zeichenFlaeche.DrawLine(
-                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial),
+                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
                                         grafikPfad.PathPoints[0],
                                         grafikPfad.PathPoints[1]
                                     );
@@ -180,7 +180,7 @@ namespace ScorchGore.Klassen
                                 else
                                 {
                                     zeichenFlaeche.DrawPath(
-                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial),
+                                        Farbverwaltung.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
                                         grafikPfad
                                     );
                                 }
