@@ -276,12 +276,15 @@ namespace ScorchGore.Klassen
 
         private static void ZeichneGras(Control woBinIch, Graphics zeichenFlaeche, LevelArchitekturPfad architekturPfad)
         {
+            PointF grasPunktGenau;
+            var random = new Random();
             var grafikPfad = LevelZeichner.AlsPfad(woBinIch, architekturPfad);
             if (grafikPfad.PointCount == 2)
             {
                 var sodeAnfang = grafikPfad.PathPoints[0];
                 var sodeEndpkt = grafikPfad.PathPoints[1];
                 var letztesBlatt = PointF.Empty;
+                var ueberLappung = PointF.Empty;
                 var ersterDurchlauf = true;
                 foreach (var grasPunkt in LinienFolger.Bresenham(
                     (int)sodeAnfang.X,
@@ -290,48 +293,93 @@ namespace ScorchGore.Klassen
                     (int)sodeEndpkt.Y
                 ))
                 {
-                    var grasPunktGenau = new PointF(grasPunkt.X, grasPunkt.Y);
+                    grasPunktGenau = new PointF(grasPunkt.X, grasPunkt.Y);
                     if (ersterDurchlauf)
                     {
                         letztesBlatt = sodeAnfang;
                         ersterDurchlauf = false;
                     }
-                    else if (LevelZeichner.Abstand(letztesBlatt, grasPunktGenau) > 8)
+                    else
                     {
-                        LevelZeichner.ZeichneBlatt(
-                            zeichenFlaeche,
-                            letztesBlatt,
-                            grasPunktGenau
-                        );
-
-                        letztesBlatt = grasPunktGenau;
+                        LevelZeichner.RechneBlattPosition(zeichenFlaeche, random, grasPunktGenau, ref letztesBlatt, ref ueberLappung);
                     }
+                }
 
-                    zeichenFlaeche.DrawLine(Pens.OrangeRed, grasPunkt, new Point(grasPunkt.X, grasPunkt.Y - 10));
-
+                ersterDurchlauf = true;
+                foreach (var grasPunkt in LinienFolger.Bresenham(
+                    (int)sodeEndpkt.X,
+                    (int)sodeEndpkt.Y,
+                    (int)sodeAnfang.X,
+                    (int)sodeAnfang.Y
+                ))
+                {
+                    grasPunktGenau = new PointF(grasPunkt.X, grasPunkt.Y);
+                    if (ersterDurchlauf)
+                    {
+                        letztesBlatt = sodeEndpkt;
+                        ersterDurchlauf = false;
+                    }
+                    else
+                    {
+                        LevelZeichner.RechneBlattPosition(zeichenFlaeche, random, grasPunktGenau, ref letztesBlatt, ref ueberLappung);
+                    }
                 }
 
                 zeichenFlaeche.DrawPath(Pens.LimeGreen, grafikPfad);
             }
         }
 
+        private static void RechneBlattPosition(Graphics zeichenFlaeche, Random random, PointF grasPunktGenau, ref PointF letztesBlatt, ref PointF ueberLappung)
+        {
+            var abstand = LevelZeichner.Abstand(letztesBlatt, grasPunktGenau);
+            if (abstand < 6)
+            {
+                ueberLappung = grasPunktGenau;
+            }
+            else if (abstand > 8)
+            {
+                LevelZeichner.ZeichneBlatt(
+                    zeichenFlaeche,
+                    random,
+                    grasPunktGenau,
+                    letztesBlatt
+                );
+
+                letztesBlatt = ueberLappung;
+            }
+        }
+
         private static float Abstand(PointF von, PointF bis) => (float)Math.Sqrt(Math.Pow(bis.Y - von.Y, 2) + Math.Pow(bis.X - von.X, 2));
 
-        private static void ZeichneBlatt(Graphics zeichenFlaeche, PointF anfangsPunkt, PointF endPunkt)
+        private static void ZeichneBlatt(Graphics zeichenFlaeche, Random random, PointF anfangsPunkt, PointF endPunkt)
         {
-            zeichenFlaeche.DrawBezier(
-                Pens.YellowGreen,
+            var mittelPunkt = new PointF(
+                anfangsPunkt.X + (endPunkt.X - anfangsPunkt.X) / 2f - 2 + random.Next(4),
+                anfangsPunkt.Y - 11 + random.Next(4)
+            );
+
+            var umrissPfad = new GraphicsPath();
+            umrissPfad.AddLine(anfangsPunkt, endPunkt);
+            umrissPfad.AddBezier(
                 anfangsPunkt.X,
                 anfangsPunkt.Y,
-                200, 50,
-                200, 50,
+                mittelPunkt.X - 2 + random.Next(4),
+                mittelPunkt.Y - 2 + random.Next(4),
+                mittelPunkt.X + 2 - random.Next(4),
+                mittelPunkt.Y - 2 + random.Next(4),
                 endPunkt.X,
                 endPunkt.Y
             );
 
+            umrissPfad.CloseFigure();
+            zeichenFlaeche.FillPath(Brushes.Lime, umrissPfad);
+            zeichenFlaeche.DrawPath(Pens.LimeGreen, umrissPfad);
+
+            /*
             zeichenFlaeche.DrawEllipse(Pens.LightSalmon, anfangsPunkt.X - 2, anfangsPunkt.Y - 2, 4, 4);
-            zeichenFlaeche.DrawEllipse(Pens.LightSalmon, 198, 48, 4, 4);
+            zeichenFlaeche.DrawEllipse(Pens.LightSalmon, mittelPunkt.X - 2, mittelPunkt.Y - 2, 4, 4);
             zeichenFlaeche.DrawEllipse(Pens.LightSalmon, endPunkt.X - 2, endPunkt.Y - 2, 4, 4);
+            */
         }
 
         private static GraphicsPath AlsPfad(Control woBinIch, LevelArchitekturPfad architekturPfad)
