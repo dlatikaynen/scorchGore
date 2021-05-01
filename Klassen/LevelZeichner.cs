@@ -279,27 +279,59 @@ namespace ScorchGore.Klassen
             var grafikPfad = LevelZeichner.AlsPfad(woBinIch, architekturPfad);
             if (grafikPfad.PointCount == 2)
             {
-                foreach(var grasPunkt in LinienFolger.Bresenham(
-                    (int)grafikPfad.PathPoints[0].X,
-                    (int)grafikPfad.PathPoints[0].Y,
-                    (int)grafikPfad.PathPoints[1].X,
-                    (int)grafikPfad.PathPoints[1].Y
+                var sodeAnfang = grafikPfad.PathPoints[0];
+                var sodeEndpkt = grafikPfad.PathPoints[1];
+                var letztesBlatt = PointF.Empty;
+                var ersterDurchlauf = true;
+                foreach (var grasPunkt in LinienFolger.Bresenham(
+                    (int)sodeAnfang.X,
+                    (int)sodeAnfang.Y,
+                    (int)sodeEndpkt.X,
+                    (int)sodeEndpkt.Y
                 ))
                 {
-                    zeichenFlaeche.DrawLine(Pens.OrangeRed, grasPunkt, new Point(grasPunkt.X, grasPunkt.Y + 10));
-                    zeichenFlaeche.DrawBezier(
-                        Pens.YellowGreen,
-                        150,100,
-                        200,150,
-                        200,150,
-                        250,100
-                    );
+                    var grasPunktGenau = new PointF(grasPunkt.X, grasPunkt.Y);
+                    if (ersterDurchlauf)
+                    {
+                        letztesBlatt = sodeAnfang;
+                        ersterDurchlauf = false;
+                    }
+                    else if (LevelZeichner.Abstand(letztesBlatt, grasPunktGenau) > 8)
+                    {
+                        LevelZeichner.ZeichneBlatt(
+                            zeichenFlaeche,
+                            letztesBlatt,
+                            grasPunktGenau
+                        );
 
-                    zeichenFlaeche.DrawEllipse(Pens.LightSalmon, 148, 98, 4, 4);
-                    zeichenFlaeche.DrawEllipse(Pens.LightSalmon, 198, 148, 4, 4);
-                    zeichenFlaeche.DrawEllipse(Pens.LightSalmon, 248, 98, 4, 4);
+                        letztesBlatt = grasPunktGenau;
+                    }
+
+                    zeichenFlaeche.DrawLine(Pens.OrangeRed, grasPunkt, new Point(grasPunkt.X, grasPunkt.Y - 10));
+
                 }
+
+                zeichenFlaeche.DrawPath(Pens.LimeGreen, grafikPfad);
             }
+        }
+
+        private static float Abstand(PointF von, PointF bis) => (float)Math.Sqrt(Math.Pow(bis.Y - von.Y, 2) + Math.Pow(bis.X - von.X, 2));
+
+        private static void ZeichneBlatt(Graphics zeichenFlaeche, PointF anfangsPunkt, PointF endPunkt)
+        {
+            zeichenFlaeche.DrawBezier(
+                Pens.YellowGreen,
+                anfangsPunkt.X,
+                anfangsPunkt.Y,
+                200, 50,
+                200, 50,
+                endPunkt.X,
+                endPunkt.Y
+            );
+
+            zeichenFlaeche.DrawEllipse(Pens.LightSalmon, anfangsPunkt.X - 2, anfangsPunkt.Y - 2, 4, 4);
+            zeichenFlaeche.DrawEllipse(Pens.LightSalmon, 198, 48, 4, 4);
+            zeichenFlaeche.DrawEllipse(Pens.LightSalmon, endPunkt.X - 2, endPunkt.Y - 2, 4, 4);
         }
 
         private static GraphicsPath AlsPfad(Control woBinIch, LevelArchitekturPfad architekturPfad)
