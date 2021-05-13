@@ -24,6 +24,55 @@ namespace ScorchGore.Klassen
         public static int StahlfarbeAlsInt => Farbverwaltung.Stahlfarbe.ToArgb();
         public static Brush Stahlbuerste => new SolidBrush(Farbverwaltung.Stahlfarbe);
 
+        public static Brush GrasBuersteHell => Brushes.Chartreuse;
+        public static Pen GrasStiftHell => Pens.GreenYellow;
+
+        public static Brush GrasBuersteMittel => Brushes.LightGreen;
+        public static Pen GrasStiftMittel => Pens.LawnGreen;
+
+        public static Brush GrasBuersteAlternativ => Brushes.SpringGreen;
+        public static Pen GrasStiftAlternativ => Pens.Lime;
+
+        public static Brush GrasBuersteDunkler => Brushes.ForestGreen;
+        public static Pen GrasStiftDunkler => Pens.LimeGreen;
+
+        public static Brush GrasBuerste(int nullBisDrei)
+        {
+            switch(nullBisDrei)
+            {
+                case 0:
+                    return Farbverwaltung.GrasBuersteHell;
+
+                case 1:
+                    return Farbverwaltung.GrasBuersteDunkler;
+
+                case 2:
+                    return Farbverwaltung.GrasBuersteMittel;
+
+                default:
+                    return Farbverwaltung.GrasBuersteAlternativ;
+            }
+        }
+           
+        public static Pen GrasStift(int nullBisDrei)
+        {
+            switch (nullBisDrei)
+            {
+                case 0:
+                    return Farbverwaltung.GrasStiftHell;
+
+                case 1:
+                    return Farbverwaltung.GrasStiftDunkler;
+
+                case 2:
+                    return Farbverwaltung.GrasStiftMittel;
+
+                default:
+                    return Farbverwaltung.GrasStiftAlternativ;
+            }
+
+        }
+
         public static Brush BuersteVonMedium(Medium vonMedium)
         {
             switch(vonMedium)

@@ -372,8 +372,11 @@ namespace ScorchGore.Klassen
             );
 
             umrissPfad.CloseFigure();
-            zeichenFlaeche.FillPath(Brushes.Lime, umrissPfad);
-            zeichenFlaeche.DrawPath(Pens.LimeGreen, umrissPfad);
+            var grasFarbton = random.Next(4);
+            var grasStift = Farbverwaltung.GrasStift(grasFarbton);
+            var grasBuerste = Farbverwaltung.GrasBuerste(grasFarbton);
+            zeichenFlaeche.FillPath(grasBuerste, umrissPfad);
+            zeichenFlaeche.DrawPath(grasStift, umrissPfad);
 
             /*
             zeichenFlaeche.DrawEllipse(Pens.LightSalmon, anfangsPunkt.X - 2, anfangsPunkt.Y - 2, 4, 4);
