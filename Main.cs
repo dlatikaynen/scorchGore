@@ -692,6 +692,7 @@ namespace ScorchGore
                         break;
 
                     default:
+                        /* standard: resultierender vektor aus schwerkraftrichtung und mündungsrichtung, parabolisch */
                         x = v * Math.Cos(mathWinkel) * t;
                         y = v * Math.Sin(mathWinkel) * t - Main.schwerkraftFaktor * t * t;
                         break;

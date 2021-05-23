@@ -39,6 +39,10 @@ namespace ScorchGore
                 case TrajektorienArt.Spiralenfoermig:
                     trajektorienPrefix = "s";
                     break;
+
+                case TrajektorienArt.Schwarm:
+                    trajektorienPrefix = "sw";
+                    break;
             }
 
             return $"{ trajektorienPrefix }{ this.SchussWinkel },{ this.SchussKraft }";
@@ -58,6 +62,11 @@ namespace ScorchGore
             {
                 this.Trajektorie = TrajektorienArt.SinusDaempfer;
                 winkelText = winkelText.Substring("sd".Length);
+            }
+            else if (winkelText.StartsWith("sw"))
+            {
+                this.Trajektorie = TrajektorienArt.Schwarm;
+                winkelText = winkelText.Substring("sw".Length);
             }
             else
             {
