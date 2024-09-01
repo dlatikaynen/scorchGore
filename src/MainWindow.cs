@@ -1,4 +1,6 @@
 using ScorchGore.Configuration;
+using ScorchGore.Translation;
+using System.Runtime.CompilerServices;
 
 namespace Fso.ScorchGore;
 
@@ -96,6 +98,14 @@ public partial class MainWindow : Form
 
                 break;
         }
+
+        ApplyTranslation(language);
+    }
+
+    private void ApplyTranslation(string lcid)
+    {
+        InstanceSettings.Language = lcid;
+        mnuFile.Text = Translation.µ(1); /* File */
     }
 
     private static void NotGermanEnough()

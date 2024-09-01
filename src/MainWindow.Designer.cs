@@ -35,20 +35,20 @@ partial class MainWindow
         MdiError = new ErrorProvider(components);
         MdiBkg = new System.ComponentModel.BackgroundWorker();
         MainMenu = new MenuStrip();
-        fileToolStripMenuItem = new ToolStripMenuItem();
+        mnuFile = new ToolStripMenuItem();
         newGameToolStripMenuItem = new ToolStripMenuItem();
         practiceOnlineToolStripMenuItem = new ToolStripMenuItem();
         practiceLocalToolStripMenuItem = new ToolStripMenuItem();
         tournamentonlineToolStripMenuItem = new ToolStripMenuItem();
         tournamentLocalToolStripMenuItem = new ToolStripMenuItem();
-        quitToolStripMenuItem = new ToolStripMenuItem();
+        mnuFileQuit = new ToolStripMenuItem();
         mnuView = new ToolStripMenuItem();
         mnuViewSwitchLanguage = new ToolStripMenuItem();
-        mnuViewSwitchLanguageDe = new ToolStripMenuItem();
         mnuViewSwitchLanguageEn = new ToolStripMenuItem();
         mnuViewSwitchLanguageFi = new ToolStripMenuItem();
+        mnuViewSwitchLanguageDe = new ToolStripMenuItem();
         mnuViewSwitchLanguageUa = new ToolStripMenuItem();
-        toolsToolStripMenuItem = new ToolStripMenuItem();
+        mnuTools = new ToolStripMenuItem();
         contributeToolStripMenuItem = new ToolStripMenuItem();
         helpToolStripMenuItem = new ToolStripMenuItem();
         buyFullVersionToolStripMenuItem = new ToolStripMenuItem();
@@ -90,15 +90,15 @@ partial class MainWindow
         // 
         // MainMenu
         // 
-        MainMenu.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, mnuView, toolsToolStripMenuItem, contributeToolStripMenuItem, helpToolStripMenuItem });
+        MainMenu.Items.AddRange(new ToolStripItem[] { mnuFile, mnuView, mnuTools, contributeToolStripMenuItem, helpToolStripMenuItem });
         resources.ApplyResources(MainMenu, "MainMenu");
         MainMenu.Name = "MainMenu";
         // 
-        // fileToolStripMenuItem
+        // mnuFile
         // 
-        fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newGameToolStripMenuItem, quitToolStripMenuItem });
-        fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-        resources.ApplyResources(fileToolStripMenuItem, "fileToolStripMenuItem");
+        mnuFile.DropDownItems.AddRange(new ToolStripItem[] { newGameToolStripMenuItem, mnuFileQuit });
+        mnuFile.Name = "mnuFile";
+        resources.ApplyResources(mnuFile, "mnuFile");
         // 
         // newGameToolStripMenuItem
         // 
@@ -127,11 +127,11 @@ partial class MainWindow
         tournamentLocalToolStripMenuItem.Name = "tournamentLocalToolStripMenuItem";
         resources.ApplyResources(tournamentLocalToolStripMenuItem, "tournamentLocalToolStripMenuItem");
         // 
-        // quitToolStripMenuItem
+        // mnuFileQuit
         // 
-        quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-        resources.ApplyResources(quitToolStripMenuItem, "quitToolStripMenuItem");
-        quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
+        mnuFileQuit.Name = "mnuFileQuit";
+        resources.ApplyResources(mnuFileQuit, "mnuFileQuit");
+        mnuFileQuit.Click += quitToolStripMenuItem_Click;
         // 
         // mnuView
         // 
@@ -141,15 +141,9 @@ partial class MainWindow
         // 
         // mnuViewSwitchLanguage
         // 
-        mnuViewSwitchLanguage.DropDownItems.AddRange(new ToolStripItem[] { mnuViewSwitchLanguageDe, mnuViewSwitchLanguageEn, mnuViewSwitchLanguageFi, mnuViewSwitchLanguageUa });
+        mnuViewSwitchLanguage.DropDownItems.AddRange(new ToolStripItem[] { mnuViewSwitchLanguageEn, mnuViewSwitchLanguageFi, mnuViewSwitchLanguageDe, mnuViewSwitchLanguageUa });
         mnuViewSwitchLanguage.Name = "mnuViewSwitchLanguage";
         resources.ApplyResources(mnuViewSwitchLanguage, "mnuViewSwitchLanguage");
-        // 
-        // mnuViewSwitchLanguageDe
-        // 
-        mnuViewSwitchLanguageDe.Name = "mnuViewSwitchLanguageDe";
-        resources.ApplyResources(mnuViewSwitchLanguageDe, "mnuViewSwitchLanguageDe");
-        mnuViewSwitchLanguageDe.Click += mnuViewSwitchLanguageDe_Click;
         // 
         // mnuViewSwitchLanguageEn
         // 
@@ -163,16 +157,22 @@ partial class MainWindow
         resources.ApplyResources(mnuViewSwitchLanguageFi, "mnuViewSwitchLanguageFi");
         mnuViewSwitchLanguageFi.Click += mnuViewSwitchLanguageFi_Click;
         // 
+        // mnuViewSwitchLanguageDe
+        // 
+        mnuViewSwitchLanguageDe.Name = "mnuViewSwitchLanguageDe";
+        resources.ApplyResources(mnuViewSwitchLanguageDe, "mnuViewSwitchLanguageDe");
+        mnuViewSwitchLanguageDe.Click += mnuViewSwitchLanguageDe_Click;
+        // 
         // mnuViewSwitchLanguageUa
         // 
         mnuViewSwitchLanguageUa.Name = "mnuViewSwitchLanguageUa";
         resources.ApplyResources(mnuViewSwitchLanguageUa, "mnuViewSwitchLanguageUa");
         mnuViewSwitchLanguageUa.Click += mnuViewSwitchLanguageUa_Click;
         // 
-        // toolsToolStripMenuItem
+        // mnuTools
         // 
-        toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-        resources.ApplyResources(toolsToolStripMenuItem, "toolsToolStripMenuItem");
+        mnuTools.Name = "mnuTools";
+        resources.ApplyResources(mnuTools, "mnuTools");
         // 
         // contributeToolStripMenuItem
         // 
@@ -359,11 +359,11 @@ partial class MainWindow
     private ToolStripButton toolStripButton6;
     private MenuStrip MainMenu;
     private ToolStripStatusLabel toolStripStatusLabel3;
-    private ToolStripMenuItem fileToolStripMenuItem;
+    private ToolStripMenuItem mnuFile;
     private ToolStripMenuItem newGameToolStripMenuItem;
-    private ToolStripMenuItem quitToolStripMenuItem;
+    private ToolStripMenuItem mnuFileQuit;
     private ToolStripMenuItem mnuView;
-    private ToolStripMenuItem toolsToolStripMenuItem;
+    private ToolStripMenuItem mnuTools;
     private ToolStripMenuItem contributeToolStripMenuItem;
     private ToolStripMenuItem helpToolStripMenuItem;
     private ToolStripMenuItem practiceOnlineToolStripMenuItem;
