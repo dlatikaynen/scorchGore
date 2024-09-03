@@ -1,4 +1,5 @@
 using ScorchGore.Configuration;
+using ScorchGore.Forms;
 using ScorchGore.Translation;
 using System.Runtime.CompilerServices;
 
@@ -35,9 +36,9 @@ public partial class MainWindow : Form
 
     private void SetLanguageMenuState(string language, bool complainAlready = true)
     {
-        if(complainAlready)
+        if (complainAlready)
         {
-            if(mnuViewSwitchLanguageDe.Checked && language == "de")
+            if (mnuViewSwitchLanguageDe.Checked && language == "de")
             {
                 NotGermanEnough();
 
@@ -59,7 +60,7 @@ public partial class MainWindow : Form
             else if (mnuViewSwitchLanguageUa.Checked && language == "ua")
             {
                 NotUkrainianEnough();
-                
+
                 return;
             }
         }
@@ -126,5 +127,47 @@ public partial class MainWindow : Form
     private static void NotFinnishEnough()
     {
 
+    }
+
+    private void mnuFileNewGamePracticeLocal_Click(object sender, EventArgs e)
+    {
+        var frmGame = new frmGame
+        {
+            MdiParent = this
+        };
+
+        frmGame.Show();
+    }
+
+    private void mnuFileNewGameTournamentOnline_Click(object sender, EventArgs e)
+    {
+        using var frmInitiate = new frmInitiateGame();
+
+        if (frmInitiate.ShowDialog() == DialogResult.OK)
+        {
+            var frmGame = new frmGame
+            {
+                MdiParent = this
+            };
+
+            frmGame.Show();
+            frmGame.Immerse();
+        };
+    }
+
+    private void joinGameToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        using var frmJoin = new frmJoinGame();
+
+        if (frmJoin.ShowDialog() == DialogResult.OK)
+        {
+            var frmGame = new frmGame
+            {
+                MdiParent = this
+            };
+
+            frmGame.Show();
+            frmGame.Immerse();
+        }
     }
 }
