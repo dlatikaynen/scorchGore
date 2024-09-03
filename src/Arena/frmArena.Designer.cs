@@ -29,15 +29,26 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmArena));
+            pnlViewport = new Panel();
             SuspendLayout();
+            // 
+            // pnlViewport
+            // 
+            pnlViewport.BorderStyle = BorderStyle.Fixed3D;
+            resources.ApplyResources(pnlViewport, "pnlViewport");
+            pnlViewport.Name = "pnlViewport";
+            pnlViewport.Paint += pnlViewport_Paint;
             // 
             // frmArena
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = SystemColors.Window;
+            BackgroundImage = Properties.Resources.penrose_nontiling;
+            Controls.Add(pnlViewport);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
+            KeyPreview = true;
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
@@ -47,9 +58,13 @@
             SizeGripStyle = SizeGripStyle.Hide;
             TopMost = true;
             WindowState = FormWindowState.Maximized;
+            Load += frmArena_Load;
+            KeyDown += frmArena_KeyDown;
             ResumeLayout(false);
         }
 
         #endregion
+
+        private Panel pnlViewport;
     }
 }

@@ -59,5 +59,15 @@ namespace ScorchGore.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap penrose_nontiling {
+            get {
+                object obj = ResourceManager.GetObject("penrose_nontiling", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
