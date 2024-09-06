@@ -1,0 +1,74 @@
+﻿how do players find each other?
+
+The principle is unguessable guid files, which contain information
+that exists only on local PCs of each, and they tell each other by
+exchanging a join token.
+
+To simulate locally, the ordinal of scorchgore.exe processes
+(the how manieth instance am I) is made a part of the device-binding
+hash.
+
+The initiating player invents a hash, stores it as a file name,
+which at the same time contains the name and the game, and pushes it to the server.
+and tells it to the joining player by means of any communication medium.
+
+Players cannot join their own invitation simply by checking if the file is
+already on their local storage when they enter the token into the "Join" box.
+
+Only the invited player is able to find that file since she will have the hash.
+When she finds it she notes it down in their local settings directory.
+
+The initiating player polls the remote file (handshake file) until
+their peer have written their reciprocal one-off token into it.
+
+The way how this is done is that every players turn works as follows:
+they know the watermark, poll for one higher, and when it appears read it,
+add its content to the collective game description file, delete it, and then
+place their own next move.
+
+This protocol is the most ingenious online gaming protocol ever invented,
+and this is best illustrated by the following sequence (files and content):
+
+
+Games are resumed by delayless replay of a whole-ass level history file.
+
+-1----------------------------------------------------------------------
+invitingplayertoken.ligma
+HELO dlatikay
+------------------------------------------------------------------------
+
+1 knows to wait for .1 since they are aware that they just initiated.
+
+-2----------------------------------------------------------------------
+invitingplayertoken.ligma
+HELO dlatikay
+invitingplayertoken.1.ligma
+OHAI pommesfritz
+------------------------------------------------------------------------
+
+now the inviter knows that the invitee has joined since the file with
+the next expected number has appeared. it is always a ping-pong, with the
+one player always writing even numbers and the other one always writing
+odd numbers!
+The polling-and-receiving player then reads the content, interprets it,
+adds it to the main ligma, and places their next file, as follows:
+
+-3-----------------------------------------------------------------------
+invitingplayertoken.ligma
+HELO dlatikay
+OHAI pommesfritz
+invitingplayertoken.2.ligma
+ENTER WORLD 1 LEVEL 1 WITH SCISSORS dlatikay
+-------------------------------------------------------------------------
+
+so they can play now. the starting player is determined by SSP.
+
+-4-----------------------------------------------------------------------
+invitingplayertoken.ligma
+HELO dlatikay
+OHAI pommesfritz
+ENTER WORLD 1 LEVEL 1 WITH SCISSORS dlatikay
+invitingplayertoken.3.ligma
+I HAD STONE pommesfritz
+c60 60 FIRE pommesfritz
+-------------------------------------------------------------------------

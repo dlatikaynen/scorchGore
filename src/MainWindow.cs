@@ -1,7 +1,6 @@
 using ScorchGore.Configuration;
 using ScorchGore.Forms;
 using ScorchGore.Translation;
-using System.Runtime.CompilerServices;
 
 namespace Fso.ScorchGore;
 
@@ -15,6 +14,19 @@ public partial class MainWindow : Form
     public bool Prepare()
     {
         SetLanguageMenuState(InstanceSettings.Language, complainAlready: false);
+
+        var sharewarePart = InstanceSettings.Edition == "S"
+            ? $" | {Translation.µ(2).ToUpper()}" // SHAREWARE EDITION
+            : string.Empty;
+
+        if (Program.WhichInstanceAmI > 1)
+        {
+            Text = $"{Translation.µ(3)} (#{Program.WhichInstanceAmI}){sharewarePart}"; // scorchgore
+        }
+        else
+        {
+            Text = $"{Translation.µ(3)}{sharewarePart}"; // scorchgore
+        }
 
         return true;
     }

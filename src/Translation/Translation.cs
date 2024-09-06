@@ -18,6 +18,13 @@ internal static class Translation
             { "en", "Shareware Edition" },
             { "fi", "Shareware painos" },
             { "ua", "шервер версія" }
+        } },
+        { 3, new()
+        {
+            { "de", "s·c·o·r·c·h·↑·g·o·r·e" },
+            { "en", "s·c·o·r·c·h·↑·g·o·r·e" },
+            { "fi", "s·c·o·r·c·h·↑·g·o·r·e" },
+            { "ua", "s·c·o·r·c·h·↑·g·o·r·e" }
         } }
     };
   

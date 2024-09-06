@@ -1,4 +1,5 @@
-﻿using ScorchGore.Constants;
+﻿using Fso.ScorchGore;
+using ScorchGore.Constants;
 using System.Management;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
@@ -106,6 +107,7 @@ internal class InstanceConfiguration
             appData,
             InfrastructureConstants.ManufacturerName,
             Assembly.GetExecutingAssembly()!.GetName().Name!,
+            InstanceId().ToString("D"),
             InfrastructureConstants.InstanceConfigFile
         );
     }
@@ -161,7 +163,7 @@ internal class InstanceConfiguration
             motherBoard = (string)mo["SerialNumber"];
         }
 
-        _instanceId = new Guid(MD5.HashData(Encoding.ASCII.GetBytes($"{id}::{motherBoard}")));
+        _instanceId = new Guid(MD5.HashData(Encoding.ASCII.GetBytes($"{id}::#{Program.WhichInstanceAmI}@{motherBoard}")));
 
         return _instanceId.Value;
     }
