@@ -1,11 +1,16 @@
 ﻿using ScorchGore.Arena;
+using ScorchGore.GameSession;
 
 namespace ScorchGore.Forms;
 
 public partial class frmGame : Form
 {
-    public frmGame()
+    private readonly GoreSession _session;
+
+    public frmGame(GoreSession session)
     {
+        _session = session;
+
         InitializeComponent();
     }
 

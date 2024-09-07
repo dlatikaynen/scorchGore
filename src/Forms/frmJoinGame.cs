@@ -1,7 +1,11 @@
-﻿namespace ScorchGore.Forms;
+﻿using ScorchGore.GameSession;
+
+namespace ScorchGore.Forms;
 
 public partial class frmJoinGame : Form
 {
+    public GoreSession JoinedSession = new();
+
     public frmJoinGame()
     {
         InitializeComponent();
@@ -39,11 +43,18 @@ public partial class frmJoinGame : Form
             txtToken.ReadOnly = true;
             btnPaste.Enabled = false;
             pgbWaitJoin.Enabled = true;
-
-            // initiate
-            DialogResult = DialogResult.OK;
-            Close();
-
+            pgbWaitJoin.Style = ProgressBarStyle.Marquee;
+            ThreadPool.QueueUserWorkItem((_) =>
+            {
+                if (JoinedSession.Join(token))
+                {
+                    Invoke(() =>
+                    {
+                        DialogResult = DialogResult.OK;
+                        Close();
+                    });
+                }
+            });
         }
     }
 }

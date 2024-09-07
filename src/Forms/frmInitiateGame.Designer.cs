@@ -59,6 +59,7 @@
             // 
             // btnCopy
             // 
+            btnCopy.Enabled = false;
             btnCopy.Location = new Point(12, 54);
             btnCopy.Name = "btnCopy";
             btnCopy.Size = new Size(90, 25);
@@ -96,9 +97,8 @@
             pgbWaitJoin.RightToLeft = RightToLeft.Yes;
             pgbWaitJoin.RightToLeftLayout = true;
             pgbWaitJoin.Size = new Size(292, 67);
-            pgbWaitJoin.Style = ProgressBarStyle.Marquee;
+            pgbWaitJoin.Style = ProgressBarStyle.Continuous;
             pgbWaitJoin.TabIndex = 6;
-            pgbWaitJoin.Value = 10;
             // 
             // frmInitiateGame
             // 
@@ -120,6 +120,7 @@
             ShowInTaskbar = false;
             SizeGripStyle = SizeGripStyle.Hide;
             Text = "Initiate a new online game";
+            Activated += frmInitiateGame_Activated;
             ResumeLayout(false);
             PerformLayout();
         }

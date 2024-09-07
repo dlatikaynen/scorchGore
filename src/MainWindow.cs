@@ -1,6 +1,7 @@
 using ScorchGore.Configuration;
 using ScorchGore.Forms;
 using ScorchGore.Translation;
+using System.Runtime.CompilerServices;
 
 namespace Fso.ScorchGore;
 
@@ -123,27 +124,35 @@ public partial class MainWindow : Form
 
     private static void NotGermanEnough()
     {
+        using var alreadyGerman = new frmAlreadyGerman();
 
+        alreadyGerman.ShowDialog();
     }
 
     private static void NotEnglishEnough()
     {
+        using var alreadyBritish = new frmAlreadyEnglish();
 
+        alreadyBritish.ShowDialog();
     }
 
     private static void NotUkrainianEnough()
     {
+        using var alreadyUkrainian = new frmAlreadyUkrainian();
 
+        alreadyUkrainian.ShowDialog();
     }
 
     private static void NotFinnishEnough()
     {
+        using var alreadyFinnish = new frmAlreadyFinnish();
 
+        alreadyFinnish.ShowDialog();
     }
 
     private void mnuFileNewGamePracticeLocal_Click(object sender, EventArgs e)
     {
-        var frmGame = new frmGame
+        var frmGame = new frmGame(new())
         {
             MdiParent = this
         };
@@ -157,7 +166,7 @@ public partial class MainWindow : Form
 
         if (frmInitiate.ShowDialog() == DialogResult.OK)
         {
-            var frmGame = new frmGame
+            var frmGame = new frmGame(frmInitiate.NewGame)
             {
                 MdiParent = this
             };
@@ -173,7 +182,7 @@ public partial class MainWindow : Form
 
         if (frmJoin.ShowDialog() == DialogResult.OK)
         {
-            var frmGame = new frmGame
+            var frmGame = new frmGame(frmJoin.JoinedSession)
             {
                 MdiParent = this
             };

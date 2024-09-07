@@ -1,8 +1,8 @@
 ﻿using Fso.ScorchGore;
 using ScorchGore.Constants;
+using System.Diagnostics;
 using System.Management;
 using System.Reflection;
-using System.Runtime.ExceptionServices;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -13,6 +13,33 @@ internal class InstanceConfiguration
     private static readonly char[] signature = [(char)4, 'L', 'S', 'L', (char)3, 'J', 'M', 'L', (char)5, '$', 'c', 'g'];
     private static Guid? _instanceId;
     private static int _retries = 0;
+
+    internal static bool IsRunningOnLocalWebserver
+    {
+        get
+        {
+#if DEBUG
+            if (Debugger.IsAttached)
+            {
+                return true;
+            }
+#endif
+            return false;
+        }
+    }
+
+    internal static string ApiUrl
+    {
+        get
+        {
+            if(IsRunningOnLocalWebserver)
+            {
+                return "http://scorchgore.localhost";
+            }
+
+            return "https://en-software.com/scorchgore/mmorpg";
+        }
+    }
 
     internal static void Read()
     {
@@ -99,15 +126,25 @@ internal class InstanceConfiguration
         instanceConfigFile.Dispose();
     }
 
+    public static string LocalDataPath
+    {
+        get
+        {
+            var appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+            return Path.Combine(
+                appData,
+                InfrastructureConstants.ManufacturerName,
+                Assembly.GetExecutingAssembly()!.GetName().Name!,
+                InstanceId().ToString("D")
+            );
+        }
+    }
+
     private static string FullPath()
     {
-        var appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-
         return Path.Combine(
-            appData,
-            InfrastructureConstants.ManufacturerName,
-            Assembly.GetExecutingAssembly()!.GetName().Name!,
-            InstanceId().ToString("D"),
+            LocalDataPath,
             InfrastructureConstants.InstanceConfigFile
         );
     }

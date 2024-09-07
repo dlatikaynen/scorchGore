@@ -96,9 +96,8 @@
             pgbWaitJoin.RightToLeft = RightToLeft.Yes;
             pgbWaitJoin.RightToLeftLayout = true;
             pgbWaitJoin.Size = new Size(292, 67);
-            pgbWaitJoin.Style = ProgressBarStyle.Marquee;
+            pgbWaitJoin.Style = ProgressBarStyle.Continuous;
             pgbWaitJoin.TabIndex = 6;
-            pgbWaitJoin.Value = 10;
             // 
             // frmJoinGame
             // 
