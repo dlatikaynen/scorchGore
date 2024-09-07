@@ -1,4 +1,5 @@
-﻿using ScorchGore.GameSession;
+﻿using ScorchGore.Constants;
+using ScorchGore.GameSession;
 
 namespace ScorchGore.Forms;
 
@@ -23,6 +24,25 @@ public partial class frmInitiateGame : Form
 
     private void InitiateNow()
     {
+        var mySsp = SSP.None;
+
+        if (optPaper.Checked)
+        {
+            mySsp = SSP.Paper;
+        }
+        else if (optScissors.Checked)
+        {
+            mySsp = SSP.Scissors;
+        }
+        else if (optStone.Checked)
+        {
+            mySsp = SSP.Stone;
+        }
+        else if (optWell.Checked)
+        {
+            mySsp = SSP.Well;
+        }
+
         optPaper.Enabled = false;
         optScissors.Enabled = false;
         optStone.Enabled = false;
@@ -43,7 +63,7 @@ public partial class frmInitiateGame : Form
                 do
                 {
                     Thread.Sleep(333);
-                    if(NewGame.HasPeerJoined())
+                    if(NewGame.HasPeerJoined(mySsp))
                     {
                         Invoke(() =>
                         {

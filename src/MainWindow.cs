@@ -122,32 +122,32 @@ public partial class MainWindow : Form
         mnuFile.Text = Translation.µ(1); /* File */
     }
 
-    private static void NotGermanEnough()
+    private void NotGermanEnough()
     {
         using var alreadyGerman = new frmAlreadyGerman();
 
-        alreadyGerman.ShowDialog();
+        alreadyGerman.ShowDialog(this);
     }
 
-    private static void NotEnglishEnough()
+    private void NotEnglishEnough()
     {
         using var alreadyBritish = new frmAlreadyEnglish();
 
-        alreadyBritish.ShowDialog();
+        alreadyBritish.ShowDialog(this);
     }
 
-    private static void NotUkrainianEnough()
+    private void NotUkrainianEnough()
     {
         using var alreadyUkrainian = new frmAlreadyUkrainian();
 
-        alreadyUkrainian.ShowDialog();
+        alreadyUkrainian.ShowDialog(this);
     }
 
-    private static void NotFinnishEnough()
+    private void NotFinnishEnough()
     {
         using var alreadyFinnish = new frmAlreadyFinnish();
 
-        alreadyFinnish.ShowDialog();
+        alreadyFinnish.ShowDialog(this);
     }
 
     private void mnuFileNewGamePracticeLocal_Click(object sender, EventArgs e)
@@ -157,27 +157,26 @@ public partial class MainWindow : Form
             MdiParent = this
         };
 
-        frmGame.Show();
+        frmGame.Show(this);
     }
 
     private void mnuFileNewGameTournamentOnline_Click(object sender, EventArgs e)
     {
-        if (!EnsurePlayername())
+        if (!EnsurePlayername(this))
         {
             return;
         }
 
         using var frmInitiate = new frmInitiateGame();
 
-        if (frmInitiate.ShowDialog() == DialogResult.OK)
+        if (frmInitiate.ShowDialog(this) == DialogResult.OK)
         {
             var frmGame = new frmGame(frmInitiate.NewGame)
             {
                 MdiParent = this
             };
 
-            frmGame.Show();
-            frmGame.Immerse();
+            frmGame.DoSomething();
         };
     }
 
@@ -185,15 +184,14 @@ public partial class MainWindow : Form
     {
         using var frmJoin = new frmJoinGame();
 
-        if (frmJoin.ShowDialog() == DialogResult.OK)
+        if (frmJoin.ShowDialog(this) == DialogResult.OK)
         {
             var frmGame = new frmGame(frmJoin.JoinedSession)
             {
                 MdiParent = this
             };
 
-            frmGame.Show();
-            frmGame.Immerse();
+            frmGame.DoSomething();
         }
     }
 
@@ -201,19 +199,19 @@ public partial class MainWindow : Form
     {
         using var playerProfile = new frmEditPlayerProfile();
 
-        if (playerProfile.ShowDialog() == DialogResult.OK)
+        if (playerProfile.ShowDialog(this) == DialogResult.OK)
         {
 
         }
     }
 
-    private static bool EnsurePlayername()
+    private static bool EnsurePlayername(Form owner)
     {
         if (string.IsNullOrWhiteSpace(InstanceSettings.PlayerName))
         {
             using var namePlayer = new frmEditPlayerProfile();
 
-            return namePlayer.ShowDialog() == DialogResult.OK;
+            return namePlayer.ShowDialog(owner) == DialogResult.OK;
         }
 
         return true;

@@ -126,7 +126,7 @@ internal class InstanceConfiguration
         instanceConfigFile.Dispose();
     }
 
-    public static string LocalDataPath
+    public static string LocalSharedDataPath
     {
         get
         {
@@ -135,7 +135,17 @@ internal class InstanceConfiguration
             return Path.Combine(
                 appData,
                 InfrastructureConstants.ManufacturerName,
-                Assembly.GetExecutingAssembly()!.GetName().Name!,
+                Assembly.GetExecutingAssembly()!.GetName().Name!
+            );
+        }
+    }
+
+    private static string LocalInstanceDataPath
+    {
+        get
+        {
+            return Path.Combine(
+                LocalSharedDataPath,
                 InstanceId().ToString("D")
             );
         }
@@ -144,7 +154,7 @@ internal class InstanceConfiguration
     private static string FullPath()
     {
         return Path.Combine(
-            LocalDataPath,
+            LocalInstanceDataPath,
             InfrastructureConstants.InstanceConfigFile
         );
     }

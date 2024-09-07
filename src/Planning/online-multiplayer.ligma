@@ -84,7 +84,7 @@ B peer-odd                 | A initiator-even
 --------------------------------------------------------
                            | SATTELT DIE HÜHNER
                            | HELO A
-1 EHLO B                   |
+1 OHAI B                   |
   I HAVE SCISSORS          |
                            | 2 I HAD SCISSORS FIRST
                            |   CANVAS_THE_TOWN_BRUSH_THE_BACKDROP
@@ -92,13 +92,13 @@ B peer-odd                 | A initiator-even
 3 c75 72 FIRE IN THE HOLE  |
 
 
-WHen B initiates and loses the SSP to B
+WHen B initiates and loses the SSP to A
 
 B initiator-even           | A peer-odd
 --------------------------------------------------------
 SATTELT DIE HÜHNER         |
 HELO B                     |
-                           | 1 EHLO A
+                           | 1 OHAI A
                            |   I HAVE PAPER
 2 I HAD STONE              |
   CANVAS_THE_TOWN_BRUSH_TH |

@@ -6,6 +6,9 @@ public partial class frmJoinGame : Form
 {
     public GoreSession JoinedSession = new();
 
+    private bool cancelRequested = false;
+    private bool cancelAcknowledged = true;
+
     public frmJoinGame()
     {
         InitializeComponent();
@@ -22,6 +25,14 @@ public partial class frmJoinGame : Form
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
+        cancelRequested = true;
+        while(!cancelAcknowledged)
+        {
+            Thread.Sleep(333);
+        }
+
+        pgbWaitJoin.Style = ProgressBarStyle.Continuous;
+        cancelRequested = false;
         if (txtToken.ReadOnly)
         {
             txtToken.Clear();
@@ -44,16 +55,26 @@ public partial class frmJoinGame : Form
             btnPaste.Enabled = false;
             pgbWaitJoin.Enabled = true;
             pgbWaitJoin.Style = ProgressBarStyle.Marquee;
+            cancelAcknowledged = false;
             ThreadPool.QueueUserWorkItem((_) =>
             {
-                if (JoinedSession.Join(token))
+                do
                 {
-                    Invoke(() =>
+                    if (JoinedSession.Join(token))
                     {
-                        DialogResult = DialogResult.OK;
-                        Close();
-                    });
-                }
+                        Invoke(() =>
+                        {
+                            DialogResult = DialogResult.OK;
+                            Close();
+                        });
+
+                        break;
+                    }
+
+                    Thread.Sleep(333);
+                } while (!cancelRequested);
+
+                cancelAcknowledged = true;
             });
         }
     }

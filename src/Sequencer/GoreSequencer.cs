@@ -1,5 +1,6 @@
 ﻿using ScorchGore.Configuration;
 using ScorchGore.GameSession;
+using System.IO;
 
 namespace ScorchGore.Sequencer;
 
@@ -9,6 +10,30 @@ public class GoreSequencer(GoreSession session, bool isLocal)
     public bool IsLocal => isLocal;
 
     public Queue<SequencerCommand> CommandQueue = new();
+    public List<SequencerCommand> ProcessedCommands = [];
+
+    public SequencerCommand ConsumeOne()
+    {
+        var consumed = CommandQueue.Dequeue();
+
+        ProcessedCommands.Add(consumed);
+
+        return consumed;
+    }
+
+    public List<SequencerCommand> ConsumeToEnd()
+    {
+        var consumed = new List<SequencerCommand>();
+
+        while (CommandQueue.TryDequeue(out var item))
+        {
+            consumed.Add(item);
+        }
+
+        ProcessedCommands.AddRange(consumed);
+
+        return consumed;
+    }
 
     public bool MyTurnPushCommand(List<SequencerCommand> commands)
     {
@@ -50,15 +75,88 @@ public class GoreSequencer(GoreSession session, bool isLocal)
     /// </summary>
     public bool PollPopPeerAction()
     {
+        if (Session.AmITheInitiatorEven)
+        {
+            /* read the other's stuff only, which is odd (the stuff, not reading it) */
+            var head = Session.Watermark;
 
+            if (head == 0 || int.IsEvenInteger(head))
+            {
+                ++head;
+            }
 
-        return true;
+            return PendingEventsToQueue(head);
+        }
+        else if (Session.AmIThePeerOdd)
+        {
+            /* read the other's stuff only, which is even, and includes the original file */
+            if(Session.Watermark == 0)
+            {
+                return PendingEventsToQueue(0);
+            }
+            else
+            {
+                var start = Session.Watermark;
+                
+                if(int.IsOddInteger(start))
+                {
+                    ++start;
+                }
+
+                return PendingEventsToQueue(start);
+            }
+        }
+
+        return false;
+    }
+
+    private bool PendingEventsToQueue(int queuePosition)
+    {
+        var anyItems = false;
+        var expectedFile = Path.Combine(
+            InstanceConfiguration.LocalSharedDataPath,
+            LocalGameFileTurnName(queuePosition)
+        );
+
+        if (File.Exists(expectedFile))
+        {
+            var lines = File.ReadLines(expectedFile);
+
+            foreach (var line in lines)
+            {
+                CommandQueue.Enqueue(SequencerCommand.FromLine(line));
+                anyItems = true;
+            }
+
+            if (queuePosition > Session.Watermark)
+            {
+                Session.Watermark = queuePosition;
+            }
+
+            if (queuePosition != 0)
+            {
+                var localGameFile = Path.Combine(
+                    InstanceConfiguration.LocalSharedDataPath,
+                    LocalGameFileName
+                );
+
+                File.AppendAllLines(localGameFile, lines);
+                File.Delete(expectedFile);
+            }
+        }
+
+        return anyItems;
     }
 
     private string LocalGameFileName => $"{Session.GameToken}.sugma";
 
     private string LocalGameFileTurnName(int turn)
     {
+        if(turn == 0)
+        {
+            return LocalGameFileName;
+        }
+
         return $"{Session.GameToken}.{turn}.bofa";
     }
 
@@ -66,7 +164,7 @@ public class GoreSequencer(GoreSession session, bool isLocal)
     {
         if(IsLocal)
         {
-            var fileName = Path.Combine(InstanceConfiguration.LocalDataPath, LocalGameFileName);
+            var fileName = Path.Combine(InstanceConfiguration.LocalSharedDataPath, LocalGameFileName);
 
             if(mustExist)
             {
@@ -88,20 +186,57 @@ public class GoreSequencer(GoreSession session, bool isLocal)
             // TODO:
         }
 
+        ProcessedCommands.AddRange(commands);
+
         return true;
     }
 
     private bool PushNewTurnFile(int turn, List<SequencerCommand> commands)
     {
-        var fileName = Path.Combine(InstanceConfiguration.LocalDataPath, LocalGameFileTurnName(turn));
+        var fileName = Path.Combine(
+            InstanceConfiguration.LocalSharedDataPath,
+            LocalGameFileTurnName(turn)
+        );
 
         File.WriteAllLines(fileName, commands.Select(c => c.ToString()));
+        ProcessedCommands.AddRange(commands);
 
         return true;
     }
 
     internal bool TryJoin()
     {
-        return PollPopPeerAction();
+        if (Session.AmITheInitiatorEven)
+        {
+            throw new ArgumentOutOfRangeException(nameof(Session.AmITheInitiatorEven), Session.AmITheInitiatorEven, "Initiator cannot join their own game as the peer");
+        }
+
+        if(Session.Watermark != 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(Session.Watermark), Session.Watermark, "Peer cannot join a game from the start when the game is already on");
+        }
+
+        if (PollPopPeerAction())
+        {
+            if(CommandQueue.TryPeek(out var command))
+            {
+                if (command.Command == SequencerCommands.SATTELT_DIE_HUEHNER_WIR_REITEN_INS_GEBIRGE)
+                {
+                    ConsumeToEnd();
+                    if (PushNewTurnFile(Session.Watermark + 1,
+                    [
+                        new() { Command=SequencerCommands.OHAI, Arguments = InstanceSettings.PlayerName },
+                        new() { Command=SequencerCommands.I_HAVE_STONE } // TODO
+                    ]))
+                    {
+                        ++Session.Watermark;
+
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
