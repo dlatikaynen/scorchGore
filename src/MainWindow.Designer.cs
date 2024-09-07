@@ -41,7 +41,7 @@ partial class MainWindow
         mnuFileNewGamePracticeLocal = new ToolStripMenuItem();
         mnuFileNewGameTournamentOnline = new ToolStripMenuItem();
         tournamentLocalToolStripMenuItem = new ToolStripMenuItem();
-        joinGameToolStripMenuItem = new ToolStripMenuItem();
+        mnuFileJoinGame = new ToolStripMenuItem();
         toolStripMenuItem5 = new ToolStripSeparator();
         mnuFileQuit = new ToolStripMenuItem();
         mnuView = new ToolStripMenuItem();
@@ -52,6 +52,7 @@ partial class MainWindow
         mnuViewSwitchLanguageUa = new ToolStripMenuItem();
         mnuTools = new ToolStripMenuItem();
         contributeToolStripMenuItem = new ToolStripMenuItem();
+        mnuCommunityEditPlayerProfile = new ToolStripMenuItem();
         mnuWindow = new ToolStripMenuItem();
         closeToolStripMenuItem = new ToolStripMenuItem();
         arrangeToolStripMenuItem = new ToolStripMenuItem();
@@ -67,9 +68,9 @@ partial class MainWindow
         toolStripMenuItem1 = new ToolStripSeparator();
         aboutToolStripMenuItem = new ToolStripMenuItem();
         MainToolbar = new ToolStrip();
-        toolStripButton1 = new ToolStripButton();
-        toolStripButton2 = new ToolStripButton();
-        toolStripButton3 = new ToolStripButton();
+        tbbInitiate = new ToolStripButton();
+        tbbJoin = new ToolStripButton();
+        ttbEditPlayerProfile = new ToolStripButton();
         toolStripSeparator1 = new ToolStripSeparator();
         toolStripButton4 = new ToolStripButton();
         toolStripButton5 = new ToolStripButton();
@@ -104,7 +105,7 @@ partial class MainWindow
         // 
         // mnuFile
         // 
-        mnuFile.DropDownItems.AddRange(new ToolStripItem[] { newGameToolStripMenuItem, joinGameToolStripMenuItem, toolStripMenuItem5, mnuFileQuit });
+        mnuFile.DropDownItems.AddRange(new ToolStripItem[] { newGameToolStripMenuItem, mnuFileJoinGame, toolStripMenuItem5, mnuFileQuit });
         mnuFile.Name = "mnuFile";
         resources.ApplyResources(mnuFile, "mnuFile");
         // 
@@ -137,11 +138,11 @@ partial class MainWindow
         tournamentLocalToolStripMenuItem.Name = "tournamentLocalToolStripMenuItem";
         resources.ApplyResources(tournamentLocalToolStripMenuItem, "tournamentLocalToolStripMenuItem");
         // 
-        // joinGameToolStripMenuItem
+        // mnuFileJoinGame
         // 
-        joinGameToolStripMenuItem.Name = "joinGameToolStripMenuItem";
-        resources.ApplyResources(joinGameToolStripMenuItem, "joinGameToolStripMenuItem");
-        joinGameToolStripMenuItem.Click += joinGameToolStripMenuItem_Click;
+        mnuFileJoinGame.Name = "mnuFileJoinGame";
+        resources.ApplyResources(mnuFileJoinGame, "mnuFileJoinGame");
+        mnuFileJoinGame.Click += mnuFileJoinGame_Click;
         // 
         // toolStripMenuItem5
         // 
@@ -197,8 +198,15 @@ partial class MainWindow
         // 
         // contributeToolStripMenuItem
         // 
+        contributeToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuCommunityEditPlayerProfile });
         contributeToolStripMenuItem.Name = "contributeToolStripMenuItem";
         resources.ApplyResources(contributeToolStripMenuItem, "contributeToolStripMenuItem");
+        // 
+        // mnuCommunityEditPlayerProfile
+        // 
+        mnuCommunityEditPlayerProfile.Name = "mnuCommunityEditPlayerProfile";
+        resources.ApplyResources(mnuCommunityEditPlayerProfile, "mnuCommunityEditPlayerProfile");
+        mnuCommunityEditPlayerProfile.Click += mnuCommunityEditPlayerProfile_Click;
         // 
         // mnuWindow
         // 
@@ -275,27 +283,30 @@ partial class MainWindow
         // 
         // MainToolbar
         // 
-        MainToolbar.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3, toolStripSeparator1, toolStripButton4, toolStripButton5, toolStripButton6 });
+        MainToolbar.Items.AddRange(new ToolStripItem[] { tbbInitiate, tbbJoin, ttbEditPlayerProfile, toolStripSeparator1, toolStripButton4, toolStripButton5, toolStripButton6 });
         resources.ApplyResources(MainToolbar, "MainToolbar");
         MainToolbar.Name = "MainToolbar";
         // 
-        // toolStripButton1
+        // tbbInitiate
         // 
-        toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(toolStripButton1, "toolStripButton1");
-        toolStripButton1.Name = "toolStripButton1";
+        tbbInitiate.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(tbbInitiate, "tbbInitiate");
+        tbbInitiate.Name = "tbbInitiate";
+        tbbInitiate.Click += tbbInitiate_Click;
         // 
-        // toolStripButton2
+        // tbbJoin
         // 
-        toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(toolStripButton2, "toolStripButton2");
-        toolStripButton2.Name = "toolStripButton2";
+        tbbJoin.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(tbbJoin, "tbbJoin");
+        tbbJoin.Name = "tbbJoin";
+        tbbJoin.Click += tbbJoin_Click;
         // 
-        // toolStripButton3
+        // ttbEditPlayerProfile
         // 
-        toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(toolStripButton3, "toolStripButton3");
-        toolStripButton3.Name = "toolStripButton3";
+        ttbEditPlayerProfile.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(ttbEditPlayerProfile, "ttbEditPlayerProfile");
+        ttbEditPlayerProfile.Name = "ttbEditPlayerProfile";
+        ttbEditPlayerProfile.Click += ttbEditPlayerProfile_Click;
         // 
         // toolStripSeparator1
         // 
@@ -398,9 +409,9 @@ partial class MainWindow
     private ToolStripStatusLabel toolStripStatusLabel2;
     private ToolStripProgressBar toolStripProgressBar1;
     private ToolStrip MainToolbar;
-    private ToolStripButton toolStripButton1;
-    private ToolStripButton toolStripButton2;
-    private ToolStripButton toolStripButton3;
+    private ToolStripButton tbbInitiate;
+    private ToolStripButton tbbJoin;
+    private ToolStripButton ttbEditPlayerProfile;
     private ToolStripSeparator toolStripSeparator1;
     private ToolStripButton toolStripButton4;
     private ToolStripButton toolStripButton5;
@@ -437,6 +448,7 @@ partial class MainWindow
     private ToolStripMenuItem arrangeToolStripMenuItem;
     private ToolStripMenuItem minimizeAllToolStripMenuItem;
     private ToolStripSeparator toolStripMenuItem4;
-    private ToolStripMenuItem joinGameToolStripMenuItem;
+    private ToolStripMenuItem mnuFileJoinGame;
     private ToolStripSeparator toolStripMenuItem5;
+    private ToolStripMenuItem mnuCommunityEditPlayerProfile;
 }

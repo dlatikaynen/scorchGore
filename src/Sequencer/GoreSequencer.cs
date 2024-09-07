@@ -10,17 +10,18 @@ public class GoreSequencer(GoreSession session, bool isLocal)
 
     public Queue<SequencerCommand> CommandQueue = new();
 
-    public bool MyTurnPushCommand(SequencerCommand command)
+    public bool MyTurnPushCommand(List<SequencerCommand> commands)
     {
         if (session.AmITheInitiatorEven && session.Watermark == 0)
         {
-            if(command.Command != SequencerCommands.SATTELT_DIE_HUEHNER_WIR_REITEN_INS_GEBIRGE)
+            var firstCommand = commands.First();
+            if(firstCommand.Command != SequencerCommands.SATTELT_DIE_HUEHNER_WIR_REITEN_INS_GEBIRGE)
             {
-                throw new ArgumentOutOfRangeException(nameof(command.Command), command.Command, $"First turn can only be {SequencerCommands.SATTELT_DIE_HUEHNER_WIR_REITEN_INS_GEBIRGE}");
+                throw new ArgumentOutOfRangeException(nameof(SequencerCommand.Command), firstCommand.Command, $"First turn can only be {SequencerCommands.SATTELT_DIE_HUEHNER_WIR_REITEN_INS_GEBIRGE}");
             }
 
             /* new game starts, we write the file for the first time */
-            return AppendCommandToGameFile(command, false);
+            return AppendCommandsToGameFile(commands, false);
         }
 
         if(session.AmITheInitiatorEven && int.IsEvenInteger(session.Watermark))
@@ -32,7 +33,7 @@ public class GoreSequencer(GoreSession session, bool isLocal)
             throw new ArgumentOutOfRangeException(nameof(session.Watermark), session.Watermark, nameof(session.AmIThePeerOdd));
         }
 
-        if (PushNewTurnFile(Session.Watermark + 1, command))
+        if (PushNewTurnFile(Session.Watermark + 1, commands))
         {
             ++session.Watermark;
 
@@ -47,7 +48,7 @@ public class GoreSequencer(GoreSession session, bool isLocal)
     /// that the querying party has not seen yet, and then adjusts
     /// the watermark for the next turn
     /// </summary>
-    public bool WaitPopPeerAction()
+    public bool PollPopPeerAction()
     {
 
 
@@ -61,7 +62,7 @@ public class GoreSequencer(GoreSession session, bool isLocal)
         return $"{Session.GameToken}.{turn}.bofa";
     }
 
-    private bool AppendCommandToGameFile(SequencerCommand command, bool mustExist)
+    private bool AppendCommandsToGameFile(List<SequencerCommand> commands, bool mustExist)
     {
         if(IsLocal)
         {
@@ -72,11 +73,14 @@ public class GoreSequencer(GoreSession session, bool isLocal)
                 using var file = File.Open(fileName, FileMode.Open, FileAccess.Write, FileShare.Read);
                 using var writer = new StreamWriter(file);
 
-                writer.WriteLine(command.ToString());
+                foreach (var command in commands)
+                {
+                    writer.WriteLine(command.ToString());
+                }
             }
             else
             {
-                File.WriteAllLines(fileName, [command.Command.ToString()]);
+                File.WriteAllLines(fileName, commands.Select(c => c.ToString()!));
             }
         }
         else
@@ -87,17 +91,17 @@ public class GoreSequencer(GoreSession session, bool isLocal)
         return true;
     }
 
-    private bool PushNewTurnFile(int turn, SequencerCommand command)
+    private bool PushNewTurnFile(int turn, List<SequencerCommand> commands)
     {
         var fileName = Path.Combine(InstanceConfiguration.LocalDataPath, LocalGameFileTurnName(turn));
 
-        File.WriteAllLines(fileName, [command.Command.ToString()]);
+        File.WriteAllLines(fileName, commands.Select(c => c.ToString()));
 
         return true;
     }
 
     internal bool TryJoin()
     {
-        return WaitPopPeerAction();
+        return PollPopPeerAction();
     }
 }

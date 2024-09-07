@@ -1,4 +1,5 @@
-﻿using ScorchGore.Sequencer;
+﻿using ScorchGore.Configuration;
+using ScorchGore.Sequencer;
 
 namespace ScorchGore.GameSession;
 
@@ -22,7 +23,11 @@ public class GoreSession
         AmITheInitiatorEven = true;
 
         _sequencer = new(this, true);
-        return Sequencer.MyTurnPushCommand(new SequencerCommand { Command = SequencerCommands.SATTELT_DIE_HUEHNER_WIR_REITEN_INS_GEBIRGE });
+        return Sequencer.MyTurnPushCommand(
+        [
+            new SequencerCommand { Command = SequencerCommands.SATTELT_DIE_HUEHNER_WIR_REITEN_INS_GEBIRGE },
+            new SequencerCommand { Command = SequencerCommands.HELO, Arguments = InstanceSettings.PlayerName }
+        ]);
     }
 
     public bool Join(Guid token)
@@ -32,5 +37,10 @@ public class GoreSession
 
         _sequencer = new(this, true);
         return _sequencer.TryJoin();
+    }
+
+    public bool HasPeerJoined()
+    {
+        return _sequencer?.PollPopPeerAction() ?? false;
     }
 }

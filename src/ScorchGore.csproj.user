@@ -16,6 +16,9 @@
     <Compile Update="Forms\frmAlreadyUkrainian.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\frmEditPlayerProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\frmGame.cs">
       <SubType>Form</SubType>
     </Compile>

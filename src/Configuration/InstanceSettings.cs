@@ -7,16 +7,19 @@ internal static class InstanceSettings
 {
     public static string Edition = "S"; // S...shareware F...full
     public static string Language = "en";
+    public static string PlayerName = "";
 
     public static string GetSerialized()
     {
         var encodedEdition = Convert.ToBase64String(Encoding.ASCII.GetBytes(Edition));
         var encodedLanguage = Convert.ToBase64String(Encoding.ASCII.GetBytes(Language));
+        var encodedPlayerName = Convert.ToBase64String(Encoding.ASCII.GetBytes(PlayerName));
 
         return string.Join(
             (char)6,
             encodedEdition,
-            encodedLanguage
+            encodedLanguage,
+            encodedPlayerName
         );
     }
 
@@ -24,10 +27,11 @@ internal static class InstanceSettings
     {
         var parts = raw.Split((char)6);
 
-        if (parts.Length == 2)
+        if (parts.Length == 3)
         {
             Edition = Encoding.ASCII.GetString(Convert.FromBase64String(parts[0]));
             Language = Encoding.ASCII.GetString(Convert.FromBase64String(parts[1]));
+            PlayerName = Encoding.ASCII.GetString(Convert.FromBase64String(parts[2]));
         }
     }
 

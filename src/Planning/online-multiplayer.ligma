@@ -72,3 +72,35 @@ invitingplayertoken.3.ligma
 I HAD STONE pommesfritz
 c60 60 FIRE pommesfritz
 -------------------------------------------------------------------------
+
+
+
+Sequence example:
+================
+
+When A initiates and wins the SSP
+
+B peer-odd                 | A initiator-even
+--------------------------------------------------------
+                           | SATTELT DIE HÜHNER
+                           | HELO A
+1 EHLO B                   |
+  I HAVE SCISSORS          |
+                           | 2 I HAD SCISSORS FIRST
+                           |   CANVAS_THE_TOWN_BRUSH_THE_BACKDROP
+                           |   c60 60 FIRE IN THE HOLE
+3 c75 72 FIRE IN THE HOLE  |
+
+
+WHen B initiates and loses the SSP to B
+
+B initiator-even           | A peer-odd
+--------------------------------------------------------
+SATTELT DIE HÜHNER         |
+HELO B                     |
+                           | 1 EHLO A
+                           |   I HAVE PAPER
+2 I HAD STONE              |
+  CANVAS_THE_TOWN_BRUSH_TH |
+                           | 3 78 78 FIRE IN THE HOLE
+4 BLIMEY                   |

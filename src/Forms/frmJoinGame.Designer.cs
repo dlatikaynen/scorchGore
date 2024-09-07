@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJoinGame));
             label1 = new Label();
             txtToken = new TextBox();
             btnPaste = new Button();
             btnCancel = new Button();
-            label2 = new Label();
             pgbWaitJoin = new ProgressBar();
             SuspendLayout();
             // 
@@ -70,7 +70,7 @@
             // btnCancel
             // 
             btnCancel.DialogResult = DialogResult.Cancel;
-            btnCancel.Location = new Point(12, 222);
+            btnCancel.Location = new Point(12, 180);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(86, 30);
             btnCancel.TabIndex = 4;
@@ -78,19 +78,10 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
-            // label2
-            // 
-            label2.Location = new Point(12, 96);
-            label2.Name = "label2";
-            label2.Size = new Size(294, 50);
-            label2.TabIndex = 5;
-            label2.Text = "On the other end, open the File > Join Game menu, and paste the token there.";
-            label2.UseMnemonic = false;
-            // 
             // pgbWaitJoin
             // 
             pgbWaitJoin.ForeColor = Color.Orchid;
-            pgbWaitJoin.Location = new Point(12, 149);
+            pgbWaitJoin.Location = new Point(12, 107);
             pgbWaitJoin.MarqueeAnimationSpeed = 11;
             pgbWaitJoin.Name = "pgbWaitJoin";
             pgbWaitJoin.RightToLeft = RightToLeft.Yes;
@@ -104,15 +95,15 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnCancel;
-            ClientSize = new Size(318, 264);
+            ClientSize = new Size(318, 221);
             Controls.Add(pgbWaitJoin);
-            Controls.Add(label2);
             Controls.Add(btnCancel);
             Controls.Add(btnPaste);
             Controls.Add(txtToken);
             Controls.Add(label1);
             DoubleBuffered = true;
             HelpButton = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmJoinGame";
@@ -129,7 +120,6 @@
         private TextBox txtToken;
         private Button btnPaste;
         private Button btnCancel;
-        private Label label2;
         private ProgressBar pgbWaitJoin;
     }
 }

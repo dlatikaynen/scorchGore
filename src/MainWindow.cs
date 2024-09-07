@@ -162,6 +162,11 @@ public partial class MainWindow : Form
 
     private void mnuFileNewGameTournamentOnline_Click(object sender, EventArgs e)
     {
+        if (!EnsurePlayername())
+        {
+            return;
+        }
+
         using var frmInitiate = new frmInitiateGame();
 
         if (frmInitiate.ShowDialog() == DialogResult.OK)
@@ -176,7 +181,7 @@ public partial class MainWindow : Form
         };
     }
 
-    private void joinGameToolStripMenuItem_Click(object sender, EventArgs e)
+    private void mnuFileJoinGame_Click(object sender, EventArgs e)
     {
         using var frmJoin = new frmJoinGame();
 
@@ -190,5 +195,44 @@ public partial class MainWindow : Form
             frmGame.Show();
             frmGame.Immerse();
         }
+    }
+
+    private void mnuCommunityEditPlayerProfile_Click(object sender, EventArgs e)
+    {
+        using var playerProfile = new frmEditPlayerProfile();
+
+        if (playerProfile.ShowDialog() == DialogResult.OK)
+        {
+
+        }
+    }
+
+    private static bool EnsurePlayername()
+    {
+        if (string.IsNullOrWhiteSpace(InstanceSettings.PlayerName))
+        {
+            using var namePlayer = new frmEditPlayerProfile();
+
+            return namePlayer.ShowDialog() == DialogResult.OK;
+        }
+
+        return true;
+    }
+
+
+
+    private void tbbInitiate_Click(object sender, EventArgs e)
+    {
+        mnuFileNewGameTournamentOnline_Click(sender, e);
+    }
+
+    private void tbbJoin_Click(object sender, EventArgs e)
+    {
+        mnuFileJoinGame_Click(sender, e);
+    }
+
+    private void ttbEditPlayerProfile_Click(object sender, EventArgs e)
+    {
+        mnuCommunityEditPlayerProfile_Click(sender, e);
     }
 }

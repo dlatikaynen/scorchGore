@@ -24,6 +24,7 @@ internal static class Program
             Application.Run(mainWindow);
         }
 
+        InstanceConfiguration.Write();
         mySemaphore.Release();
     }
 }

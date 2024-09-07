@@ -198,59 +198,65 @@
   <metadata name="MainToolbar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>948, 17</value>
   </metadata>
-  <data name="toolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tbbInitiate.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACRSURBVDhPY/j27dt/SjDYACcnJ7IwigEf3n8kCZNswPNb
-        J/+f6DYF0yA+yQac6Db5f6hWCmwIiE+mC0wIu2DS2Vf/F1x6DefjwlgNyNr34r/0wkdgTMgQDAOQNRNj
-        CIoBOg0rMTTDMLIhIHbriZeYBmDTiIxBGkEYxge5liQDsGGQqykyAISpZwAlmIEywMAAAAc1/Jwvt6sN
-        AAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGlSURBVDhPpZI7SwNBEMenEARLwUckuStMY+FnsJAIYirx
+        EXK7Fy0sRGxsLHOJ0dJGBK0sxA/g67K7CeQbGNDKyk4xio2KokWcndvEPBSC/mFgmN3/b3dnFmzPLoSz
+        4VH4qxBQxfjE2I9uRvuo6Mg14OISHPFG4aorYDIHqdIgrTfKAIJI208RL7Les7QdgqTcQRDDSIGj3oGp
+        Q4Q8YD5nrIGaACYsz7q2MtYsjJW6YEb0ApdnCMiieRzz2ybIr4C0Fa8DnPwUmm4goYaAFWOYVyBRHGgH
+        ND6BiV18/wdwVf0x9I0aAN9NZCKGGw7w1FBTcHGMpmXKkyKOeZkAkXTEt7P2CKz63bDoI0BmcHGvDaBr
+        TKQpd/1h4PkXApC4OqEibSzkOgIw8WzcKD1napTeKFfouo1mHa1PcOWFcaO42qo3p+OQnnGj9Hgc8Ugj
+        ohxHpk+pnZ6Uk/UxOv4EAu7xpv3GbcTFPBbvCMLFBgLP6wCmTqm52qz3cDVtXC3SP4xuoo4wx+8rF7Cp
+        bpBTrfK7uSb9w4JRlqnTjnqlhuk3t1373wL4Alq6I15pzP0kAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="toolStripButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="tbbInitiate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbbInitiate.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripButton1.Text" xml:space="preserve">
-    <value>toolStripButton1</value>
+  <data name="tbbInitiate.ToolTipText" xml:space="preserve">
+    <value>Initiate a new online game</value>
   </data>
-  <data name="toolStripButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tbbJoin.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACRSURBVDhPY/j27dt/SjDYACcnJ7IwigEf3n8kCZNswPNb
-        J/+f6DYF0yA+yQac6Db5f6hWCmwIiE+mC0wIu2DS2Vf/F1x6DefjwlgNyNr34r/0wkdgTMgQDAOQNRNj
-        CIoBOg0rMTTDMLIhIHbriZeYBmDTiIxBGkEYxge5liQDsGGQqykyAISpZwAlmIEywMAAAAc1/Jwvt6sN
-        AAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADRSURBVDhPrZNBDsIgEEVn0ZUeoGFTwj00GK/RcgzPZtre
+        xp2nqPxxJmmxhUb9yYRA5z9mgNJfZK19OOemNLAuKXkhuWkaE8caowbWJSUv2bH23lfGmMNXAJgp9Ddq
+        x4tCFCAb7GgvjCcKw5O6/goIErGsFQmU29Rvb4VhSgKQYwoANE4rQJYAVXs/i/mjAjbH9tAm2l0AMMmd
+        AZtn7bFpLiTG2L6F2A6b01ZVSBTD6jsoVlB6iYAxZOsMStKKGJK9hRUhUQEImGXcB/j5R8uL6AViF5DX
+        ufWB2wAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="toolStripButton2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="tbbJoin.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripButton2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbbJoin.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripButton2.Text" xml:space="preserve">
-    <value>toolStripButton2</value>
+  <data name="tbbJoin.ToolTipText" xml:space="preserve">
+    <value>Join an online game</value>
   </data>
-  <data name="toolStripButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ttbEditPlayerProfile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACRSURBVDhPY/j27dt/SjDYACcnJ7IwigEf3n8kCZNswPNb
-        J/+f6DYF0yA+yQac6Db5f6hWCmwIiE+mC0wIu2DS2Vf/F1x6DefjwlgNyNr34r/0wkdgTMgQDAOQNRNj
-        CIoBOg0rMTTDMLIhIHbriZeYBmDTiIxBGkEYxge5liQDsGGQqykyAISpZwAlmIEywMAAAAc1/Jwvt6sN
-        AAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADiSURBVDhP3ZA9CsJAEEYD8QbaGMgvGLTzBunESq20FsQT
+        iK14CgWj3kMPoIXBA1hqGc+gb8kEgtHYih88FmbezC6r/Wl83684jrOFWNgYhlGWdnGCICi5rnu2bXsF
+        TQULQoho64lVEAZ6yAfLsqoppmkanEfqXdE+B2kKi+wCYUl9ItrnfHlBR7TC6IgRhJk/WMNJ9RLlS5AH
+        fOQjC7W+tIuDPEe+cY48z6speMUQLtRnor0PUhuu0Mj+gYJaXS2Gluj5IO3Vza/DKQyPcXai58PwXT35
+        3bCCvs+SWPSfiKY9AWLNQqHdR2IhAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="toolStripButton3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="ttbEditPlayerProfile.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ttbEditPlayerProfile.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripButton3.Text" xml:space="preserve">
-    <value>toolStripButton3</value>
+  <data name="ttbEditPlayerProfile.ToolTipText" xml:space="preserve">
+    <value>Set your player name</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -361,22 +367,22 @@
     <value>&amp;Tournament local</value>
   </data>
   <data name="newGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="newGameToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;New Game</value>
   </data>
-  <data name="joinGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+  <data name="mnuFileJoinGame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 22</value>
   </data>
-  <data name="joinGameToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuFileJoinGame.Text" xml:space="preserve">
     <value>&amp;Join Game</value>
   </data>
   <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>129, 6</value>
   </data>
   <data name="mnuFileQuit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="mnuFileQuit.Text" xml:space="preserve">
     <value>&amp;Quit</value>
@@ -412,7 +418,7 @@
     <value>&amp;Ukrainian (українська)</value>
   </data>
   <data name="mnuViewSwitchLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>161, 22</value>
   </data>
   <data name="mnuViewSwitchLanguage.Text" xml:space="preserve">
     <value>Switch language</value>
@@ -428,6 +434,12 @@
   </data>
   <data name="mnuTools.Text" xml:space="preserve">
     <value>Tools</value>
+  </data>
+  <data name="mnuCommunityEditPlayerProfile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="mnuCommunityEditPlayerProfile.Text" xml:space="preserve">
+    <value>Edit player profile</value>
   </data>
   <data name="contributeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 20</value>
@@ -594,10 +606,10 @@
   <data name="&gt;&gt;tournamentLocalToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;joinGameToolStripMenuItem.Name" xml:space="preserve">
-    <value>joinGameToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuFileJoinGame.Name" xml:space="preserve">
+    <value>mnuFileJoinGame</value>
   </data>
-  <data name="&gt;&gt;joinGameToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuFileJoinGame.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem5.Name" xml:space="preserve">
@@ -658,6 +670,12 @@
     <value>contributeToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;contributeToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuCommunityEditPlayerProfile.Name" xml:space="preserve">
+    <value>mnuCommunityEditPlayerProfile</value>
+  </data>
+  <data name="&gt;&gt;mnuCommunityEditPlayerProfile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuWindow.Name" xml:space="preserve">
@@ -744,22 +762,22 @@
   <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripButton1.Name" xml:space="preserve">
-    <value>toolStripButton1</value>
+  <data name="&gt;&gt;tbbInitiate.Name" xml:space="preserve">
+    <value>tbbInitiate</value>
   </data>
-  <data name="&gt;&gt;toolStripButton1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbbInitiate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripButton2.Name" xml:space="preserve">
-    <value>toolStripButton2</value>
+  <data name="&gt;&gt;tbbJoin.Name" xml:space="preserve">
+    <value>tbbJoin</value>
   </data>
-  <data name="&gt;&gt;toolStripButton2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbbJoin.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripButton3.Name" xml:space="preserve">
-    <value>toolStripButton3</value>
+  <data name="&gt;&gt;ttbEditPlayerProfile.Name" xml:space="preserve">
+    <value>ttbEditPlayerProfile</value>
   </data>
-  <data name="&gt;&gt;toolStripButton3.Type" xml:space="preserve">
+  <data name="&gt;&gt;ttbEditPlayerProfile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
