@@ -150,7 +150,7 @@ public partial class MainWindow : Form
         alreadyFinnish.ShowDialog(this);
     }
 
-    private void mnuFileNewGamePracticeLocal_Click(object sender, EventArgs e)
+    private void mnuFilePractice_Click(object sender, EventArgs e)
     {
         var frmGame = new frmGame(new())
         {
@@ -160,7 +160,7 @@ public partial class MainWindow : Form
         frmGame.Show(this);
     }
 
-    private void mnuFileNewGameTournamentOnline_Click(object sender, EventArgs e)
+    private void mnuFileInitiateTournamentOnline_Click(object sender, EventArgs e)
     {
         if (!EnsurePlayername(this))
         {
@@ -178,6 +178,11 @@ public partial class MainWindow : Form
 
             frmGame.DoSomething();
         };
+    }
+
+    private void mnuFileInitiateTournamentLocal_Click(object sender, EventArgs e)
+    {
+        // two players without internet connection, on the same computer
     }
 
     private void mnuFileJoinGame_Click(object sender, EventArgs e)
@@ -217,11 +222,9 @@ public partial class MainWindow : Form
         return true;
     }
 
-
-
     private void tbbInitiate_Click(object sender, EventArgs e)
     {
-        mnuFileNewGameTournamentOnline_Click(sender, e);
+        mnuFileInitiateTournamentOnline_Click(sender, e);
     }
 
     private void tbbJoin_Click(object sender, EventArgs e)

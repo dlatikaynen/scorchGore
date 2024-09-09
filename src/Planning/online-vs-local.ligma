@@ -1,0 +1,23 @@
+﻿Generally, we have practice
+Here we also have the sandboxes which, in the full version,
+can be made into new tournament levels
+
+And there is the regular tournament, which is suitable for
+speedrunning, and the only option where true online multiplayer
+is available.
+
+a local game works inside one instance, where players take
+turn in front of one screen, with one computer's peripherals.
+
+an online game can be simulated, for local debugging purposes,
+by using the filesystem, but that is likely not what we're
+going to ship eventually.
+
+a true online game is where players take turns via the en-software.com
+internet php api. in either case, local computers keep track of
+each of the games they initiated and joined, and whether they
+are a games initiator or opponent, so continuation after a break
+of any duration becomes a possibility.
+
+purely local games should also be logged just like online games
+are, so that they can be saved, backed up, replayed.

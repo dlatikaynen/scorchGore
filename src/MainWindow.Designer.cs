@@ -32,17 +32,25 @@ partial class MainWindow
         components = new System.ComponentModel.Container();
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
         MdiHelp = new HelpProvider();
+        MainToolbar = new ToolStrip();
+        tbbInitiate = new ToolStripButton();
+        tbbJoin = new ToolStripButton();
+        ttbEditPlayerProfile = new ToolStripButton();
+        toolStripSeparator1 = new ToolStripSeparator();
         MdiError = new ErrorProvider(components);
         MdiBkg = new System.ComponentModel.BackgroundWorker();
         MainMenu = new MenuStrip();
         mnuFile = new ToolStripMenuItem();
-        newGameToolStripMenuItem = new ToolStripMenuItem();
-        practiceOnlineToolStripMenuItem = new ToolStripMenuItem();
-        mnuFileNewGamePracticeLocal = new ToolStripMenuItem();
-        mnuFileNewGameTournamentOnline = new ToolStripMenuItem();
-        tournamentLocalToolStripMenuItem = new ToolStripMenuItem();
+        mnuFileInitiateTournamentOnline = new ToolStripMenuItem();
+        mnuFileInitiateTournamentLocal = new ToolStripMenuItem();
+        mnuFilePractice = new ToolStripMenuItem();
+        toolStripMenuItem7 = new ToolStripSeparator();
         mnuFileJoinGame = new ToolStripMenuItem();
+        mnuFileLoadSavegame = new ToolStripMenuItem();
         toolStripMenuItem5 = new ToolStripSeparator();
+        mnuFileBackup = new ToolStripMenuItem();
+        mnuFileRestore = new ToolStripMenuItem();
+        toolStripMenuItem6 = new ToolStripSeparator();
         mnuFileQuit = new ToolStripMenuItem();
         mnuView = new ToolStripMenuItem();
         mnuViewSwitchLanguage = new ToolStripMenuItem();
@@ -53,6 +61,9 @@ partial class MainWindow
         mnuTools = new ToolStripMenuItem();
         contributeToolStripMenuItem = new ToolStripMenuItem();
         mnuCommunityEditPlayerProfile = new ToolStripMenuItem();
+        toolStripMenuItem8 = new ToolStripSeparator();
+        discordToolStripMenuItem = new ToolStripMenuItem();
+        forumToolStripMenuItem = new ToolStripMenuItem();
         mnuWindow = new ToolStripMenuItem();
         closeToolStripMenuItem = new ToolStripMenuItem();
         arrangeToolStripMenuItem = new ToolStripMenuItem();
@@ -67,25 +78,50 @@ partial class MainWindow
         toolStripMenuItem3 = new ToolStripMenuItem();
         toolStripMenuItem1 = new ToolStripSeparator();
         aboutToolStripMenuItem = new ToolStripMenuItem();
-        MainToolbar = new ToolStrip();
-        tbbInitiate = new ToolStripButton();
-        tbbJoin = new ToolStripButton();
-        ttbEditPlayerProfile = new ToolStripButton();
-        toolStripSeparator1 = new ToolStripSeparator();
-        toolStripButton4 = new ToolStripButton();
-        toolStripButton5 = new ToolStripButton();
-        toolStripButton6 = new ToolStripButton();
         statusStrip1 = new StatusStrip();
         toolStripStatusLabel1 = new ToolStripStatusLabel();
         toolStripStatusLabel4 = new ToolStripStatusLabel();
         toolStripStatusLabel2 = new ToolStripStatusLabel();
         toolStripStatusLabel3 = new ToolStripStatusLabel();
         toolStripProgressBar1 = new ToolStripProgressBar();
+        MainToolbar.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)MdiError).BeginInit();
         MainMenu.SuspendLayout();
-        MainToolbar.SuspendLayout();
         statusStrip1.SuspendLayout();
         SuspendLayout();
+        // 
+        // MainToolbar
+        // 
+        MainToolbar.Items.AddRange(new ToolStripItem[] { tbbInitiate, tbbJoin, ttbEditPlayerProfile, toolStripSeparator1 });
+        resources.ApplyResources(MainToolbar, "MainToolbar");
+        MainToolbar.Name = "MainToolbar";
+        MdiHelp.SetShowHelp(MainToolbar, (bool)resources.GetObject("MainToolbar.ShowHelp"));
+        // 
+        // tbbInitiate
+        // 
+        tbbInitiate.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(tbbInitiate, "tbbInitiate");
+        tbbInitiate.Name = "tbbInitiate";
+        tbbInitiate.Click += tbbInitiate_Click;
+        // 
+        // tbbJoin
+        // 
+        tbbJoin.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(tbbJoin, "tbbJoin");
+        tbbJoin.Name = "tbbJoin";
+        tbbJoin.Click += tbbJoin_Click;
+        // 
+        // ttbEditPlayerProfile
+        // 
+        ttbEditPlayerProfile.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(ttbEditPlayerProfile, "ttbEditPlayerProfile");
+        ttbEditPlayerProfile.Name = "ttbEditPlayerProfile";
+        ttbEditPlayerProfile.Click += ttbEditPlayerProfile_Click;
+        // 
+        // toolStripSeparator1
+        // 
+        toolStripSeparator1.Name = "toolStripSeparator1";
+        resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
         // 
         // MdiError
         // 
@@ -105,38 +141,32 @@ partial class MainWindow
         // 
         // mnuFile
         // 
-        mnuFile.DropDownItems.AddRange(new ToolStripItem[] { newGameToolStripMenuItem, mnuFileJoinGame, toolStripMenuItem5, mnuFileQuit });
+        mnuFile.DropDownItems.AddRange(new ToolStripItem[] { mnuFileInitiateTournamentOnline, mnuFileInitiateTournamentLocal, mnuFilePractice, toolStripMenuItem7, mnuFileJoinGame, mnuFileLoadSavegame, toolStripMenuItem5, mnuFileBackup, mnuFileRestore, toolStripMenuItem6, mnuFileQuit });
         mnuFile.Name = "mnuFile";
         resources.ApplyResources(mnuFile, "mnuFile");
         // 
-        // newGameToolStripMenuItem
+        // mnuFileInitiateTournamentOnline
         // 
-        newGameToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { practiceOnlineToolStripMenuItem, mnuFileNewGamePracticeLocal, mnuFileNewGameTournamentOnline, tournamentLocalToolStripMenuItem });
-        newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-        resources.ApplyResources(newGameToolStripMenuItem, "newGameToolStripMenuItem");
-        newGameToolStripMenuItem.Click += newGameToolStripMenuItem_Click;
+        mnuFileInitiateTournamentOnline.Name = "mnuFileInitiateTournamentOnline";
+        resources.ApplyResources(mnuFileInitiateTournamentOnline, "mnuFileInitiateTournamentOnline");
+        mnuFileInitiateTournamentOnline.Click += mnuFileInitiateTournamentOnline_Click;
         // 
-        // practiceOnlineToolStripMenuItem
+        // mnuFileInitiateTournamentLocal
         // 
-        practiceOnlineToolStripMenuItem.Name = "practiceOnlineToolStripMenuItem";
-        resources.ApplyResources(practiceOnlineToolStripMenuItem, "practiceOnlineToolStripMenuItem");
+        mnuFileInitiateTournamentLocal.Name = "mnuFileInitiateTournamentLocal";
+        resources.ApplyResources(mnuFileInitiateTournamentLocal, "mnuFileInitiateTournamentLocal");
+        mnuFileInitiateTournamentLocal.Click += mnuFileInitiateTournamentLocal_Click;
         // 
-        // mnuFileNewGamePracticeLocal
+        // mnuFilePractice
         // 
-        mnuFileNewGamePracticeLocal.Name = "mnuFileNewGamePracticeLocal";
-        resources.ApplyResources(mnuFileNewGamePracticeLocal, "mnuFileNewGamePracticeLocal");
-        mnuFileNewGamePracticeLocal.Click += mnuFileNewGamePracticeLocal_Click;
+        mnuFilePractice.Name = "mnuFilePractice";
+        resources.ApplyResources(mnuFilePractice, "mnuFilePractice");
+        mnuFilePractice.Click += mnuFilePractice_Click;
         // 
-        // mnuFileNewGameTournamentOnline
+        // toolStripMenuItem7
         // 
-        mnuFileNewGameTournamentOnline.Name = "mnuFileNewGameTournamentOnline";
-        resources.ApplyResources(mnuFileNewGameTournamentOnline, "mnuFileNewGameTournamentOnline");
-        mnuFileNewGameTournamentOnline.Click += mnuFileNewGameTournamentOnline_Click;
-        // 
-        // tournamentLocalToolStripMenuItem
-        // 
-        tournamentLocalToolStripMenuItem.Name = "tournamentLocalToolStripMenuItem";
-        resources.ApplyResources(tournamentLocalToolStripMenuItem, "tournamentLocalToolStripMenuItem");
+        toolStripMenuItem7.Name = "toolStripMenuItem7";
+        resources.ApplyResources(toolStripMenuItem7, "toolStripMenuItem7");
         // 
         // mnuFileJoinGame
         // 
@@ -144,10 +174,30 @@ partial class MainWindow
         resources.ApplyResources(mnuFileJoinGame, "mnuFileJoinGame");
         mnuFileJoinGame.Click += mnuFileJoinGame_Click;
         // 
+        // mnuFileLoadSavegame
+        // 
+        mnuFileLoadSavegame.Name = "mnuFileLoadSavegame";
+        resources.ApplyResources(mnuFileLoadSavegame, "mnuFileLoadSavegame");
+        // 
         // toolStripMenuItem5
         // 
         toolStripMenuItem5.Name = "toolStripMenuItem5";
         resources.ApplyResources(toolStripMenuItem5, "toolStripMenuItem5");
+        // 
+        // mnuFileBackup
+        // 
+        mnuFileBackup.Name = "mnuFileBackup";
+        resources.ApplyResources(mnuFileBackup, "mnuFileBackup");
+        // 
+        // mnuFileRestore
+        // 
+        mnuFileRestore.Name = "mnuFileRestore";
+        resources.ApplyResources(mnuFileRestore, "mnuFileRestore");
+        // 
+        // toolStripMenuItem6
+        // 
+        toolStripMenuItem6.Name = "toolStripMenuItem6";
+        resources.ApplyResources(toolStripMenuItem6, "toolStripMenuItem6");
         // 
         // mnuFileQuit
         // 
@@ -198,7 +248,7 @@ partial class MainWindow
         // 
         // contributeToolStripMenuItem
         // 
-        contributeToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuCommunityEditPlayerProfile });
+        contributeToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuCommunityEditPlayerProfile, toolStripMenuItem8, discordToolStripMenuItem, forumToolStripMenuItem });
         contributeToolStripMenuItem.Name = "contributeToolStripMenuItem";
         resources.ApplyResources(contributeToolStripMenuItem, "contributeToolStripMenuItem");
         // 
@@ -207,6 +257,21 @@ partial class MainWindow
         mnuCommunityEditPlayerProfile.Name = "mnuCommunityEditPlayerProfile";
         resources.ApplyResources(mnuCommunityEditPlayerProfile, "mnuCommunityEditPlayerProfile");
         mnuCommunityEditPlayerProfile.Click += mnuCommunityEditPlayerProfile_Click;
+        // 
+        // toolStripMenuItem8
+        // 
+        toolStripMenuItem8.Name = "toolStripMenuItem8";
+        resources.ApplyResources(toolStripMenuItem8, "toolStripMenuItem8");
+        // 
+        // discordToolStripMenuItem
+        // 
+        discordToolStripMenuItem.Name = "discordToolStripMenuItem";
+        resources.ApplyResources(discordToolStripMenuItem, "discordToolStripMenuItem");
+        // 
+        // forumToolStripMenuItem
+        // 
+        forumToolStripMenuItem.Name = "forumToolStripMenuItem";
+        resources.ApplyResources(forumToolStripMenuItem, "forumToolStripMenuItem");
         // 
         // mnuWindow
         // 
@@ -281,56 +346,6 @@ partial class MainWindow
         aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
         resources.ApplyResources(aboutToolStripMenuItem, "aboutToolStripMenuItem");
         // 
-        // MainToolbar
-        // 
-        MainToolbar.Items.AddRange(new ToolStripItem[] { tbbInitiate, tbbJoin, ttbEditPlayerProfile, toolStripSeparator1, toolStripButton4, toolStripButton5, toolStripButton6 });
-        resources.ApplyResources(MainToolbar, "MainToolbar");
-        MainToolbar.Name = "MainToolbar";
-        // 
-        // tbbInitiate
-        // 
-        tbbInitiate.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(tbbInitiate, "tbbInitiate");
-        tbbInitiate.Name = "tbbInitiate";
-        tbbInitiate.Click += tbbInitiate_Click;
-        // 
-        // tbbJoin
-        // 
-        tbbJoin.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(tbbJoin, "tbbJoin");
-        tbbJoin.Name = "tbbJoin";
-        tbbJoin.Click += tbbJoin_Click;
-        // 
-        // ttbEditPlayerProfile
-        // 
-        ttbEditPlayerProfile.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(ttbEditPlayerProfile, "ttbEditPlayerProfile");
-        ttbEditPlayerProfile.Name = "ttbEditPlayerProfile";
-        ttbEditPlayerProfile.Click += ttbEditPlayerProfile_Click;
-        // 
-        // toolStripSeparator1
-        // 
-        toolStripSeparator1.Name = "toolStripSeparator1";
-        resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
-        // 
-        // toolStripButton4
-        // 
-        toolStripButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(toolStripButton4, "toolStripButton4");
-        toolStripButton4.Name = "toolStripButton4";
-        // 
-        // toolStripButton5
-        // 
-        toolStripButton5.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(toolStripButton5, "toolStripButton5");
-        toolStripButton5.Name = "toolStripButton5";
-        // 
-        // toolStripButton6
-        // 
-        toolStripButton6.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(toolStripButton6, "toolStripButton6");
-        toolStripButton6.Name = "toolStripButton6";
-        // 
         // statusStrip1
         // 
         statusStrip1.AllowItemReorder = true;
@@ -389,11 +404,11 @@ partial class MainWindow
         MainMenuStrip = MainMenu;
         Name = "MainWindow";
         SizeGripStyle = SizeGripStyle.Show;
+        MainToolbar.ResumeLayout(false);
+        MainToolbar.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)MdiError).EndInit();
         MainMenu.ResumeLayout(false);
         MainMenu.PerformLayout();
-        MainToolbar.ResumeLayout(false);
-        MainToolbar.PerformLayout();
         statusStrip1.ResumeLayout(false);
         statusStrip1.PerformLayout();
         ResumeLayout(false);
@@ -408,27 +423,14 @@ partial class MainWindow
     private ToolStripStatusLabel toolStripStatusLabel1;
     private ToolStripStatusLabel toolStripStatusLabel2;
     private ToolStripProgressBar toolStripProgressBar1;
-    private ToolStrip MainToolbar;
-    private ToolStripButton tbbInitiate;
-    private ToolStripButton tbbJoin;
-    private ToolStripButton ttbEditPlayerProfile;
-    private ToolStripSeparator toolStripSeparator1;
-    private ToolStripButton toolStripButton4;
-    private ToolStripButton toolStripButton5;
-    private ToolStripButton toolStripButton6;
     private MenuStrip MainMenu;
     private ToolStripStatusLabel toolStripStatusLabel3;
     private ToolStripMenuItem mnuFile;
-    private ToolStripMenuItem newGameToolStripMenuItem;
     private ToolStripMenuItem mnuFileQuit;
     private ToolStripMenuItem mnuView;
     private ToolStripMenuItem mnuTools;
     private ToolStripMenuItem contributeToolStripMenuItem;
     private ToolStripMenuItem helpToolStripMenuItem;
-    private ToolStripMenuItem practiceOnlineToolStripMenuItem;
-    private ToolStripMenuItem mnuFileNewGamePracticeLocal;
-    private ToolStripMenuItem mnuFileNewGameTournamentOnline;
-    private ToolStripMenuItem tournamentLocalToolStripMenuItem;
     private ToolStripStatusLabel toolStripStatusLabel4;
     private ToolStripMenuItem onlineHelpToolStripMenuItem;
     private ToolStripMenuItem aboutToolStripMenuItem;
@@ -451,4 +453,20 @@ partial class MainWindow
     private ToolStripMenuItem mnuFileJoinGame;
     private ToolStripSeparator toolStripMenuItem5;
     private ToolStripMenuItem mnuCommunityEditPlayerProfile;
+    private ToolStrip MainToolbar;
+    private ToolStripButton tbbInitiate;
+    private ToolStripButton tbbJoin;
+    private ToolStripButton ttbEditPlayerProfile;
+    private ToolStripSeparator toolStripSeparator1;
+    private ToolStripMenuItem mnuFileInitiateTournamentOnline;
+    private ToolStripMenuItem mnuFileInitiateTournamentLocal;
+    private ToolStripMenuItem mnuFilePractice;
+    private ToolStripSeparator toolStripMenuItem7;
+    private ToolStripMenuItem mnuFileLoadSavegame;
+    private ToolStripMenuItem mnuFileBackup;
+    private ToolStripMenuItem mnuFileRestore;
+    private ToolStripSeparator toolStripMenuItem6;
+    private ToolStripSeparator toolStripMenuItem8;
+    private ToolStripMenuItem discordToolStripMenuItem;
+    private ToolStripMenuItem forumToolStripMenuItem;
 }
