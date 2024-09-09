@@ -6,7 +6,7 @@ namespace ScorchGore.ApiClient;
 
 internal class GoreApiClient
 {
-    static bool InitiateGame(Guid token, string payload)
+    internal static bool InitiateGame(Guid token, string payload)
     {
         using var client = new HttpClient();
 
@@ -14,17 +14,18 @@ internal class GoreApiClient
 
         using var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "v1/initiate"
+            "v1/initiate.php"
         );
 
         var lines = new List<string>
         {
-            token.ToString("D").ToUpperInvariant(),
-            payload
+            token.ToString("D").ToUpperInvariant()
         };
 
+        lines.AddRange(payload.Split(Environment.NewLine));
+
         request.Content = new StringContent(
-            string.Join(Environment.NewLine, lines),
+            string.Join('\n', lines),
             Encoding.UTF8,
             MediaTypeHeaderValue.Parse("application/json")
         );

@@ -1,4 +1,5 @@
-﻿using ScorchGore.Configuration;
+﻿using ScorchGore.ApiClient;
+using ScorchGore.Configuration;
 using ScorchGore.GameSession;
 using System.IO;
 
@@ -183,7 +184,18 @@ public class GoreSequencer(GoreSession session, bool isLocal)
         }
         else
         {
-            // TODO:
+            if(mustExist)
+            {
+                // the server should do the appending
+            }
+            else
+            {
+                // this is the only time an online initiate will succeed: file must not exist
+                GoreApiClient.InitiateGame(
+                    Session.GameToken,
+                    string.Join(Environment.NewLine, commands.Select(c => c.ToString()!))
+                );
+            }
         }
 
         ProcessedCommands.AddRange(commands);

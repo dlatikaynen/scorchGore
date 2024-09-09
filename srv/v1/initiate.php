@@ -4,29 +4,39 @@ $posted = file_get_contents('php://input');
 $gametoken = rtrim(strtok($posted, "\n"));
 $filename = "{$gametoken}.ligma";
 
-// Let's make sure the file exists and is writable first.
-//if (is_writable($filename)) {
-    // In our example we're opening $filename in append mode.
-    // The file pointer is at the bottom of the file hence
-    // that's where $somecontent will go when we fwrite() it.
-    if (!$fp = fopen($filename, 'w')) {
-         echo "Cannot open file ($filename)";
-         exit;
-    }
+if (is_readable($filename)) {
+    echo "Cannot initiate over existing session ($filename)";
+    http_response_code(400);
+    exit;
+}
 
-    // Write $somecontent to our opened file.
-    if (fwrite($fp, $posted) === FALSE) {
+if (!$fp = fopen($filename, 'w')) {
+    echo "Cannot open file ($filename)";
+    http_response_code(400);
+    exit;
+}
+
+$token = rtrim(strtok("\n"));
+$lines = 0;
+while ($token !== false) {
+    $commandline = rtrim($token);
+    if (fwrite($fp, "{$commandline}\n") === false) {
+        fclose($fp);
         echo "Cannot write to file ($filename)";
+        http_response_code(400);
         exit;
     }
 
-    echo "Success, wrote ($posted) to file ($filename)";
+    $lines++;
+    if($lines > 10) {
+        echo "An initiation cannot possibly consist of more than 10 lines ($filename)";
+        http_response_code(400);
+        exit;
+    }
 
-    fclose($fp);
+    $token = strtok("\n");
+}
 
-//} else {
-//    echo "The file $filename is not writable";
-//}
-
-// echo $posted;
+echo "Success, wrote ($lines) lines to file ($filename)";
+fclose($fp);
 http_response_code(201);

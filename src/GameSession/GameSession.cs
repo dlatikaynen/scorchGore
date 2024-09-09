@@ -23,7 +23,7 @@ public class GoreSession
         GameToken = Guid.NewGuid();
         AmITheInitiatorEven = true;
 
-        _sequencer = new(this, true);
+        _sequencer = new(this, isLocal: false);
         return Sequencer.MyTurnPushCommand(
         [
             new SequencerCommand { Command = SequencerCommands.SATTELT_DIE_HUEHNER_WIR_REITEN_INS_GEBIRGE },
@@ -35,7 +35,7 @@ public class GoreSession
     {
         GameToken = token;
         AmITheInitiatorEven = false;
-        _sequencer = new(this, true);
+        _sequencer = new(this, isLocal: false);
 
         return _sequencer.TryJoin();
     }
