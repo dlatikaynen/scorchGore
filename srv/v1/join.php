@@ -1,32 +1,38 @@
 <?php
 
-$posted = file_get_contents('php://input');
-$gametoken = rtrim(strtok($posted, "\n"));
+$gametoken = substr($_GET['token'], 0, 32);
 $filename = "{$gametoken}.ligma";
 
-// Let's make sure the file exists and is writable first.
-if (is_writable($filename)) {
-    // In our example we're opening $filename in append mode.
-    // The file pointer is at the bottom of the file hence
-    // that's where $somecontent will go when we fwrite() it.
-    if (!$fp = fopen($filename, 'w')) {
-         echo "Cannot open file ($filename)";
-         http_response_code(400);
-         exit;
+if (is_readable($filename) and is_writable($filename)) {
+    $ordinal = (int)$_GET['ordinal'];
+
+    if($ordinal === 0) {
+        $contents = file_get_contents($filename);
+        echo $contents;
+        http_response_code(200);
     }
 
-    // Write $somecontent to our opened file.
-    if (fwrite($fp, $posted) === FALSE) {
-        echo "Cannot write to file ($filename)";
+    if($ordinal > 0) {
+        $turnfile = "{$gametoken}.{$ordinal}.bofa";
+        if (is_readable($turnfile)) {
+            $contents = file_get_contents($turnfile);
+            $gamefile = fopen($filename, "a");
+            fwrite($gamefile, $contents);
+            fclose($gamefile);
+
+            echo $contents;
+            http_response_code(200);
+        }
+        else {
+            echo "No #{$ordinal} in ({$gametoken})";
+            http_response_code(404);
+        }
+    }
+
+    if($ordinal < 0) {
         http_response_code(400);
-        exit;
     }
-
-    echo "Success, wrote ($posted) to file ($filename)";
-
-    fclose($fp);
-    http_response_code(200);
 } else {
-    echo "The file $filename is not writable";
-    http_response_code(400);
+    echo "There is no active game under ({$gametoken})";
+    http_response_code(404);
 }

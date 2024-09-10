@@ -1,4 +1,5 @@
 ﻿using ScorchGore.Configuration;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -8,8 +9,7 @@ internal class GoreApiClient
 {
     internal static bool InitiateGame(Guid token, string payload)
     {
-        using var client = new HttpClient();
-
+        var client = HttpClientFactory.Create();
         client.BaseAddress = new(InstanceConfiguration.ApiUrl);
 
         using var request = new HttpRequestMessage(
@@ -37,5 +37,28 @@ internal class GoreApiClient
         var body = response.Content.ReadAsStringAsync().Result;
 
         return true;
+    }
+
+    internal static (bool success, string[] payload) Pop(Guid token, int queuePositiom)
+    {
+        var client = HttpClientFactory.Create();
+        client.BaseAddress = new(InstanceConfiguration.ApiUrl);
+
+        using var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"v1/join.php?token={token.ToString("D").ToUpperInvariant()}&ordinal={queuePositiom}"
+        );
+
+        using var response = client.Send(request);
+
+        if(response.IsSuccessStatusCode)
+        {
+            var body = response.Content.ReadAsStringAsync().Result;
+            var lines = body.Split(Environment.NewLine);
+
+            return (true, lines);
+        }
+
+        return (false, []);
     }
 }

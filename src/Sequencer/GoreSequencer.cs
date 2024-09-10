@@ -2,6 +2,7 @@
 using ScorchGore.Configuration;
 using ScorchGore.GameSession;
 using System.IO;
+using static System.Windows.Forms.LinkLabel;
 
 namespace ScorchGore.Sequencer;
 
@@ -114,35 +115,57 @@ public class GoreSequencer(GoreSession session, bool isLocal)
     private bool PendingEventsToQueue(int queuePosition)
     {
         var anyItems = false;
-        var expectedFile = Path.Combine(
-            InstanceConfiguration.LocalSharedDataPath,
-            LocalGameFileTurnName(queuePosition)
-        );
 
-        if (File.Exists(expectedFile))
+        if (isLocal)
         {
-            var lines = File.ReadLines(expectedFile);
+            var expectedFile = Path.Combine(
+                InstanceConfiguration.LocalSharedDataPath,
+                LocalGameFileTurnName(queuePosition)
+            );
 
-            foreach (var line in lines)
+            if (File.Exists(expectedFile))
             {
-                CommandQueue.Enqueue(SequencerCommand.FromLine(line));
-                anyItems = true;
+                var lines = File.ReadLines(expectedFile);
+
+                foreach (var line in lines)
+                {
+                    CommandQueue.Enqueue(SequencerCommand.FromLine(line));
+                    anyItems = true;
+                }
+
+                if (queuePosition > Session.Watermark)
+                {
+                    Session.Watermark = queuePosition;
+                }
+
+                if (queuePosition != 0)
+                {
+                    var localGameFile = Path.Combine(
+                        InstanceConfiguration.LocalSharedDataPath,
+                        LocalGameFileName
+                    );
+
+                    File.AppendAllLines(localGameFile, lines);
+                    File.Delete(expectedFile);
+                }
             }
-
-            if (queuePosition > Session.Watermark)
+        }
+        else
+        {
+            (var success, var payload) = GoreApiClient.Pop(Session.GameToken, queuePosition);
+            
+            if(success)
             {
-                Session.Watermark = queuePosition;
-            }
+                foreach (var line in payload)
+                {
+                    CommandQueue.Enqueue(SequencerCommand.FromLine(line));
+                    anyItems = true;
+                }
 
-            if (queuePosition != 0)
-            {
-                var localGameFile = Path.Combine(
-                    InstanceConfiguration.LocalSharedDataPath,
-                    LocalGameFileName
-                );
-
-                File.AppendAllLines(localGameFile, lines);
-                File.Delete(expectedFile);
+                if (queuePosition > Session.Watermark)
+                {
+                    Session.Watermark = queuePosition;
+                }
             }
         }
 
