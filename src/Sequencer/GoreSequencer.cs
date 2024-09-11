@@ -1,8 +1,8 @@
 ﻿using ScorchGore.ApiClient;
 using ScorchGore.Configuration;
+using ScorchGore.Constants;
 using ScorchGore.GameSession;
-using System.IO;
-using static System.Windows.Forms.LinkLabel;
+using System.Runtime.CompilerServices;
 
 namespace ScorchGore.Sequencer;
 
@@ -44,14 +44,17 @@ public class GoreSequencer(GoreSession session, bool isLocal)
             var firstCommand = commands.First();
             if(firstCommand.Command != SequencerCommands.SATTELT_DIE_HUEHNER_WIR_REITEN_INS_GEBIRGE)
             {
+#pragma warning disable CA2208 // Instantiate argument exceptions correctly
                 throw new ArgumentOutOfRangeException(nameof(SequencerCommand.Command), firstCommand.Command, $"First turn can only be {SequencerCommands.SATTELT_DIE_HUEHNER_WIR_REITEN_INS_GEBIRGE}");
+#pragma warning restore CA2208 // Instantiate argument exceptions correctly
             }
 
             /* new game starts, we write the file for the first time */
             return AppendCommandsToGameFile(commands, false);
         }
 
-        if(session.AmITheInitiatorEven && int.IsEvenInteger(session.Watermark))
+#pragma warning disable CA2208 // Instantiate argument exceptions correctly
+        if (session.AmITheInitiatorEven && int.IsEvenInteger(session.Watermark))
         {
             throw new ArgumentOutOfRangeException(nameof(session.Watermark), session.Watermark, nameof(session.AmITheInitiatorEven));
         }
@@ -59,6 +62,7 @@ public class GoreSequencer(GoreSession session, bool isLocal)
         {
             throw new ArgumentOutOfRangeException(nameof(session.Watermark), session.Watermark, nameof(session.AmIThePeerOdd));
         }
+#pragma warning restore CA2208 // Instantiate argument exceptions correctly
 
         if (PushNewTurnFile(Session.Watermark + 1, commands))
         {
@@ -228,19 +232,32 @@ public class GoreSequencer(GoreSession session, bool isLocal)
 
     private bool PushNewTurnFile(int turn, List<SequencerCommand> commands)
     {
-        var fileName = Path.Combine(
-            InstanceConfiguration.LocalSharedDataPath,
-            LocalGameFileTurnName(turn)
-        );
+        if (turn <= 0 || commands.Count == 0)
+        {
+            return false;
+        }
 
-        File.WriteAllLines(fileName, commands.Select(c => c.ToString()));
-        ProcessedCommands.AddRange(commands);
+        if (IsLocal)
+        {
+            var fileName = Path.Combine(
+                InstanceConfiguration.LocalSharedDataPath,
+                LocalGameFileTurnName(turn)
+            );
+
+            File.WriteAllLines(fileName, commands.Select(c => c.ToString()));
+            ProcessedCommands.AddRange(commands);
+        }
+        else
+        {
+            return GoreApiClient.Turn(Session.GameToken, turn, commands.Select(c => c.ToString()).ToArray());
+        }
 
         return true;
     }
 
-    internal bool TryJoin()
+    internal bool TryJoin(SSP mySSP)
     {
+#pragma warning disable CA2208 // Instantiate argument exceptions correctly
         if (Session.AmITheInitiatorEven)
         {
             throw new ArgumentOutOfRangeException(nameof(Session.AmITheInitiatorEven), Session.AmITheInitiatorEven, "Initiator cannot join their own game as the peer");
@@ -250,6 +267,7 @@ public class GoreSequencer(GoreSession session, bool isLocal)
         {
             throw new ArgumentOutOfRangeException(nameof(Session.Watermark), Session.Watermark, "Peer cannot join a game from the start when the game is already on");
         }
+#pragma warning restore CA2208 // Instantiate argument exceptions correctly
 
         if (PollPopPeerAction())
         {
@@ -258,11 +276,32 @@ public class GoreSequencer(GoreSession session, bool isLocal)
                 if (command.Command == SequencerCommands.SATTELT_DIE_HUEHNER_WIR_REITEN_INS_GEBIRGE)
                 {
                     ConsumeToEnd();
-                    if (PushNewTurnFile(Session.Watermark + 1,
-                    [
-                        new() { Command=SequencerCommands.OHAI, Arguments = InstanceSettings.PlayerName },
-                        new() { Command=SequencerCommands.I_HAVE_STONE } // TODO
-                    ]))
+
+                    var commands = new List<SequencerCommand>()
+                    {
+                        new() { Command = SequencerCommands.OHAI, Arguments = InstanceSettings.PlayerName }
+                    };
+
+                    switch(mySSP)
+                    {
+                        case SSP.Scissors:
+                            commands.Add(new() { Command = SequencerCommands.I_HAVE_SCISSORS, Arguments = InstanceSettings.PlayerName });
+                            break;
+
+                        case SSP.Stone:
+                            commands.Add(new() { Command = SequencerCommands.I_HAVE_STONE, Arguments = InstanceSettings.PlayerName });
+                            break;
+
+                        case SSP.Paper:
+                            commands.Add(new() { Command = SequencerCommands.I_HAVE_PAPER, Arguments = InstanceSettings.PlayerName });
+                            break;
+
+                        case SSP.Well:
+                            commands.Add(new() { Command = SequencerCommands.I_HAVE_BRONNEN, Arguments = InstanceSettings.PlayerName });
+                            break;
+                    }
+
+                    if (PushNewTurnFile(Session.Watermark + 1, commands))
                     {
                         ++Session.Watermark;
 

@@ -1,4 +1,6 @@
-﻿using ScorchGore.GameSession;
+﻿using ScorchGore.Constants;
+using ScorchGore.GameSession;
+using System.Diagnostics.Eventing.Reader;
 
 namespace ScorchGore.Forms;
 
@@ -56,11 +58,31 @@ public partial class frmJoinGame : Form
             pgbWaitJoin.Enabled = true;
             pgbWaitJoin.Style = ProgressBarStyle.Marquee;
             cancelAcknowledged = false;
+
+            var mySsp = SSP.None;
+
+            if (optScissors.Checked)
+            {
+                mySsp = SSP.Scissors;
+            }
+            else if (optStone.Checked)
+            {
+                mySsp = SSP.Stone;
+            }
+            else if (optPaper.Checked)
+            {
+                mySsp = SSP.Paper;
+            }
+            else if (optWell.Checked)
+            {
+                mySsp = SSP.Well;
+            }
+
             ThreadPool.QueueUserWorkItem((_) =>
             {
                 do
                 {
-                    if (JoinedSession.Join(token))
+                    if (JoinedSession.Join(token, mySsp))
                     {
                         Invoke(() =>
                         {

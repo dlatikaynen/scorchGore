@@ -61,4 +61,32 @@ internal class GoreApiClient
 
         return (false, []);
     }
+
+    internal static bool Turn(Guid token, int turn, string[] payload)
+    {
+        var client = HttpClientFactory.Create();
+        client.BaseAddress = new(InstanceConfiguration.ApiUrl);
+
+        using var request = new HttpRequestMessage(
+            HttpMethod.Patch,
+            $"v1/turn.php?token={token.ToString("D").ToUpperInvariant()}&ordinal={turn}"
+        );
+
+        request.Content = new StringContent(
+            string.Join('\n', payload),
+            Encoding.UTF8,
+            MediaTypeHeaderValue.Parse("application/json")
+        );
+
+        using var response = client.Send(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            return true;
+        }
+
+        var body = response.Content.ReadAsStringAsync().Result;
+
+        return false;
+    }
 }

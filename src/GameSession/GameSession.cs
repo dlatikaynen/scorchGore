@@ -31,13 +31,13 @@ public class GoreSession
         ]);
     }
 
-    public bool Join(Guid token)
+    public bool Join(Guid token, SSP mySsp)
     {
         GameToken = token;
         AmITheInitiatorEven = false;
         _sequencer = new(this, isLocal: false);
 
-        return _sequencer.TryJoin();
+        return _sequencer.TryJoin(mySsp);
     }
 
     public bool HasPeerJoined(SSP mySsp)
