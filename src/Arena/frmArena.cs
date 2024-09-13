@@ -3,7 +3,6 @@ using System.Reflection;
 
 namespace ScorchGore.Arena;
 
-
 public partial class frmArena : Form
 {
     private Bitmap image = new(2000, 2000);

@@ -57,15 +57,20 @@
             // frmAlreadyFinnish
             // 
             AcceptButton = btnHylkaa;
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             CancelButton = btnHylkaa;
             ClientSize = new Size(406, 320);
             Controls.Add(btnHylkaa);
             Controls.Add(lblInfo);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             HelpButton = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "frmAlreadyFinnish";
+            ShowInTaskbar = false;
+            SizeGripStyle = SizeGripStyle.Hide;
             Text = "Tietyn kielen tarpeeton vaatiminen";
             ResumeLayout(false);
             PerformLayout();

@@ -11,6 +11,42 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\chel-cr.png" />
+    <None Remove="Resources\decay-crumble.wav" />
+    <None Remove="Resources\ganzesherz.png" />
+    <None Remove="Resources\halbesherz.png" />
+    <None Remove="Resources\hohlesherz.png" />
+    <None Remove="Resources\initiate.ico" />
+    <None Remove="Resources\join.ico" />
+    <None Remove="Resources\langflag-am.ico" />
+    <None Remove="Resources\langflag-de.ico" />
+    <None Remove="Resources\langflag-fi.ico" />
+    <None Remove="Resources\langflag-ua.ico" />
+    <None Remove="Resources\penrose-nontiling.png" />
+    <None Remove="Resources\projectile-fired.wav" />
+    <None Remove="Resources\rechtsherz.png" />
+    <None Remove="Resources\user.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\chel-cr.png" />
+    <EmbeddedResource Include="Resources\decay-crumble.wav" />
+    <EmbeddedResource Include="Resources\ganzesherz.png" />
+    <EmbeddedResource Include="Resources\halbesherz.png" />
+    <EmbeddedResource Include="Resources\hohlesherz.png" />
+    <EmbeddedResource Include="Resources\initiate.ico" />
+    <EmbeddedResource Include="Resources\join.ico" />
+    <EmbeddedResource Include="Resources\langflag-am.ico" />
+    <EmbeddedResource Include="Resources\langflag-de.ico" />
+    <EmbeddedResource Include="Resources\langflag-fi.ico" />
+    <EmbeddedResource Include="Resources\langflag-ua.ico" />
+    <EmbeddedResource Include="Resources\penrose-nontiling.png" />
+    <EmbeddedResource Include="Resources\projectile-fired.wav" />
+    <EmbeddedResource Include="Resources\rechtsherz.png" />
+    <EmbeddedResource Include="Resources\user.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -28,6 +64,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
     <PackageReference Include="System.Management" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\" />
+    <Folder Include="Classes\" />
   </ItemGroup>
 
 </Project>
