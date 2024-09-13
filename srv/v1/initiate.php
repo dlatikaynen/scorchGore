@@ -1,7 +1,15 @@
 <?php
 
+$gamecount = count(glob($directory . "????????????????????????????????.ligma"));
+
+if($gamecount > 100) {
+    echo "https://http.cat/status/420";
+    http_response_code(429);
+    exit;
+}
+
 $posted = file_get_contents('php://input');
-$gametoken = rtrim(strtok($posted, "\n"));
+$gametoken = substr(rtrim(strtok($posted, "\n")), 0, 32);
 $filename = "{$gametoken}.ligma";
 
 if (is_readable($filename)) {
@@ -29,6 +37,7 @@ while ($token !== false) {
 
     $lines++;
     if($lines > 10) {
+        fclose($fp);
         echo "An initiation cannot possibly consist of more than 10 lines ($filename)";
         http_response_code(400);
         exit;
@@ -37,6 +46,6 @@ while ($token !== false) {
     $token = strtok("\n");
 }
 
-echo "Success, wrote ($lines) lines to file ($filename)";
+echo "Success, wrote ($lines) lines to file ($filename), #$gamecount";
 fclose($fp);
 http_response_code(201);

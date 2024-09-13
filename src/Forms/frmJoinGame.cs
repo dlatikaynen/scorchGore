@@ -1,6 +1,6 @@
 ﻿using ScorchGore.Constants;
+using ScorchGore.Extensions;
 using ScorchGore.GameSession;
-using System.Diagnostics.Eventing.Reader;
 
 namespace ScorchGore.Forms;
 
@@ -19,7 +19,7 @@ public partial class frmJoinGame : Form
     private void btnPaste_Click(object sender, EventArgs e)
     {
         var text = Clipboard.GetText();
-        if (Guid.TryParseExact(text, "N", out _))
+        if (GuidExtensions.TryParseGore(text, out _))
         {
             txtToken.Text = text;
         }
@@ -51,7 +51,7 @@ public partial class frmJoinGame : Form
 
     private void txtToken_TextChanged(object sender, EventArgs e)
     {
-        if (Guid.TryParseExact(txtToken.Text, "N", out var token))
+        if (GuidExtensions.TryParseGore(txtToken.Text, out var token))
         {
             txtToken.ReadOnly = true;
             btnPaste.Enabled = false;

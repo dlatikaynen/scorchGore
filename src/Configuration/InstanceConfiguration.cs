@@ -21,7 +21,7 @@ internal class InstanceConfiguration
 #if DEBUG
             if (Debugger.IsAttached)
             {
-                return true;
+               // return true;
             }
 #endif
             return false;
@@ -34,10 +34,10 @@ internal class InstanceConfiguration
         {
             if(IsRunningOnLocalWebserver)
             {
-                return "http://scorchgore.localhost";
+                return InfrastructureConstants.LocalApiUrl;
             }
 
-            return "https://en-software.com/scorchgore/mmorpg";
+            return InfrastructureConstants.RemoteApiUrl;
         }
     }
 

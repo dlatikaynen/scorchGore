@@ -1,4 +1,5 @@
 ﻿using ScorchGore.Constants;
+using ScorchGore.Extensions;
 using ScorchGore.GameSession;
 
 namespace ScorchGore.Forms;
@@ -55,7 +56,7 @@ public partial class frmInitiateGame : Form
             {
                 Invoke(() =>
                 {
-                    lblToken.Text = NewGame.GameToken.ToString("N").ToUpperInvariant();
+                    lblToken.Text = NewGame.GameToken.ToGore();
                     btnCopy.Enabled = true;
                 });
 

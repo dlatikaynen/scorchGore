@@ -1,5 +1,5 @@
 ﻿using ScorchGore.Configuration;
-using System.Net.Http;
+using ScorchGore.Extensions;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -19,7 +19,7 @@ internal class GoreApiClient
 
         var lines = new List<string>
         {
-            token.ToString("D").ToUpperInvariant()
+            token.ToGore()
         };
 
         lines.AddRange(payload.Split(Environment.NewLine));
@@ -46,7 +46,7 @@ internal class GoreApiClient
 
         using var request = new HttpRequestMessage(
             HttpMethod.Get,
-            $"v1/join.php?token={token.ToString("D").ToUpperInvariant()}&ordinal={queuePositiom}"
+            $"v1/join.php?token={token.ToGore()}&ordinal={queuePositiom}"
         );
 
         using var response = client.Send(request);
@@ -54,7 +54,7 @@ internal class GoreApiClient
         if(response.IsSuccessStatusCode)
         {
             var body = response.Content.ReadAsStringAsync().Result;
-            var lines = body.Split(Environment.NewLine);
+            var lines = body.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
             return (true, lines);
         }
@@ -69,7 +69,7 @@ internal class GoreApiClient
 
         using var request = new HttpRequestMessage(
             HttpMethod.Patch,
-            $"v1/turn.php?token={token.ToString("D").ToUpperInvariant()}&ordinal={turn}"
+            $"v1/turn.php?token={token.ToGore()}&ordinal={turn}"
         );
 
         request.Content = new StringContent(

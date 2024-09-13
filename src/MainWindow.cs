@@ -1,15 +1,20 @@
 using ScorchGore.Configuration;
 using ScorchGore.Forms;
 using ScorchGore.Translation;
-using System.Runtime.CompilerServices;
 
 namespace Fso.ScorchGore;
 
 public partial class MainWindow : Form
 {
+    private frmOutputPane outputPane;
+
     public MainWindow()
     {
         InitializeComponent();
+        outputPane = new frmOutputPane()
+        {
+            MdiParent = this
+        };
     }
 
     public bool Prepare()
@@ -235,5 +240,10 @@ public partial class MainWindow : Form
     private void ttbEditPlayerProfile_Click(object sender, EventArgs e)
     {
         mnuCommunityEditPlayerProfile_Click(sender, e);
+    }
+
+    private void mnuViewServerTraffic_Click(object sender, EventArgs e)
+    {
+        outputPane.Show();
     }
 }

@@ -58,6 +58,7 @@ partial class MainWindow
         mnuViewSwitchLanguageFi = new ToolStripMenuItem();
         mnuViewSwitchLanguageDe = new ToolStripMenuItem();
         mnuViewSwitchLanguageUa = new ToolStripMenuItem();
+        mnuViewServerTraffic = new ToolStripMenuItem();
         mnuTools = new ToolStripMenuItem();
         contributeToolStripMenuItem = new ToolStripMenuItem();
         mnuCommunityEditPlayerProfile = new ToolStripMenuItem();
@@ -207,7 +208,7 @@ partial class MainWindow
         // 
         // mnuView
         // 
-        mnuView.DropDownItems.AddRange(new ToolStripItem[] { mnuViewSwitchLanguage });
+        mnuView.DropDownItems.AddRange(new ToolStripItem[] { mnuViewSwitchLanguage, mnuViewServerTraffic });
         mnuView.Name = "mnuView";
         resources.ApplyResources(mnuView, "mnuView");
         // 
@@ -240,6 +241,12 @@ partial class MainWindow
         mnuViewSwitchLanguageUa.Name = "mnuViewSwitchLanguageUa";
         resources.ApplyResources(mnuViewSwitchLanguageUa, "mnuViewSwitchLanguageUa");
         mnuViewSwitchLanguageUa.Click += mnuViewSwitchLanguageUa_Click;
+        // 
+        // mnuViewServerTraffic
+        // 
+        mnuViewServerTraffic.Name = "mnuViewServerTraffic";
+        resources.ApplyResources(mnuViewServerTraffic, "mnuViewServerTraffic");
+        mnuViewServerTraffic.Click += mnuViewServerTraffic_Click;
         // 
         // mnuTools
         // 
@@ -469,4 +476,5 @@ partial class MainWindow
     private ToolStripSeparator toolStripMenuItem8;
     private ToolStripMenuItem discordToolStripMenuItem;
     private ToolStripMenuItem forumToolStripMenuItem;
+    private ToolStripMenuItem mnuViewServerTraffic;
 }
