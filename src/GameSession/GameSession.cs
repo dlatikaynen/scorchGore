@@ -74,7 +74,7 @@ public class GoreSession
                     }
 
                     var iWon = false;
-                    var iHad = SequencerCommands.MY_TURN;
+                    var iHad = SequencerCommands.INITIATORS_TURN;
 
                     switch (mySsp)
                     {
@@ -140,7 +140,11 @@ public class GoreSession
                     communique.Add(new() { Command = SequencerCommands.CANVAS_THE_CITY_AND_BRUSH_THE_BACKDROP });
                     if (iWon)
                     {
-                        communique.Add(new() { Command = SequencerCommands.MY_TURN });
+                        communique.Add(new() { Command = SequencerCommands.INITIATORS_TURN });
+                    }
+                    else
+                    {
+                        communique.Add(new() { Command = SequencerCommands.TURN_OF_HE_WHOMST_JOINED });
                     }
 
                     return Sequencer.MyTurnPushCommand(communique);

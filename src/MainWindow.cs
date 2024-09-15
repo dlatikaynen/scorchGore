@@ -202,12 +202,6 @@ public partial class MainWindow : Form
 
         if (frmJoin.ShowDialog(this) == DialogResult.OK)
         {
-            // consume that one turn that makes us draw initially
-            if(frmJoin.JoinedSession.AmIThePeerOdd)
-            {
-                frmJoin.JoinedSession.Sequencer.PollPopPeerAction();
-            }
-
             var frmGame = new frmGame(frmJoin.JoinedSession)
             {
                 MdiParent = this
@@ -223,7 +217,7 @@ public partial class MainWindow : Form
 
         if (playerProfile.ShowDialog(this) == DialogResult.OK)
         {
-
+            // update?
         }
     }
 

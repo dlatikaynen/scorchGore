@@ -34,6 +34,10 @@
             enterToolStripMenuItem = new ToolStripMenuItem();
             leaveToolStripMenuItem = new ToolStripMenuItem();
             abortToolStripMenuItem = new ToolStripMenuItem();
+            lblStatusLabel = new Label();
+            lblStatus = new Label();
+            lblTurnLabel = new Label();
+            lblTurn = new Label();
             mnuGame.SuspendLayout();
             SuspendLayout();
             // 
@@ -67,10 +71,40 @@
             abortToolStripMenuItem.Name = "abortToolStripMenuItem";
             resources.ApplyResources(abortToolStripMenuItem, "abortToolStripMenuItem");
             // 
+            // lblStatusLabel
+            // 
+            resources.ApplyResources(lblStatusLabel, "lblStatusLabel");
+            lblStatusLabel.Name = "lblStatusLabel";
+            lblStatusLabel.UseMnemonic = false;
+            // 
+            // lblStatus
+            // 
+            resources.ApplyResources(lblStatus, "lblStatus");
+            lblStatus.BackColor = Color.Transparent;
+            lblStatus.Name = "lblStatus";
+            lblStatus.UseMnemonic = false;
+            // 
+            // lblTurnLabel
+            // 
+            resources.ApplyResources(lblTurnLabel, "lblTurnLabel");
+            lblTurnLabel.Name = "lblTurnLabel";
+            lblTurnLabel.UseMnemonic = false;
+            // 
+            // lblTurn
+            // 
+            resources.ApplyResources(lblTurn, "lblTurn");
+            lblTurn.BackColor = Color.Transparent;
+            lblTurn.Name = "lblTurn";
+            lblTurn.UseMnemonic = false;
+            // 
             // frmGame
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(lblTurn);
+            Controls.Add(lblTurnLabel);
+            Controls.Add(lblStatus);
+            Controls.Add(lblStatusLabel);
             Controls.Add(mnuGame);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -93,5 +127,9 @@
         private ToolStripMenuItem enterToolStripMenuItem;
         private ToolStripMenuItem leaveToolStripMenuItem;
         private ToolStripMenuItem abortToolStripMenuItem;
+        private Label lblStatusLabel;
+        private Label lblStatus;
+        private Label lblTurnLabel;
+        private Label lblTurn;
     }
 }

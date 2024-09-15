@@ -1,4 +1,5 @@
 ﻿using ScorchGore.Arena;
+using ScorchGore.Constants;
 using ScorchGore.GameSession;
 using ScorchGore.Sequencer;
 
@@ -8,11 +9,14 @@ public partial class frmGame : Form
 {
     private readonly GoreSession _session;
     private readonly GoreArena _arena;
+    private readonly frmArena _arenaWindow;
+    private GameState _state = GameState.Unknown;
 
     public frmGame(GoreSession session)
     {
         _session = session;
         _arena = new GoreArena();
+        _arenaWindow = new frmArena(_arena);
 
         InitializeComponent();
 
@@ -20,14 +24,67 @@ public partial class frmGame : Form
          * that tells us who the opponent is, and who won the SSP. evaluate that now */
     }
 
+    public void SetState(GameState newState)
+    {
+        if (_state == newState)
+        {
+            return;
+        }
+
+        _state = newState;
+        Invoke(() =>
+        {
+            switch (_state)
+            {
+                case GameState.GameEngine:
+                    lblStatus.Text = "Spiellogik";
+                    break;
+
+                case GameState.MyTurn:
+                    lblStatus.Text = "ich bin dran";
+                    break;
+
+                case GameState.OpponentsTurn:
+                    lblStatus.Text = "Gegner ist dran";
+                    break;
+
+                default:
+                    lblStatus.Text = "initialisieren";
+                    break;
+            }
+
+            lblTurn.Text = _session.Watermark.ToString();
+        });
+    }
+
     public void DoSomething()
     {
+        SetState(GameState.OpponentsTurn);
         PrepareArenaAndReadUp();
         Show();
         if (ShouldAutoImmerse())
         {
             Immerse();
         }
+
+        ThreadPool.QueueUserWorkItem((_) =>
+        {
+            do
+            {
+                Thread.Sleep(333);
+
+                if (_state == GameState.OpponentsTurn)
+                {
+                    if(_session.Sequencer.PollPopPeerAction())
+                    {
+                        Invoke(() =>
+                        {
+                            ProcessGameQueue();
+                        });
+                    }
+                }
+            } while (true);
+        });
     }
 
     /// <summary>
@@ -64,7 +121,12 @@ public partial class frmGame : Form
             }
         }
 
-        while( _session.Sequencer.CommandQueue.TryPeek(out var command))
+        ProcessGameQueue();
+    }
+
+    private void ProcessGameQueue()
+    {
+        while (_session.Sequencer.CommandQueue.TryPeek(out var command))
         {
             ExecuteCommand(command, isReplay: false);
         }
@@ -83,6 +145,22 @@ public partial class frmGame : Form
             case SequencerCommands.CANVAS_THE_CITY_AND_BRUSH_THE_BACKDROP:
                 _arena.Initialize(1);
                 break;
+
+            case SequencerCommands.INITIATORS_TURN:
+                if (_session.AmITheInitiatorEven)
+                {
+                    SetState(GameState.MyTurn);
+                }
+
+                break;
+
+            case SequencerCommands.TURN_OF_HE_WHOMST_JOINED:
+                if (_session.AmIThePeerOdd)
+                {
+                    SetState(GameState.MyTurn);
+                }
+
+                break;
         }
 
         if (!isReplay)
@@ -98,8 +176,15 @@ public partial class frmGame : Form
 
     public void Immerse()
     {
-        using var arena = new frmArena(_arena);
-
-        arena.ShowDialog(this);
+        if(_arenaWindow.Visible)
+        {
+            _arenaWindow.BringToFront();
+        }
+        else
+        {
+            _arenaWindow.Text = Text;
+            _arenaWindow.MdiParent = MdiParent;
+            _arenaWindow.Show();
+        }
     }
 }

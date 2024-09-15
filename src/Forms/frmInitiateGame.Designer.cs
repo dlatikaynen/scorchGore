@@ -200,6 +200,7 @@
             Name = "frmInitiateGame";
             ShowInTaskbar = false;
             SizeGripStyle = SizeGripStyle.Hide;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Initiate a new online game";
             ResumeLayout(false);
             PerformLayout();

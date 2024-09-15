@@ -183,6 +183,7 @@
             Name = "frmJoinGame";
             ShowInTaskbar = false;
             SizeGripStyle = SizeGripStyle.Hide;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Join an online game";
             ResumeLayout(false);
             PerformLayout();

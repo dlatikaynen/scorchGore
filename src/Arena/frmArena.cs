@@ -6,7 +6,6 @@ namespace ScorchGore.Arena;
 public partial class frmArena : Form
 {
     private readonly GoreArena _arena;
-    private CachedBitmap? cachedImage = null;
     private int viewportOffsetX = 0;
     private int viewportOffsetY = 0;
 
@@ -14,13 +13,14 @@ public partial class frmArena : Form
     {
         _arena = arena;
         InitializeComponent();
+        _arena.Target = pnlViewport;
 
 #if DEBUG
         TopMost = false;
 #endif
     }
 
-    private Bitmap Image => _arena.Image;
+    //private Bitmap Image => _arena.Image;
 
     private void frmArena_KeyDown(object sender, KeyEventArgs e)
     {
@@ -41,15 +41,5 @@ public partial class frmArena : Form
             pnlViewport, 
             [true]
         );
-    }
-
-    private void pnlViewport_Paint(object sender, PaintEventArgs e)
-    {
-        if(cachedImage == null)
-        {
-            cachedImage = new(Image, e.Graphics);
-        }
-
-        e.Graphics.DrawCachedBitmap(cachedImage, viewportOffsetX, viewportOffsetY);
     }
 }

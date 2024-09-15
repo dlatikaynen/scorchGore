@@ -16,6 +16,14 @@ public enum SSP
     Well
 }
 
+public enum GameState
+{
+    Unknown,
+    GameEngine,
+    MyTurn,
+    OpponentsTurn
+}
+
 public enum ZeichnungsBefehl
 {
     /// <summary>
