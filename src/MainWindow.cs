@@ -6,12 +6,18 @@ namespace Fso.ScorchGore;
 
 public partial class MainWindow : Form
 {
-    private frmOutputPane outputPane;
+    private readonly frmOutputPane outputPane;
+    private readonly frmApiMessages apiMessagePane;
 
     public MainWindow()
     {
         InitializeComponent();
         outputPane = new frmOutputPane()
+        {
+            MdiParent = this
+        };
+
+        apiMessagePane = new frmApiMessages()
         {
             MdiParent = this
         };
@@ -196,6 +202,12 @@ public partial class MainWindow : Form
 
         if (frmJoin.ShowDialog(this) == DialogResult.OK)
         {
+            // consume that one turn that makes us draw initially
+            if(frmJoin.JoinedSession.AmIThePeerOdd)
+            {
+                frmJoin.JoinedSession.Sequencer.PollPopPeerAction();
+            }
+
             var frmGame = new frmGame(frmJoin.JoinedSession)
             {
                 MdiParent = this
@@ -244,6 +256,25 @@ public partial class MainWindow : Form
 
     private void mnuViewServerTraffic_Click(object sender, EventArgs e)
     {
-        outputPane.Show();
+        if (outputPane.Visible)
+        {
+            outputPane.BringToFront();
+        }
+        else
+        {
+            outputPane.Show();
+        }
+    }
+
+    private void mnuViewApiMessages_Click(object sender, EventArgs e)
+    {
+        if (apiMessagePane.Visible)
+        {
+            apiMessagePane.BringToFront();
+        }
+        else
+        {
+            apiMessagePane.Show();
+        }
     }
 }

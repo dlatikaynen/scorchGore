@@ -52,7 +52,6 @@
             lblInfo.Size = new Size(383, 260);
             lblInfo.TabIndex = 6;
             lblInfo.Text = resources.GetString("lblInfo.Text");
-            lblInfo.TextChanged += lblInfo_TextChanged;
             // 
             // frmAlreadyFinnish
             // 

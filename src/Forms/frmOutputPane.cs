@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ScorchGore.ApiClient;
 
-namespace ScorchGore.Forms
+namespace ScorchGore.Forms;
+
+public partial class frmOutputPane : Form
 {
-    public partial class frmOutputPane : Form
+    public frmOutputPane()
     {
-        public frmOutputPane()
+        InitializeComponent();
+        txtOutput.Clear();
+        GoreApiClient.RestCommunication += (sender, e) =>
         {
-            InitializeComponent();
-        }
+            Invoke(() =>
+            {
+                txtOutput.AppendText($@"{DateTime.Now:HH:mm:ss.fff} {e.Method} {e.Controller} {e.Status} ""{e.Response}""{Environment.NewLine}");
+            });
+        };
     }
 }

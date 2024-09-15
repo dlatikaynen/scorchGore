@@ -6,5 +6,4 @@ internal static class InfrastructureConstants
     internal const string InstanceConfigFile = "instance.ligma";
     internal const string LocalApiUrl = "http://scorchgore.localhost";
     internal const string RemoteApiUrl = "https://en-software.com/scorchgore/";
-
 }

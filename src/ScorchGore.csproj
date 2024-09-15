@@ -47,6 +47,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Forms\frmApiMessages.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -68,7 +71,6 @@
 
   <ItemGroup>
     <Folder Include="Controls\" />
-    <Folder Include="Classes\" />
   </ItemGroup>
 
 </Project>

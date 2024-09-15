@@ -1,5 +1,12 @@
 ﻿namespace ScorchGore.Constants;
 
+internal class GameLogicConstants
+{
+    internal const int SpielerBreite = 30;
+    internal const int SpielerBasisHoehe = 15;
+    internal const int ObererRand = 15;
+}
+
 public enum SSP
 {
     None,
@@ -9,7 +16,7 @@ public enum SSP
     Well
 }
 
-internal enum ZeichnungsBefehl
+public enum ZeichnungsBefehl
 {
     /// <summary>
     /// pfad ist default.
@@ -63,13 +70,13 @@ public enum SchussErgebnis
     SelbstErschossen = 4
 }
 
-internal enum ObenUnten
+public enum ObenUnten
 {
     BergTeil,
     HoehlenTeil
 }
 
-internal enum Medium
+public enum Medium
 {
     Berg,
     Himmel,

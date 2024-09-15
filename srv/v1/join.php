@@ -19,6 +19,7 @@ if (is_readable($filename) and is_writable($filename)) {
             $gamefile = fopen($filename, "a");
             fwrite($gamefile, $contents);
             fclose($gamefile);
+            unlink($turnfile);
 
             echo $contents;
             http_response_code(200);

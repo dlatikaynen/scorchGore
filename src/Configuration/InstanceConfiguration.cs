@@ -19,10 +19,10 @@ internal class InstanceConfiguration
         get
         {
 #if DEBUG
-            if (Debugger.IsAttached)
-            {
-               // return true;
-            }
+            //if (Debugger.IsAttached)
+            //{
+                return true;
+            //}
 #endif
             return false;
         }

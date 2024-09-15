@@ -249,7 +249,14 @@ public class GoreSequencer(GoreSession session, bool isLocal)
         }
         else
         {
-            return GoreApiClient.Turn(Session.GameToken, turn, commands.Select(c => c.ToString()).ToArray());
+            if(GoreApiClient.Turn(Session.GameToken, turn, commands.Select(c => c.ToString()).ToArray()))
+            {
+                ProcessedCommands.AddRange(commands);
+
+                return true;
+            }
+
+            return false;
         }
 
         return true;
