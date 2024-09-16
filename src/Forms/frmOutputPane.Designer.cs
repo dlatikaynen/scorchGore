@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOutputPane));
             txtOutput = new TextBox();
             SuspendLayout();
             // 
@@ -57,6 +58,7 @@
             ClientSize = new Size(576, 147);
             Controls.Add(txtOutput);
             HelpButton = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmOutputPane";
             ShowInTaskbar = false;
             Text = "Server traffic";

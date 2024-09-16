@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmApiMessages));
             txtOutput = new TextBox();
             SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             txtOutput.Text = "OHAI";
             txtOutput.WordWrap = false;
             // 
-            // frmOutputPane
+            // frmApiMessages
             // 
             AccessibleRole = AccessibleRole.Pane;
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -57,9 +58,10 @@
             ClientSize = new Size(576, 147);
             Controls.Add(txtOutput);
             HelpButton = true;
-            Name = "frmOutputPane";
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "frmApiMessages";
             ShowInTaskbar = false;
-            Text = "Server traffic";
+            Text = "Multiplayer comm log";
             ResumeLayout(false);
             PerformLayout();
         }

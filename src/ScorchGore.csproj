@@ -8,6 +8,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
     <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
+    <ApplicationIcon>Resources\tank.ico</ApplicationIcon>
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <SignAssembly>False</SignAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +38,10 @@
     <None Remove="Resources\projectile-fired.wav" />
     <None Remove="Resources\rechtsherz.png" />
     <None Remove="Resources\user.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\tank.ico" />
   </ItemGroup>
 
   <ItemGroup>

@@ -59,7 +59,9 @@ partial class MainWindow
         mnuViewSwitchLanguageDe = new ToolStripMenuItem();
         mnuViewSwitchLanguageUa = new ToolStripMenuItem();
         mnuViewServerTraffic = new ToolStripMenuItem();
+        mnuViewApiMessages = new ToolStripMenuItem();
         mnuTools = new ToolStripMenuItem();
+        mnuToolsLevelDesigner = new ToolStripMenuItem();
         contributeToolStripMenuItem = new ToolStripMenuItem();
         mnuCommunityEditPlayerProfile = new ToolStripMenuItem();
         toolStripMenuItem8 = new ToolStripSeparator();
@@ -85,7 +87,6 @@ partial class MainWindow
         toolStripStatusLabel2 = new ToolStripStatusLabel();
         toolStripStatusLabel3 = new ToolStripStatusLabel();
         toolStripProgressBar1 = new ToolStripProgressBar();
-        mnuViewApiMessages = new ToolStripMenuItem();
         MainToolbar.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)MdiError).BeginInit();
         MainMenu.SuspendLayout();
@@ -249,10 +250,22 @@ partial class MainWindow
         resources.ApplyResources(mnuViewServerTraffic, "mnuViewServerTraffic");
         mnuViewServerTraffic.Click += mnuViewServerTraffic_Click;
         // 
+        // mnuViewApiMessages
+        // 
+        mnuViewApiMessages.Name = "mnuViewApiMessages";
+        resources.ApplyResources(mnuViewApiMessages, "mnuViewApiMessages");
+        mnuViewApiMessages.Click += mnuViewApiMessages_Click;
+        // 
         // mnuTools
         // 
+        mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsLevelDesigner });
         mnuTools.Name = "mnuTools";
         resources.ApplyResources(mnuTools, "mnuTools");
+        // 
+        // mnuToolsLevelDesigner
+        // 
+        mnuToolsLevelDesigner.Name = "mnuToolsLevelDesigner";
+        resources.ApplyResources(mnuToolsLevelDesigner, "mnuToolsLevelDesigner");
         // 
         // contributeToolStripMenuItem
         // 
@@ -398,12 +411,6 @@ partial class MainWindow
         toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
         toolStripProgressBar1.Value = 50;
         // 
-        // mnuViewApiMessages
-        // 
-        mnuViewApiMessages.Name = "mnuViewApiMessages";
-        resources.ApplyResources(mnuViewApiMessages, "mnuViewApiMessages");
-        mnuViewApiMessages.Click += mnuViewApiMessages_Click;
-        // 
         // MainWindow
         // 
         AccessibleRole = AccessibleRole.Application;
@@ -485,4 +492,5 @@ partial class MainWindow
     private ToolStripMenuItem forumToolStripMenuItem;
     private ToolStripMenuItem mnuViewServerTraffic;
     private ToolStripMenuItem mnuViewApiMessages;
+    private ToolStripMenuItem mnuToolsLevelDesigner;
 }

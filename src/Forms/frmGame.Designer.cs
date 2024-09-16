@@ -38,6 +38,10 @@
             lblStatus = new Label();
             lblTurnLabel = new Label();
             lblTurn = new Label();
+            lblCommand = new Label();
+            lblOomph = new Label();
+            txtCommand = new TextBox();
+            txtOomph = new TextBox();
             mnuGame.SuspendLayout();
             SuspendLayout();
             // 
@@ -97,10 +101,38 @@
             lblTurn.Name = "lblTurn";
             lblTurn.UseMnemonic = false;
             // 
+            // lblCommand
+            // 
+            resources.ApplyResources(lblCommand, "lblCommand");
+            lblCommand.Name = "lblCommand";
+            // 
+            // lblOomph
+            // 
+            resources.ApplyResources(lblOomph, "lblOomph");
+            lblOomph.Name = "lblOomph";
+            // 
+            // txtCommand
+            // 
+            txtCommand.HideSelection = false;
+            resources.ApplyResources(txtCommand, "txtCommand");
+            txtCommand.Name = "txtCommand";
+            txtCommand.ReadOnly = true;
+            // 
+            // txtOomph
+            // 
+            txtOomph.HideSelection = false;
+            resources.ApplyResources(txtOomph, "txtOomph");
+            txtOomph.Name = "txtOomph";
+            txtOomph.ReadOnly = true;
+            // 
             // frmGame
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(txtOomph);
+            Controls.Add(txtCommand);
+            Controls.Add(lblOomph);
+            Controls.Add(lblCommand);
             Controls.Add(lblTurn);
             Controls.Add(lblTurnLabel);
             Controls.Add(lblStatus);
@@ -109,6 +141,7 @@
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             HelpButton = true;
+            KeyPreview = true;
             MainMenuStrip = mnuGame;
             MaximizeBox = false;
             Name = "frmGame";
@@ -131,5 +164,9 @@
         private Label lblStatus;
         private Label lblTurnLabel;
         private Label lblTurn;
+        private Label lblCommand;
+        private Label lblOomph;
+        private TextBox txtCommand;
+        private TextBox txtOomph;
     }
 }

@@ -73,10 +73,11 @@ internal static class LevelSequenzierer
 
             default:
                 /* spielende */
-                return null;
+                return new();
         }
 
         levelBeschreibung.MisisonsnameSetzen();
+
         return levelBeschreibung;
     }
 }

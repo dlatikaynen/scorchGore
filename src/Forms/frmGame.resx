@@ -121,30 +121,6 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="enterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 22</value>
-  </data>
-  <data name="enterToolStripMenuItem.Text" xml:space="preserve">
-    <value>Enter</value>
-  </data>
-  <data name="leaveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 22</value>
-  </data>
-  <data name="leaveToolStripMenuItem.Text" xml:space="preserve">
-    <value>Leave</value>
-  </data>
-  <data name="abortToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 22</value>
-  </data>
-  <data name="abortToolStripMenuItem.Text" xml:space="preserve">
-    <value>Abort</value>
-  </data>
-  <data name="gameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="gameToolStripMenuItem.Text" xml:space="preserve">
-    <value>Game</value>
-  </data>
   <data name="mnuGame.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -168,7 +144,31 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mnuGame.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
+  </data>
+  <data name="gameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="gameToolStripMenuItem.Text" xml:space="preserve">
+    <value>Game</value>
+  </data>
+  <data name="enterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 22</value>
+  </data>
+  <data name="enterToolStripMenuItem.Text" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="leaveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 22</value>
+  </data>
+  <data name="leaveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Leave</value>
+  </data>
+  <data name="abortToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 22</value>
+  </data>
+  <data name="abortToolStripMenuItem.Text" xml:space="preserve">
+    <value>Abort</value>
   </data>
   <data name="lblStatusLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 9</value>
@@ -192,7 +192,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblStatusLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -226,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="lblTurnLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -253,7 +253,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTurnLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="lblTurn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -289,6 +289,108 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTurn.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblCommand.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblCommand.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 50</value>
+  </data>
+  <data name="lblCommand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 19</value>
+  </data>
+  <data name="lblCommand.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblCommand.Text" xml:space="preserve">
+    <value>&amp;Command</value>
+  </data>
+  <data name="&gt;&gt;lblCommand.Name" xml:space="preserve">
+    <value>lblCommand</value>
+  </data>
+  <data name="&gt;&gt;lblCommand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCommand.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblCommand.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblOomph.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblOomph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 98</value>
+  </data>
+  <data name="lblOomph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 19</value>
+  </data>
+  <data name="lblOomph.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblOomph.Text" xml:space="preserve">
+    <value>&amp;Oomph</value>
+  </data>
+  <data name="&gt;&gt;lblOomph.Name" xml:space="preserve">
+    <value>lblOomph</value>
+  </data>
+  <data name="&gt;&gt;lblOomph.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOomph.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblOomph.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtCommand.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 69</value>
+  </data>
+  <data name="txtCommand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 23</value>
+  </data>
+  <data name="txtCommand.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="txtCommand.WordWrap" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtCommand.Name" xml:space="preserve">
+    <value>txtCommand</value>
+  </data>
+  <data name="&gt;&gt;txtCommand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtCommand.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtCommand.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtOomph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 116</value>
+  </data>
+  <data name="txtOomph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 23</value>
+  </data>
+  <data name="txtOomph.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="txtOomph.WordWrap" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtOomph.Name" xml:space="preserve">
+    <value>txtOomph</value>
+  </data>
+  <data name="&gt;&gt;txtOomph.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtOomph.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtOomph.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -298,7 +400,31 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>229, 152</value>
+    <value>229, 151</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgIHYgICB2AAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEhIRchISHuISEh7iEh
+        IRcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhISH/ISEh/yEhIf8AAAAAAAAAAAAAAAAhISGLICAgmyAg
+        IJwhISGLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcHBwSIiIiSyEhIXEgICCXISEh7h8f
+        HzEfHx8xISEh7iAgIJchISFxIiIiSxwcHBIAAAAAAAAAAAAAAAAAAAAAISEheyAgIPsgICCeISEheh0d
+        HUYeHh4ZHh4eGR0dHUYhISF6ICAgniAgIPshISF7ISEh/yEhIf8hISH/ISEh/xkZGQogICC6ISEhsCIi
+        Ih4eHh4ZHh4eGR4eHhkeHh4ZGxsbHCEhIaohISHAKioqDAAAAAAAAAAAAAAAAAAAAAAAAAAAHx8fCCAg
+        ILUgICClHh4eGR4eHhkeHh4ZHh4eGSAgIKUgICC1Hx8fCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAgICA+Hx8fyR4eHhkeHh4ZHh4eGR4eHhkfHx/IICAgPgAAAAAAAAAAAAAAAAAAAAAhISH/ISEh/yEh
+        If8AAAAAIiIiaSEhIaIhISEmISEhiyEhIYsgICAnISEhoSIiImkAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAACAgIJYhISHMICAg6iAgIJ8gICCfICAg6iEhIcsgICCWAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAgICB/ICAgrB8fHygAAAAAAAAAAB8fHyggICCsICAgfwAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAA//8AAP//AAD/nwAA/w8AAMcPAADwAAAA8AAAAAAAAAD4AQAA/AMAAMQDAAD8AwAA/GMAAP//
+        AAD//wAA//8AAA==
+</value>
   </data>
   <data name="&gt;&gt;gameToolStripMenuItem.Name" xml:space="preserve">
     <value>gameToolStripMenuItem</value>

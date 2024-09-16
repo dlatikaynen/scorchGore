@@ -218,7 +218,7 @@ internal static class LevelZeichner
 
     private static void ZeichneEi(Bitmap woBinIch, Graphics zeichenFlaeche, LevelArchitekturPfad architekturPfad)
     {
-        var grafikPfad = LevelZeichner.AlsPfad(woBinIch, architekturPfad);
+        var grafikPfad = AlsPfad(woBinIch, architekturPfad);
         if (architekturPfad.IstGefuellt)
         {
             zeichenFlaeche.FillEllipse(
@@ -241,7 +241,7 @@ internal static class LevelZeichner
 
     private static void ZeichneGummiband(Bitmap woBinIch, Graphics zeichenFlaeche, LevelArchitekturPfad architekturPfad)
     {
-        var grafikPfad = LevelZeichner.AlsPfad(woBinIch, architekturPfad);
+        var grafikPfad = AlsPfad(woBinIch, architekturPfad);
         if (architekturPfad.IstRechteck || architekturPfad.IstGefuellt)
         {
             /* gefüllt geht nur als geschlossene kurva */
@@ -276,7 +276,7 @@ internal static class LevelZeichner
     {
         PointF grasPunktGenau;
         var random = new Random();
-        var grafikPfad = LevelZeichner.AlsPfad(woBinIch, architekturPfad);
+        var grafikPfad = AlsPfad(woBinIch, architekturPfad);
         if (grafikPfad.PointCount == 2)
         {
             var sodeAnfang = grafikPfad.PathPoints[0];
@@ -299,7 +299,7 @@ internal static class LevelZeichner
                 }
                 else
                 {
-                    LevelZeichner.RechneBlattPosition(zeichenFlaeche, random, grasPunktGenau, ref letztesBlatt, ref ueberLappung);
+                    RechneBlattPosition(zeichenFlaeche, random, grasPunktGenau, ref letztesBlatt, ref ueberLappung);
                 }
             }
 
@@ -319,7 +319,7 @@ internal static class LevelZeichner
                 }
                 else
                 {
-                    LevelZeichner.RechneBlattPosition(zeichenFlaeche, random, grasPunktGenau, ref letztesBlatt, ref ueberLappung);
+                    RechneBlattPosition(zeichenFlaeche, random, grasPunktGenau, ref letztesBlatt, ref ueberLappung);
                 }
             }
 
@@ -329,14 +329,14 @@ internal static class LevelZeichner
 
     private static void RechneBlattPosition(Graphics zeichenFlaeche, Random random, PointF grasPunktGenau, ref PointF letztesBlatt, ref PointF ueberLappung)
     {
-        var abstand = LevelZeichner.Abstand(letztesBlatt, grasPunktGenau);
+        var abstand = Abstand(letztesBlatt, grasPunktGenau);
         if (abstand < 6)
         {
             ueberLappung = grasPunktGenau;
         }
         else if (abstand > 8)
         {
-            LevelZeichner.ZeichneBlatt(
+            ZeichneBlatt(
                 zeichenFlaeche,
                 random,
                 grasPunktGenau,
