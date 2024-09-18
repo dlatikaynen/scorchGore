@@ -5,6 +5,7 @@ internal class GameLogicConstants
     internal const int SpielerBreite = 30;
     internal const int SpielerBasisHoehe = 15;
     internal const int ObererRand = 15;
+    internal const int MaxOomph = 269;
 }
 
 public enum SSP

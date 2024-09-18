@@ -7,6 +7,9 @@
     <Compile Update="Arena\frmArena.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\frmAlreadyEnglish.cs">
       <SubType>Form</SubType>
     </Compile>

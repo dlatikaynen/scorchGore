@@ -80,7 +80,7 @@ partial class MainWindow
         toolStripMenuItem2 = new ToolStripMenuItem();
         toolStripMenuItem3 = new ToolStripMenuItem();
         toolStripMenuItem1 = new ToolStripSeparator();
-        aboutToolStripMenuItem = new ToolStripMenuItem();
+        mnuHelpAbout = new ToolStripMenuItem();
         statusStrip1 = new StatusStrip();
         toolStripStatusLabel1 = new ToolStripStatusLabel();
         toolStripStatusLabel4 = new ToolStripStatusLabel();
@@ -322,7 +322,7 @@ partial class MainWindow
         // 
         // helpToolStripMenuItem
         // 
-        helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { buyFullVersionToolStripMenuItem, onlineHelpToolStripMenuItem, toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem1, aboutToolStripMenuItem });
+        helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { buyFullVersionToolStripMenuItem, onlineHelpToolStripMenuItem, toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem1, mnuHelpAbout });
         helpToolStripMenuItem.Name = "helpToolStripMenuItem";
         resources.ApplyResources(helpToolStripMenuItem, "helpToolStripMenuItem");
         // 
@@ -362,10 +362,11 @@ partial class MainWindow
         toolStripMenuItem1.Name = "toolStripMenuItem1";
         resources.ApplyResources(toolStripMenuItem1, "toolStripMenuItem1");
         // 
-        // aboutToolStripMenuItem
+        // mnuHelpAbout
         // 
-        aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-        resources.ApplyResources(aboutToolStripMenuItem, "aboutToolStripMenuItem");
+        mnuHelpAbout.Name = "mnuHelpAbout";
+        resources.ApplyResources(mnuHelpAbout, "mnuHelpAbout");
+        mnuHelpAbout.Click += mnuHelpAbout_Click;
         // 
         // statusStrip1
         // 
@@ -454,7 +455,7 @@ partial class MainWindow
     private ToolStripMenuItem helpToolStripMenuItem;
     private ToolStripStatusLabel toolStripStatusLabel4;
     private ToolStripMenuItem onlineHelpToolStripMenuItem;
-    private ToolStripMenuItem aboutToolStripMenuItem;
+    private ToolStripMenuItem mnuHelpAbout;
     private ToolStripMenuItem buyFullVersionToolStripMenuItem;
     private ToolStripMenuItem payAndRegisterToolStripMenuItem;
     private ToolStripMenuItem enterProductkeyToolStripMenuItem;

@@ -75,7 +75,7 @@ public partial class frmGame : Form
 
                 if (_state == GameState.OpponentsTurn)
                 {
-                    if(_session.Sequencer.PollPopPeerAction())
+                    if (_session.Sequencer.PollPopPeerAction())
                     {
                         Invoke(() =>
                         {
@@ -132,7 +132,23 @@ public partial class frmGame : Form
         }
     }
 
-    private void ExecuteCommand(SequencerCommand command, bool isReplay = false)
+    private bool PushAndExecuteCommand(SequencerCommand command)
+    {
+        if(!_session.Sequencer.MyTurnPushCommand([command]))
+        {
+            return false;
+        }
+
+        var executedCommand = ExecuteCommand(command);
+
+        // we consider it succeeded if the command that
+        // was executed, is the command the had been
+        // commanded to execute. we may reconsider this
+        // later on, if maybe substitution is useful
+        return executedCommand.Command == command.Command;
+    }
+
+    private SequencerCommand ExecuteCommand(SequencerCommand command, bool isReplay = false)
     {
         switch (command.Command)
         {
@@ -161,12 +177,18 @@ public partial class frmGame : Form
                 }
 
                 break;
+
+            case SequencerCommands.FIRE_IN_THE_HOLE:
+                // shoot!
+                break;
         }
 
         if (!isReplay)
         {
-            _session.Sequencer.ConsumeOne();
+            return _session.Sequencer.ConsumeOne();
         }
+
+        return command;
     }
 
     private bool ShouldAutoImmerse()
@@ -176,7 +198,7 @@ public partial class frmGame : Form
 
     public void Immerse()
     {
-        if(_arenaWindow.Visible)
+        if (_arenaWindow.Visible)
         {
             _arenaWindow.BringToFront();
         }
@@ -186,5 +208,65 @@ public partial class frmGame : Form
             _arenaWindow.MdiParent = MdiParent;
             _arenaWindow.Show();
         }
+    }
+
+    private void frmGame_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            e.Handled = true;
+            e.SuppressKeyPress = true;
+
+            var command = ValidateInput();
+            if(command.isValid)
+            {
+                try
+                {
+                    txtOomph.ReadOnly = true;
+                    txtCommand.ReadOnly = true;
+                    if (PushAndExecuteCommand(command.input))
+                    {
+                        txtCommand.Clear();
+                        txtOomph.Clear();
+                    }
+                }
+                finally
+                {
+                    txtCommand.ReadOnly = false;
+                    txtOomph.ReadOnly = false;
+                }
+            }
+        }
+    }
+
+    private (bool isValid, SequencerCommand input) ValidateInput()
+    {
+        var command = new SequencerCommand
+        {
+            Command = SequencerCommands.INDETERMINATE
+        };
+
+        if(int.TryParse(txtOomph.Text, out int oomph) && oomph > 0 && oomph <= GameLogicConstants.MaxOomph)
+        {
+            var rawCommand = txtCommand.Text.Trim();
+
+            if(string.IsNullOrEmpty(rawCommand))
+            {
+                BringToFront();
+                txtCommand.Focus();
+            }
+            else
+            {
+                // some potentially valid input
+
+            }
+        }
+        else
+        {
+            BringToFront();
+            txtOomph.Focus();
+        }
+
+        return (isValid: false, input: command);
     }
 }

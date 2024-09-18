@@ -258,6 +258,11 @@ public partial class MainWindow : Form
         {
             outputPane.Show();
         }
+
+        if (outputPane.WindowState == FormWindowState.Minimized)
+        {
+            outputPane.WindowState = FormWindowState.Normal;
+        }
     }
 
     private void mnuViewApiMessages_Click(object sender, EventArgs e)
@@ -270,5 +275,15 @@ public partial class MainWindow : Form
         {
             apiMessagePane.Show();
         }
+
+        if (apiMessagePane.WindowState == FormWindowState.Minimized)
+        {
+            apiMessagePane.WindowState = FormWindowState.Normal;
+        }
+    }
+
+    private void mnuHelpAbout_Click(object sender, EventArgs e)
+    {
+        new frmAbout().Show(this);
     }
 }

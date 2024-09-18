@@ -147,6 +147,7 @@
             Name = "frmGame";
             ShowInTaskbar = false;
             SizeGripStyle = SizeGripStyle.Hide;
+            KeyDown += frmGame_KeyDown;
             mnuGame.ResumeLayout(false);
             mnuGame.PerformLayout();
             ResumeLayout(false);
