@@ -38,18 +38,33 @@ public partial class frmGame : Form
             {
                 case GameState.GameEngine:
                     lblStatus.Text = "Spiellogik";
+                    txtCommand.ReadOnly = true;
+                    txtOomph.ReadOnly = true;
                     break;
 
                 case GameState.MyTurn:
                     lblStatus.Text = "ich bin dran";
+                    txtCommand.ReadOnly = false;
+                    txtOomph.ReadOnly = false;
+                    if (WindowState == FormWindowState.Minimized)
+                    {
+                        WindowState = FormWindowState.Normal;
+                    }
+
+                    BringToFront();
+                    txtCommand.Focus();
                     break;
 
                 case GameState.OpponentsTurn:
                     lblStatus.Text = "Gegner ist dran";
+                    txtCommand.ReadOnly = true;
+                    txtOomph.ReadOnly = true;
                     break;
 
                 default:
                     lblStatus.Text = "initialisieren";
+                    txtCommand.ReadOnly = true;
+                    txtOomph.ReadOnly = true;
                     break;
             }
 
@@ -139,6 +154,8 @@ public partial class frmGame : Form
             return false;
         }
 
+        _session.Sequencer.CommandQueue.Enqueue(command);
+
         var executedCommand = ExecuteCommand(command);
 
         // we consider it succeeded if the command that
@@ -163,7 +180,16 @@ public partial class frmGame : Form
                 break;
 
             case SequencerCommands.INITIATORS_TURN:
-                if (_session.AmITheInitiatorEven)
+                if (_session.AmIThePeerOdd)
+                {
+                    SetState(GameState.OpponentsTurn);
+                    PushAndExecuteCommand(new() { Command = SequencerCommands.ACK });
+                }
+
+                break;
+
+            case SequencerCommands.ACK:
+                if(_session.AmITheInitiatorEven)
                 {
                     SetState(GameState.MyTurn);
                 }
@@ -180,6 +206,7 @@ public partial class frmGame : Form
 
             case SequencerCommands.FIRE_IN_THE_HOLE:
                 // shoot!
+                SetState(GameState.GameEngine);
                 break;
         }
 
@@ -220,17 +247,14 @@ public partial class frmGame : Form
             var command = ValidateInput();
             if(command.isValid)
             {
-                try
+                txtOomph.ReadOnly = true;
+                txtCommand.ReadOnly = true;
+                if (PushAndExecuteCommand(command.input))
                 {
-                    txtOomph.ReadOnly = true;
-                    txtCommand.ReadOnly = true;
-                    if (PushAndExecuteCommand(command.input))
-                    {
-                        txtCommand.Clear();
-                        txtOomph.Clear();
-                    }
+                    txtCommand.Clear();
+                    txtOomph.Clear();
                 }
-                finally
+                else
                 {
                     txtCommand.ReadOnly = false;
                     txtOomph.ReadOnly = false;
@@ -258,7 +282,13 @@ public partial class frmGame : Form
             else
             {
                 // some potentially valid input
+                if (int.TryParse(rawCommand, out int angle) && angle > 0)
+                {
+                    command.Command = SequencerCommands.FIRE_IN_THE_HOLE;
+                    command.Arguments = $"{angle} {oomph}";
 
+                    return (isValid: true, input: command);
+                }
             }
         }
         else
