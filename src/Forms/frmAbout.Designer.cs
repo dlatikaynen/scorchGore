@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ProgressBar progressBar1;
-            TrackBar trackBar1;
+            ProgressBar pgbForms;
+            TrackBar trbForms;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAbout));
             pnlAbout = new Panel();
+            lblCopyright = new Label();
+            lblByTheCreators = new Label();
             label23 = new Label();
             label22 = new Label();
             label21 = new Label();
@@ -46,52 +48,50 @@
             label12 = new Label();
             label11 = new Label();
             label10 = new Label();
-            checkBox1 = new CheckBox();
-            radioButton1 = new RadioButton();
+            chkForms = new CheckBox();
+            optForms = new RadioButton();
             label9 = new Label();
             label8 = new Label();
-            label7 = new Label();
-            label6 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
+            lblDesign = new Label();
+            lblDesignLabel = new Label();
+            lblManufacturerLabel = new Label();
+            lblManufacturer = new Label();
+            lblProducer = new Label();
+            lblProducerLabel = new Label();
+            lblInstalment = new Label();
             lblProduct = new Label();
-            label24 = new Label();
-            label25 = new Label();
-            progressBar1 = new ProgressBar();
-            trackBar1 = new TrackBar();
-            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
+            pgbForms = new ProgressBar();
+            trbForms = new TrackBar();
+            ((System.ComponentModel.ISupportInitialize)trbForms).BeginInit();
             pnlAbout.SuspendLayout();
             SuspendLayout();
             // 
-            // progressBar1
+            // pgbForms
             // 
-            progressBar1.ForeColor = Color.Gold;
-            progressBar1.Location = new Point(32, 279);
-            progressBar1.MarqueeAnimationSpeed = 5;
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(45, 23);
-            progressBar1.Style = ProgressBarStyle.Marquee;
-            progressBar1.TabIndex = 11;
-            progressBar1.UseWaitCursor = true;
+            pgbForms.ForeColor = Color.Gold;
+            pgbForms.Location = new Point(32, 279);
+            pgbForms.MarqueeAnimationSpeed = 5;
+            pgbForms.Name = "pgbForms";
+            pgbForms.Size = new Size(45, 23);
+            pgbForms.Style = ProgressBarStyle.Marquee;
+            pgbForms.TabIndex = 11;
+            pgbForms.UseWaitCursor = true;
             // 
-            // trackBar1
+            // trbForms
             // 
-            trackBar1.LargeChange = 2;
-            trackBar1.Location = new Point(87, 279);
-            trackBar1.Maximum = 5;
-            trackBar1.Name = "trackBar1";
-            trackBar1.Size = new Size(71, 45);
-            trackBar1.TabIndex = 12;
-            trackBar1.Value = 1;
+            trbForms.LargeChange = 2;
+            trbForms.Location = new Point(87, 279);
+            trbForms.Maximum = 5;
+            trbForms.Name = "trbForms";
+            trbForms.Size = new Size(71, 45);
+            trbForms.TabIndex = 12;
+            trbForms.Value = 1;
             // 
             // pnlAbout
             // 
             pnlAbout.AccessibleRole = AccessibleRole.Pane;
-            pnlAbout.Controls.Add(label25);
-            pnlAbout.Controls.Add(label24);
+            pnlAbout.Controls.Add(lblCopyright);
+            pnlAbout.Controls.Add(lblByTheCreators);
             pnlAbout.Controls.Add(label23);
             pnlAbout.Controls.Add(label22);
             pnlAbout.Controls.Add(label21);
@@ -106,24 +106,45 @@
             pnlAbout.Controls.Add(label12);
             pnlAbout.Controls.Add(label11);
             pnlAbout.Controls.Add(label10);
-            pnlAbout.Controls.Add(checkBox1);
-            pnlAbout.Controls.Add(trackBar1);
-            pnlAbout.Controls.Add(progressBar1);
-            pnlAbout.Controls.Add(radioButton1);
+            pnlAbout.Controls.Add(chkForms);
+            pnlAbout.Controls.Add(trbForms);
+            pnlAbout.Controls.Add(pgbForms);
+            pnlAbout.Controls.Add(optForms);
             pnlAbout.Controls.Add(label9);
             pnlAbout.Controls.Add(label8);
-            pnlAbout.Controls.Add(label7);
-            pnlAbout.Controls.Add(label6);
-            pnlAbout.Controls.Add(label4);
-            pnlAbout.Controls.Add(label5);
-            pnlAbout.Controls.Add(label3);
-            pnlAbout.Controls.Add(label2);
-            pnlAbout.Controls.Add(label1);
+            pnlAbout.Controls.Add(lblDesign);
+            pnlAbout.Controls.Add(lblDesignLabel);
+            pnlAbout.Controls.Add(lblManufacturerLabel);
+            pnlAbout.Controls.Add(lblManufacturer);
+            pnlAbout.Controls.Add(lblProducer);
+            pnlAbout.Controls.Add(lblProducerLabel);
+            pnlAbout.Controls.Add(lblInstalment);
             pnlAbout.Controls.Add(lblProduct);
             pnlAbout.Location = new Point(0, 0);
             pnlAbout.Name = "pnlAbout";
             pnlAbout.Size = new Size(261, 811);
             pnlAbout.TabIndex = 0;
+            // 
+            // lblCopyright
+            // 
+            lblCopyright.AutoSize = true;
+            lblCopyright.Location = new Point(12, 80);
+            lblCopyright.Name = "lblCopyright";
+            lblCopyright.Size = new Size(127, 15);
+            lblCopyright.TabIndex = 29;
+            lblCopyright.Text = "Copyright ©2021-2024";
+            lblCopyright.UseMnemonic = false;
+            // 
+            // lblByTheCreators
+            // 
+            lblByTheCreators.AutoSize = true;
+            lblByTheCreators.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            lblByTheCreators.Location = new Point(12, 63);
+            lblByTheCreators.Name = "lblByTheCreators";
+            lblByTheCreators.Size = new Size(141, 15);
+            lblByTheCreators.TabIndex = 28;
+            lblByTheCreators.Text = "by the creators of blooDot";
+            lblByTheCreators.UseMnemonic = false;
             // 
             // label23
             // 
@@ -270,24 +291,24 @@
             label10.Text = "Additional design";
             label10.UseMnemonic = false;
             // 
-            // checkBox1
+            // chkForms
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(164, 284);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(15, 14);
-            checkBox1.TabIndex = 13;
-            checkBox1.UseVisualStyleBackColor = true;
+            chkForms.AutoSize = true;
+            chkForms.Location = new Point(164, 284);
+            chkForms.Name = "chkForms";
+            chkForms.Size = new Size(15, 14);
+            chkForms.TabIndex = 13;
+            chkForms.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // optForms
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(12, 284);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(14, 13);
-            radioButton1.TabIndex = 10;
-            radioButton1.TabStop = true;
-            radioButton1.UseVisualStyleBackColor = true;
+            optForms.AutoSize = true;
+            optForms.Location = new Point(12, 284);
+            optForms.Name = "optForms";
+            optForms.Size = new Size(14, 13);
+            optForms.TabIndex = 10;
+            optForms.TabStop = true;
+            optForms.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -310,79 +331,79 @@
             label8.Text = "Engine";
             label8.UseMnemonic = false;
             // 
-            // label7
+            // lblDesign
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(12, 215);
-            label7.Name = "label7";
-            label7.Size = new Size(100, 15);
-            label7.TabIndex = 7;
-            label7.Text = "Daniel Latikaynen";
-            label7.UseMnemonic = false;
+            lblDesign.AutoSize = true;
+            lblDesign.Location = new Point(12, 215);
+            lblDesign.Name = "lblDesign";
+            lblDesign.Size = new Size(100, 15);
+            lblDesign.TabIndex = 7;
+            lblDesign.Text = "Daniel Latikaynen";
+            lblDesign.UseMnemonic = false;
             // 
-            // label6
+            // lblDesignLabel
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            label6.Location = new Point(12, 198);
-            label6.Name = "label6";
-            label6.Size = new Size(52, 15);
-            label6.TabIndex = 6;
-            label6.Text = "\"Design\"";
-            label6.UseMnemonic = false;
+            lblDesignLabel.AutoSize = true;
+            lblDesignLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            lblDesignLabel.Location = new Point(12, 198);
+            lblDesignLabel.Name = "lblDesignLabel";
+            lblDesignLabel.Size = new Size(52, 15);
+            lblDesignLabel.TabIndex = 6;
+            lblDesignLabel.Text = "\"Design\"";
+            lblDesignLabel.UseMnemonic = false;
             // 
-            // label4
+            // lblManufacturerLabel
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            label4.Location = new Point(12, 156);
-            label4.Name = "label4";
-            label4.Size = new Size(160, 15);
-            label4.TabIndex = 5;
-            label4.Text = "Manufacturer and distributor";
-            label4.UseMnemonic = false;
+            lblManufacturerLabel.AutoSize = true;
+            lblManufacturerLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            lblManufacturerLabel.Location = new Point(12, 156);
+            lblManufacturerLabel.Name = "lblManufacturerLabel";
+            lblManufacturerLabel.Size = new Size(160, 15);
+            lblManufacturerLabel.TabIndex = 5;
+            lblManufacturerLabel.Text = "Manufacturer and distributor";
+            lblManufacturerLabel.UseMnemonic = false;
             // 
-            // label5
+            // lblManufacturer
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(12, 173);
-            label5.Name = "label5";
-            label5.Size = new Size(108, 15);
-            label5.TabIndex = 4;
-            label5.Text = "en-software GmbH";
-            label5.UseMnemonic = false;
+            lblManufacturer.AutoSize = true;
+            lblManufacturer.Location = new Point(12, 173);
+            lblManufacturer.Name = "lblManufacturer";
+            lblManufacturer.Size = new Size(108, 15);
+            lblManufacturer.TabIndex = 4;
+            lblManufacturer.Text = "en-software GmbH";
+            lblManufacturer.UseMnemonic = false;
             // 
-            // label3
+            // lblProducer
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 130);
-            label3.Name = "label3";
-            label3.Size = new Size(135, 15);
-            label3.TabIndex = 3;
-            label3.Text = "Flamingin Sarjakuvat Oy";
-            label3.UseMnemonic = false;
+            lblProducer.AutoSize = true;
+            lblProducer.Location = new Point(12, 130);
+            lblProducer.Name = "lblProducer";
+            lblProducer.Size = new Size(135, 15);
+            lblProducer.TabIndex = 3;
+            lblProducer.Text = "Flamingin Sarjakuvat Oy";
+            lblProducer.UseMnemonic = false;
             // 
-            // label2
+            // lblProducerLabel
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            label2.Location = new Point(12, 115);
-            label2.Name = "label2";
-            label2.Size = new Size(53, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Producer";
-            label2.UseMnemonic = false;
+            lblProducerLabel.AutoSize = true;
+            lblProducerLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            lblProducerLabel.Location = new Point(12, 115);
+            lblProducerLabel.Name = "lblProducerLabel";
+            lblProducerLabel.Size = new Size(53, 15);
+            lblProducerLabel.TabIndex = 2;
+            lblProducerLabel.Text = "Producer";
+            lblProducerLabel.UseMnemonic = false;
             // 
-            // label1
+            // lblInstalment
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label1.Location = new Point(12, 35);
-            label1.Name = "label1";
-            label1.Size = new Size(148, 15);
-            label1.TabIndex = 1;
-            label1.Text = "Era 1 \"Wrath of the Mild\"";
-            label1.UseMnemonic = false;
+            lblInstalment.AutoSize = true;
+            lblInstalment.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblInstalment.Location = new Point(12, 35);
+            lblInstalment.Name = "lblInstalment";
+            lblInstalment.Size = new Size(191, 15);
+            lblInstalment.TabIndex = 1;
+            lblInstalment.Text = "Instalment 1 \"Wrath of the Mild\"";
+            lblInstalment.UseMnemonic = false;
             // 
             // lblProduct
             // 
@@ -395,27 +416,6 @@
             lblProduct.Text = "Scorch Gore";
             lblProduct.UseMnemonic = false;
             // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            label24.Location = new Point(12, 63);
-            label24.Name = "label24";
-            label24.Size = new Size(141, 15);
-            label24.TabIndex = 28;
-            label24.Text = "by the creators of blooDot";
-            label24.UseMnemonic = false;
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Location = new Point(12, 80);
-            label25.Name = "label25";
-            label25.Size = new Size(127, 15);
-            label25.TabIndex = 29;
-            label25.Text = "Copyright ©2021-2024";
-            label25.UseMnemonic = false;
-            // 
             // frmAbout
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -425,14 +425,17 @@
             Controls.Add(pnlAbout);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             HelpButton = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
             MaximizeBox = false;
+            MinimizeBox = false;
             Name = "frmAbout";
             ShowInTaskbar = false;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "About";
             Load += frmAbout_Load;
             KeyDown += frmAbout_KeyDown;
-            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trbForms).EndInit();
             pnlAbout.ResumeLayout(false);
             pnlAbout.PerformLayout();
             ResumeLayout(false);
@@ -442,17 +445,17 @@
 
         private Panel pnlAbout;
         private Label lblProduct;
-        private Label label6;
-        private Label label4;
-        private Label label5;
-        private Label label3;
-        private Label label2;
-        private Label label1;
-        private RadioButton radioButton1;
+        private Label lblDesignLabel;
+        private Label lblManufacturerLabel;
+        private Label lblManufacturer;
+        private Label lblProducer;
+        private Label lblProducerLabel;
+        private Label lblInstalment;
+        private RadioButton optForms;
         private Label label9;
         private Label label8;
-        private Label label7;
-        private CheckBox checkBox1;
+        private Label lblDesign;
+        private CheckBox chkForms;
         private Label label13;
         private Label label12;
         private Label label11;
@@ -467,7 +470,7 @@
         private Label label16;
         private Label label23;
         private Label label22;
-        private Label label25;
-        private Label label24;
+        private Label lblCopyright;
+        private Label lblByTheCreators;
     }
 }

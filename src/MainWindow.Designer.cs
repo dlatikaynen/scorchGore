@@ -35,8 +35,10 @@ partial class MainWindow
         MainToolbar = new ToolStrip();
         tbbInitiate = new ToolStripButton();
         tbbJoin = new ToolStripButton();
-        ttbEditPlayerProfile = new ToolStripButton();
+        tbbEditPlayerProfile = new ToolStripButton();
         toolStripSeparator1 = new ToolStripSeparator();
+        tbbViewServerTraffic = new ToolStripButton();
+        tbbViewApiMessageLog = new ToolStripButton();
         MdiError = new ErrorProvider(components);
         MdiBkg = new System.ComponentModel.BackgroundWorker();
         MainMenu = new MenuStrip();
@@ -95,7 +97,7 @@ partial class MainWindow
         // 
         // MainToolbar
         // 
-        MainToolbar.Items.AddRange(new ToolStripItem[] { tbbInitiate, tbbJoin, ttbEditPlayerProfile, toolStripSeparator1 });
+        MainToolbar.Items.AddRange(new ToolStripItem[] { tbbInitiate, tbbJoin, tbbEditPlayerProfile, toolStripSeparator1, tbbViewServerTraffic, tbbViewApiMessageLog });
         resources.ApplyResources(MainToolbar, "MainToolbar");
         MainToolbar.Name = "MainToolbar";
         MdiHelp.SetShowHelp(MainToolbar, (bool)resources.GetObject("MainToolbar.ShowHelp"));
@@ -114,17 +116,31 @@ partial class MainWindow
         tbbJoin.Name = "tbbJoin";
         tbbJoin.Click += tbbJoin_Click;
         // 
-        // ttbEditPlayerProfile
+        // tbbEditPlayerProfile
         // 
-        ttbEditPlayerProfile.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(ttbEditPlayerProfile, "ttbEditPlayerProfile");
-        ttbEditPlayerProfile.Name = "ttbEditPlayerProfile";
-        ttbEditPlayerProfile.Click += ttbEditPlayerProfile_Click;
+        tbbEditPlayerProfile.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(tbbEditPlayerProfile, "tbbEditPlayerProfile");
+        tbbEditPlayerProfile.Name = "tbbEditPlayerProfile";
+        tbbEditPlayerProfile.Click += ttbEditPlayerProfile_Click;
         // 
         // toolStripSeparator1
         // 
         toolStripSeparator1.Name = "toolStripSeparator1";
         resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+        // 
+        // tbbViewServerTraffic
+        // 
+        tbbViewServerTraffic.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(tbbViewServerTraffic, "tbbViewServerTraffic");
+        tbbViewServerTraffic.Name = "tbbViewServerTraffic";
+        tbbViewServerTraffic.Click += tbbViewServerTraffic_Click;
+        // 
+        // tbbViewApiMessageLog
+        // 
+        tbbViewApiMessageLog.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(tbbViewApiMessageLog, "tbbViewApiMessageLog");
+        tbbViewApiMessageLog.Name = "tbbViewApiMessageLog";
+        tbbViewApiMessageLog.Click += tbbViewApiMessageLog_Click;
         // 
         // MdiError
         // 
@@ -478,7 +494,7 @@ partial class MainWindow
     private ToolStrip MainToolbar;
     private ToolStripButton tbbInitiate;
     private ToolStripButton tbbJoin;
-    private ToolStripButton ttbEditPlayerProfile;
+    private ToolStripButton tbbEditPlayerProfile;
     private ToolStripSeparator toolStripSeparator1;
     private ToolStripMenuItem mnuFileInitiateTournamentOnline;
     private ToolStripMenuItem mnuFileInitiateTournamentLocal;
@@ -494,4 +510,6 @@ partial class MainWindow
     private ToolStripMenuItem mnuViewServerTraffic;
     private ToolStripMenuItem mnuViewApiMessages;
     private ToolStripMenuItem mnuToolsLevelDesigner;
+    private ToolStripButton tbbViewServerTraffic;
+    private ToolStripButton tbbViewApiMessageLog;
 }

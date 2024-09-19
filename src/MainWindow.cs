@@ -284,6 +284,16 @@ public partial class MainWindow : Form
 
     private void mnuHelpAbout_Click(object sender, EventArgs e)
     {
-        new frmAbout().Show(this);
+        new frmAbout().ShowDialog(this);
+    }
+
+    private void tbbViewServerTraffic_Click(object sender, EventArgs e)
+    {
+        mnuViewServerTraffic_Click(sender, e);
+    }
+
+    private void tbbViewApiMessageLog_Click(object sender, EventArgs e)
+    {
+        mnuViewApiMessages_Click(sender, e);
     }
 }
