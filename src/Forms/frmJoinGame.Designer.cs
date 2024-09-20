@@ -185,6 +185,7 @@
             SizeGripStyle = SizeGripStyle.Hide;
             StartPosition = FormStartPosition.CenterParent;
             Text = "Join an online game";
+            FormClosing += frmJoinGame_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }

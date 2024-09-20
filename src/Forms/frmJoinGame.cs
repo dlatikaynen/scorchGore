@@ -1,6 +1,7 @@
 ﻿using ScorchGore.Constants;
 using ScorchGore.Extensions;
-using ScorchGore.GameSession;
+using ScorchGore.Platform;
+using ScorchGore.Sequencer;
 
 namespace ScorchGore.Forms;
 
@@ -22,30 +23,6 @@ public partial class frmJoinGame : Form
         if (GuidExtensions.TryParseGore(text, out _))
         {
             txtToken.Text = text;
-        }
-    }
-
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-        cancelRequested = true;
-        while(!cancelAcknowledged)
-        {
-            Thread.Sleep(333);
-        }
-
-        pgbWaitJoin.Style = ProgressBarStyle.Continuous;
-        cancelRequested = false;
-        if (txtToken.ReadOnly)
-        {
-            txtToken.Clear();
-            txtToken.ReadOnly = false;
-            txtToken.Focus();
-            btnPaste.Enabled = true;
-        }
-        else
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
         }
     }
 
@@ -98,6 +75,70 @@ public partial class frmJoinGame : Form
 
                 cancelAcknowledged = true;
             });
+        }
+    }
+
+    private bool cancelReentrant = false;
+    private void btnCancel_Click(object sender, EventArgs e)
+    {
+        if (cancelReentrant)
+        {
+            return;
+        }
+
+        cancelReentrant = true;
+        try
+        {
+            if (cancelAcknowledged)
+            {
+                if (e is FormClosingEventArgs efca)
+                {
+                    efca.Cancel = false;
+                }
+
+                Close();
+
+                return;
+            }
+
+            cancelRequested = true;
+            while (!cancelAcknowledged)
+            {
+                PlatformWindows.SoftWait();
+            }
+
+            pgbWaitJoin.Style = ProgressBarStyle.Continuous;
+            cancelRequested = false;
+            if (txtToken.ReadOnly)
+            {
+                txtToken.Clear();
+                txtToken.ReadOnly = false;
+                txtToken.Focus();
+                btnPaste.Enabled = true;
+
+                if (e is FormClosingEventArgs efca2)
+                {
+                    efca2.Cancel = false;
+                }
+            }
+            else
+            {
+                DialogResult = DialogResult.Cancel;
+                Close();
+            }
+        }
+        finally
+        {
+            cancelReentrant = false;
+        }
+    }
+
+    private void frmJoinGame_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        if (!cancelRequested && !cancelReentrant)
+        {
+            e.Cancel = true;
+            btnCancel_Click(sender, e);
         }
     }
 }

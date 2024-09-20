@@ -59,9 +59,11 @@
             Controls.Add(txtOutput);
             HelpButton = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            KeyPreview = true;
             Name = "frmApiMessages";
             ShowInTaskbar = false;
             Text = "Multiplayer comm log";
+            KeyDown += frmApiMessages_KeyDown;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -59,9 +59,11 @@
             Controls.Add(txtOutput);
             HelpButton = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            KeyPreview = true;
             Name = "frmOutputPane";
             ShowInTaskbar = false;
             Text = "Server traffic";
+            KeyDown += frmOutputPane_KeyDown;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -1,8 +1,7 @@
 ﻿using ScorchGore.Configuration;
 using ScorchGore.Constants;
-using ScorchGore.Sequencer;
 
-namespace ScorchGore.GameSession;
+namespace ScorchGore.Sequencer;
 
 public class GoreSession
 {
@@ -54,7 +53,7 @@ public class GoreSession
                     var theirChoice = SSP.None;
 
                     Sequencer.ConsumeToEnd();
-                    switch(expectingSSP.Command)
+                    switch (expectingSSP.Command)
                     {
                         case SequencerCommands.I_HAVE_SCISSORS:
                             theirChoice = SSP.Scissors;
@@ -132,7 +131,7 @@ public class GoreSession
 
                     var communique = new List<SequencerCommand>();
 
-                    if(mySsp != SSP.None)
+                    if (mySsp != SSP.None)
                     {
                         communique.Add(new() { Command = iHad });
                     }

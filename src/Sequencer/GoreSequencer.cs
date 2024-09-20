@@ -1,8 +1,6 @@
 ﻿using ScorchGore.ApiClient;
 using ScorchGore.Configuration;
 using ScorchGore.Constants;
-using ScorchGore.GameSession;
-using System.Runtime.CompilerServices;
 
 namespace ScorchGore.Sequencer;
 
@@ -218,10 +216,13 @@ public class GoreSequencer(GoreSession session, bool isLocal)
             else
             {
                 // this is the only time an online initiate will succeed: file must not exist
-                GoreApiClient.InitiateGame(
+                if (!GoreApiClient.InitiateGame(
                     Session.GameToken,
                     string.Join(Environment.NewLine, commands.Select(c => c.ToString()!))
-                );
+                ))
+                {
+                    return false;
+                }
             }
         }
 

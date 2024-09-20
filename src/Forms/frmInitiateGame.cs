@@ -1,6 +1,7 @@
 ﻿using ScorchGore.Constants;
 using ScorchGore.Extensions;
-using ScorchGore.GameSession;
+using ScorchGore.Platform;
+using ScorchGore.Sequencer;
 
 namespace ScorchGore.Forms;
 
@@ -63,8 +64,8 @@ public partial class frmInitiateGame : Form
                 // now we wait until they join, or we're canceled
                 do
                 {
-                    Thread.Sleep(333);
-                    if(NewGame.HasPeerJoined(mySsp))
+                    PlatformWindows.SoftWait();
+                    if (NewGame.HasPeerJoined(mySsp))
                     {
                         Invoke(() =>
                         {
@@ -78,6 +79,11 @@ public partial class frmInitiateGame : Form
             }
 
             cancelAcknowledged = true;
+            cancelRequested = false;
+            Invoke(() =>
+            {
+                Close();
+            });
         });
     }
 
@@ -86,14 +92,54 @@ public partial class frmInitiateGame : Form
         Clipboard.SetText(lblToken.Text);
     }
 
+    private bool cancelReentrant = false;
     private void btnCancel_Click(object sender, EventArgs e)
     {
-        cancelRequested = true;
-        btnCancel.Enabled = false;
-        pgbWaitJoin.Style = ProgressBarStyle.Continuous;
-        do
+        if(cancelReentrant)
         {
-            Thread.SpinWait(10);
-        } while (!cancelAcknowledged);
+            return;
+        }
+
+        cancelReentrant = true;
+        try
+        {
+            if (cancelAcknowledged)
+            {
+                if (e is FormClosingEventArgs efca)
+                {
+                    efca.Cancel = false;
+                }
+
+                Close();
+
+                return;
+            }
+
+            cancelRequested = true;
+            btnCancel.Enabled = false;
+            pgbWaitJoin.Style = ProgressBarStyle.Continuous;
+            do
+            {
+                PlatformWindows.SoftWait();
+            } while (!cancelAcknowledged);
+
+            if (e is FormClosingEventArgs efca2)
+            {
+                efca2.Cancel = false;
+            }
+        }
+        finally
+        {
+            cancelReentrant = false;
+        }
+    }
+
+    private void frmInitiateGame_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        if(!cancelRequested && !cancelReentrant)
+        {
+            e.Cancel = true;
+            btnCancel_Click(sender, e);
+        }
     }
 }

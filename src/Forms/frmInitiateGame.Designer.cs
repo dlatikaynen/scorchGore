@@ -202,6 +202,7 @@
             SizeGripStyle = SizeGripStyle.Hide;
             StartPosition = FormStartPosition.CenterParent;
             Text = "Initiate a new online game";
+            FormClosing += frmInitiateGame_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }
