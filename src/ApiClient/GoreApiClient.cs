@@ -86,7 +86,11 @@ internal class GoreApiClient
         }
         catch (Exception ex)
         {
+#if DEBUG
             OnRestCommunication(new(HttpMethod.Post, "initate", HttpStatusCode.ServiceUnavailable, ex.ToString()));
+#else
+            OnRestCommunication(new(HttpMethod.Post, "initate", HttpStatusCode.ServiceUnavailable, ex.Message));
+#endif
         }
         finally
         {
@@ -131,7 +135,11 @@ internal class GoreApiClient
         catch (Exception ex)
         {
             suppressLog = false;
+#if DEBUG
             OnRestCommunication(new(HttpMethod.Get, "join", HttpStatusCode.ServiceUnavailable, ex.ToString()));
+#else
+            OnRestCommunication(new(HttpMethod.Get, "join", HttpStatusCode.ServiceUnavailable, ex.Message));
+#endif
         }
         finally
         {
@@ -174,7 +182,11 @@ internal class GoreApiClient
         }
         catch (Exception ex)
         {
+#if DEBUG
             OnRestCommunication(new(HttpMethod.Patch, "turn", HttpStatusCode.ServiceUnavailable, ex.ToString()));
+#else
+            OnRestCommunication(new(HttpMethod.Patch, "turn", HttpStatusCode.ServiceUnavailable, ex.Message));
+#endif
         }
         finally
         {

@@ -70,6 +70,7 @@ public partial class frmInitiateGame : Form
                         Invoke(() =>
                         {
                             DialogResult = DialogResult.OK;
+                            cancelAcknowledged = true;
                             Close();
                         });
 

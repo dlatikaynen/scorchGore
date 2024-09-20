@@ -28,39 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmArena));
             pnlViewport = new Panel();
+            pnlArena = new Panel();
+            pnlViewport.SuspendLayout();
             SuspendLayout();
             // 
             // pnlViewport
             // 
-            resources.ApplyResources(pnlViewport, "pnlViewport");
-            pnlViewport.BorderStyle = BorderStyle.Fixed3D;
+            pnlViewport.BackColor = Color.FromArgb(16, 16, 16);
+            pnlViewport.BackgroundImageLayout = ImageLayout.None;
+            pnlViewport.BorderStyle = BorderStyle.FixedSingle;
+            pnlViewport.Controls.Add(pnlArena);
+            pnlViewport.Dock = DockStyle.Fill;
+            pnlViewport.Location = new Point(60, 60);
+            pnlViewport.Margin = new Padding(0);
             pnlViewport.Name = "pnlViewport";
+            pnlViewport.Size = new Size(530, 360);
+            pnlViewport.TabIndex = 0;
+            // 
+            // pnlArena
+            // 
+            pnlArena.BackColor = Color.White;
+            pnlArena.BackgroundImageLayout = ImageLayout.Stretch;
+            pnlArena.CausesValidation = false;
+            pnlArena.Cursor = Cursors.Cross;
+            pnlArena.Location = new Point(66, 68);
+            pnlArena.Margin = new Padding(0);
+            pnlArena.Name = "pnlArena";
+            pnlArena.Size = new Size(200, 100);
+            pnlArena.TabIndex = 0;
             // 
             // frmArena
             // 
-            resources.ApplyResources(this, "$this");
+            AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = SystemColors.Window;
             BackgroundImage = Properties.Resources.penrose_nontiling;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(650, 450);
             Controls.Add(pnlViewport);
             DoubleBuffered = true;
+            HelpButton = true;
             KeyPreview = true;
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
             Name = "frmArena";
-            ShowIcon = false;
+            Padding = new Padding(60, 60, 60, 30);
             ShowInTaskbar = false;
             SizeGripStyle = SizeGripStyle.Hide;
-            TopMost = true;
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "frmArena";
             Load += frmArena_Load;
+            SizeChanged += frmArena_SizeChanged;
             KeyDown += frmArena_KeyDown;
+            pnlViewport.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel pnlViewport;
+        private Panel pnlArena;
     }
 }

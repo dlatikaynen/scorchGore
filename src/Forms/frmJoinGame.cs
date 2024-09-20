@@ -64,6 +64,7 @@ public partial class frmJoinGame : Form
                         Invoke(() =>
                         {
                             DialogResult = DialogResult.OK;
+                            cancelAcknowledged = true;
                             Close();
                         });
 

@@ -38,8 +38,6 @@ public partial class frmOutputPane : Form
     protected override void WndProc(ref Message m)
     {
         base.WndProc(ref m);
-
-        // Test if the About item was selected from the system menu
         if ((m.Msg == PlatformWindows.WM_SYSCOMMAND) && ((int)m.WParam == SYSMENU_CLEAR_ID))
         {
             txtOutput.Clear();

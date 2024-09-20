@@ -21,3 +21,8 @@ internal enum Anchorage
     BottomCenter,
     BottomRight
 }
+
+internal class PlatformerConstants
+{
+    internal const float SchwerkraftFaktor = 9.81f / 2.0f;
+}

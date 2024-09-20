@@ -1,5 +1,4 @@
-﻿using System.Drawing.Imaging;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace ScorchGore.Arena;
 
@@ -13,14 +12,9 @@ public partial class frmArena : Form
     {
         _arena = arena;
         InitializeComponent();
-        _arena.Target = pnlViewport;
-
-#if DEBUG
+        _arena.Target = pnlArena;
         TopMost = false;
-#endif
     }
-
-    //private Bitmap Image => _arena.Image;
 
     private void frmArena_KeyDown(object sender, KeyEventArgs e)
     {
@@ -38,8 +32,23 @@ public partial class frmArena : Form
             nameof(DoubleBuffered),
             BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
             null,
-            pnlViewport, 
+            pnlArena,
             [true]
         );
+    }
+
+    private void frmArena_SizeChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            pnlArena.Left = (pnlViewport.Width - pnlArena.Width) / 2;
+            pnlArena.Top = (pnlViewport.Height - pnlArena.Height) / 2;
+        }
+        catch
+        {
+#if DEBUG
+            throw;
+#endif
+        }
     }
 }
