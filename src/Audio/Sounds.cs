@@ -1,4 +1,4 @@
-﻿namespace ScorchGore.Audio;
+﻿namespace ScorchGore.Sound;
 
 internal enum Geraeusche
 {

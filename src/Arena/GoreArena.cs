@@ -1,6 +1,7 @@
 ﻿using ScorchGore.Classes;
 using ScorchGore.Constants;
 using ScorchGore.Sequencer;
+using ScorchGore.Sound;
 
 namespace ScorchGore.Arena;
 
@@ -58,12 +59,12 @@ public class GoreArena
             var rawArgs = command.Arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             if (rawArgs.Length >= 2 && schussEingabe.Deserialisieren($"{rawArgs[0]},{rawArgs[1]}"))
             {
-                ClassicShoot(shooter, opponent, schussEingabe);
+                var ergebnis = ClassicShoot(shooter, opponent, schussEingabe);
             }
         }
     }
 
-    private void ClassicShoot(int shooter, int opponent, SchussEingabe aim)
+    private Treffer ClassicShoot(int shooter, int opponent, SchussEingabe aim)
     {
         double x, y;
 
@@ -80,11 +81,11 @@ public class GoreArena
         var behandeltePixel = new HashSet<long>();
         var ausgangsPunktx = dranSeiender.AnchorX;
         var ausgangsPunkty = dranSeiender.AnchorY;
-        //var schussErgebnis = new Treffer
-        //{
-        //    GespieltesLevel = this.aktuelleLevelNummer,
-        //    Ergebnis = SchussErgebnis.NixGetroffen
-        //};
+        var schussErgebnis = new Treffer
+        {
+            GespieltesLevel = CurrentLevel.LevelNummer,
+            Ergebnis = SchussErgebnis.NixGetroffen
+        };
 
         /* von hier nach dort x laufen lassen */
         for (
@@ -137,7 +138,7 @@ public class GoreArena
                     {
                         if (hitColor != dranSeiender.PrimaryBodyColor.ToArgb())
                         {
-                            //Audio.GeraeuschAbspielen(Geraeusche.SchussStart);
+                            Audio.GeraeuschAbspielen(Geraeusche.SchussStart);
                             muendungVerlassen = true;
                         }
                     }
@@ -145,26 +146,23 @@ public class GoreArena
                     {
                         if (hitColor == gegner.PrimaryBodyColor.ToArgb())
                         {
-                            return; // schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.GegnerGekillt);
+                            return schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.GegnerGekillt);
                         }
                         else if (hitColor != Farbverwaltung.HimmelsfarbeAlsInt)
                         {
                             if (hitColor == dranSeiender.PrimaryBodyColor.ToArgb())
                             {
-                                //return; // schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.SelbstErschossen);
+                                return schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.SelbstErschossen);
                             }
                             else if(hitColor != Color.WhiteSmoke.ToArgb())
                             {
-                                return; // schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.BergGetroffen);
+                                return schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.BergGetroffen);
                             }
                         }
 
                         Image.SetPixel(pixelX, pixelY, dranSeiender.PrimaryBodyColor);
                         behandeltePixel.Add(pixelFach);
                     }
-
-                    //Application.DoEvents();
-                    //Target?.Refresh();
                 }
             }
 
@@ -174,5 +172,7 @@ public class GoreArena
                 break;
             }
         }
+
+        return schussErgebnis;
     }
 }

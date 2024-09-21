@@ -1,3 +1,4 @@
+using ScorchGore.Sound;
 using ScorchGore.Configuration;
 
 namespace Fso.ScorchGore;
@@ -21,6 +22,7 @@ internal static class Program
         InstanceConfiguration.Read();
         if (mainWindow.Prepare())
         {
+            Audio.AlleAudiosVorbereiten();
             Application.Run(mainWindow);
         }
 

@@ -3,14 +3,14 @@ using System.Collections.Concurrent;
 using System.Media;
 using System.Reflection;
 
-namespace ScorchGore.Audio;
+namespace ScorchGore.Sound;
 
-internal class Audio
+internal static class Audio
 {
-    private readonly ConcurrentDictionary<Geraeusche, Stream> geraeuschKatalog = new();
-    private readonly SoundPlayer soundPlayer = new();
+    private static readonly ConcurrentDictionary<Geraeusche, Stream> geraeuschKatalog = new();
+    private static readonly SoundPlayer soundPlayer = new();
 
-    public void AlleAudiosVorbereiten()
+    public static void AlleAudiosVorbereiten()
     {
         Task.Run(() =>
         {
@@ -21,7 +21,7 @@ internal class Audio
         });
     }
 
-    public void GeraeuschAbspielen(Geraeusche welchesGeraeusch)
+    public static void GeraeuschAbspielen(Geraeusche welchesGeraeusch)
     {
         Task.Run(() =>
         {
@@ -38,19 +38,23 @@ internal class Audio
         });
     }
 
-    private void AudioDateiVorladen(Geraeusche welchesGeraeusch)
+    private static void AudioDateiVorladen(Geraeusche welchesGeraeusch)
     {
         if (!geraeuschKatalog.ContainsKey(welchesGeraeusch))
         {
             var audioDateiName = GetAudioDateiName(welchesGeraeusch);
-            var geraeuschDatei = Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                typeof(ResourceProxy),
-                $@"Geraeusche.{audioDateiName}"
-            );
 
-            if (geraeuschDatei != null)
+            if (audioDateiName != null)
             {
-                geraeuschKatalog.TryAdd(welchesGeraeusch, geraeuschDatei);
+                var geraeuschDatei = Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                    typeof(ResourceProxy),
+                    audioDateiName
+                );
+
+                if (geraeuschDatei != null)
+                {
+                    geraeuschKatalog.TryAdd(welchesGeraeusch, geraeuschDatei);
+                }
             }
         }
     }
