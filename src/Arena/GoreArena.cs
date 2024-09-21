@@ -7,7 +7,7 @@ namespace ScorchGore.Arena;
 public class GoreArena
 {
     public LevelBeschreibung CurrentLevel = new();
-    public Form? Target { get; set; }
+    public Panel? Target { get; set; }
     public Bitmap Image = new(1, 1);
     public object LockObject = new();
 
@@ -26,15 +26,12 @@ public class GoreArena
 
         CurrentLevel = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
 
-        Target.Width = (int)(CurrentLevel.LevelWidth); // * PlatformerConstants.SilverRatio);
-        Target.Height = (int)(CurrentLevel.LevelHeight); // * PlatformerConstants.SilverRatio);
         Graphics? canvas = null;
         try
         {
             lock (LockObject)
             {
                 Image = new(CurrentLevel.LevelWidth, CurrentLevel.LevelHeight, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-                //Target.BackgroundImage = Image;
                 canvas = Graphics.FromImage(Image);
             }
 
@@ -51,7 +48,6 @@ public class GoreArena
         Player2.AnchorY = CurrentLevel.SpielerPosition2.Y;
         Player1.Emplace(Image);
         Player2.Emplace(Image);
-
     }
 
     internal void Shoot(int shooter, int opponent, SequencerCommand command)
