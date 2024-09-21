@@ -29,9 +29,9 @@ internal static class LevelSequenzierer
                 levelBeschreibung.BergRauhheitProzent = 21;
                 levelBeschreibung.BergZufallszahl = zufallsZahlenGenerator;
                 levelBeschreibung.Plateau(645 - 460, 82, 200);
-                levelBeschreibung.SpielerPosition1 = new Point(112, GameLogicConstants.SpielerBasisHoehe);
+                levelBeschreibung.SpielerPosition1 = new Point(112, levelBeschreibung.LevelHeight - 185);
                 levelBeschreibung.Plateau(645 - 415, 638, 700);
-                levelBeschreibung.SpielerPosition2 = new Point(673, GameLogicConstants.SpielerBasisHoehe);
+                levelBeschreibung.SpielerPosition2 = new Point(673, levelBeschreibung.LevelHeight - 230);
                 break;
 
             case 2:

@@ -13,8 +13,66 @@ internal abstract class Sprite : IDisposable
     private Bitmap? BackingBitmap;
     private Bitmap? DingPic;
     private bool disposedValue;
+    private Rectangle? _physicalBounds;
+
+    internal abstract Color PrimaryBodyColor { get; }
 
     protected abstract void Draw(Graphics g);
+
+    protected Rectangle PhysicalBounds 
+    {
+        get
+        {
+            if (_physicalBounds != null)
+            {
+                return _physicalBounds.Value;
+            }
+
+            switch(Anchorage)
+            {
+                case Anchorage.TopLeft:
+                    _physicalBounds = new(AnchorX, AnchorY, Width, Height);
+                    break;
+
+                case Anchorage.TopCenter:
+                    _physicalBounds = new(AnchorX - Width / 2, AnchorY, Width, Height);
+                    break;
+
+                case Anchorage.TopRight:
+                    _physicalBounds = new(AnchorX - Width, AnchorY, Width, Height);
+                    break;
+
+                case Anchorage.MiddleLeft:
+                    _physicalBounds = new(AnchorX, AnchorY - Height / 2, Width, Height);
+                    break;
+
+                case Anchorage.MiddleRight:
+                    _physicalBounds = new(AnchorX - Width, AnchorY - Height / 2, Width, Height);
+                    break;
+
+                case Anchorage.BottomRight:
+                    _physicalBounds = new(AnchorX - Width, AnchorY - Height, Width, Height);
+                    break;
+
+                case Anchorage.BottomLeft:
+                    _physicalBounds = new(AnchorX, AnchorY - Height, Width, Height);
+                    break;
+
+                case Anchorage.BottomCenter:
+                    _physicalBounds = new(AnchorX - Width / 2, AnchorY - Height, Width, Height);
+                    break;
+
+                case Anchorage.DeadCenter:
+                    _physicalBounds = new(AnchorX - Width / 2, AnchorY - Height / 2, Width, Height);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(Anchorage), Anchorage, "invalid value");
+            }
+
+            return _physicalBounds.Value;
+        }
+    }
 
     public void Emplace(Image arena)
     {
@@ -34,27 +92,29 @@ internal abstract class Sprite : IDisposable
             g.DrawImage(
                 arena,
                 destRect: new Rectangle(0, 0, Width, Height),
-                srcRect: new Rectangle(AnchorX, AnchorY, Width, Height),
+                srcRect: PhysicalBounds,
                 GraphicsUnit.Pixel
             );
         }
 
         // draw the current state of the sprite onto
-        // it foreground caching bitmap
+        // its foreground caching bitmap
         DingPic = new Bitmap(Width, Height);
         using (var gd = Graphics.FromImage(DingPic))
         {
             Draw(gd);
         }
 
-        // blit it to the arena
+        // blit that to the arena
         using var ga = Graphics.FromImage(arena);
+#if DEBUG
+        ga.DrawRectangle(Pens.WhiteSmoke, PhysicalBounds);
+        ga.FillRectangle(Brushes.WhiteSmoke, AnchorX - 1, AnchorY - 1, 3, 3);
+#endif
         ga.DrawImageUnscaled(
             DingPic,
-            new Rectangle(AnchorX, AnchorY, Width, Height)
+            PhysicalBounds
         );
-
-        ga.DrawRectangle(Pens.WhiteSmoke, AnchorX, AnchorY, Width, Height);
     }
 
     protected virtual void Dispose(bool disposing)

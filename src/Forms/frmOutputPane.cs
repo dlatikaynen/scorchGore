@@ -53,4 +53,19 @@ public partial class frmOutputPane : Form
             txtOutput.Clear();
         }
     }
+
+    private void frmOutputPane_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        switch (e.CloseReason)
+        {
+            case CloseReason.TaskManagerClosing:
+            case CloseReason.FormOwnerClosing:
+            case CloseReason.MdiFormClosing:
+            case CloseReason.ApplicationExitCall:
+                return;
+        }
+
+        e.Cancel = true;
+        Hide();
+    }
 }

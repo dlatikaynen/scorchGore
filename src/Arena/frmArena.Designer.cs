@@ -28,66 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pnlViewport = new Panel();
-            pnlArena = new Panel();
-            pnlViewport.SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmArena));
             SuspendLayout();
-            // 
-            // pnlViewport
-            // 
-            pnlViewport.BackColor = Color.FromArgb(16, 16, 16);
-            pnlViewport.BackgroundImageLayout = ImageLayout.None;
-            pnlViewport.BorderStyle = BorderStyle.FixedSingle;
-            pnlViewport.Controls.Add(pnlArena);
-            pnlViewport.Dock = DockStyle.Fill;
-            pnlViewport.Location = new Point(60, 60);
-            pnlViewport.Margin = new Padding(0);
-            pnlViewport.Name = "pnlViewport";
-            pnlViewport.Size = new Size(530, 360);
-            pnlViewport.TabIndex = 0;
-            // 
-            // pnlArena
-            // 
-            pnlArena.BackColor = Color.White;
-            pnlArena.BackgroundImageLayout = ImageLayout.Stretch;
-            pnlArena.CausesValidation = false;
-            pnlArena.Cursor = Cursors.Cross;
-            pnlArena.Location = new Point(66, 68);
-            pnlArena.Margin = new Padding(0);
-            pnlArena.Name = "pnlArena";
-            pnlArena.Size = new Size(200, 100);
-            pnlArena.TabIndex = 0;
             // 
             // frmArena
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            BackgroundImage = Properties.Resources.penrose_nontiling;
-            BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(650, 450);
-            Controls.Add(pnlViewport);
+            CausesValidation = false;
+            ClientSize = new Size(175, 115);
+            ControlBox = false;
             DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.None;
             HelpButton = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
             Name = "frmArena";
             Padding = new Padding(60, 60, 60, 30);
-            ShowInTaskbar = false;
+            ShowIcon = false;
             SizeGripStyle = SizeGripStyle.Hide;
-            StartPosition = FormStartPosition.CenterParent;
-            Text = "frmArena";
+            StartPosition = FormStartPosition.CenterScreen;
+            FormClosing += frmArena_FormClosing;
             Load += frmArena_Load;
-            SizeChanged += frmArena_SizeChanged;
             KeyDown += frmArena_KeyDown;
-            pnlViewport.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel pnlViewport;
-        private Panel pnlArena;
     }
 }

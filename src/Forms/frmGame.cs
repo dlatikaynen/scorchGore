@@ -10,6 +10,7 @@ public partial class frmGame : Form
     private readonly GoreArena _arena;
     private readonly frmArena _arenaWindow;
     private GameState _state = GameState.Unknown;
+    private GameState _whosTurnFromMyPerspective = GameState.Unknown;
 
     public frmGame(GoreSession session)
     {
@@ -30,6 +31,15 @@ public partial class frmGame : Form
             return;
         }
 
+        if (newState == GameState.MyTurn || newState == GameState.OpponentsTurn)
+        {
+            _whosTurnFromMyPerspective = newState;
+        }
+        else if (_state == GameState.MyTurn || _state == GameState.OpponentsTurn)
+        {
+            _whosTurnFromMyPerspective = _state;
+        }
+
         _state = newState;
         Invoke(() =>
         {
@@ -38,7 +48,7 @@ public partial class frmGame : Form
                 case GameState.GameEngine:
                     lblStatus.Text = "Spiellogik";
                     txtCommand.ReadOnly = true;
-                    txtOomph.ReadOnly = true;
+                    txtOomph.ReadOnly = true;                    
                     break;
 
                 case GameState.MyTurn:
@@ -181,6 +191,7 @@ public partial class frmGame : Form
             case SequencerCommands.INITIATORS_TURN:
                 if (_session.AmIThePeerOdd)
                 {
+                    // pong!
                     SetState(GameState.OpponentsTurn);
                     PushAndExecuteCommand(new() { Command = SequencerCommands.ACK });
                 }
@@ -188,7 +199,7 @@ public partial class frmGame : Form
                 break;
 
             case SequencerCommands.ACK:
-                if(_session.AmITheInitiatorEven)
+                if (_session.AmITheInitiatorEven)
                 {
                     SetState(GameState.MyTurn);
                 }
@@ -206,6 +217,28 @@ public partial class frmGame : Form
             case SequencerCommands.FIRE_IN_THE_HOLE:
                 // shoot!
                 SetState(GameState.GameEngine);
+
+                int fromPlayer = 0;
+                int thruPlayer = 0;
+
+                if(_session.AmIThePeerOdd)
+                {
+                    // I am player 1. my opponent is player 2. if it is my turn, then we shoot 1 ==> 2. if it is their turn, we shoot 2 ==> 1
+                    fromPlayer = _whosTurnFromMyPerspective == GameState.MyTurn ? 1 : 2;
+                    thruPlayer = _whosTurnFromMyPerspective == GameState.MyTurn ? 2 : 1;
+                }
+                else if(_session.AmITheInitiatorEven)
+                {
+                    // I am player 2. my opponent is player 1. if it is my turn, then we shoot 2 ==> 1. if it is their turn, we shoot 1 ==> 2
+                    fromPlayer = _whosTurnFromMyPerspective == GameState.MyTurn ? 2 : 1;
+                    thruPlayer = _whosTurnFromMyPerspective == GameState.MyTurn ? 1 : 2;
+                }
+
+                if (fromPlayer > 0 && thruPlayer > 0)
+                {
+                    _arena.Shoot(fromPlayer, thruPlayer, command);
+                }
+
                 break;
         }
 
@@ -231,7 +264,7 @@ public partial class frmGame : Form
         else
         {
             _arenaWindow.Text = Text;
-            _arenaWindow.MdiParent = MdiParent;
+            //_arenaWindow.MdiParent = MdiParent;
             _arenaWindow.Show();
         }
     }

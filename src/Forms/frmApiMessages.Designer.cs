@@ -63,6 +63,7 @@
             Name = "frmApiMessages";
             ShowInTaskbar = false;
             Text = "Multiplayer comm log";
+            FormClosing += frmApiMessages_FormClosing;
             KeyDown += frmApiMessages_KeyDown;
             ResumeLayout(false);
             PerformLayout();

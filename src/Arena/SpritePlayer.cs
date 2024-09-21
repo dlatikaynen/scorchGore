@@ -12,6 +12,8 @@ internal class SpritePlayer : Sprite
         Anchorage = Constants.Anchorage.BottomCenter;
     }
 
+    internal override Color PrimaryBodyColor => ((SolidBrush)_color).Color;
+
     protected override void Draw(Graphics g)
     {
         g.FillPie(

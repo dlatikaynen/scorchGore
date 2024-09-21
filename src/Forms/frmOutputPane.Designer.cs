@@ -63,6 +63,7 @@
             Name = "frmOutputPane";
             ShowInTaskbar = false;
             Text = "Server traffic";
+            FormClosing += frmOutputPane_FormClosing;
             KeyDown += frmOutputPane_KeyDown;
             ResumeLayout(false);
             PerformLayout();

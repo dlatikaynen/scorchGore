@@ -51,17 +51,16 @@ public class LevelBeschreibung
     public int MaxHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleMaxHoeheProzent : BergMaxHoeheProzent;
     public int RauhheitProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleRauhheitProzent : BergRauhheitProzent;
 
-    private string MissionsnameBestimmen(int missionsNummer)
+    private static string MissionsnameBestimmen(int missionsNummer)
     {
-        switch (missionsNummer)
+        return missionsNummer switch
         {
-            case 1: return "Blue Mountains";
-        }
-
-        throw new ArgumentOutOfRangeException(
-            nameof(missionsNummer),
-            missionsNummer,
-            "1-?"
-        );
+            1 => "Blue Mountains",
+            _ => throw new ArgumentOutOfRangeException(
+                        nameof(missionsNummer),
+                        missionsNummer,
+                        "1-?"
+                    ),
+        };
     }
 }

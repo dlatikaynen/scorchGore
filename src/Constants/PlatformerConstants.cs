@@ -25,4 +25,5 @@ internal enum Anchorage
 internal class PlatformerConstants
 {
     internal const float SchwerkraftFaktor = 9.81f / 2.0f;
+    internal const float SilverRatio = 1.381966011f;
 }
