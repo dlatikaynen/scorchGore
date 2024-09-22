@@ -81,17 +81,17 @@ public partial class frmGame : Form
         });
     }
 
-    public void DoSomething()
+    public async Task DoSomething()
     {
         SetState(GameState.OpponentsTurn);
-        PrepareArenaAndReadUp();
+        await PrepareArenaAndReadUp();
         Show();
         if (ShouldAutoImmerse())
         {
             Immerse();
         }
 
-        ThreadPool.QueueUserWorkItem((_) =>
+        ThreadPool.QueueUserWorkItem(async (_) =>
         {
             do
             {
@@ -101,9 +101,9 @@ public partial class frmGame : Form
                 {
                     if (_session.Sequencer.PollPopPeerAction())
                     {
-                        Invoke(() =>
+                        await Invoke(async () =>
                         {
-                            ProcessGameQueue();
+                            await ProcessGameQueue();
                         });
                     }
                 }
@@ -117,7 +117,7 @@ public partial class frmGame : Form
     /// it was by the time the game was interrupted. Starting a new
     /// game is merely an edge case of this algorithm.
     /// </summary>
-    private void PrepareArenaAndReadUp()
+    private async Task PrepareArenaAndReadUp()
     {
         foreach (var command in _session.Sequencer.ProcessedCommands)
         {
@@ -140,23 +140,23 @@ public partial class frmGame : Form
                     break;
 
                 default:
-                    ExecuteCommand(command, isReplay: true);
+                    await ExecuteCommand(command, isReplay: true);
                     break;
             }
         }
 
-        ProcessGameQueue();
+        await ProcessGameQueue();
     }
 
-    private void ProcessGameQueue()
+    private async Task ProcessGameQueue()
     {
         while (_session.Sequencer.CommandQueue.TryPeek(out var command))
         {
-            ExecuteCommand(command, isReplay: false);
+            await ExecuteCommand(command, isReplay: false);
         }
     }
 
-    private bool PushAndExecuteCommand(SequencerCommand command)
+    private async Task<bool> PushAndExecuteCommand(SequencerCommand command)
     {
         if(!_session.Sequencer.MyTurnPushCommand([command]))
         {
@@ -165,7 +165,7 @@ public partial class frmGame : Form
 
         _session.Sequencer.CommandQueue.Enqueue(command);
 
-        var executedCommand = ExecuteCommand(command);
+        var executedCommand = await ExecuteCommand(command);
 
         // we consider it succeeded if the command that
         // was executed, is the command the had been
@@ -174,7 +174,7 @@ public partial class frmGame : Form
         return executedCommand.Command == command.Command;
     }
 
-    private SequencerCommand ExecuteCommand(SequencerCommand command, bool isReplay = false)
+    private async Task<SequencerCommand> ExecuteCommand(SequencerCommand command, bool isReplay = false)
     {
         switch (command.Command)
         {
@@ -193,7 +193,7 @@ public partial class frmGame : Form
                 {
                     // pong!
                     SetState(GameState.OpponentsTurn);
-                    PushAndExecuteCommand(new() { Command = SequencerCommands.ACK });
+                    await PushAndExecuteCommand(new() { Command = SequencerCommands.ACK });
                 }
 
                 break;
@@ -269,7 +269,7 @@ public partial class frmGame : Form
         }
     }
 
-    private void frmGame_KeyDown(object sender, KeyEventArgs e)
+    private async void frmGame_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Enter)
         {
@@ -281,7 +281,7 @@ public partial class frmGame : Form
             {
                 txtOomph.ReadOnly = true;
                 txtCommand.ReadOnly = true;
-                if (PushAndExecuteCommand(command.input))
+                if (await PushAndExecuteCommand(command.input))
                 {
                     txtCommand.Clear();
                     txtOomph.Clear();

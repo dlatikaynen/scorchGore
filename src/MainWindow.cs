@@ -8,6 +8,7 @@ public partial class MainWindow : Form
 {
     private readonly frmOutputPane outputPane;
     private readonly frmApiMessages apiMessagePane;
+    private bool isFirstActivate = true;
 
     public MainWindow()
     {
@@ -21,6 +22,29 @@ public partial class MainWindow : Form
         {
             MdiParent = this
         };
+
+    }
+    protected override void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
+
+        if(!isFirstActivate)
+        {
+            return;
+        }
+
+        isFirstActivate = false;
+
+        // https://stackoverflow.com/a/23124456/1132334
+        var handle = outputPane.Handle;
+        
+        outputPane.Hide();
+        if (handle == apiMessagePane.Handle)
+        {
+            throw new InvalidOperationException($"{handle}=={Handle}");
+        }
+
+        apiMessagePane.Hide();
     }
 
     public bool Prepare()
@@ -171,7 +195,7 @@ public partial class MainWindow : Form
         frmGame.Show(this);
     }
 
-    private void mnuFileInitiateTournamentOnline_Click(object sender, EventArgs e)
+    private async void mnuFileInitiateTournamentOnline_Click(object sender, EventArgs e)
     {
         if (!EnsurePlayername(this))
         {
@@ -187,7 +211,7 @@ public partial class MainWindow : Form
                 MdiParent = this
             };
 
-            frmGame.DoSomething();
+            await frmGame.DoSomething();
         };
     }
 
@@ -196,7 +220,7 @@ public partial class MainWindow : Form
         // two players without internet connection, on the same computer
     }
 
-    private void mnuFileJoinGame_Click(object sender, EventArgs e)
+    private async void mnuFileJoinGame_Click(object sender, EventArgs e)
     {
         using var frmJoin = new frmJoinGame();
 
@@ -207,7 +231,7 @@ public partial class MainWindow : Form
                 MdiParent = this
             };
 
-            frmGame.DoSomething();
+            await frmGame.DoSomething();
         }
     }
 

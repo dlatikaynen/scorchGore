@@ -1,99 +1,82 @@
 ﻿using Microsoft.VisualBasic.Devices;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace ScorchGore.Arena;
 
 public partial class frmArena : Form
 {
+    public Bitmap Image;
+    public Graphics BackBuffer;
+
     private bool mitMausVerschieben;
     private Point mitMausVerschiebenAnfang;
     private readonly GoreArena _arena;
     private int viewportOffsetX = 0;
     private int viewportOffsetY = 0;
-    private bool IsIdle = false;
     private readonly CancellationTokenSource cancelSource = new();
     private readonly Keyboard kybd = new();
+    private long frames = 0;
+    private long time = 0;
+    private Stopwatch stopWatch = new();
 
     public frmArena(GoreArena arena)
     {
         _arena = arena;
         InitializeComponent();
-        _arena.Target = pnlArena;
+        _arena.Target = this;
+        Image = new(1, 1, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+        BackBuffer = Graphics.FromImage(Image);
     }
 
-    protected override void OnHandleCreated(EventArgs e)
+    public void SetupBackbuffer(int width, int height)
     {
-        base.OnHandleCreated(e);
-
-        var cancelToken = cancelSource.Token;
-        Application.Idle += Application_Idle;
-        Task.Factory.StartNew((_) =>
-        {
-            while (!IsIdle || _arena.Image.Width == 1)
-            {
-                Task.Delay(100).Wait();
-            }
-
-            SetupArena();
-            while (IsIdle && !cancelToken.IsCancellationRequested)
-            {
-                try
-                {
-                    while (!cancelToken.IsCancellationRequested)
-                    {
-                        if (pnlArena.InvokeRequired)
-                        {
-                            pnlArena.Invoke(() => pnlArena.Refresh());
-                        }
-                        else
-                        {
-                            pnlArena.Refresh();
-                        }
-
-                        Task.Delay(32).Wait();
-                        if (!ReferenceEquals(pnlArena.BackgroundImage, _arena.Image))
-                        {
-                            SetupArena();
-                        }
-                    }
-                }
-                catch (InvalidOperationException)
-                {
-                    continue;
-                }
-            }
-        }, cancelToken, TaskCreationOptions.LongRunning);
+        Image = new(width, height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+        BackBuffer = Graphics.FromImage(Image);
     }
 
-    private void SetupArena()
+    protected override void OnPaintBackground(PaintEventArgs e)
     {
-        if (pnlArena.InvokeRequired)
-        {
-            pnlArena.Invoke(() =>
-            {
-                SetupArenaInternal();
-            });
-        }
-        else
-        {
-            SetupArenaInternal();
-        }
     }
 
-    private void SetupArenaInternal()
+    protected async override void OnPaint(PaintEventArgs e)
     {
-        pnlArena.Size = _arena.Image.Size;
-        pnlArena.Location = new Point(
-            (Width - pnlArena.Width) / 2,
-            (Height - pnlArena.Height) / 2
+        stopWatch.Restart();
+        var color = Random.Shared.Next(3) switch
+        {
+            0 => Brushes.SaddleBrown,
+            1 => Brushes.Beige,
+            2 => Brushes.BlueViolet,
+            _ => throw new NotImplementedException()
+        };
+
+        BackBuffer.FillEllipse(color, 10, 10, 30, 30);
+        e.Graphics.DrawImageUnscaledAndClipped(
+            Image,
+            new(0, 0, Image.Width, Image.Height)
         );
 
-        pnlArena.BackgroundImage = _arena.Image;
+        stopWatch.Stop();
+        ++frames;
+        var frameTime = stopWatch.ElapsedMilliseconds;
+
+        if(frameTime < 16)
+        {
+            var wait = 16 - frameTime;
+            frameTime += wait;
+
+            await Task.Delay((int)wait);
+        }
+
+        time += frameTime;
+        var rate = (1.0 / frameTime) * 1000f;
+        Text = rate.ToString("#0");
+        Invalidate();
     }
 
     private void frmArena_KeyDown(object sender, KeyEventArgs e)
     {
-        if(e.KeyCode == Keys.ControlKey)
+        if (e.KeyCode == Keys.ControlKey)
         {
             Cursor = Cursors.NoMove2D;
         }
@@ -124,71 +107,58 @@ public partial class frmArena : Form
         );
     }
 
-    private void Application_Idle(object? sender, EventArgs e)
-    {
-        IsIdle = true;
-    }
-
-    private void frmArena_FormClosing(object sender, FormClosingEventArgs e)
-    {
-        if (!cancelSource.IsCancellationRequested)
-        {
-            cancelSource.Cancel();
-        }
-    }
-
-    private void pnlArena_MouseDown(object sender, MouseEventArgs e)
+    private void frmArena_MouseDown(object sender, MouseEventArgs e)
     {
         mitMausVerschieben = true;
         mitMausVerschiebenAnfang = e.Location;
     }
 
-    private void pnlArena_MouseMove(object sender, MouseEventArgs e)
+    private void frmArena_MouseMove(object sender, MouseEventArgs e)
     {
         if (mitMausVerschieben)
         {
-            if (kybd.CtrlKeyDown)
-            {
-                var desiredPos = new Point(
-                    pnlArena.Left + (e.X - mitMausVerschiebenAnfang.X),
-                    pnlArena.Top + (e.Y - mitMausVerschiebenAnfang.Y)
-                );
+            //if (kybd.CtrlKeyDown)
+            //{
+            //    var desiredPos = new Point(
+            //        pnlArena.Left + (e.X - mitMausVerschiebenAnfang.X),
+            //        pnlArena.Top + (e.Y - mitMausVerschiebenAnfang.Y)
+            //    );
 
-                if(desiredPos.X > 0)
-                {
-                    desiredPos.X = 0;
-                }
+            //    if (desiredPos.X > 0)
+            //    {
+            //        desiredPos.X = 0;
+            //    }
 
-                if(desiredPos.Y > 0)
-                {
-                    desiredPos.Y = 0;
-                }
+            //    if (desiredPos.Y > 0)
+            //    {
+            //        desiredPos.Y = 0;
+            //    }
 
-                if (-desiredPos.X > (pnlArena.Width - Width))
-                {
-                    desiredPos.X = -(pnlArena.Width - Width);
-                }
+            //    if (-desiredPos.X > (pnlArena.Width - Width))
+            //    {
+            //        desiredPos.X = -(pnlArena.Width - Width);
+            //    }
 
-                if (-desiredPos.Y > (pnlArena.Height - Height))
-                {
-                    desiredPos.Y = -(pnlArena.Height - Height);
-                }
+            //    if (-desiredPos.Y > (pnlArena.Height - Height))
+            //    {
+            //        desiredPos.Y = -(pnlArena.Height - Height);
+            //    }
 
-                pnlArena.Location = desiredPos;
-            }
-            else
-            {
+            //    pnlArena.Location = desiredPos;
+            //}
+            //else
+            //{
                 Location = new Point(
                     (Location.X - mitMausVerschiebenAnfang.X) + e.X,
                     (Location.Y - mitMausVerschiebenAnfang.Y) + e.Y
                 );
 
                 Update();
-            }
+            //}
         }
     }
 
-    private void pnlArena_MouseUp(object sender, MouseEventArgs e)
+    private void frmArena_MouseUp(object sender, MouseEventArgs e)
     {
         mitMausVerschieben = false;
     }

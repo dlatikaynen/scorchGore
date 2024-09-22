@@ -8,12 +8,10 @@ namespace ScorchGore.Arena;
 public class GoreArena
 {
     public LevelBeschreibung CurrentLevel = new();
-    public Panel? Target { get; set; }
-    public Bitmap Image = new(1, 1);
-    public object LockObject = new();
+    public frmArena? Target { get; set; }
 
     internal Sprite Player1 = new SpritePlayer(Brushes.YellowGreen);
-    internal Sprite Player2 = new SpritePlayer(Brushes.MistyRose);    
+    internal Sprite Player2 = new SpritePlayer(Brushes.MistyRose);
 
     private Sprite DranSeiender(int player) => player == 1 ? Player1 : Player2;
     private Sprite Gegner(int player) => player == 1 ? Player1 : Player2;
@@ -26,29 +24,15 @@ public class GoreArena
         }
 
         CurrentLevel = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
-
-        Graphics? canvas = null;
-        try
-        {
-            lock (LockObject)
-            {
-                Image = new(CurrentLevel.LevelWidth, CurrentLevel.LevelHeight, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-                canvas = Graphics.FromImage(Image);
-            }
-
-            LevelZeichner.Zeichne(Image, CurrentLevel, canvas);
-        }
-        finally
-        {
-            canvas?.Dispose();
-        }
+        Target.SetupBackbuffer(CurrentLevel.LevelWidth, CurrentLevel.LevelHeight);
+        LevelZeichner.Zeichne(Target.Image, CurrentLevel, Target.BackBuffer);
 
         Player1.AnchorX = CurrentLevel.SpielerPosition1.X;
         Player1.AnchorY = CurrentLevel.SpielerPosition1.Y;
         Player2.AnchorX = CurrentLevel.SpielerPosition2.X;
         Player2.AnchorY = CurrentLevel.SpielerPosition2.Y;
-        Player1.Emplace(Image);
-        Player2.Emplace(Image);
+        Player1.Emplace(Target);
+        Player2.Emplace(Target);
     }
 
     internal void Shoot(int shooter, int opponent, SequencerCommand command)
@@ -77,7 +61,7 @@ public class GoreArena
         var v = (float)aim.SchussKraft;
         var vSkaliert = 1.0f / (v * 0.5f);
         var mathWinkel = Math.PI * (180 - aim.SchussWinkel) / 180f;
-        var muendungVerlassen = false;
+        var muendungVerlassen = 3;
         var behandeltePixel = new HashSet<long>();
         var ausgangsPunktx = dranSeiender.AnchorX;
         var ausgangsPunkty = dranSeiender.AnchorY;
@@ -133,13 +117,16 @@ public class GoreArena
                 var pixelFach = ((long)pixelY << 32) + pixelX;
                 if (!behandeltePixel.Contains(pixelFach))
                 {
-                    var hitColor = Image.GetPixel(pixelX, pixelY).ToArgb();
-                    if (muendungVerlassen == false)
+                    var hitColor = Target!.Image.GetPixel(pixelX, pixelY).ToArgb();
+                    if (muendungVerlassen > 0)
                     {
                         if (hitColor != dranSeiender.PrimaryBodyColor.ToArgb())
                         {
-                            Audio.GeraeuschAbspielen(Geraeusche.SchussStart);
-                            muendungVerlassen = true;
+                            --muendungVerlassen;
+                            if (muendungVerlassen == 0)
+                            {
+                                Audio.GeraeuschAbspielen(Geraeusche.SchussStart);
+                            }
                         }
                     }
                     else
@@ -160,8 +147,10 @@ public class GoreArena
                             }
                         }
 
-                        Image.SetPixel(pixelX, pixelY, dranSeiender.PrimaryBodyColor);
+                        Target.Image.SetPixel(pixelX, pixelY, dranSeiender.PrimaryBodyColor);
                         behandeltePixel.Add(pixelFach);
+
+                        Application.DoEvents();
                     }
                 }
             }

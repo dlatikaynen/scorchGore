@@ -74,7 +74,7 @@ internal abstract class Sprite : IDisposable
         }
     }
 
-    public void Emplace(Image arena)
+    public void Emplace(frmArena arena)
     {
         if (Width == 0 || Height == 0)
         {
@@ -90,7 +90,7 @@ internal abstract class Sprite : IDisposable
         using (var g = Graphics.FromImage(BackingBitmap))
         {
             g.DrawImage(
-                arena,
+                arena.Image,
                 destRect: new Rectangle(0, 0, Width, Height),
                 srcRect: PhysicalBounds,
                 GraphicsUnit.Pixel
@@ -106,12 +106,11 @@ internal abstract class Sprite : IDisposable
         }
 
         // blit that to the arena
-        using var ga = Graphics.FromImage(arena);
 #if DEBUG
-        ga.DrawRectangle(Pens.WhiteSmoke, PhysicalBounds);
-        ga.FillRectangle(Brushes.WhiteSmoke, AnchorX - 1, AnchorY - 1, 3, 3);
+        arena.BackBuffer.DrawRectangle(Pens.WhiteSmoke, PhysicalBounds);
+        arena.BackBuffer.FillRectangle(Brushes.WhiteSmoke, AnchorX - 1, AnchorY - 1, 3, 3);
 #endif
-        ga.DrawImageUnscaled(
+        arena.BackBuffer.DrawImageUnscaled(
             DingPic,
             PhysicalBounds
         );
