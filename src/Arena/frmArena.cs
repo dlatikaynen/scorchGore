@@ -37,6 +37,7 @@ public partial class frmArena : Form
 
     protected override void OnPaintBackground(PaintEventArgs e)
     {
+        // NOP
     }
 
     protected async override void OnPaint(PaintEventArgs e)
@@ -51,9 +52,11 @@ public partial class frmArena : Form
         };
 
         BackBuffer.FillEllipse(color, 10, 10, 30, 30);
-        e.Graphics.DrawImageUnscaledAndClipped(
+        e.Graphics.DrawImage(
             Image,
-            new(0, 0, Image.Width, Image.Height)
+            destRect: new(0, 0, Image.Width, Image.Height),
+            srcRect: new(viewportOffsetX, viewportOffsetY, Image.Width, Image.Height),
+            GraphicsUnit.Pixel
         );
 
         stopWatch.Stop();
@@ -117,44 +120,45 @@ public partial class frmArena : Form
     {
         if (mitMausVerschieben)
         {
-            //if (kybd.CtrlKeyDown)
-            //{
-            //    var desiredPos = new Point(
-            //        pnlArena.Left + (e.X - mitMausVerschiebenAnfang.X),
-            //        pnlArena.Top + (e.Y - mitMausVerschiebenAnfang.Y)
-            //    );
+            if (kybd.CtrlKeyDown)
+            {
+                var desiredPos = new Point(
+                    (e.X - mitMausVerschiebenAnfang.X) - viewportOffsetX,
+                    (e.Y - mitMausVerschiebenAnfang.Y) - viewportOffsetY
+                );
 
-            //    if (desiredPos.X > 0)
-            //    {
-            //        desiredPos.X = 0;
-            //    }
+                if (desiredPos.X > 0)
+                {
+                    desiredPos.X = 0;
+                }
 
-            //    if (desiredPos.Y > 0)
-            //    {
-            //        desiredPos.Y = 0;
-            //    }
+                if (desiredPos.Y > 0)
+                {
+                    desiredPos.Y = 0;
+                }
 
-            //    if (-desiredPos.X > (pnlArena.Width - Width))
-            //    {
-            //        desiredPos.X = -(pnlArena.Width - Width);
-            //    }
+                if (-desiredPos.X > (Image.Width - Width))
+                {
+                    desiredPos.X = -(Image.Width - Width);
+                }
 
-            //    if (-desiredPos.Y > (pnlArena.Height - Height))
-            //    {
-            //        desiredPos.Y = -(pnlArena.Height - Height);
-            //    }
+                if (-desiredPos.Y > (Image.Height - Height))
+                {
+                    desiredPos.Y = -(Image.Height - Height);
+                }
 
-            //    pnlArena.Location = desiredPos;
-            //}
-            //else
-            //{
+                viewportOffsetX = -desiredPos.X;
+                viewportOffsetY = -desiredPos.Y;
+            }
+            else
+            {
                 Location = new Point(
                     (Location.X - mitMausVerschiebenAnfang.X) + e.X,
                     (Location.Y - mitMausVerschiebenAnfang.Y) + e.Y
                 );
 
                 Update();
-            //}
+            }
         }
     }
 

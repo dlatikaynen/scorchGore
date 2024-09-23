@@ -67,11 +67,6 @@ public partial class MainWindow : Form
         return true;
     }
 
-    private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-
-    }
-
     private void quitToolStripMenuItem_Click(object sender, EventArgs e)
     {
         Close();
