@@ -236,7 +236,21 @@ public partial class frmGame : Form
 
                 if (fromPlayer > 0 && thruPlayer > 0)
                 {
-                    _arena.Shoot(fromPlayer, thruPlayer, command);
+                    var result = _arena.Shoot(fromPlayer, thruPlayer, command);
+
+                    if (result.Ergebnis != SchussErgebnis.NichtGeschossen)
+                    {
+                        if (_whosTurnFromMyPerspective == GameState.OpponentsTurn)
+                        {
+                            SetState(GameState.MyTurn);
+                        }
+                        else
+                        {
+                            // now my turn is over and we continue
+                            // waiting and polling the opponent's queue
+                            SetState(GameState.OpponentsTurn);
+                        }
+                    }
                 }
 
                 break;

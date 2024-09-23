@@ -35,7 +35,7 @@ public class GoreArena
         Player2.Emplace(Target);
     }
 
-    internal void Shoot(int shooter, int opponent, SequencerCommand command)
+    internal Treffer Shoot(int shooter, int opponent, SequencerCommand command)
     {
         if (command.Command == SequencerCommands.FIRE_IN_THE_HOLE)
         {
@@ -43,9 +43,11 @@ public class GoreArena
             var rawArgs = command.Arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             if (rawArgs.Length >= 2 && schussEingabe.Deserialisieren($"{rawArgs[0]},{rawArgs[1]}"))
             {
-                var ergebnis = ClassicShoot(shooter, opponent, schussEingabe);
+                return ClassicShoot(shooter, opponent, schussEingabe);
             }
         }
+
+        return new();
     }
 
     private Treffer ClassicShoot(int shooter, int opponent, SchussEingabe aim)
