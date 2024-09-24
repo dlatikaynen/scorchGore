@@ -10,6 +10,8 @@ internal static class Program
     [STAThread]
     static void Main()
     {
+        Application.SetHighDpiMode(HighDpiMode.DpiUnaware);
+
         // see https://aka.ms/applicationconfiguration
         ApplicationConfiguration.Initialize();
         Semaphore mySemaphore = new(int.MaxValue, int.MaxValue, @"Global\Fso.ScorchGore.Executable");

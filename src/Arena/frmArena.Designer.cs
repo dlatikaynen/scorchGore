@@ -33,7 +33,8 @@
             // 
             // frmArena
             // 
-            AutoScaleMode = AutoScaleMode.None;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = SystemColors.Window;
             CausesValidation = false;
             ClientSize = new Size(640, 480);
