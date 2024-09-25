@@ -7,10 +7,16 @@ exchanging a join token.
 To simulate locally, the ordinal of scorchgore.exe processes
 (the how manieth instance am I) is made a part of the device-binding
 hash.
+--> [X] implemented, tested, works
 
 The initiating player invents a hash, stores it as a file name,
 which at the same time contains the name and the game, and pushes it to the server.
 and tells it to the joining player by means of any communication medium.
+
+Locally, each player participating in an online game store that game's
+hash in their workspace file along with the information about whether
+they are its initiator or its joinee, so when picking up a game later
+the engine gets the ping-pong sequence right.
 
 Players cannot join their own invitation simply by checking if the file is
 already on their local storage when they enter the token into the "Join" box.
@@ -104,3 +110,21 @@ HELO B                     |
   CANVAS_THE_TOWN_BRUSH_TH |
                            | 3 78 78 FIRE IN THE HOLE
 4 BLIMEY                   |
+
+
+
+The basic shooters-take-turns ping-pong is further simplified by
+that there is no need to make a REQ<>ACK after the shot, as both
+players' engines will come to the same conclusion and know who's
+turn it is now. if the opponent's turn takes longer to render,
+and it is their turn afterwards, then the other player simply will
+add that to their time waiting for the opponent's next move.
+
+Platformer moves: What we send over the wire are only the inputs.
+Thus, both engines will independently render pixel-perfectly the
+same moves; there is no random component involved at any point.
+In other words, the mechanics of movement are perfectly deterministic.
+If a level with a platformer component contains animated parts,
+those are also strictly frame time dependent. So both engines can
+never get out of sync, movement-wise. They can be severely out of
+sync performance-wise, though.
