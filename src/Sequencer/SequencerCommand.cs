@@ -24,6 +24,11 @@ public enum SequencerCommands
     ACK = 45,
     GONNA_WRITE_YOU_A_WHOLE_ASS_OPERATING_SYSTEM_FOR_THAT_TRICKSHOT = 45,
     FIRE_IN_THE_HOLE = 69,
+    EGRESS = 71,
+    DROP = 77,
+    DESIGNATE = 79,
+    ACT = 80,
+    AT_EASE = 81,
     KTHXBYE = 111
 }
 

@@ -2,17 +2,18 @@
 using System.Diagnostics;
 using System.Reflection;
 
-namespace ScorchGore.Arena;
+namespace ScorchGore.Leved;
 
-public partial class frmArena : Form
+public partial class frmLeved : Form
 {
     public Bitmap Image;
     public Graphics BackBuffer;
 
-    private readonly GoreArena _arena;
+    private readonly GoreLeved _viewport;
     private readonly Keyboard kybd = new();
     private readonly Stopwatch stopWatch = new();
 
+    private Point[] gridPoints = [];
     private Point mitMausVerschiebenAnfang;
     private bool mitMausVerschieben;
     private int viewportOffsetX = 0;
@@ -20,11 +21,11 @@ public partial class frmArena : Form
     private long frames = 0;
     private long time = 0;
 
-    public frmArena(GoreArena arena)
+    public frmLeved(GoreLeved viewport)
     {
-        _arena = arena;
+        _viewport = viewport;
         InitializeComponent();
-        _arena.Target = this;
+        _viewport.Target = this;
         Image = new(1, 1, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
         BackBuffer = Graphics.FromImage(Image);
     }
@@ -51,13 +52,23 @@ public partial class frmArena : Form
             _ => throw new NotImplementedException()
         };
 
-        BackBuffer.FillEllipse(color, 10, 10, 30, 30);
+        BackBuffer.FillRectangle(color, 10, 10, 30, 30);
         e.Graphics.DrawImage(
             Image,
             destRect: new(0, 0, Image.Width, Image.Height),
             srcRect: new(viewportOffsetX, viewportOffsetY, Image.Width, Image.Height),
             GraphicsUnit.Pixel
         );
+
+        var w = Image.Width;
+        var h = Image.Height;
+
+        if(gridPoints.Length == 0)
+        {
+            SetupGrid(w, h);
+        }
+
+        BackBuffer.DrawLines(Pens.AntiqueWhite, gridPoints);
 
         stopWatch.Stop();
         ++frames;
@@ -77,7 +88,43 @@ public partial class frmArena : Form
         Invalidate();
     }
 
-    private void frmArena_KeyDown(object sender, KeyEventArgs e)
+    private void SetupGrid(int w, int h)
+    {
+        var points = new List<Point>
+        {
+            new(49, -1)
+        };
+
+        for (var x = 49; x < w; x += 49)
+        {
+            points.Add(new(x, h + 1));
+            points.Add(new(x + 49, h + 1));
+            points.Add(new(x + 49, -1));
+        }
+
+        points.Add(new(w + 1, 49));
+        for (var y = 49; y < h; y += 49)
+        {
+            points.Add(new(-1, y));
+            points.Add(new(-1, y + 49));
+            points.Add(new(w + 1, y + 49));
+        }
+
+        gridPoints = points.ToArray();
+    }
+
+    private void frmLeved_Load(object sender, EventArgs e)
+    {
+        typeof(Form).InvokeMember(
+            nameof(DoubleBuffered),
+            BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+            null,
+            this,
+            [true]
+        );
+    }
+
+    private void frmLeved_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.ControlKey)
         {
@@ -91,7 +138,7 @@ public partial class frmArena : Form
         }
     }
 
-    private void frmArena_KeyUp(object sender, KeyEventArgs e)
+    private void frmLeved_KeyUp(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.ControlKey)
         {
@@ -99,24 +146,13 @@ public partial class frmArena : Form
         }
     }
 
-    private void frmArena_Load(object sender, EventArgs e)
-    {
-        typeof(Form).InvokeMember(
-            nameof(DoubleBuffered),
-            BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-            null,
-            this,
-            [true]
-        );
-    }
-
-    private void frmArena_MouseDown(object sender, MouseEventArgs e)
+    private void frmLeved_MouseDown(object sender, MouseEventArgs e)
     {
         mitMausVerschieben = true;
         mitMausVerschiebenAnfang = e.Location;
     }
 
-    private void frmArena_MouseMove(object sender, MouseEventArgs e)
+    private void frmLeved_MouseMove(object sender, MouseEventArgs e)
     {
         if (mitMausVerschieben)
         {
@@ -162,7 +198,7 @@ public partial class frmArena : Form
         }
     }
 
-    private void frmArena_MouseUp(object sender, MouseEventArgs e)
+    private void frmLeved_MouseUp(object sender, MouseEventArgs e)
     {
         mitMausVerschieben = false;
     }

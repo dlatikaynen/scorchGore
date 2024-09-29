@@ -282,6 +282,7 @@ partial class MainWindow
         // 
         mnuToolsLevelDesigner.Name = "mnuToolsLevelDesigner";
         resources.ApplyResources(mnuToolsLevelDesigner, "mnuToolsLevelDesigner");
+        mnuToolsLevelDesigner.Click += mnuToolsLevelDesigner_Click;
         // 
         // contributeToolStripMenuItem
         // 

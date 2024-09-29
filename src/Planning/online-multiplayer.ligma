@@ -128,3 +128,9 @@ If a level with a platformer component contains animated parts,
 those are also strictly frame time dependent. So both engines can
 never get out of sync, movement-wise. They can be severely out of
 sync performance-wise, though.
+
+Yesterday I learned that DOOM did something similar. They can
+record their input, and then run headless and check whether
+implementations are 100% conforming by testing for differences
+in (text) input and (text) output files.
+

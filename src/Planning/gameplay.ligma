@@ -1,0 +1,45 @@
+﻿Two players take turns.
+To determine who has the first turn, a minigame of SSP (with Bronnen) is played.
+(SSP is is not used when playing from the same instance, locally).
+
+A turn must be initiated by entering two tokens.
+Possible token combinations are endless, because the processing code
+constitutes a turing-complete virtual machine.
+
+Trivial token inputs are:
+60 78 FIRE IN THE HOLE
+will cause a single-point tracer shot to launch from the active player
+towards the passive player in a parabola trajectory
+
+60 c70 FIRE IN THE HOLW
+will cause a single-point tracer shot to launch from the active player
+towards the passive player in a cubic trajectory
+
+0 EGRESS CROW
+will cause the crow to walk out towards the opponent player
+
+50 EGRESS CROW
+will point the crow at the angle given, towards the side closer to the
+opponent player, and it will walk from where it lands
+
+0 EGRESS RAT
+will cause a single rat to walk out towards the opponent player.
+rats cannot be egressed from height or launched from the craft.
+
+-0 EGRESS RAT
+will cause a single rat to walk out away from the opponent player
+
+0 EGRESS RAT_STAMPEDE
+will cause all available rats, dundee-like, to depart from the craft
+on the side that is closer to the opponent player
+
+80 40 DROP <DING>
+will simulate a collision-free parabola shot and where it intersects
+the bottom it takes note of the X coordinate of that, then parachutes
+the requested ding, if available in inventory, on that latitude,
+who does it in a cave is an idiot.
+
+A turn lasts until the shot is complete.
+An egress is like a shot in that regard that it is active and part of
+the current player's turn as long as the creature(s) that have departed
+the craft are in motion.

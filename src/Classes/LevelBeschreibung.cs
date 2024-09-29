@@ -1,4 +1,5 @@
 ﻿using ScorchGore.Constants;
+using Xlat = ScorchGore.Translation.Translation;
 
 namespace ScorchGore.Classes;
 
@@ -51,16 +52,22 @@ public class LevelBeschreibung
     public int MaxHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleMaxHoeheProzent : BergMaxHoeheProzent;
     public int RauhheitProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleRauhheitProzent : BergRauhheitProzent;
 
-    private static string MissionsnameBestimmen(int missionsNummer)
+    internal static string MissionsnameBestimmen(int missionsNummer)
     {
         return missionsNummer switch
         {
-            1 => "Blue Mountains",
+            1 => Xlat.µ(4),  // Siniset vuoret
+            2 => Xlat.µ(5),  // Zatychlo pid snihom
+            3 => Xlat.µ(6),  // Paratrouper
+            4 => Xlat.µ(7),  // Dzvonyat' dzvony
+            5 => Xlat.µ(8),  // Deadly Nightshade
+            6 => Xlat.µ(9),  // Usses and Thems
+            7 => Xlat.µ(10), // Mid-size Nightmares
             _ => throw new ArgumentOutOfRangeException(
-                        nameof(missionsNummer),
-                        missionsNummer,
-                        "1-?"
-                    ),
+                nameof(missionsNummer),
+                missionsNummer,
+                "1-?"
+            )
         };
     }
 }

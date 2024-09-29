@@ -1,5 +1,6 @@
 using ScorchGore.Configuration;
 using ScorchGore.Forms;
+using ScorchGore.Leved;
 using ScorchGore.Translation;
 
 namespace Fso.ScorchGore;
@@ -8,6 +9,7 @@ public partial class MainWindow : Form
 {
     private readonly frmOutputPane outputPane;
     private readonly frmApiMessages apiMessagePane;
+    private readonly frmLevelManager levelManager;
     private bool isFirstActivate = true;
 
     public MainWindow()
@@ -23,12 +25,17 @@ public partial class MainWindow : Form
             MdiParent = this
         };
 
+
+        levelManager = new frmLevelManager()
+        {
+            MdiParent = this
+        };
     }
     protected override void OnActivated(EventArgs e)
     {
         base.OnActivated(e);
 
-        if(!isFirstActivate)
+        if (!isFirstActivate)
         {
             return;
         }
@@ -37,7 +44,7 @@ public partial class MainWindow : Form
 
         // https://stackoverflow.com/a/23124456/1132334
         var handle = outputPane.Handle;
-        
+
         outputPane.Hide();
         if (handle == apiMessagePane.Handle)
         {
@@ -314,5 +321,18 @@ public partial class MainWindow : Form
     private void tbbViewApiMessageLog_Click(object sender, EventArgs e)
     {
         mnuViewApiMessages_Click(sender, e);
+    }
+
+    private void mnuToolsLevelDesigner_Click(object sender, EventArgs e)
+    {
+        if (levelManager.Visible)
+        {
+            levelManager.BringToFront();
+        }
+        else
+        {
+            levelManager.MdiParent = this;
+            levelManager.Show();
+        }
     }
 }
