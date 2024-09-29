@@ -18,17 +18,23 @@ public partial class frmLevelManager : Form
 
     private void tvLevels_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
     {
-        _leved.Initialize(1);
+        var key = e.Node.Name.ToString();
+        var keyParts = key.Split('.');
 
-        if (_levedWindow.Visible)
+        if (keyParts.Length == 3 && int.TryParse(keyParts.Last(), out var levelNr))
         {
-            _levedWindow.BringToFront();
-        }
-        else
-        {
-            _levedWindow.Text = e.Node.Text;
-            _levedWindow.MdiParent = ParentForm?.MdiParent;
-            _levedWindow.Show();
+            _leved.Initialize(levelNr);
+
+            if (_levedWindow.Visible)
+            {
+                _levedWindow.BringToFront();
+            }
+            else
+            {
+                _levedWindow.Text = e.Node.Text;
+                _levedWindow.MdiParent = ParentForm?.MdiParent;
+                _levedWindow.Show();
+            }
         }
     }
 
@@ -47,7 +53,7 @@ public partial class frmLevelManager : Form
         for (var mission = 1; mission <= 7; ++mission)
         {
             var missionNode = installmentOne.Nodes.Add(
-                $"installment-1-mission-{mission}",
+                $"1.{mission}",
                 LevelBeschreibung.MissionsnameBestimmen(mission),
                 null
             );
@@ -56,7 +62,7 @@ public partial class frmLevelManager : Form
             while (levelInfo.MissionsNummer == mission)
             {
                 missionNode.Nodes.Add(
-                    $"installment-1-mission-{mission}-level-{levelInfo.LevelNummer}",
+                    $"1.{mission}.{levelInfo.LevelNummer}",
                     levelInfo.LevelName,
                     null
                 );

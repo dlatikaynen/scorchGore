@@ -35,6 +35,8 @@ internal static class LevelSequenzierer
                 break;
 
             case 2:
+                levelBeschreibung.LevelWidth = 862;
+                levelBeschreibung.LevelHeight = 518;
                 levelBeschreibung.MissionsNummer = 1;
                 levelBeschreibung.LevelNummerInMission = 2;
                 levelBeschreibung.LevelName = "The Blue Cave";
@@ -51,6 +53,8 @@ internal static class LevelSequenzierer
                 break;
 
             case 3:
+                levelBeschreibung.LevelWidth = 862;
+                levelBeschreibung.LevelHeight = 518;
                 levelBeschreibung.MissionsNummer = 1;
                 levelBeschreibung.LevelNummerInMission = 3;
                 levelBeschreibung.LevelName = "Dalí";
@@ -65,6 +69,8 @@ internal static class LevelSequenzierer
                 break;
 
             case 4:
+                levelBeschreibung.LevelWidth = 862;
+                levelBeschreibung.LevelHeight = 518;
                 levelBeschreibung.MissionsNummer = 2;
                 levelBeschreibung.LevelNummerInMission = 1;
                 levelBeschreibung.LevelName = "Vah Miaw";

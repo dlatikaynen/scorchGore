@@ -1,10 +1,11 @@
-﻿using ScorchGore.Classes;
+﻿using ScorchGore.Arena;
+using ScorchGore.Classes;
 
 namespace ScorchGore.Leved;
 
 public class GoreLeved
 {
-    public LevelBeschreibung CurrentLevel = new();
+    public LevelBeschreibung EditedLevel = new();
     public frmLeved? Target { get; set; }
 
     public void Initialize(int levelNr)
@@ -14,7 +15,8 @@ public class GoreLeved
             throw new NullReferenceException(nameof(Target));
         }
 
-        CurrentLevel = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
-        Target.SetupBackbuffer(CurrentLevel.LevelWidth, CurrentLevel.LevelHeight);
+        EditedLevel = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
+        Target.SetupBackbuffer(EditedLevel.LevelWidth, EditedLevel.LevelHeight);
+        LevelZeichner.Zeichne(Target.Image, EditedLevel, Target.BackBuffer);
     }
 }
