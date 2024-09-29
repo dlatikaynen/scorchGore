@@ -43,7 +43,7 @@ public partial class frmLevelManager : Form
         tvLevels.Nodes.Clear();
 
         var installmentOne = tvLevels.Nodes.Add(
-            "installment-1",
+            "1",
             Xlat.µ(11),  // Instalment I: Wrath of the Mild
             null
         );
@@ -73,21 +73,32 @@ public partial class frmLevelManager : Form
         }
 
         var customLevels = tvLevels.Nodes.Add(
-            "custom",
+            "69",
             Xlat.µ(12), // My levels
             null
         );
 
         var customMission = customLevels.Nodes.Add(
-            "custom-mission-1",
+            "69.1",
             Xlat.µ(13), // My mission
             null
         );
 
         var _ = customMission.Nodes.Add(
-            "custom-mission-1-level-1",
+            "69.1.1",
             Xlat.µ(14), // Horror vacui
             null
         );
+    }
+
+    private void mnuToolsEditLevel_Click(object sender, EventArgs e)
+    {
+        tvLevels_NodeMouseDoubleClick(sender, new TreeNodeMouseClickEventArgs(
+            tvLevels.SelectedNode,
+            MouseButtons.None,
+            0,
+            0,
+            0
+        ));
     }
 }

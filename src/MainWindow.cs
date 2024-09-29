@@ -7,6 +7,8 @@ namespace Fso.ScorchGore;
 
 public partial class MainWindow : Form
 {
+    internal static bool ShowGrid;
+
     private readonly frmOutputPane outputPane;
     private readonly frmApiMessages apiMessagePane;
     private readonly frmLevelManager levelManager;
@@ -30,6 +32,8 @@ public partial class MainWindow : Form
         {
             MdiParent = this
         };
+
+        ShowGrid = mnuViewShowGrid.Checked;
     }
     protected override void OnActivated(EventArgs e)
     {
@@ -334,5 +338,10 @@ public partial class MainWindow : Form
             levelManager.MdiParent = this;
             levelManager.Show();
         }
+    }
+
+    private void mnuViewShowGrid_Click(object sender, EventArgs e)
+    {
+        ShowGrid = mnuViewShowGrid.Checked;
     }
 }

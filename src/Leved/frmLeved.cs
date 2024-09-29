@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.Devices;
+﻿using Fso.ScorchGore;
+using Microsoft.VisualBasic.Devices;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -63,12 +64,15 @@ public partial class frmLeved : Form
         var w = Image.Width;
         var h = Image.Height;
 
-        if(gridPoints.Length == 0)
+        if (MainWindow.ShowGrid)
         {
-            SetupGrid(w, h);
-        }
+            if (gridPoints.Length == 0)
+            {
+                SetupGrid(w, h);
+            }
 
-        BackBuffer.DrawLines(Pens.AntiqueWhite, gridPoints);
+            e.Graphics.DrawLines(Pens.AntiqueWhite, gridPoints);
+        }
 
         stopWatch.Stop();
         ++frames;

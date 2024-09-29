@@ -28,34 +28,101 @@
         /// </summary>
         private void InitializeComponent()
         {
-            TreeNode treeNode5 = new TreeNode("I.1 Blue Mountains");
-            TreeNode treeNode6 = new TreeNode("I. Blue Mountains", new TreeNode[] { treeNode5 });
-            TreeNode treeNode7 = new TreeNode("Built-in levels", new TreeNode[] { treeNode6 });
-            TreeNode treeNode8 = new TreeNode("dlatikay's levels");
+            components = new System.ComponentModel.Container();
+            TreeNode treeNode1 = new TreeNode("I.1 Blue Mountains");
+            TreeNode treeNode2 = new TreeNode("I. Blue Mountains", new TreeNode[] { treeNode1 });
+            TreeNode treeNode3 = new TreeNode("Built-in levels", new TreeNode[] { treeNode2 });
+            TreeNode treeNode4 = new TreeNode("dlatikay's levels");
             tvLevels = new TreeView();
+            ilTreeview = new ImageList(components);
+            mnuLeved = new MenuStrip();
+            mnuTools = new ToolStripMenuItem();
+            mnuToolsAddLevel = new ToolStripMenuItem();
+            mnuToolsEditLevel = new ToolStripMenuItem();
+            mnuToolsPlaytestLevel = new ToolStripMenuItem();
+            mnuToolsDeleteLevel = new ToolStripMenuItem();
+            mnuToolsLevelProperties = new ToolStripMenuItem();
+            mnuLeved.SuspendLayout();
             SuspendLayout();
             // 
             // tvLevels
             // 
+            tvLevels.BackColor = SystemColors.Control;
             tvLevels.Dock = DockStyle.Fill;
             tvLevels.FullRowSelect = true;
             tvLevels.HideSelection = false;
             tvLevels.LabelEdit = true;
             tvLevels.Location = new Point(0, 0);
             tvLevels.Name = "tvLevels";
-            treeNode5.Name = "Node3";
-            treeNode5.Text = "I.1 Blue Mountains";
-            treeNode6.Name = "Node2";
-            treeNode6.Text = "I. Blue Mountains";
-            treeNode7.Name = "Node0";
-            treeNode7.Text = "Built-in levels";
-            treeNode8.Name = "Node1";
-            treeNode8.Text = "dlatikay's levels";
-            tvLevels.Nodes.AddRange(new TreeNode[] { treeNode7, treeNode8 });
+            treeNode1.Name = "Node3";
+            treeNode1.Text = "I.1 Blue Mountains";
+            treeNode2.Name = "Node2";
+            treeNode2.Text = "I. Blue Mountains";
+            treeNode3.Name = "Node0";
+            treeNode3.Text = "Built-in levels";
+            treeNode4.Name = "Node1";
+            treeNode4.Text = "dlatikay's levels";
+            tvLevels.Nodes.AddRange(new TreeNode[] { treeNode3, treeNode4 });
             tvLevels.PathSeparator = "|";
             tvLevels.Size = new Size(251, 211);
             tvLevels.TabIndex = 0;
             tvLevels.NodeMouseDoubleClick += tvLevels_NodeMouseDoubleClick;
+            // 
+            // ilTreeview
+            // 
+            ilTreeview.ColorDepth = ColorDepth.Depth32Bit;
+            ilTreeview.ImageSize = new Size(16, 16);
+            ilTreeview.TransparentColor = Color.Transparent;
+            // 
+            // mnuLeved
+            // 
+            mnuLeved.AccessibleRole = AccessibleRole.MenuBar;
+            mnuLeved.Items.AddRange(new ToolStripItem[] { mnuTools });
+            mnuLeved.Location = new Point(0, 0);
+            mnuLeved.Name = "mnuLeved";
+            mnuLeved.Size = new Size(251, 24);
+            mnuLeved.TabIndex = 1;
+            mnuLeved.Visible = false;
+            // 
+            // mnuTools
+            // 
+            mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsAddLevel, mnuToolsEditLevel, mnuToolsPlaytestLevel, mnuToolsDeleteLevel, mnuToolsLevelProperties });
+            mnuTools.MergeAction = MergeAction.Insert;
+            mnuTools.MergeIndex = 2;
+            mnuTools.Name = "mnuTools";
+            mnuTools.Size = new Size(55, 20);
+            mnuTools.Text = "&Design";
+            // 
+            // mnuToolsAddLevel
+            // 
+            mnuToolsAddLevel.Name = "mnuToolsAddLevel";
+            mnuToolsAddLevel.Size = new Size(180, 22);
+            mnuToolsAddLevel.Text = "Add level";
+            // 
+            // mnuToolsEditLevel
+            // 
+            mnuToolsEditLevel.Name = "mnuToolsEditLevel";
+            mnuToolsEditLevel.Size = new Size(180, 22);
+            mnuToolsEditLevel.Text = "Edit level";
+            mnuToolsEditLevel.Click += mnuToolsEditLevel_Click;
+            // 
+            // mnuToolsPlaytestLevel
+            // 
+            mnuToolsPlaytestLevel.Name = "mnuToolsPlaytestLevel";
+            mnuToolsPlaytestLevel.Size = new Size(180, 22);
+            mnuToolsPlaytestLevel.Text = "Playtest level";
+            // 
+            // mnuToolsDeleteLevel
+            // 
+            mnuToolsDeleteLevel.Name = "mnuToolsDeleteLevel";
+            mnuToolsDeleteLevel.Size = new Size(180, 22);
+            mnuToolsDeleteLevel.Text = "Delete level";
+            // 
+            // mnuToolsLevelProperties
+            // 
+            mnuToolsLevelProperties.Name = "mnuToolsLevelProperties";
+            mnuToolsLevelProperties.Size = new Size(180, 22);
+            mnuToolsLevelProperties.Text = "Level properties";
             // 
             // frmLevelManager
             // 
@@ -63,14 +130,27 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(251, 211);
             Controls.Add(tvLevels);
+            Controls.Add(mnuLeved);
+            MainMenuStrip = mnuLeved;
             Name = "frmLevelManager";
             Text = "Level Manager";
             Load += frmLevelManager_Load;
+            mnuLeved.ResumeLayout(false);
+            mnuLeved.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private TreeView tvLevels;
+        private ImageList ilTreeview;
+        private MenuStrip mnuLeved;
+        private ToolStripMenuItem mnuTools;
+        private ToolStripMenuItem mnuToolsAddLevel;
+        private ToolStripMenuItem mnuToolsEditLevel;
+        private ToolStripMenuItem mnuToolsPlaytestLevel;
+        private ToolStripMenuItem mnuToolsDeleteLevel;
+        private ToolStripMenuItem mnuToolsLevelProperties;
     }
 }

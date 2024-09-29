@@ -89,6 +89,7 @@ partial class MainWindow
         toolStripStatusLabel2 = new ToolStripStatusLabel();
         toolStripStatusLabel3 = new ToolStripStatusLabel();
         toolStripProgressBar1 = new ToolStripProgressBar();
+        mnuViewShowGrid = new ToolStripMenuItem();
         MainToolbar.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)MdiError).BeginInit();
         MainMenu.SuspendLayout();
@@ -226,7 +227,7 @@ partial class MainWindow
         // 
         // mnuView
         // 
-        mnuView.DropDownItems.AddRange(new ToolStripItem[] { mnuViewSwitchLanguage, mnuViewServerTraffic, mnuViewApiMessages });
+        mnuView.DropDownItems.AddRange(new ToolStripItem[] { mnuViewSwitchLanguage, mnuViewServerTraffic, mnuViewApiMessages, mnuViewShowGrid });
         mnuView.Name = "mnuView";
         resources.ApplyResources(mnuView, "mnuView");
         // 
@@ -429,6 +430,15 @@ partial class MainWindow
         toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
         toolStripProgressBar1.Value = 50;
         // 
+        // mnuViewShowGrid
+        // 
+        mnuViewShowGrid.Checked = true;
+        mnuViewShowGrid.CheckOnClick = true;
+        mnuViewShowGrid.CheckState = CheckState.Checked;
+        mnuViewShowGrid.Name = "mnuViewShowGrid";
+        resources.ApplyResources(mnuViewShowGrid, "mnuViewShowGrid");
+        mnuViewShowGrid.Click += mnuViewShowGrid_Click;
+        // 
         // MainWindow
         // 
         AccessibleRole = AccessibleRole.Application;
@@ -513,4 +523,5 @@ partial class MainWindow
     private ToolStripMenuItem mnuToolsLevelDesigner;
     private ToolStripButton tbbViewServerTraffic;
     private ToolStripButton tbbViewApiMessageLog;
+    private ToolStripMenuItem mnuViewShowGrid;
 }
