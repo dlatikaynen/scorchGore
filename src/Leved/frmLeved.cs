@@ -13,6 +13,7 @@ public partial class frmLeved : Form
     private readonly GoreLeved _viewport;
     private readonly Keyboard kybd = new();
     private readonly Stopwatch stopWatch = new();
+    private readonly Pen gridPen;
 
     private Point[] gridPoints = [];
     private Point mitMausVerschiebenAnfang;
@@ -29,6 +30,8 @@ public partial class frmLeved : Form
         _viewport.Target = this;
         Image = new(1, 1, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
         BackBuffer = Graphics.FromImage(Image);
+        var gridColor = Color.FromKnownColor(KnownColor.AntiqueWhite);
+        gridPen = new Pen(Color.FromArgb(0x33, gridColor.R, gridColor.G, gridColor.B));
     }
 
     public void SetupBackbuffer(int width, int height)
@@ -71,7 +74,7 @@ public partial class frmLeved : Form
                 SetupGrid(w, h);
             }
 
-            e.Graphics.DrawLines(Pens.AntiqueWhite, gridPoints);
+            e.Graphics.DrawLines(gridPen, gridPoints);
         }
 
         stopWatch.Stop();
@@ -205,5 +208,20 @@ public partial class frmLeved : Form
     private void frmLeved_MouseUp(object sender, MouseEventArgs e)
     {
         mitMausVerschieben = false;
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            if (components != null)
+            {
+                components.Dispose();
+            }
+
+            gridPen.Dispose();
+        }
+
+        base.Dispose(disposing);
     }
 }

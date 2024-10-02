@@ -123,8 +123,8 @@
   <metadata name="trbForms.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <data name="label23.Text" xml:space="preserve">
-    <value>This software is not fit for any purpose. Actually, at this point we are no longer comfortable to insist that this abomination should be called software in the first place. Anyway, for legal purposes it is, so if you pirate it, our CEO will sue your pants off. Thus, don't.
+  <data name="lblDisclaimer.Text" xml:space="preserve">
+    <value>This software is not fit for any purpose. Actually, at this point we are no longer comfortable to insist that this abomination should be called software in the first place. Anyway, for legal purposes it is, so if you pirate it, our CEO will tip you off to CIA. Thus, don't.
 </value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />

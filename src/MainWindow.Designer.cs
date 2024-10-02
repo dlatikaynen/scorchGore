@@ -62,6 +62,7 @@ partial class MainWindow
         mnuViewSwitchLanguageUa = new ToolStripMenuItem();
         mnuViewServerTraffic = new ToolStripMenuItem();
         mnuViewApiMessages = new ToolStripMenuItem();
+        mnuViewShowGrid = new ToolStripMenuItem();
         mnuTools = new ToolStripMenuItem();
         mnuToolsLevelDesigner = new ToolStripMenuItem();
         contributeToolStripMenuItem = new ToolStripMenuItem();
@@ -89,7 +90,6 @@ partial class MainWindow
         toolStripStatusLabel2 = new ToolStripStatusLabel();
         toolStripStatusLabel3 = new ToolStripStatusLabel();
         toolStripProgressBar1 = new ToolStripProgressBar();
-        mnuViewShowGrid = new ToolStripMenuItem();
         MainToolbar.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)MdiError).BeginInit();
         MainMenu.SuspendLayout();
@@ -273,6 +273,15 @@ partial class MainWindow
         resources.ApplyResources(mnuViewApiMessages, "mnuViewApiMessages");
         mnuViewApiMessages.Click += mnuViewApiMessages_Click;
         // 
+        // mnuViewShowGrid
+        // 
+        mnuViewShowGrid.Checked = true;
+        mnuViewShowGrid.CheckOnClick = true;
+        mnuViewShowGrid.CheckState = CheckState.Checked;
+        mnuViewShowGrid.Name = "mnuViewShowGrid";
+        resources.ApplyResources(mnuViewShowGrid, "mnuViewShowGrid");
+        mnuViewShowGrid.Click += mnuViewShowGrid_Click;
+        // 
         // mnuTools
         // 
         mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsLevelDesigner });
@@ -281,8 +290,8 @@ partial class MainWindow
         // 
         // mnuToolsLevelDesigner
         // 
-        mnuToolsLevelDesigner.Name = "mnuToolsLevelDesigner";
         resources.ApplyResources(mnuToolsLevelDesigner, "mnuToolsLevelDesigner");
+        mnuToolsLevelDesigner.Name = "mnuToolsLevelDesigner";
         mnuToolsLevelDesigner.Click += mnuToolsLevelDesigner_Click;
         // 
         // contributeToolStripMenuItem
@@ -429,15 +438,6 @@ partial class MainWindow
         resources.ApplyResources(toolStripProgressBar1, "toolStripProgressBar1");
         toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
         toolStripProgressBar1.Value = 50;
-        // 
-        // mnuViewShowGrid
-        // 
-        mnuViewShowGrid.Checked = true;
-        mnuViewShowGrid.CheckOnClick = true;
-        mnuViewShowGrid.CheckState = CheckState.Checked;
-        mnuViewShowGrid.Name = "mnuViewShowGrid";
-        resources.ApplyResources(mnuViewShowGrid, "mnuViewShowGrid");
-        mnuViewShowGrid.Click += mnuViewShowGrid_Click;
         // 
         // MainWindow
         // 

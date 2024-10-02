@@ -32,9 +32,12 @@
             TrackBar trbForms;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAbout));
             pnlAbout = new Panel();
+            pcbGle = new PictureBox();
+            lblDedication = new Label();
+            lblDedicationLabel = new Label();
             lblCopyright = new Label();
             lblByTheCreators = new Label();
-            label23 = new Label();
+            lblDisclaimer = new Label();
             label22 = new Label();
             label21 = new Label();
             label20 = new Label();
@@ -64,12 +67,13 @@
             trbForms = new TrackBar();
             ((System.ComponentModel.ISupportInitialize)trbForms).BeginInit();
             pnlAbout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pcbGle).BeginInit();
             SuspendLayout();
             // 
             // pgbForms
             // 
             pgbForms.ForeColor = Color.Gold;
-            pgbForms.Location = new Point(32, 279);
+            pgbForms.Location = new Point(36, 279);
             pgbForms.MarqueeAnimationSpeed = 5;
             pgbForms.Name = "pgbForms";
             pgbForms.Size = new Size(45, 23);
@@ -80,7 +84,7 @@
             // trbForms
             // 
             trbForms.LargeChange = 2;
-            trbForms.Location = new Point(87, 279);
+            trbForms.Location = new Point(91, 279);
             trbForms.Maximum = 5;
             trbForms.Name = "trbForms";
             trbForms.Size = new Size(71, 45);
@@ -90,9 +94,12 @@
             // pnlAbout
             // 
             pnlAbout.AccessibleRole = AccessibleRole.Pane;
+            pnlAbout.Controls.Add(pcbGle);
+            pnlAbout.Controls.Add(lblDedication);
+            pnlAbout.Controls.Add(lblDedicationLabel);
             pnlAbout.Controls.Add(lblCopyright);
             pnlAbout.Controls.Add(lblByTheCreators);
-            pnlAbout.Controls.Add(label23);
+            pnlAbout.Controls.Add(lblDisclaimer);
             pnlAbout.Controls.Add(label22);
             pnlAbout.Controls.Add(label21);
             pnlAbout.Controls.Add(label20);
@@ -122,8 +129,39 @@
             pnlAbout.Controls.Add(lblProduct);
             pnlAbout.Location = new Point(0, 0);
             pnlAbout.Name = "pnlAbout";
-            pnlAbout.Size = new Size(261, 811);
+            pnlAbout.Size = new Size(261, 885);
             pnlAbout.TabIndex = 0;
+            // 
+            // pcbGle
+            // 
+            pcbGle.BackgroundImageLayout = ImageLayout.None;
+            pcbGle.Image = Properties.Resources.gle;
+            pcbGle.Location = new Point(193, 842);
+            pcbGle.Name = "pcbGle";
+            pcbGle.Size = new Size(66, 47);
+            pcbGle.SizeMode = PictureBoxSizeMode.Zoom;
+            pcbGle.TabIndex = 32;
+            pcbGle.TabStop = false;
+            // 
+            // lblDedication
+            // 
+            lblDedication.Location = new Point(12, 639);
+            lblDedication.Name = "lblDedication";
+            lblDedication.Size = new Size(246, 57);
+            lblDedication.TabIndex = 31;
+            lblDedication.Text = "An Unfun Game made with Holy C .NET\r\nDedicated in admiration to the memory of Terry A. Davis";
+            lblDedication.UseMnemonic = false;
+            // 
+            // lblDedicationLabel
+            // 
+            lblDedicationLabel.AutoSize = true;
+            lblDedicationLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            lblDedicationLabel.Location = new Point(12, 621);
+            lblDedicationLabel.Name = "lblDedicationLabel";
+            lblDedicationLabel.Size = new Size(127, 15);
+            lblDedicationLabel.TabIndex = 30;
+            lblDedicationLabel.Text = "Programming platform";
+            lblDedicationLabel.UseMnemonic = false;
             // 
             // lblCopyright
             // 
@@ -146,20 +184,20 @@
             lblByTheCreators.Text = "by the creators of blooDot";
             lblByTheCreators.UseMnemonic = false;
             // 
-            // label23
+            // lblDisclaimer
             // 
-            label23.Location = new Point(12, 638);
-            label23.Name = "label23";
-            label23.Size = new Size(246, 161);
-            label23.TabIndex = 27;
-            label23.Text = resources.GetString("label23.Text");
-            label23.UseMnemonic = false;
+            lblDisclaimer.Location = new Point(12, 721);
+            lblDisclaimer.Name = "lblDisclaimer";
+            lblDisclaimer.Size = new Size(246, 161);
+            lblDisclaimer.TabIndex = 27;
+            lblDisclaimer.Text = resources.GetString("lblDisclaimer.Text");
+            lblDisclaimer.UseMnemonic = false;
             // 
             // label22
             // 
             label22.AutoSize = true;
             label22.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            label22.Location = new Point(12, 619);
+            label22.Location = new Point(12, 702);
             label22.Name = "label22";
             label22.Size = new Size(92, 15);
             label22.TabIndex = 26;
@@ -169,7 +207,7 @@
             // label21
             // 
             label21.AutoSize = true;
-            label21.Location = new Point(12, 590);
+            label21.Location = new Point(12, 589);
             label21.Name = "label21";
             label21.Size = new Size(226, 15);
             label21.TabIndex = 25;
@@ -180,7 +218,7 @@
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            label20.Location = new Point(12, 571);
+            label20.Location = new Point(12, 570);
             label20.Name = "label20";
             label20.Size = new Size(82, 15);
             label20.TabIndex = 24;
@@ -265,9 +303,9 @@
             label12.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
             label12.Location = new Point(12, 362);
             label12.Name = "label12";
-            label12.Size = new Size(174, 15);
+            label12.Size = new Size(163, 15);
             label12.TabIndex = 16;
-            label12.Text = "Additional design & playtesting";
+            label12.Text = "Additional code & playtesting";
             label12.UseMnemonic = false;
             // 
             // label11
@@ -294,7 +332,7 @@
             // chkForms
             // 
             chkForms.AutoSize = true;
-            chkForms.Location = new Point(164, 284);
+            chkForms.Location = new Point(168, 284);
             chkForms.Name = "chkForms";
             chkForms.Size = new Size(15, 14);
             chkForms.TabIndex = 13;
@@ -303,7 +341,7 @@
             // optForms
             // 
             optForms.AutoSize = true;
-            optForms.Location = new Point(12, 284);
+            optForms.Location = new Point(16, 284);
             optForms.Name = "optForms";
             optForms.Size = new Size(14, 13);
             optForms.TabIndex = 10;
@@ -438,6 +476,7 @@
             ((System.ComponentModel.ISupportInitialize)trbForms).EndInit();
             pnlAbout.ResumeLayout(false);
             pnlAbout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pcbGle).EndInit();
             ResumeLayout(false);
         }
 
@@ -468,9 +507,12 @@
         private Label label18;
         private Label label17;
         private Label label16;
-        private Label label23;
+        private Label lblDisclaimer;
         private Label label22;
         private Label lblCopyright;
         private Label lblByTheCreators;
+        private Label lblDedication;
+        private Label lblDedicationLabel;
+        private PictureBox pcbGle;
     }
 }

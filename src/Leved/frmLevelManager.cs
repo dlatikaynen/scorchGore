@@ -55,7 +55,8 @@ public partial class frmLevelManager : Form
             var missionNode = installmentOne.Nodes.Add(
                 $"1.{mission}",
                 LevelBeschreibung.MissionsnameBestimmen(mission),
-                null
+                "mission",
+                "mission"
             );
 
             var levelInfo = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
@@ -64,7 +65,8 @@ public partial class frmLevelManager : Form
                 missionNode.Nodes.Add(
                     $"1.{mission}.{levelInfo.LevelNummer}",
                     levelInfo.LevelName,
-                    null
+                    "map",
+                    "map"
                 );
 
                 ++levelNr;
@@ -81,13 +83,15 @@ public partial class frmLevelManager : Form
         var customMission = customLevels.Nodes.Add(
             "69.1",
             Xlat.µ(13), // My mission
-            null
+            "mission",
+            "mission"
         );
 
         var _ = customMission.Nodes.Add(
             "69.1.1",
             Xlat.µ(14), // Horror vacui
-            null
+            "map",
+            "map"
         );
     }
 

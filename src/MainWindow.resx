@@ -124,34 +124,6 @@
     <value>948, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="MainToolbar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="MainToolbar.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="MainToolbar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 25</value>
-  </data>
-  <data name="MainToolbar.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="MainToolbar.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;MainToolbar.Name" xml:space="preserve">
-    <value>MainToolbar</value>
-  </data>
-  <data name="&gt;&gt;MainToolbar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MainToolbar.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;MainToolbar.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="tbbInitiate.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -236,10 +208,10 @@
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADZSURBVDhPY6AaUFRUfADE/4nED6DaEAAkIScnJ0kMBqmF
-        aoMAoMB+GAYpYEgLe8yQHvEfAwPFsRoAAiBBmA1gxanRkhgYKI7TABkZmQ9wA0h1gZKSkidQQlFBQWE9
+        aoMAoMB+GAYpYEgLe8yQHvEfAwPFsRoAAiBBmA1gxanRkhgYKI7TACkpqQ9wA0h1gZKSkidQQlFBQWE9
         zBB8GNMF0bsdGGJ3ltrb27MAJcWxaULGqAZEb7dliN31kiFmpxNUBAUQNiB251WgAf+xYiAgwoDdNkDF
         FLgABKBhAOWBXFUKEpOUlOQizgB0gOQqbIZgGoDN/2AMDB8GBhbCBqADpJgBKs4GaUDDmJkJBUDDAMrD
-        AxgYAJgdqw4LIGHeAAAAAElFTkSuQmCC
+        AxgYAIeXqwje2epIAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tbbViewApiMessageLog.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -250,6 +222,34 @@
   </data>
   <data name="tbbViewApiMessageLog.Text" xml:space="preserve">
     <value>toolStripButton2</value>
+  </data>
+  <data name="MainToolbar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="MainToolbar.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="MainToolbar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>624, 25</value>
+  </data>
+  <data name="MainToolbar.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="MainToolbar.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;MainToolbar.Name" xml:space="preserve">
+    <value>MainToolbar</value>
+  </data>
+  <data name="&gt;&gt;MainToolbar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MainToolbar.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;MainToolbar.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="MdiError.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>625, 17</value>
@@ -270,6 +270,39 @@
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 63</value>
   </metadata>
+  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 17</value>
+  </data>
+  <data name="toolStripStatusLabel1.Text" xml:space="preserve">
+    <value>No active game</value>
+  </data>
+  <data name="toolStripStatusLabel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
+  </data>
+  <data name="toolStripStatusLabel4.Text" xml:space="preserve">
+    <value>Version 2.1.0</value>
+  </data>
+  <data name="toolStripStatusLabel2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="toolStripStatusLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 17</value>
+  </data>
+  <data name="toolStripStatusLabel2.Text" xml:space="preserve">
+    <value>SHAREWARE EDITION</value>
+  </data>
+  <data name="toolStripStatusLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 17</value>
+  </data>
+  <data name="toolStripStatusLabel3.Text" xml:space="preserve">
+    <value>Loading</value>
+  </data>
+  <data name="toolStripStatusLabel3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="toolStripProgressBar1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 16</value>
+  </data>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 419</value>
   </data>
@@ -294,11 +327,92 @@
   <metadata name="MainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>798, 17</value>
   </metadata>
+  <data name="mnuFileInitiateTournamentOnline.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 22</value>
+  </data>
+  <data name="mnuFileInitiateTournamentOnline.Text" xml:space="preserve">
+    <value>&amp;Tournament online...</value>
+  </data>
+  <data name="mnuFileInitiateTournamentLocal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 22</value>
+  </data>
+  <data name="mnuFileInitiateTournamentLocal.Text" xml:space="preserve">
+    <value>Tournament &amp;local</value>
+  </data>
+  <data name="mnuFilePractice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 22</value>
+  </data>
+  <data name="mnuFilePractice.Text" xml:space="preserve">
+    <value>&amp;Practice</value>
+  </data>
+  <data name="toolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 6</value>
+  </data>
+  <data name="mnuFileJoinGame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 22</value>
+  </data>
+  <data name="mnuFileJoinGame.Text" xml:space="preserve">
+    <value>&amp;Join Game...</value>
+  </data>
+  <data name="mnuFileLoadSavegame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 22</value>
+  </data>
+  <data name="mnuFileLoadSavegame.Text" xml:space="preserve">
+    <value>&amp;Load savegame...</value>
+  </data>
+  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 6</value>
+  </data>
+  <data name="mnuFileBackup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 22</value>
+  </data>
+  <data name="mnuFileBackup.Text" xml:space="preserve">
+    <value>&amp;Backup...</value>
+  </data>
+  <data name="mnuFileRestore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 22</value>
+  </data>
+  <data name="mnuFileRestore.Text" xml:space="preserve">
+    <value>&amp;Restore...</value>
+  </data>
+  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 6</value>
+  </data>
+  <data name="mnuFileQuit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 22</value>
+  </data>
+  <data name="mnuFileQuit.Text" xml:space="preserve">
+    <value>&amp;Quit</value>
+  </data>
   <data name="mnuFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 20</value>
   </data>
   <data name="mnuFile.Text" xml:space="preserve">
     <value>File</value>
+  </data>
+  <data name="mnuViewSwitchLanguageEn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="mnuViewSwitchLanguageEn.Text" xml:space="preserve">
+    <value>&amp;English</value>
+  </data>
+  <data name="mnuViewSwitchLanguageFi.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="mnuViewSwitchLanguageFi.Text" xml:space="preserve">
+    <value>&amp;Finnish (suomi)</value>
+  </data>
+  <data name="mnuViewSwitchLanguageDe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="mnuViewSwitchLanguageDe.Text" xml:space="preserve">
+    <value>&amp;German (Deutsch)</value>
+  </data>
+  <data name="mnuViewSwitchLanguageUa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="mnuViewSwitchLanguageUa.Text" xml:space="preserve">
+    <value>&amp;Ukrainian (українська)</value>
   </data>
   <data name="mnuViewSwitchLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 22</value>
@@ -330,11 +444,51 @@
   <data name="mnuView.Text" xml:space="preserve">
     <value>View</value>
   </data>
+  <data name="mnuToolsLevelDesigner.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGRSURBVDhPY6AKUFBWe66oqPifRPwAqp2BASTAELvrP2PU
+        lkPM4aubWQPnxsnJyUkC+XsYYnb+5HWptwDxeTxbrfndKoxBGKwHBmAGQA3Zy+7R6SyjqirNGLlpI493
+        qy0IC5tEqzNGbzvBEL3tPtDQH7gNiNl2hjFq0w7GsNW9srLqUiCbheySNVn958QCDVwL1PwLpA6nAWAc
+        s/0Fa8CsMJBmEBYz8VZijNq8iyF6+xPG6O3nGGO2X8JmwB+I5h3veN0bLWGaQRjEB3rtAEvokkKgyyaD
+        1GIYAJSYAJJkd292EDUMVUE2gDFi4xq462J3/gOGwz0MA0CBBnR2JJvflBCW0OUlIqbhaggD1i8E+v0r
+        3JDo7eBoh2qHGABTzBK8JA+sCBQOwfOSYOJgg6K3ngTJgVyE0wCQf0HhAFYYs+08igGRG5aBxFmCF2bg
+        NACicNNKoF9/s3n2eyKLs4QsKwamhdPSKroyhAxYCwyHKmQxEAaFEyxt4DcAGBsgW5DF0DG6AQ9AAiRi
+        RGYiHzAwAACSN/XjKZdM1AAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="mnuToolsLevelDesigner.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuToolsLevelDesigner.Text" xml:space="preserve">
+    <value>Level &amp;Manager</value>
+  </data>
   <data name="mnuTools.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
   </data>
   <data name="mnuTools.Text" xml:space="preserve">
     <value>Tools</value>
+  </data>
+  <data name="mnuCommunityEditPlayerProfile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="mnuCommunityEditPlayerProfile.Text" xml:space="preserve">
+    <value>Edit player &amp;profile...</value>
+  </data>
+  <data name="toolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 6</value>
+  </data>
+  <data name="discordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="discordToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Discord</value>
+  </data>
+  <data name="forumToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="forumToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Forum</value>
   </data>
   <data name="contributeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 20</value>
@@ -342,11 +496,77 @@
   <data name="contributeToolStripMenuItem.Text" xml:space="preserve">
     <value>Community</value>
   </data>
+  <data name="closeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 22</value>
+  </data>
+  <data name="closeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="arrangeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 22</value>
+  </data>
+  <data name="arrangeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Arrange</value>
+  </data>
+  <data name="minimizeAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 22</value>
+  </data>
+  <data name="minimizeAllToolStripMenuItem.Text" xml:space="preserve">
+    <value>Minimize all</value>
+  </data>
+  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 6</value>
+  </data>
   <data name="mnuWindow.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 20</value>
   </data>
   <data name="mnuWindow.Text" xml:space="preserve">
     <value>Window</value>
+  </data>
+  <data name="payAndRegisterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 22</value>
+  </data>
+  <data name="payAndRegisterToolStripMenuItem.Text" xml:space="preserve">
+    <value>Pa&amp;y and register</value>
+  </data>
+  <data name="enterProductkeyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 22</value>
+  </data>
+  <data name="enterProductkeyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Enter product &amp;key</value>
+  </data>
+  <data name="buyFullVersionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 22</value>
+  </data>
+  <data name="buyFullVersionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Get &amp;full version</value>
+  </data>
+  <data name="onlineHelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 22</value>
+  </data>
+  <data name="onlineHelpToolStripMenuItem.Text" xml:space="preserve">
+    <value>Online &amp;Help</value>
+  </data>
+  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 22</value>
+  </data>
+  <data name="toolStripMenuItem2.Text" xml:space="preserve">
+    <value>Terms &amp;&amp; &amp;Conditions</value>
+  </data>
+  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 22</value>
+  </data>
+  <data name="toolStripMenuItem3.Text" xml:space="preserve">
+    <value>&amp;Privacy statement</value>
+  </data>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 6</value>
+  </data>
+  <data name="mnuHelpAbout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 22</value>
+  </data>
+  <data name="mnuHelpAbout.Text" xml:space="preserve">
+    <value>&amp;About...</value>
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -3940,6 +4160,12 @@
   <data name="&gt;&gt;mnuViewApiMessages.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuViewShowGrid.Name" xml:space="preserve">
+    <value>mnuViewShowGrid</value>
+  </data>
+  <data name="&gt;&gt;mnuViewShowGrid.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuTools.Name" xml:space="preserve">
     <value>mnuTools</value>
   </data>
@@ -4096,12 +4322,6 @@
   <data name="&gt;&gt;toolStripProgressBar1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuViewShowGrid.Name" xml:space="preserve">
-    <value>mnuViewShowGrid</value>
-  </data>
-  <data name="&gt;&gt;mnuViewShowGrid.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>
   </data>
@@ -4111,211 +4331,4 @@
   <metadata name="MdiBkg.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 13</value>
   </metadata>
-  <data name="mnuFileInitiateTournamentOnline.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
-  </data>
-  <data name="mnuFileInitiateTournamentOnline.Text" xml:space="preserve">
-    <value>&amp;Tournament online...</value>
-  </data>
-  <data name="mnuFileInitiateTournamentLocal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
-  </data>
-  <data name="mnuFileInitiateTournamentLocal.Text" xml:space="preserve">
-    <value>Tournament &amp;local</value>
-  </data>
-  <data name="mnuFilePractice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
-  </data>
-  <data name="mnuFilePractice.Text" xml:space="preserve">
-    <value>&amp;Practice</value>
-  </data>
-  <data name="toolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 6</value>
-  </data>
-  <data name="mnuFileJoinGame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
-  </data>
-  <data name="mnuFileJoinGame.Text" xml:space="preserve">
-    <value>&amp;Join Game...</value>
-  </data>
-  <data name="mnuFileLoadSavegame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
-  </data>
-  <data name="mnuFileLoadSavegame.Text" xml:space="preserve">
-    <value>&amp;Load savegame...</value>
-  </data>
-  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 6</value>
-  </data>
-  <data name="mnuFileBackup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
-  </data>
-  <data name="mnuFileBackup.Text" xml:space="preserve">
-    <value>&amp;Backup...</value>
-  </data>
-  <data name="mnuFileRestore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
-  </data>
-  <data name="mnuFileRestore.Text" xml:space="preserve">
-    <value>&amp;Restore...</value>
-  </data>
-  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 6</value>
-  </data>
-  <data name="mnuFileQuit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
-  </data>
-  <data name="mnuFileQuit.Text" xml:space="preserve">
-    <value>&amp;Quit</value>
-  </data>
-  <data name="mnuViewSwitchLanguageEn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
-  </data>
-  <data name="mnuViewSwitchLanguageEn.Text" xml:space="preserve">
-    <value>&amp;English</value>
-  </data>
-  <data name="mnuViewSwitchLanguageFi.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
-  </data>
-  <data name="mnuViewSwitchLanguageFi.Text" xml:space="preserve">
-    <value>&amp;Finnish (suomi)</value>
-  </data>
-  <data name="mnuViewSwitchLanguageDe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
-  </data>
-  <data name="mnuViewSwitchLanguageDe.Text" xml:space="preserve">
-    <value>&amp;German (Deutsch)</value>
-  </data>
-  <data name="mnuViewSwitchLanguageUa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
-  </data>
-  <data name="mnuViewSwitchLanguageUa.Text" xml:space="preserve">
-    <value>&amp;Ukrainian (українська)</value>
-  </data>
-  <data name="mnuToolsLevelDesigner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
-  </data>
-  <data name="mnuToolsLevelDesigner.Text" xml:space="preserve">
-    <value>Level &amp;Designer</value>
-  </data>
-  <data name="mnuCommunityEditPlayerProfile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="mnuCommunityEditPlayerProfile.Text" xml:space="preserve">
-    <value>Edit player &amp;profile...</value>
-  </data>
-  <data name="toolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
-  </data>
-  <data name="discordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="discordToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Discord</value>
-  </data>
-  <data name="forumToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="forumToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Forum</value>
-  </data>
-  <data name="closeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 22</value>
-  </data>
-  <data name="closeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="arrangeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 22</value>
-  </data>
-  <data name="arrangeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Arrange</value>
-  </data>
-  <data name="minimizeAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 22</value>
-  </data>
-  <data name="minimizeAllToolStripMenuItem.Text" xml:space="preserve">
-    <value>Minimize all</value>
-  </data>
-  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 6</value>
-  </data>
-  <data name="buyFullVersionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
-  </data>
-  <data name="buyFullVersionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Get &amp;full version</value>
-  </data>
-  <data name="payAndRegisterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 22</value>
-  </data>
-  <data name="payAndRegisterToolStripMenuItem.Text" xml:space="preserve">
-    <value>Pa&amp;y and register</value>
-  </data>
-  <data name="enterProductkeyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 22</value>
-  </data>
-  <data name="enterProductkeyToolStripMenuItem.Text" xml:space="preserve">
-    <value>Enter product &amp;key</value>
-  </data>
-  <data name="onlineHelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
-  </data>
-  <data name="onlineHelpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Online &amp;Help</value>
-  </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
-  </data>
-  <data name="toolStripMenuItem2.Text" xml:space="preserve">
-    <value>Terms &amp;&amp; &amp;Conditions</value>
-  </data>
-  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
-  </data>
-  <data name="toolStripMenuItem3.Text" xml:space="preserve">
-    <value>&amp;Privacy statement</value>
-  </data>
-  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 6</value>
-  </data>
-  <data name="mnuHelpAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
-  </data>
-  <data name="mnuHelpAbout.Text" xml:space="preserve">
-    <value>&amp;About...</value>
-  </data>
-  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 17</value>
-  </data>
-  <data name="toolStripStatusLabel1.Text" xml:space="preserve">
-    <value>No active game</value>
-  </data>
-  <data name="toolStripStatusLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 17</value>
-  </data>
-  <data name="toolStripStatusLabel4.Text" xml:space="preserve">
-    <value>Version 2.1.0</value>
-  </data>
-  <data name="toolStripStatusLabel2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="toolStripStatusLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 17</value>
-  </data>
-  <data name="toolStripStatusLabel2.Text" xml:space="preserve">
-    <value>SHAREWARE EDITION</value>
-  </data>
-  <data name="toolStripStatusLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 17</value>
-  </data>
-  <data name="toolStripStatusLabel3.Text" xml:space="preserve">
-    <value>Loading</value>
-  </data>
-  <data name="toolStripStatusLabel3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="toolStripProgressBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 16</value>
-  </data>
 </root>

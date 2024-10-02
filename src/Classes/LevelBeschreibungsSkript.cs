@@ -16,7 +16,7 @@ public class LevelBeschreibungsSkript
 
     public LevelBeschreibungsSkript()
     {
-        this.Pfade = new List<LevelArchitekturPfad>();
+        Pfade = [];
     }
 
     internal static LevelBeschreibungsSkript Laden(LevelBeschreibung levelBeschreibung)

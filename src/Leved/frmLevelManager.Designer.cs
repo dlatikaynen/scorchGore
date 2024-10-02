@@ -141,6 +141,7 @@
             ClientSize = new Size(251, 211);
             Controls.Add(tvLevels);
             Controls.Add(mnuLeved);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = mnuLeved;
             Name = "frmLevelManager";
             Text = "Level Manager";
