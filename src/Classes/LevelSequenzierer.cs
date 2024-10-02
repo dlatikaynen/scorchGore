@@ -1,16 +1,4 @@
 ﻿using ScorchGore.Constants;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Drawing;
-using System.Numerics;
-using System.Runtime.InteropServices.JavaScript;
-using System.Security.Cryptography;
-using System.Security.Policy;
-using System;
-using System.Reflection;
 
 namespace ScorchGore.Classes;
 

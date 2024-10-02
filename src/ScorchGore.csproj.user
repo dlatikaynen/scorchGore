@@ -40,6 +40,9 @@
     <Compile Update="Leved\frmLevelManager.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Leved\frmLevelProp.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

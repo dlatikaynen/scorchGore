@@ -7,6 +7,7 @@ public partial class frmLevelManager : Form
 {
     private readonly GoreLeved _leved;
     private readonly frmLeved _levedWindow;
+    private readonly frmLevelProp _levelProp;
 
     public frmLevelManager()
     {
@@ -14,6 +15,7 @@ public partial class frmLevelManager : Form
 
         _leved = new GoreLeved();
         _levedWindow = new frmLeved(_leved);
+        _levelProp = new frmLevelProp();
     }
 
     private void tvLevels_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -104,5 +106,22 @@ public partial class frmLevelManager : Form
             0,
             0
         ));
+    }
+
+    private void mnuToolsLevelProperties_Click(object sender, EventArgs e)
+    {
+        var properties = new LevelProperties();
+
+        _levelProp.Prepare(properties);
+        if (_levelProp.Visible)
+        {
+            _levelProp.BringToFront();
+        }
+        else
+        {
+            _levelProp.MdiParent = MdiParent;
+            _levelProp.Show();
+        }
+
     }
 }
