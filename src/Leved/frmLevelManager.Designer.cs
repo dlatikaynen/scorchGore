@@ -33,6 +33,7 @@
             TreeNode treeNode2 = new TreeNode("I. Blue Mountains", new TreeNode[] { treeNode1 });
             TreeNode treeNode3 = new TreeNode("Built-in levels", new TreeNode[] { treeNode2 });
             TreeNode treeNode4 = new TreeNode("dlatikay's levels");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLevelManager));
             tvLevels = new TreeView();
             ilTreeview = new ImageList(components);
             mnuLeved = new MenuStrip();
@@ -51,6 +52,8 @@
             tvLevels.Dock = DockStyle.Fill;
             tvLevels.FullRowSelect = true;
             tvLevels.HideSelection = false;
+            tvLevels.ImageKey = "folder_closed";
+            tvLevels.ImageList = ilTreeview;
             tvLevels.LabelEdit = true;
             tvLevels.Location = new Point(0, 0);
             tvLevels.Name = "tvLevels";
@@ -64,6 +67,7 @@
             treeNode4.Text = "dlatikay's levels";
             tvLevels.Nodes.AddRange(new TreeNode[] { treeNode3, treeNode4 });
             tvLevels.PathSeparator = "|";
+            tvLevels.SelectedImageKey = "folder_open";
             tvLevels.Size = new Size(251, 211);
             tvLevels.TabIndex = 0;
             tvLevels.NodeMouseDoubleClick += tvLevels_NodeMouseDoubleClick;
@@ -71,8 +75,14 @@
             // ilTreeview
             // 
             ilTreeview.ColorDepth = ColorDepth.Depth32Bit;
-            ilTreeview.ImageSize = new Size(16, 16);
+            ilTreeview.ImageStream = (ImageListStreamer)resources.GetObject("ilTreeview.ImageStream");
             ilTreeview.TransparentColor = Color.Transparent;
+            ilTreeview.Images.SetKeyName(0, "a_flower");
+            ilTreeview.Images.SetKeyName(1, "folder_closed");
+            ilTreeview.Images.SetKeyName(2, "folder_open");
+            ilTreeview.Images.SetKeyName(3, "instalment");
+            ilTreeview.Images.SetKeyName(4, "map");
+            ilTreeview.Images.SetKeyName(5, "mission");
             // 
             // mnuLeved
             // 
@@ -96,32 +106,32 @@
             // mnuToolsAddLevel
             // 
             mnuToolsAddLevel.Name = "mnuToolsAddLevel";
-            mnuToolsAddLevel.Size = new Size(180, 22);
+            mnuToolsAddLevel.Size = new Size(157, 22);
             mnuToolsAddLevel.Text = "Add level";
             // 
             // mnuToolsEditLevel
             // 
             mnuToolsEditLevel.Name = "mnuToolsEditLevel";
-            mnuToolsEditLevel.Size = new Size(180, 22);
+            mnuToolsEditLevel.Size = new Size(157, 22);
             mnuToolsEditLevel.Text = "Edit level";
             mnuToolsEditLevel.Click += mnuToolsEditLevel_Click;
             // 
             // mnuToolsPlaytestLevel
             // 
             mnuToolsPlaytestLevel.Name = "mnuToolsPlaytestLevel";
-            mnuToolsPlaytestLevel.Size = new Size(180, 22);
+            mnuToolsPlaytestLevel.Size = new Size(157, 22);
             mnuToolsPlaytestLevel.Text = "Playtest level";
             // 
             // mnuToolsDeleteLevel
             // 
             mnuToolsDeleteLevel.Name = "mnuToolsDeleteLevel";
-            mnuToolsDeleteLevel.Size = new Size(180, 22);
+            mnuToolsDeleteLevel.Size = new Size(157, 22);
             mnuToolsDeleteLevel.Text = "Delete level";
             // 
             // mnuToolsLevelProperties
             // 
             mnuToolsLevelProperties.Name = "mnuToolsLevelProperties";
-            mnuToolsLevelProperties.Size = new Size(180, 22);
+            mnuToolsLevelProperties.Size = new Size(157, 22);
             mnuToolsLevelProperties.Text = "Level properties";
             // 
             // frmLevelManager

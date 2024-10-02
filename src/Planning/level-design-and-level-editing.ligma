@@ -1,4 +1,4 @@
-﻿The Scorch Gore Programming Language
+﻿The Corpse Programming Language
 
 
 ligma level a$$;
@@ -30,6 +30,60 @@ yo mamma so fat, /
 ( | ) end of multiline comment
 
 
+This would be a correct program:
+------------------------------------------------
+my ass, Namespace and Class:
 
+sugma bowle Boolean <= nope.
+enemy bowle Boolea2 <= aye.
+private bowle Paula <= nope.
+sarge bowle Boooool <= aye.
 
+sugma ligma bofa Methodname w/ arguments
+::
+	give me A of B
+	::
+		behold A.X my ass, it's eq "yeah"
+		::
+			
+		:;
+	:;
 
+	asap Method2();
+	at ease.
+:;
+
+------------------------------------------------
+would translate to
+------------------------------------------------
+
+namespace Namespace;
+
+public var Boolean = false;
+internal var Boolea2 = true;
+private var Paula = false;
+protected var Boooool = true;
+
+public class Class
+{
+	public override async Task<bool> Methodname(arguments)
+	{
+		foreach(var A in B)
+		{
+		
+		}
+
+		await Method2();
+		return;
+	}
+}
+------------------------------------------------
+
+Compiler error messages from the Corpse Compiler
+
+The compiler does not vibe with what you wrote in line # column #
+You're welcome to write what you've written in line # column #, but you cannot call that a program
+I did not know that they stack shit so high, as you did in line # column #
+My ass, line # column # is totally broken
+Whatever that thing in line # column # is supposed to be, it's certainly not a program
+Garbage alert in line # column #
