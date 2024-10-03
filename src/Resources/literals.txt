@@ -1,0 +1,169 @@
+﻿1	de	Datei
+1	en	File
+1	fi	Tiedosto
+1	ua	Файл
+
+2	de	Shareware-Ausgabe
+2	en	Shareware Edition
+2	fi	Shareware painos
+2	ua	шервер версія
+
+3	de	s·c·o·r·c·h·↑·g·o·r·e
+3	en	s·c·o·r·c·h·↑·g·o·r·e
+3	fi	s·c·o·r·c·h·↑·g·o·r·e
+3	ua	s·c·o·r·c·h·↑·g·o·r·e
+
+4	de	Blaue Berge
+4	en	Blue Mountains
+4	fi	Siniset vuoret
+4	ua	Сині гори
+
+5	de	Still und starr
+5	en	Stealth and Silence
+5	fi	Hiljaisuus²
+5	ua	Zatychlo pid snihom
+
+6	de	Fallschirmjäger
+6	en	Paratrouper
+6	fi	TODO:
+6	ua	TODO:
+
+7	de	Zeitlos
+7	en	Only Time
+7	fi	TODO:
+7	ua	TODO: Dzvonyat' dzvony
+
+8	de	Gift
+8	en	Deadly Nightshade
+8	fi	TODO:
+8	ua	TODO:
+
+9	de	Eigenes und Fremdes
+9	en	Usses and Thems
+9	fi	TODO:
+9	ua	TODO:
+
+10	de	Mittelgroße Alpträume
+10	en	Mid-size Nightmares
+10	fi	TODO:
+10	ua	TODO:
+
+11	de	Staffel 1: Wrath of the Mild
+11	en	Instalment 1: Wrath of the Mild
+11	fi	TODO:
+11	ua	TODO:
+
+12	de	Meine Level
+12	en	My levels
+12	fi	TODO:
+12	ua	TODO:
+
+13	de	Meine Mission
+13	en	My mission
+13	fi	TODO:
+13	ua	TODO:
+
+14	de	Horror vacui
+14	en	Horror vacui
+14	fi	Horror vacui
+14	ua	TODO:
+
+15	de	Namensgebung
+15	en	Naming
+15	fi	TODO:
+15	ua	TODO:
+
+16	de	Die englische Übersetzung des Levelnamens
+16	en	The English translation of the level's name
+16	fi	TODO:
+16	ua	TODO:
+
+17	de	Die deutsche Übersetzung des Levelnamens
+17	en	The German translation of the level's name
+17	fi	TODO:
+17	ua	TODO:
+
+18	de	Die finnishe Übersetzung des Levelnamens
+18	en	The Finnish translation of the level's name
+18	fi	TODO:
+18	ua	TODO:
+
+19	de	Die ukrainische Übersetzung des Levelnamens
+19	en	The Ukrainian translation of the level's name
+19	fi	TODO:
+19	ua	TODO:
+
+20	de	Grunddaten
+20	en	Basics
+20	fi	TODO:
+20	ua	TODO:
+
+21	de	Die Breite der rechteckigen Einfassung des Level-Zeichenbereiches
+21	en	The width of the level canvas' rectangular bounding box
+21	fi	TODO:
+21	ua	TODO:
+
+22	de	Die Höhe der rechteckigen Einfassung des Level-Zeichenbereichs
+22	en	The height of the level canvas' rectangular bounding box
+22	fi	TODO:
+22	ua	TODO:
+
+23	de	Zufallsgenerator-Seed für die prozeduralen Terrain-Generatoren
+23	en	Randomizer seed for procedural terrain generators
+23	fi	TODO:
+23	ua	TODO:
+
+24	de	Aktivieren, um einen Höhenzug zu generieren
+24	en	Activate to generate a mountain range
+24	fi	TODO:
+24	ua	TODO:
+
+25	de	Minimum der Bergrückenhöhe in Prozent der verfügbaren Gesamthöhe
+25	en	Minimum mountain range height in percent of available height
+25	fi	TODO:
+25	ua	TODO:
+
+26	de	Maximum der Bergrückenhöhe in Prozent der verfügbaren Gesamthöhe
+26	en	Maximum mountain range height in percent of available height
+26	fi	TODO:
+26	ua	TODO:
+
+27	de	Rauheitsfaktor des Bergkamms in Prozent von etwas, das ich vergessen habe
+27	en	Mountain range ruggedness factor as a percentage of something I don't remember
+27	fi	TODO:
+27	ua	TODO:
+
+28	de	Aktivieren, um eine Höhlendecke zu generieren
+28	en	Activate to generate a cave roof
+28	fi	TODO:
+28	ua	TODO:
+
+29	de	Mindesthöhe der Höhlendecke, gemessen von oben in Prozent der verfügbaren Gesamthöhe
+29	en	Cave roof minimum height measured from the top, in percent of available height
+29	fi	TODO:
+29	ua	TODO:
+
+30	de	Maximale Höhe der Höhlendecke, gemessen von oben in Prozent der verfügbaren Gesamthöhe
+30	en	Cave roof maximum height measured from the top, in percent of available height
+30	fi	TODO:
+30	ua	TODO:
+
+31	de	Rauheitsfaktor der Höhlendecke in Prozent von etwas, dessen ich mich nicht mehr erinnerne
+31	en	Cave roof ruggedness factor as a percentage of something I don't remember
+31	fi	TODO:
+31	ua	TODO:
+
+32	de	Farben
+32	en	Colors
+32	fi	TODO:
+32	ua	TODO:
+
+33	de	Farbe des Bergmassivs
+33	en	Define the color of the mountain range
+33	fi	TODO:
+33	ua	TODO:
+
+34	de	Farbe der Höhlendecke
+34	en	Define the color of the cave roof
+34	fi	TODO:
+34	ua	TODO:

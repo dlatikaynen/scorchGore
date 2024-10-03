@@ -38,6 +38,7 @@
     <None Remove="Resources\langflag-fi.ico" />
     <None Remove="Resources\langflag-ua.ico" />
     <None Remove="Resources\Level003.dat" />
+    <None Remove="Resources\literals.txt" />
     <None Remove="Resources\penrose-nontiling.png" />
     <None Remove="Resources\projectile-fired.wav" />
     <None Remove="Resources\rechtsherz.png" />
@@ -61,6 +62,7 @@
     <EmbeddedResource Include="Resources\langflag-fi.ico" />
     <EmbeddedResource Include="Resources\langflag-ua.ico" />
     <EmbeddedResource Include="Resources\Levels\Level003.dat" />
+    <EmbeddedResource Include="Resources\literals.txt" />
     <EmbeddedResource Include="Resources\penrose-nontiling.png" />
     <EmbeddedResource Include="Resources\projectile-fired.wav" />
     <EmbeddedResource Include="Resources\rechtsherz.png" />
