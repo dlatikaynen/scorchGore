@@ -657,7 +657,6 @@ public sealed class RuntimePropertyDescriptor : ICustomTypeDescriptor, INotifyPr
 
     object? ICustomTypeDescriptor.GetEditor(Type editorBaseType)
     {
-
         if (_editors?.TryGetValue(editorBaseType, out object? editor) ?? false)
         {
             return editor;

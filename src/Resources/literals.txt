@@ -167,3 +167,88 @@
 34	en	Define the color of the cave roof
 34	fi	TODO:
 34	ua	TODO:
+
+35	de	Name (Englisch)
+35	en	Name (English)
+35	fi	TODO:
+35	ua	TODO:
+
+36	de	Name (Deutsch)
+36	en	Name (German)
+36	fi	TODO:
+36	ua	TODO:
+
+37	de	Name (Finnisch)
+37	en	Name (Finnish)
+37	fi	TODO:
+37	ua	TODO:
+
+38	de	Name (Ukrainisch)
+38	en	Name (Ukrainian)
+38	fi	TODO:
+38	ua	TODO:
+
+39	de	Breite
+39	en	Width
+39	fi	TODO:
+39	ua	TODO:
+
+40	de	Höhe
+40	en	Height
+40	fi	TODO:
+40	ua	TODO:
+
+41	de	Zufallsgenerator-Seed
+41	en	Randomizer Seed
+41	fi	TODO:
+41	ua	TODO:
+
+42	de	Höhenzug
+42	en	Mountain ridge
+42	fi	TODO:
+42	ua	TODO:
+
+43	de	Min. Höhe Berg %
+43	en	Mountain min height %
+43	fi	TODO:
+43	ua	TODO:
+
+44	de	Max. Höhe Berg %
+44	en	Mountain max height %
+44	fi	TODO:
+44	ua	TODO:
+
+45	de	Rauheit Berg %
+45	en	Mountain ruggedness %
+45	fi	TODO:
+45	ua	TODO:
+
+46	de	Höhlendecke
+46	en	Cave ceiling
+46	fi	TODO:
+46	ua	TODO:
+
+47	de	Min. Höhe Höhle %
+47	en	Cave min height %
+47	fi	TODO:
+47	ua	TODO:
+
+48	de	Max. Höhe Höhle %
+48	en	Cave max height %
+48	fi	TODO:
+48	ua	TODO:
+
+49	de	Rauheit Höhle %
+49	en	Cave ruggedness %
+49	fi	TODO:
+49	ua	TODO:
+
+50	de	Bergfarbe
+50	en	Mountain color
+50	fi	TODO:
+50	ua	TODO:
+
+51	de	Höhlendeckenfarbe
+51	en	Cave ceiling color
+51	fi	TODO:
+51	ua	TODO:
