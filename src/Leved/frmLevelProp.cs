@@ -4,13 +4,17 @@ namespace ScorchGore.Leved;
 
 public partial class frmLevelProp : Form
 {
+    private LevelBeschreibung EditedLevel = new();
+
     public frmLevelProp()
     {
         InitializeComponent();
+        ppgTable.PropertyValueChanged += InvokeOnChangedEvent;
     }
 
     internal void Prepare(LevelBeschreibung properties)
     {
+        EditedLevel = properties;
         ppgTable.SelectedObjects = [];
 
         // here, each property gets its current value
@@ -113,6 +117,11 @@ public partial class frmLevelProp : Form
         ppgTable.Refresh();
     }
 
+    private void InvokeOnChangedEvent(object? _s, PropertyValueChangedEventArgs _e)
+    {
+        LevedEvents.OnLevedPropertyChanged(new(EditedLevel));
+    }
+
     private void frmLevelProp_FormClosing(object sender, FormClosingEventArgs e)
     {
         if (e.CloseReason == CloseReason.UserClosing)
@@ -120,5 +129,10 @@ public partial class frmLevelProp : Form
             Hide();
             e.Cancel = true;
         }
+    }
+
+    protected override void OnFormClosed(FormClosedEventArgs e)
+    {
+        ppgTable.PropertyValueChanged -= InvokeOnChangedEvent;
     }
 }
