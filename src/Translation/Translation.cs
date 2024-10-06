@@ -26,7 +26,7 @@ internal static class Translation
                 var line = literalReader.ReadLine();
 
                 ++lineNr;
-                if (line == null || line.StartsWith("#") || string.IsNullOrWhiteSpace(line))
+                if (line == null || line.StartsWith('#') || string.IsNullOrWhiteSpace(line))
                 {
                     continue;
                 }

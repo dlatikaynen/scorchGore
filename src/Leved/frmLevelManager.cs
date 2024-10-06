@@ -1,4 +1,5 @@
 ﻿using ScorchGore.Classes;
+using System.Diagnostics;
 using Xlat = ScorchGore.Translation.Translation;
 
 namespace ScorchGore.Leved;
@@ -20,12 +21,12 @@ public partial class frmLevelManager : Form
 
     private void tvLevels_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
     {
-        var key = e.Node.Name.ToString();
-        var keyParts = key.Split('.');
+        var level = LevelNrFromNode(e.Node);
 
-        if (keyParts.Length == 3 && int.TryParse(keyParts.Last(), out var levelNr))
+        if (level != null)
         {
-            _leved.Initialize(levelNr);
+            _leved.Initialize(level);
+            _levelProp.Prepare(level);
 
             if (_levedWindow.Visible)
             {
@@ -64,12 +65,14 @@ public partial class frmLevelManager : Form
             var levelInfo = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
             while (levelInfo.MissionsNummer == mission)
             {
-                missionNode.Nodes.Add(
+                var levelNode = missionNode.Nodes.Add(
                     $"1.{mission}.{levelInfo.LevelNummer}",
                     levelInfo.LevelName,
                     "map",
                     "map"
                 );
+
+                levelNode.Tag = levelInfo;
 
                 ++levelNr;
                 levelInfo = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
@@ -97,6 +100,23 @@ public partial class frmLevelManager : Form
         );
     }
 
+    private static LevelBeschreibung? LevelNrFromNode(TreeNode node)
+    {
+        var key = node.Name.ToString();
+        var keyParts = key.Split('.');
+
+        if (keyParts.Length == 3 && int.TryParse(keyParts.Last(), out var levelNr))
+        {
+            var props = node.Tag as LevelBeschreibung;
+
+            Debug.Assert(props != null && props.LevelNummer == levelNr);
+
+            return props;
+        }
+
+        return null;
+    }
+
     private void mnuToolsEditLevel_Click(object sender, EventArgs e)
     {
         tvLevels_NodeMouseDoubleClick(sender, new TreeNodeMouseClickEventArgs(
@@ -110,9 +130,13 @@ public partial class frmLevelManager : Form
 
     private void mnuToolsLevelProperties_Click(object sender, EventArgs e)
     {
-        var properties = new LevelProperties();
+        var level = LevelNrFromNode(tvLevels.SelectedNode);
 
-        _levelProp.Prepare(properties);
+        if (level == null)
+        {
+            return;
+        }
+
         if (_levelProp.Visible)
         {
             _levelProp.BringToFront();
@@ -123,5 +147,14 @@ public partial class frmLevelManager : Form
             _levelProp.Show();
         }
 
+    }
+
+    private void frmLevelManager_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        if (e.CloseReason == CloseReason.UserClosing)
+        {
+            Hide();
+            e.Cancel = true;
+        }
     }
 }

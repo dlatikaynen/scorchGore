@@ -24,7 +24,7 @@ public class GoreArena
         }
 
         CurrentLevel = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
-        Target.SetupBackbuffer(CurrentLevel.LevelWidth, CurrentLevel.LevelHeight);
+        Target.SetupBackbuffer((int)CurrentLevel.Width, (int)CurrentLevel.Height);
         LevelZeichner.Zeichne(Target.Image, CurrentLevel, Target.BackBuffer);
 
         Player1.AnchorX = CurrentLevel.SpielerPosition1.X;
@@ -55,8 +55,8 @@ public class GoreArena
         double x, y;
 
         /* schiessen wir nach rechts (spieler 1) oder nach links (spieler 2)? */
-        var lW = CurrentLevel.LevelWidth;
-        var lH = CurrentLevel.LevelHeight;
+        var lW = CurrentLevel.Width;
+        var lH = CurrentLevel.Height;
         var dranSeiender = DranSeiender(shooter);
         var gegner = Gegner(opponent);
         var schussRichtung = shooter == 1 ? 1 : -1;

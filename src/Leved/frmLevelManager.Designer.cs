@@ -146,6 +146,7 @@
             MainMenuStrip = mnuLeved;
             Name = "frmLevelManager";
             Text = "Level Manager";
+            FormClosing += frmLevelManager_FormClosing;
             Load += frmLevelManager_Load;
             mnuLeved.ResumeLayout(false);
             mnuLeved.PerformLayout();

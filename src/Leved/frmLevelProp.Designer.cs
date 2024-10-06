@@ -49,6 +49,7 @@
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
             Text = "Level Properties";
+            FormClosing += frmLevelProp_FormClosing;
             ResumeLayout(false);
         }
 

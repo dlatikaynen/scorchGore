@@ -1,4 +1,5 @@
-﻿using ScorchGore.Constants;
+﻿using ScorchGore.Configuration;
+using ScorchGore.Constants;
 using Xlat = ScorchGore.Translation.Translation;
 
 namespace ScorchGore.Classes;
@@ -10,36 +11,65 @@ public class LevelBeschreibung
         SpielerPosition1 = Point.Empty;
         SpielerPosition2 = Point.Empty;
         Plateaus = [];
-        IstBerg = true;
+        IsMountain = true;
     }
 
-    /* Beschreibung eines normalen Berges */
-    public int BergZufallszahl { get; set; }
-    public int BergMinHoeheProzent { get; set; }
-    public int BergMaxHoeheProzent { get; set; }
-    public int BergRauhheitProzent { get; set; }
+    #region Editable Properties
+    public string NameEn { get; set; } = string.Empty;
 
-    /* Beschreibung des zweiten Höhenzugs im Falle eine Höhle */
-    public bool IstBerg { get; set; }
-    public bool IstHoehle { get; set; }
+    public string NameDe { get; set; } = string.Empty;
+
+    public string NameFi { get; set; } = string.Empty;
+
+    public string NameUa { get; set; } = string.Empty;
+
+    public uint Width { get; set; } = 640;
+
+    public uint Height { get; set; } = 480;
+
+    public uint BergZufallszahl { get; set; } = 58008;
+
+    public bool IsMountain { get; set; } = false;
+
+    public uint BergMinHoeheProzent { get; set; } = 10;
+
+    public uint BergMaxHoeheProzent { get; set; } = 39;
+
+    public uint BergRauhheitProzent { get; set; } = 19;
+
+    public bool IsCave { get; set; } = false;
+
+    public uint HoehleMinHoeheProzent { get; set; } = 13;
+
+    public uint HoehleMaxHoeheProzent { get; set; } = 48;
+
+    public uint HoehleRauhheitProzent { get; set; } = 50;
+
+    public Color ColorMountain { get; set; } = Color.Empty;
+
+    public Color ColorCave { get; set; } = Color.Empty;
+    #endregion
+
+    [System.ComponentModel.Browsable(false)]
     public bool IstGeskriptet => BeschreibungsSkript != null;
-    public int HoehleMinHoeheProzent { get; set; }
-    public int HoehleMaxHoeheProzent { get; set; }
-    public int HoehleRauhheitProzent { get; set; }
 
     /* Besonderheiten der Topologie */
     public Dictionary<int, Plateau> Plateaus { get; private set; }
     public LevelBeschreibungsSkript BeschreibungsSkript { get; set; } = new();
 
     /* Beschreibung für ein Missionslevel */
+    [System.ComponentModel.Browsable(false)]
     public int MissionsNummer { get; set; } = 0;
+
+    [System.ComponentModel.Browsable(false)]
     public string MissionsName { get; set; } = string.Empty;
 
+
+    [System.ComponentModel.Browsable(false)]
     public int LevelNummer { get; set; } = 0;
+
+    [System.ComponentModel.Browsable(false)]
     public int LevelNummerInMission { get; set; } = 0;
-    public string LevelName { get; set; } = string.Empty;
-    public int LevelWidth { get; set; } // logical pixels
-    public int LevelHeight { get; set; }
 
     public Point SpielerPosition1 { get; set; }
     public Point SpielerPosition2 { get; set; }
@@ -48,9 +78,36 @@ public class LevelBeschreibung
 
     internal void Plateau(int bodenHoehe, int startX, int endetX) => Plateaus.Add(startX, new Plateau { Elevation = bodenHoehe, StartX = startX, EndetX = endetX });
 
-    public int MinHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleMinHoeheProzent : BergMinHoeheProzent;
-    public int MaxHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleMaxHoeheProzent : BergMaxHoeheProzent;
-    public int RauhheitProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleRauhheitProzent : BergRauhheitProzent;
+    [System.ComponentModel.Browsable(false)]
+    public uint MinHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleMinHoeheProzent : BergMinHoeheProzent;
+
+    [System.ComponentModel.Browsable(false)]
+    public uint MaxHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleMaxHoeheProzent : BergMaxHoeheProzent;
+
+    [System.ComponentModel.Browsable(false)]
+    public uint RauhheitProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleRauhheitProzent : BergRauhheitProzent;
+
+    [System.ComponentModel.Browsable(false)]
+    internal string LevelName
+    {
+        get
+        {
+            switch(InstanceSettings.Language)
+            {
+                case "de":
+                    return NameDe;
+
+                case "fi":
+                    return NameFi;
+
+                case "ua":
+                    return NameUa;
+
+                default:
+                    return NameEn;
+            }
+        }
+    }
 
     internal static string MissionsnameBestimmen(int missionsNummer)
     {

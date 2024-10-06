@@ -8,11 +8,11 @@ internal static class LevelZeichner
 {
     public static void Zeichne(Bitmap woBinIch, LevelBeschreibung levelBeschreibung, Graphics zeichenFlaeche)
     {
-        var verfuegbareBergHoehe = levelBeschreibung.LevelHeight - GameLogicConstants.ObererRand;
+        var verfuegbareBergHoehe = levelBeschreibung.Height - GameLogicConstants.ObererRand;
 
         for (
             var obenUnten = ObenUnten.BergTeil;
-            obenUnten <= (levelBeschreibung.IstHoehle ? ObenUnten.HoehlenTeil : ObenUnten.BergTeil);
+            obenUnten <= (levelBeschreibung.IsCave ? ObenUnten.HoehlenTeil : ObenUnten.BergTeil);
             ++obenUnten
         )
         {
@@ -20,7 +20,7 @@ internal static class LevelZeichner
             var maximumHoehe = Convert.ToInt32(Convert.ToDecimal(verfuegbareBergHoehe) * Convert.ToDecimal(levelBeschreibung.MaxHoeheProzent(obenUnten)) / 100M);
             var steilHeit = Convert.ToInt32(5 + levelBeschreibung.RauhheitProzent(obenUnten));
             var rauhHeit = 10M - Convert.ToDecimal(levelBeschreibung.RauhheitProzent(obenUnten) / 20M);
-            var zufallsZahl = new Random(levelBeschreibung.BergZufallszahl);
+            var zufallsZahl = new Random((int)levelBeschreibung.BergZufallszahl);
             var maximumHoehenunterschied = maximumHoehe - minimumHoehe;
             var aktuelleHoehe = Convert.ToDecimal(minimumHoehe + zufallsZahl.Next(maximumHoehenunterschied));
             var aktuelleRichtung = (zufallsZahl.Next(100) % 2) == 0;
@@ -37,7 +37,7 @@ internal static class LevelZeichner
                 ObenWirdUnten(woBinIch, zeichenFlaeche);
             }
 
-            if (levelBeschreibung.IstBerg || levelBeschreibung.IstHoehle)
+            if (levelBeschreibung.IsMountain || levelBeschreibung.IsCave)
             {
                 Plateau? binInPlateau = null;
                 for (var bergX = 0; bergX < woBinIch.Width; bergX += 2)
