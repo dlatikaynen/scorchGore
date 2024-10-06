@@ -28,6 +28,8 @@ internal static class LevelSequenzierer
                 levelBeschreibung.BergMaxHoeheProzent = 48;
                 levelBeschreibung.BergRauhheitProzent = 21;
                 levelBeschreibung.BergZufallszahl = zufallsZahlenGenerator;
+                levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
+                levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
                 levelBeschreibung.Plateau(645 - 460, 82, 200);
                 levelBeschreibung.SpielerPosition1 = new Point(112, (int)levelBeschreibung.Height - 185);
                 levelBeschreibung.Plateau(645 - 415, 638, 700);
@@ -48,6 +50,8 @@ internal static class LevelSequenzierer
                 levelBeschreibung.HoehleRauhheitProzent = 50;
                 levelBeschreibung.IsCave = true;
                 levelBeschreibung.BergZufallszahl = zufallsZahlenGenerator;
+                levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
+                levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
                 levelBeschreibung.SpielerPosition1 = new Point(GameLogicConstants.SpielerBreite, 300);
                 levelBeschreibung.SpielerPosition2 = new Point(800 - GameLogicConstants.SpielerBreite, 300);
                 break;
@@ -63,6 +67,8 @@ internal static class LevelSequenzierer
                 levelBeschreibung.BergMinHoeheProzent = 3;
                 levelBeschreibung.BergMaxHoeheProzent = 17;
                 levelBeschreibung.BergRauhheitProzent = 8;
+                levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
+                levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
                 levelBeschreibung.BeschreibungsSkript = LevelBeschreibungsSkript.Laden(levelBeschreibung);
                 levelBeschreibung.SpielerPosition1 = new Point(112, GameLogicConstants.SpielerBasisHoehe);
                 levelBeschreibung.SpielerPosition2 = new Point(673, GameLogicConstants.SpielerBasisHoehe);

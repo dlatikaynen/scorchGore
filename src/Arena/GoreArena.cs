@@ -8,6 +8,7 @@ namespace ScorchGore.Arena;
 public class GoreArena
 {
     public LevelBeschreibung CurrentLevel = new();
+
     public frmArena? Target { get; set; }
 
     internal Sprite Player1 = new SpritePlayer(Brushes.YellowGreen);
@@ -15,6 +16,8 @@ public class GoreArena
 
     private Sprite DranSeiender(int player) => player == 1 ? Player1 : Player2;
     private Sprite Gegner(int player) => player == 1 ? Player1 : Player2;
+
+    private Materials Materials => CurrentLevel.Materials;
 
     public void Initialize(int levelNr)
     {
@@ -137,7 +140,7 @@ public class GoreArena
                         {
                             return schussErgebnis.Setzen(pixelX, pixelY, SchussErgebnis.GegnerGekillt);
                         }
-                        else if (hitColor != Farbverwaltung.HimmelsfarbeAlsInt)
+                        else if (hitColor != CurrentLevel.Materials.HimmelsfarbeAlsInt)
                         {
                             if (hitColor == dranSeiender.PrimaryBodyColor.ToArgb())
                             {

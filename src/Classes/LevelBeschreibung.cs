@@ -12,7 +12,10 @@ public class LevelBeschreibung
         SpielerPosition2 = Point.Empty;
         Plateaus = [];
         IsMountain = true;
+        Materials = new();
     }
+
+    public Materials Materials { get; set; }
 
     #region Editable Properties
     public string NameEn { get; set; } = string.Empty;

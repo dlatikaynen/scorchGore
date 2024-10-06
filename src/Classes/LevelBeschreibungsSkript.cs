@@ -22,14 +22,14 @@ public class LevelBeschreibungsSkript
     internal static LevelBeschreibungsSkript Laden(LevelBeschreibung levelBeschreibung)
     {
         var levelSkript = new LevelBeschreibungsSkript();
-        levelSkript.LevelDateiLaden(levelBeschreibung.LevelNummer);
+        levelSkript.LevelDateiLaden(levelBeschreibung);
 
         return levelSkript;
     }
 
-    private void LevelDateiLaden(int levelNummer)
+    private void LevelDateiLaden(LevelBeschreibung levelBeschreibung)
     {
-        var levelDateiName = GetLevelDateiname(levelNummer);
+        var levelDateiName = GetLevelDateiname(levelBeschreibung.LevelNummer);
         if (levelDateiName != null)
         {
             using var levelDatei = Assembly.GetExecutingAssembly().GetManifestResourceStream(
@@ -47,13 +47,13 @@ public class LevelBeschreibungsSkript
                 if (!levelZeile.StartsWith(kommentarPrefix))
                 {
                     var levelZeileTeile = levelZeile.Split(' ');
-                    if (Enum.TryParse<Medium>(levelZeileTeile[0], ignoreCase: true, out Medium neuesMedium))
+                    if (Enum.TryParse(levelZeileTeile[0], ignoreCase: true, out Medium neuesMedium))
                     {
                         aktuellesMaterial = neuesMedium;
                     }
                     else
                     {
-                        Pfade.Add(LevelArchitekturPfad.AusLevelDatei(aktuellesMaterial, levelZeile));
+                        Pfade.Add(LevelArchitekturPfad.AusLevelDatei(levelBeschreibung.Materials, aktuellesMaterial, levelZeile));
                     }
                 }
             }

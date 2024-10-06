@@ -5,6 +5,8 @@ namespace ScorchGore.Classes;
 
 public class LevelArchitekturPfad
 {
+    public Materials Materials { get; init; }
+
     protected internal const char kennzeichenFigur = ':';
     protected internal const char kennzeichenDicke = '*';
     protected internal const string modifiziererRechteck = "B";
@@ -18,19 +20,24 @@ public class LevelArchitekturPfad
     protected internal bool hatFuellung;
     protected internal int stiftDicke;
 
-    public LevelArchitekturPfad() => this.promilleKoordinaten = new List<Point>();
-    public bool IstPunkt => this.promilleKoordinaten.Count() == 1;
-    public bool IstLinie => this.promilleKoordinaten.Count() == 2;
-    public bool IstRechteck => this.wirdRechteck;
-    public bool IstGefuellt => this.hatFuellung;
-    public int StiftDicke => this.stiftDicke;
+    public LevelArchitekturPfad(Materials materials)
+    {
+        Materials = materials;
+        promilleKoordinaten = [];
+    }
+
+    public bool IstPunkt => promilleKoordinaten.Count() == 1;
+    public bool IstLinie => promilleKoordinaten.Count() == 2;
+    public bool IstRechteck => wirdRechteck;
+    public bool IstGefuellt => hatFuellung;
+    public int StiftDicke => stiftDicke;
 
     public GraphicsPath AlsGrafikPfad(int absoluteWidth, int absoluteHeight)
     {
         var grafikPfad = new GraphicsPath();
         var vorDividierteBreit = (float)absoluteWidth / 1000f;
         var vorDividierteHoehe = (float)absoluteHeight / 1000f;
-        if (this.promilleKoordinaten.Any())
+        if (promilleKoordinaten.Any())
         {
             grafikPfad.AddLines(this.promilleKoordinaten.Select
             (
@@ -45,14 +52,14 @@ public class LevelArchitekturPfad
         return grafikPfad;
     }
 
-    internal static LevelArchitekturPfad AusLevelDatei(Medium aktuellesMaterial, string levelZeile)
+    internal static LevelArchitekturPfad AusLevelDatei(Materials materials, Medium aktuellesMaterial, string levelZeile)
     {
-        var architekturPfad = new LevelArchitekturPfad
+        var architekturPfad = new LevelArchitekturPfad(materials)
         {
             terrainMaterial = aktuellesMaterial
         };
 
-        var kommandoTeile = levelZeile.Split(LevelArchitekturPfad.kennzeichenFigur);
+        var kommandoTeile = levelZeile.Split(kennzeichenFigur);
         string figurZeile;
         if (kommandoTeile.Length == 1)
         {
@@ -61,31 +68,31 @@ public class LevelArchitekturPfad
         else
         {
             figurZeile = kommandoTeile[1].Trim();
-            if (Enum.TryParse<ZeichnungsBefehl>(kommandoTeile[0], ignoreCase: true, out ZeichnungsBefehl zeichnungBefehl))
+            if (Enum.TryParse(kommandoTeile[0], ignoreCase: true, out ZeichnungsBefehl zeichnungBefehl))
             {
                 architekturPfad.zeichnungBefehl = zeichnungBefehl;
             }
         }
 
-        var figurTeile = figurZeile.Split(LevelArchitekturPfad.kennzeichenDicke);
+        var figurTeile = figurZeile.Split(kennzeichenDicke);
         if (figurTeile.Length > 1 && int.TryParse(figurTeile[1].Trim(), out int stiftDicke))
         {
             architekturPfad.stiftDicke = stiftDicke;
         }
 
         var figurDefinition = figurTeile[0].Trim();
-        if (figurDefinition.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererVollesRechteck))
+        if (figurDefinition.ToUpperInvariant().EndsWith(modifiziererVollesRechteck))
         {
             architekturPfad.wirdRechteck = true;
             architekturPfad.hatFuellung = true;
             figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - LevelArchitekturPfad.modifiziererVollesRechteck.Length);
         }
-        else if (figurDefinition.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererRechteck))
+        else if (figurDefinition.ToUpperInvariant().EndsWith(modifiziererRechteck))
         {
             architekturPfad.wirdRechteck = true;
             figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - LevelArchitekturPfad.modifiziererRechteck.Length);
         }
-        else if (figurDefinition.ToUpperInvariant().EndsWith(LevelArchitekturPfad.modifiziererFuellung))
+        else if (figurDefinition.ToUpperInvariant().EndsWith(modifiziererFuellung))
         {
             architekturPfad.hatFuellung = true;
             figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - LevelArchitekturPfad.modifiziererFuellung.Length);
