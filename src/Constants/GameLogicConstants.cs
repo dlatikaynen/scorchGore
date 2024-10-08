@@ -88,15 +88,23 @@ public enum ObenUnten
 public enum Medium
 {
     Berg,
+    Cave,
+    Rubber,
+    Player1,
+    Player2,
+    Stahl,
+    Nihilit,
+    Phosphor,
+    Fuel,
+    Wasser,
+    Mirror,
     Himmel,
     Erde,
     Gras,
-    Wasser,
     Eis,
     Schnee,
     Lava,
-    Sand,
-    Stahl
+    Sand
 }
 
 internal enum GoodieWirkung

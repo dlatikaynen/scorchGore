@@ -19,35 +19,13 @@ public partial class frmLevelManager : Form
         _levelProp = new frmLevelProp();
     }
 
-    private void tvLevels_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-    {
-        var level = LevelNrFromNode(e.Node);
-
-        if (level != null)
-        {
-            _leved.Initialize(level);
-            _levelProp.Prepare(level);
-
-            if (_levedWindow.Visible)
-            {
-                _levedWindow.BringToFront();
-            }
-            else
-            {
-                _levedWindow.Text = e.Node.Text;
-                _levedWindow.MdiParent = ParentForm?.MdiParent;
-                _levedWindow.Show();
-            }
-        }
-    }
-
     private void frmLevelManager_Load(object sender, EventArgs e)
     {
         tvLevels.Nodes.Clear();
 
         var installmentOne = tvLevels.Nodes.Add(
             "1",
-            Xlat.µ(11),  // Instalment I: Wrath of the Mild
+            Xlat.µ(11), // Instalment I: Wrath of the Mild
             null
         );
 
@@ -100,6 +78,28 @@ public partial class frmLevelManager : Form
         );
     }
 
+    private void tvLevels_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+    {
+        var level = LevelNrFromNode(e.Node);
+
+        if (level != null)
+        {
+            _leved.Initialize(level);
+            _levelProp.Prepare(level);
+
+            if (_levedWindow.Visible)
+            {
+                _levedWindow.BringToFront();
+            }
+            else
+            {
+                _levedWindow.Text = e.Node.Text;
+                _levedWindow.MdiParent = ParentForm?.MdiParent;
+                _levedWindow.Show();
+            }
+        }
+    }
+
     private static LevelBeschreibung? LevelNrFromNode(TreeNode node)
     {
         var key = node.Name.ToString();
@@ -135,6 +135,11 @@ public partial class frmLevelManager : Form
         if (level == null)
         {
             return;
+        }
+
+        if (!ReferenceEquals(_levelProp.EditedLevel, level))
+        {
+            _levelProp.Prepare(level);
         }
 
         if (_levelProp.Visible)

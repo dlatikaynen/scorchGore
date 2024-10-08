@@ -34,13 +34,19 @@
     <Compile Update="Forms\frmJoinGame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\frmOutputPane.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Leved\frmLevelManager.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Leved\frmMaterialPalette.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\frmOutputPane.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Leved\frmLevelProp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Leved\frmMaterials.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MainWindow.cs">

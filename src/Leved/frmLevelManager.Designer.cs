@@ -130,6 +130,7 @@
             // 
             // mnuToolsLevelProperties
             // 
+            mnuToolsLevelProperties.Image = Properties.Resources.properties;
             mnuToolsLevelProperties.Name = "mnuToolsLevelProperties";
             mnuToolsLevelProperties.Size = new Size(157, 22);
             mnuToolsLevelProperties.Text = "Level properties";

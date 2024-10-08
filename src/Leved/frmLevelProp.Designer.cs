@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLevelProp));
             ppgTable = new PropertyGrid();
             SuspendLayout();
             // 
@@ -45,6 +46,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(286, 424);
             Controls.Add(ppgTable);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmLevelProp";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;

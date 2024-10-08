@@ -15,6 +15,7 @@ public class LevelBeschreibung
         Materials = new();
     }
 
+    [System.ComponentModel.Browsable(false)]
     public Materials Materials { get; set; }
 
     #region Editable Properties

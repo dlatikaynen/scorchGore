@@ -33,6 +33,8 @@ public class GoreLeved
             return;
         }
 
+        EditedLevel.Materials.Bergfarbe = EditedLevel.ColorMountain;
+
         LevelZeichner.Zeichne(Target.Image, EditedLevel, Target.BackBuffer);
     }
 }

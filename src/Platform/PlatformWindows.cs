@@ -8,12 +8,20 @@ internal static partial class PlatformWindows
     internal const int MF_STRING = 0x0;
     internal const int MF_SEPARATOR = 0x800;
 
+    private const int SC_SCREENSAVE = 0xF140;
+
     [LibraryImport("user32.dll", EntryPoint = "GetSystemMenu", SetLastError = true)]
     internal static partial IntPtr GetSystemMenu(IntPtr hWnd, [MarshalAs(UnmanagedType.Bool)] bool bRevert);
 
     [LibraryImport("user32.dll", EntryPoint = "AppendMenuW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
     [return: MarshalAs(UnmanagedType.Bool)]
     internal static partial bool AppendMenu(IntPtr hMenu, int uFlags, int uIDNewItem, string lpNewItem);
+
+    [LibraryImport("user32.dll", EntryPoint = "GetDesktopWindow", SetLastError = true)]
+    private static partial IntPtr GetDesktopWindow();
+
+    [LibraryImport("user32.dll", EntryPoint = "SendMessageW", SetLastError = true)]
+    private static partial IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
     /// <summary>
     /// This is a way of colorfully shooting ourselves,
@@ -29,5 +37,23 @@ internal static partial class PlatformWindows
             Thread.Yield();
             Application.DoEvents();
         }
+    }
+
+    internal static void RunScr()
+    {
+        var desktop = GetDesktopWindow();
+        nint error = Marshal.GetLastWin32Error();
+
+        if (error != 0)
+        {
+            return;
+        }
+
+        _ = SendMessage(
+            desktop,
+            WM_SYSCOMMAND,
+            wParam: SC_SCREENSAVE,
+            lParam: 0
+        );
     }
 }

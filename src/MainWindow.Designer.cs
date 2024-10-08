@@ -1,4 +1,6 @@
-﻿namespace Fso.ScorchGore;
+﻿using ScorchGore.Properties;
+
+namespace Fso.ScorchGore;
 
 partial class MainWindow
 {
@@ -65,6 +67,8 @@ partial class MainWindow
         mnuViewShowGrid = new ToolStripMenuItem();
         mnuTools = new ToolStripMenuItem();
         mnuToolsLevelDesigner = new ToolStripMenuItem();
+        mnuToolsMaterials = new ToolStripMenuItem();
+        mnuToolsBossKey = new ToolStripMenuItem();
         contributeToolStripMenuItem = new ToolStripMenuItem();
         mnuCommunityEditPlayerProfile = new ToolStripMenuItem();
         toolStripMenuItem8 = new ToolStripSeparator();
@@ -284,7 +288,7 @@ partial class MainWindow
         // 
         // mnuTools
         // 
-        mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsLevelDesigner });
+        mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsLevelDesigner, mnuToolsMaterials, mnuToolsBossKey });
         mnuTools.Name = "mnuTools";
         resources.ApplyResources(mnuTools, "mnuTools");
         // 
@@ -293,6 +297,19 @@ partial class MainWindow
         resources.ApplyResources(mnuToolsLevelDesigner, "mnuToolsLevelDesigner");
         mnuToolsLevelDesigner.Name = "mnuToolsLevelDesigner";
         mnuToolsLevelDesigner.Click += mnuToolsLevelDesigner_Click;
+        // 
+        // mnuToolsMaterials
+        // 
+        mnuToolsMaterials.Image = Resources.material;
+        mnuToolsMaterials.Name = "mnuToolsMaterials";
+        resources.ApplyResources(mnuToolsMaterials, "mnuToolsMaterials");
+        mnuToolsMaterials.Click += mnuToolsMaterials_Click;
+        // 
+        // mnuToolsBossKey
+        // 
+        mnuToolsBossKey.Name = "mnuToolsBossKey";
+        resources.ApplyResources(mnuToolsBossKey, "mnuToolsBossKey");
+        mnuToolsBossKey.Click += mnuToolsBossKey_Click;
         // 
         // contributeToolStripMenuItem
         // 
@@ -524,4 +541,6 @@ partial class MainWindow
     private ToolStripButton tbbViewServerTraffic;
     private ToolStripButton tbbViewApiMessageLog;
     private ToolStripMenuItem mnuViewShowGrid;
+    private ToolStripMenuItem mnuToolsMaterials;
+    private ToolStripMenuItem mnuToolsBossKey;
 }

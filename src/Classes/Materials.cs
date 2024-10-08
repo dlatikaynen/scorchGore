@@ -10,7 +10,7 @@ public class Materials: IDisposable
     private readonly Brush brushHimmel;
 
     private readonly Pen penBerg;
-    private readonly Brush brushBerg;
+    private readonly SolidBrush brushBerg;
 
     private readonly Pen penHoehle;
     private readonly Brush brushHoehle;
@@ -68,6 +68,7 @@ public class Materials: IDisposable
         set
         {
             penBerg.Color = value;
+            brushBerg.Color = value;
         }
     }
 

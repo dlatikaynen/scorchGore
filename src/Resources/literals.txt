@@ -252,3 +252,108 @@
 51	en	Cave ceiling color
 51	fi	TODO:
 51	ua	TODO:
+
+52	de	.
+52	en	.
+52	fi	TODO:
+52	ua	TODO:
+
+53	de	Stein (hartes, zerstörbares Material, gestützt von unten gegen die Wirkungsrichtung der Schwerkraft)
+53	en	Rock (hard yet destructible material, supported against direction of gravity from the bottom)
+53	fi	TODO:
+53	ua	TODO:
+
+54	de	Höhlendecke (hartes, zerstörbares Material, hängt von oben entgegen der Wirkungsrichtung der Schwerkraft)
+54	en	Cave ceiling (hard yet destructible material, suspended towards direction of gravity from the top)
+54	fi	TODO:
+54	ua	TODO:
+
+55	de	Gummi (elastisches, zerstörbares Material das Geschosse fast ohne Verlust kinetischer Energie reflektieren kann)
+55	en	Rubber (soft destructible material which will reflect projectiles with almost no loss of kinetic energy)
+55	fi	TODO:
+55	ua	TODO:
+
+56	de	Spieler 1 (empfindlich gegen Angriffe einschließlich der eigenen)
+56	en	Player 1 (vulnerable to attacks, including their own)
+56	fi	TODO:
+56	ua	TODO:
+
+57	de	Spieler 2 (empfindlich gegen Angriffe einschließlich der eigenen)
+57	en	Player 2 (vulnerable to attacks, including their own)
+57	fi	TODO:
+57	ua	TODO:
+
+58	de	Kratikulum (hartes, unzerstörbares Material das allem widersteht, und nur umgangen oder durchtunnelt werden kann)
+58	en	Craticulum (hard indestructible material which will not budge, and can only be circumvented or tunneled through)
+58	fi	TODO:
+58	ua	TODO:
+
+59	de	Nihilit (Anti-Material, dessen physikalischen Eigenschaften sich von Zeit zu Zeit zufällig ändern)
+59	en	Nihilit (anti-material which will change its physical properties randomly over time)
+59	fi	TODO:
+59	ua	TODO:
+
+60	de	Phosphor (entzündet sich bei Kontakt mit Luft oder Wasser)
+60	en	Phosphorus (will ignite when exposed to air or water)
+60	fi	TODO:
+60	ua	TODO:
+
+61	de	Brennstoff (entzündet sich, wenn es mit einer Zündquelle in Kontakt kommt)
+61	en	Fuel (will ignite when it comes in contact with something hot)
+61	fi	TODO:
+61	ua	TODO:
+
+62	de	Wasser (eine durchsichtige, geruchlose Flüssigkeit)
+62	en	Water (a transparent, odorless liquid)
+62	fi	TODO:
+62	ua	TODO:
+
+63	de	Spiegel (bricht leicht; reflektiert Laser-Licht fast perfekt und ohne Schaden zu nehmen)
+63	en	Mirror (will easily break, but reflects laser almost perfectly without taking damage)
+63	fi	TODO:
+63	ua	TODO:
+
+64	de	Kampfmaus (musculus muscularis)
+64	en	Warmouse (musculus muscularis)
+64	fi	TODO:
+64	ua	TODO:
+
+65	de	Kampfmäuse (musculus muscularis)
+65	en	Warmice (musculus muscularis)
+65	fi	TODO:
+65	ua	TODO:
+
+66	de	Schlachtkrähe (corvus belligerens)
+66	en	Battle crow (corvus belligerens)
+66	fi	TODO:
+66	ua	TODO:
+
+67	de	Schlachtkrähen (corvus belligerens)
+67	en	Battle crows (corvus belligerens)
+67	fi	TODO:
+67	ua	TODO:
+
+68	de	Mitgelieferte Material-Sets
+68	en	Built-in sets of materials
+68	fi	TODO:
+68	ua	TODO:
+
+69	de	Noice!
+69	en	Nice!
+69	fi	TODO:
+69	ua	TODO:
+
+70	de	Meine Material-Sets
+70	en	My sets of materials
+70	fi	TODO:
+70	ua	TODO:
+
+71	de	Mein Material-Set
+71	en	My set of materials
+71	fi	TODO:
+71	ua	TODO:
+
+72	de	Das "{0}" ist sicher vieles, aber keine Hex-Farbe. Das Format ist #aarrggbb, Beispiel #ff00ff00 für sattes Grün, Beispiel #770000ff for halbtransparentes Blau
+72	en	Whatever "{0}" is supposed to be, a hex color spec it is not. The format is #aarrggbb, example #ff00ff00 for solid green, example #770000ff for semi-transparent blue
+72	fi	TODO:
+72	ua	TODO:

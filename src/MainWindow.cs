@@ -1,6 +1,7 @@
 using ScorchGore.Configuration;
 using ScorchGore.Forms;
 using ScorchGore.Leved;
+using ScorchGore.Platform;
 using ScorchGore.Translation;
 
 namespace Fso.ScorchGore;
@@ -12,6 +13,8 @@ public partial class MainWindow : Form
     private readonly frmOutputPane outputPane;
     private readonly frmApiMessages apiMessagePane;
     private readonly frmLevelManager levelManager;
+    private readonly frmMaterials materialsManager;
+
     private bool isFirstActivate = true;
 
     public MainWindow()
@@ -33,8 +36,14 @@ public partial class MainWindow : Form
             MdiParent = this
         };
 
+        materialsManager = new frmMaterials()
+        {
+            MdiParent = this
+        };
+
         ShowGrid = mnuViewShowGrid.Checked;
     }
+
     protected override void OnActivated(EventArgs e)
     {
         base.OnActivated(e);
@@ -340,8 +349,26 @@ public partial class MainWindow : Form
         }
     }
 
+    private void mnuToolsMaterials_Click(object sender, EventArgs e)
+    {
+        if (materialsManager.Visible)
+        {
+            materialsManager.BringToFront();
+        }
+        else
+        {
+            materialsManager.MdiParent = this;
+            materialsManager.Show();
+        }
+    }
+
     private void mnuViewShowGrid_Click(object sender, EventArgs e)
     {
         ShowGrid = mnuViewShowGrid.Checked;
+    }
+
+    private void mnuToolsBossKey_Click(object sender, EventArgs e)
+    {
+        PlatformWindows.RunScr();
     }
 }

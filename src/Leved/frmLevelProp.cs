@@ -4,7 +4,7 @@ namespace ScorchGore.Leved;
 
 public partial class frmLevelProp : Form
 {
-    private LevelBeschreibung EditedLevel = new();
+    internal LevelBeschreibung EditedLevel = new();
 
     public frmLevelProp()
     {

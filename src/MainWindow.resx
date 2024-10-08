@@ -208,10 +208,10 @@
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADZSURBVDhPY6AaUFRUfADE/4nED6DaEAAkIScnJ0kMBqmF
-        aoMAoMB+GAYpYEgLe8yQHvEfAwPFsRoAAiBBmA1gxanRkhgYKI7TACkpqQ9wA0h1gZKSkidQQlFBQWE9
+        aoMAoMB+GAYpYEgLe8yQHvEfAwPFsRoAAiBBmA1gxanRkhgYKI7TAElJyQ9wA0h1gZKSkidQQlFBQWE9
         zBB8GNMF0bsdGGJ3ltrb27MAJcWxaULGqAZEb7dliN31kiFmpxNUBAUQNiB251WgAf+xYiAgwoDdNkDF
-        FLgABKBhAOWBXFUKEpOUlOQizgB0gOQqbIZgGoDN/2AMDB8GBhbCBqADpJgBKs4GaUDDmJkJBUDDAMrD
-        AxgYAIeXqwje2epIAAAAAElFTkSuQmCC
+        FLgABKBhAOWBXFUKEgPGDBdxBqADJFdhMwTTAGz+B2Ng+DAwsBA2AB0gxQxQcTZIAxrGzEwoABoGUB4e
+        wMAAAH9UqwXNaOfVAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tbbViewApiMessageLog.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -446,22 +446,37 @@
   </data>
   <data name="mnuToolsLevelDesigner.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGRSURBVDhPY6AKUFBWe66oqPifRPwAqp2BASTAELvrP2PU
-        lkPM4aubWQPnxsnJyUkC+XsYYnb+5HWptwDxeTxbrfndKoxBGKwHBmAGQA3Zy+7R6SyjqirNGLlpI493
-        qy0IC5tEqzNGbzvBEL3tPtDQH7gNiNl2hjFq0w7GsNW9srLqUiCbheySNVn958QCDVwL1PwLpA6nAWAc
-        s/0Fa8CsMJBmEBYz8VZijNq8iyF6+xPG6O3nGGO2X8JmwB+I5h3veN0bLWGaQRjEB3rtAEvokkKgyyaD
-        1GIYAJSYAJJkd292EDUMVUE2gDFi4xq462J3/gOGwz0MA0CBBnR2JJvflBCW0OUlIqbhaggD1i8E+v0r
-        3JDo7eBoh2qHGABTzBK8JA+sCBQOwfOSYOJgg6K3ngTJgVyE0wCQf0HhAFYYs+08igGRG5aBxFmCF2bg
-        NACicNNKoF9/s3n2eyKLs4QsKwamhdPSKroyhAxYCwyHKmQxEAaFEyxt4DcAGBsgW5DF0DG6AQ9AAiRi
-        RGYiHzAwAACSN/XjKZdM1AAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vwAADr8BOAVTJAAAAZFJREFUOE9joApQUFZ7rqio+J9E/ACqnYEBJMAQu+s/Y9SWQ8zhq5tZA+fGycnJ
+        SQL5exhidv7kdam3APF5PFut+d0qjEEYrAcGYAZADdnL7tHpLKOqKs0YuWkjj3erLQgLm0SrM0ZvO8EQ
+        ve0+0NAfuA2I2XaGMWrTDsaw1b2ysupSIJuF7JI1Wf3nxAINXAvU/AukDqcBYByz/QVrwKwwkGYQFjPx
+        VmKM2ryLIXr7E8bo7ecYY7ZfwmbAH4jmHe943RstYZpBGMQHeu0AS+iSQqDLJoPUYhgAlJgAkmR3b3YQ
+        NQxVQTaAMWLjGrjrYnf+A4bDPQwDQIEGdHYkm9+UEJbQ5SUipuFqCAPWLwT6/SvckOjt4GiHaocYAFPM
+        ErwkD6wIFA7B85Jg4mCDoreeBMmBXITTAJB/QeEAVhiz7TyKAZEbloHEWYIXZuA0AKJw00qgX3+zefZ7
+        IouzhCwrBqaF09IqujKEDFgLDIcqZDEQBoUTLG3gNwAYGyBbkMXQMboBD0ACJGJEZiIfMDAAAJI39eMp
+        l0zUAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="mnuToolsLevelDesigner.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
   <data name="mnuToolsLevelDesigner.Text" xml:space="preserve">
-    <value>Level &amp;Manager</value>
+    <value>&amp;Level Manager...</value>
+  </data>
+  <data name="mnuToolsMaterials.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuToolsMaterials.Text" xml:space="preserve">
+    <value>&amp;Materials...</value>
+  </data>
+  <data name="mnuToolsBossKey.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F24</value>
+  </data>
+  <data name="mnuToolsBossKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuToolsBossKey.Text" xml:space="preserve">
+    <value>&amp;Boss Key</value>
   </data>
   <data name="mnuTools.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
@@ -4176,6 +4191,18 @@
     <value>mnuToolsLevelDesigner</value>
   </data>
   <data name="&gt;&gt;mnuToolsLevelDesigner.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuToolsMaterials.Name" xml:space="preserve">
+    <value>mnuToolsMaterials</value>
+  </data>
+  <data name="&gt;&gt;mnuToolsMaterials.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuToolsBossKey.Name" xml:space="preserve">
+    <value>mnuToolsBossKey</value>
+  </data>
+  <data name="&gt;&gt;mnuToolsBossKey.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;contributeToolStripMenuItem.Name" xml:space="preserve">
