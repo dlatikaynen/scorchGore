@@ -357,3 +357,33 @@
 72	en	Whatever "{0}" is supposed to be, a hex color spec it is not. The format is #aarrggbb, example #ff00ff00 for solid green, example #770000ff for semi-transparent blue
 72	fi	TODO:
 72	ua	TODO:
+
+73	de	Erst eines der primären Medien auswählen
+73	en	Select a primary medium first
+73	fi	TODO:
+73	ua	TODO:
+
+74	de	Namen für Materialien können in Levelgeneratorskripten verwendet werden, müssen daher angegeben werden, und den Regeln für Holy C# Bezeichnern entsprechen: nur {0}, und nicht mit einer Ziffer beginnen
+74	en	Names for materials can be used in level generator scripts. Therefore, a name is required and needs to follow the rules for Holy C# identifiers: {0} only, and don't begin with a numeric digit
+74	fi	TODO:
+74	ua	TODO:
+
+75	de	Der Name "{0}" ist im aktuellen Primärmedium bereits der Farbe #{1} zugewiesen
+75	en	The name "{0}" has already been used for the #{1} color in the current primary medium
+75	fi	TODO:
+75	ua	TODO:
+
+76	de	Da ist ja nichts markiert zum löschen
+76	en	Ain't nothing selected to remove
+76	fi	TODO:
+76	ua	TODO:
+
+77	de	Da ist ja nichts nicht was man löschen könnte
+77	en	Ain't nothing there to remove
+77	fi	TODO:
+77	ua	TODO:
+
+78	de	Die Palette für dieses Material ist voll, mehr geht nicht
+78	en	The palette for this material is full, no room for more
+78	fi	TODO:
+78	ua	TODO:

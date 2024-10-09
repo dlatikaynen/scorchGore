@@ -38,13 +38,12 @@ public partial class frmMaterials : Form
             null
         );
 
-        var customSet = customSets.Nodes.Add(
+        _ = customSets.Nodes.Add(
             "69.*",
             Xlat.µ(71), // My set of materials
             "mat",
             "mat"
         );
-
     }
 
     private void tvSets_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

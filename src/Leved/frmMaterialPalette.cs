@@ -8,11 +8,14 @@ namespace ScorchGore.Forms;
 public partial class frmMaterialPalette : Form
 {
     private List<Button> paletteButtons = [];
+    private List<Material> selectedItems = [];
 
     public frmMaterialPalette()
     {
         InitializeComponent();
     }
+
+    private Material? SelectedItem => selectedItems.SingleOrDefault();
 
     internal void Prepare(List<SetOfMaterials> sets)
     {
@@ -43,12 +46,7 @@ public partial class frmMaterialPalette : Form
             }
         }
 
-        // make entries which are contentful bold
         lstBehavior.Items.AddRange([.. sets]);
-        foreach (var contentfulSet in contentfulMedia)
-        {
-
-        }
 
         // preselect the first behavior with any entries
         foreach (SetOfMaterials entry in lstBehavior.Items)
@@ -65,7 +63,7 @@ public partial class frmMaterialPalette : Form
     private void lstBehavior_SelectedIndexChanged(object sender, EventArgs e)
     {
         ClearPaletteButtons();
-        lblInfo.Text = lstBehavior.Text;
+        ClearError();
 
         if (lstBehavior.SelectedItem is SetOfMaterials set)
         {
@@ -112,21 +110,52 @@ public partial class frmMaterialPalette : Form
 
         paletteButtons.Add(button);
         fmePalette.Controls.Add(button);
+        ttpTips.SetToolTip(button, material.Name);
     }
 
     private void btnAdd_Click(object sender, EventArgs e)
     {
         if (lstBehavior.SelectedItem is SetOfMaterials set)
         {
+            if(paletteButtons.Count == 16 * 16)
+            {
+                lblInfo.Text = Xlat.µ(78); // The palette for this material is full, no room for more
+
+                return;
+            }
+
+            var name = txtName.Text.Trim().ToUpperInvariant();
+
+            if (!IsValidMaterialName(name, suppressMessage: false))
+            {
+                return;
+            }
+
             var color = ParseUserColor(suppressMessage: false);
 
             if (color != null)
             {
-                var material = new Material("name", color.Value);
+                // colors need to be unique across the entire
+                // set of materials because they are the only
+                // thing the engine looks at when determining
+                // a material from an arena pixel
+
+                ClearError();
+
+                var material = new Material(name, color.Value);
 
                 set.Materials.Add(material);
                 AddPaletteButton(material);
+
+                // a single manually added item is automatically
+                // the selected item, so name edits, color edits,
+                // and the delete button pertain to it right away
+                selectedItems.Add(material);
             }
+        }
+        else
+        {
+            lblInfo.Text = Xlat.µ(73); // Select a primary medium first
         }
     }
 
@@ -137,6 +166,57 @@ public partial class frmMaterialPalette : Form
             var c = dlgColor.Color;
             txtColor.Text = $"#{c.A:X}{c.R:X}{c.G:X}{c.B:X}".ToLowerInvariant();
         }
+    }
+
+    private void btnDelete_Click(object sender, EventArgs e)
+    {
+        if (lstBehavior.SelectedItem is SetOfMaterials set)
+        {
+            if (SelectedItem != null && ReferenceEquals(SelectedItem, set.Materials.Last()))
+            {
+                // we can just remove the last one quickly
+                fmePalette.Controls.Remove(paletteButtons.Last());
+                paletteButtons.Remove(paletteButtons.Last());
+                selectedItems.Clear();
+            }
+            else if (selectedItems.Count != 0)
+            {
+                // we recreate the entire grid instead of shifting stuff
+                var originalCursor = Cursor;
+
+                Cursor = Cursors.WaitCursor;
+                ClearPaletteButtons();
+
+                set.Materials.RemoveAll(m => selectedItems.Contains(m));
+                selectedItems.Clear();
+                foreach (var material in set.Materials)
+                {
+                    AddPaletteButton(material);
+                }
+
+                Cursor = originalCursor;
+            }
+            else if(paletteButtons.Count == 0)
+            {
+                lblInfo.Text = Xlat.µ(77); // Ain't nothing there to remove 
+
+                return;
+            }
+            else
+            {
+                lblInfo.Text = Xlat.µ(76); // Ain't nothing selected to remove   
+
+                return;
+            }
+        }
+        else
+        {
+            lblInfo.Text = Xlat.µ(73); // Select a primary medium first
+
+            return;
+        }
+
+        ClearError();
     }
 
     private Color? ParseUserColor(bool suppressMessage)
@@ -182,5 +262,50 @@ public partial class frmMaterialPalette : Form
         }
 
         return null;
+    }
+
+    private bool IsValidMaterialName(string name, bool suppressMessage)
+    {
+        const string allowedChars = "_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+        if (!string.IsNullOrEmpty(name))
+        {
+            if (!char.IsAsciiDigit(name[0]) && name.ToCharArray().All(c => allowedChars.Contains(c)))
+            {
+                // names need to be unique inside a primary medium
+                // (because if it is adressed, it is always addressed
+                // in the context of exactly one primary medium)
+                if (lstBehavior.SelectedItem is SetOfMaterials set)
+                {
+                    var dupe = set.Materials.FirstOrDefault(m => m.Name == name);
+
+                    if (dupe != null && (SelectedItem == null || !ReferenceEquals(dupe, SelectedItem)))
+                    {
+                        if (!suppressMessage)
+                        {
+                            lblInfo.Text = Xlat.µ(75, name, dupe.Color.Name); // The name "{0}" has already been used for the {1} color in the current primary medium
+                            txtName.Focus();
+                        }
+
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        if (!suppressMessage)
+        {
+            lblInfo.Text = Xlat.µ(74, allowedChars); // Names for materials can be used in level generator scripts. Therefore, they need to follow the rules for Holy C# identifiers: {0} only, and don't begin with a numeric digit
+            txtName.Focus();
+        }
+
+        return false;
+    }
+
+    private void ClearError()
+    {
+        lblInfo.Text = lstBehavior.Text;
     }
 }

@@ -9,7 +9,7 @@ internal static class Translation
 {
     private static readonly Dictionary<uint, Dictionary<string, string>> _translations = [];  
     
-    internal static string µ(uint µ)
+    internal static string µ(uint µ, params string[] args)
     {
         if(_translations.Count == 0)
         {
@@ -70,7 +70,14 @@ internal static class Translation
         {
             if (entry.TryGetValue(InstanceSettings.Language, out var literal))
             {
-                return literal;
+                if (args.Length == 0)
+                {
+                    return literal;
+                }
+                else
+                {
+                    return string.Format(literal, args);
+                }
             }
         }
 

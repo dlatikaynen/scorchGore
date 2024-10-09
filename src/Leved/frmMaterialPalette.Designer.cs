@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMaterialPalette));
             btnColor = new Button();
             lblBehavior = new Label();
@@ -43,13 +44,19 @@
             dlgColor = new ColorDialog();
             txtColor = new TextBox();
             btnColorPicker = new Button();
+            txtName = new TextBox();
+            label2 = new Label();
+            ttpTips = new ToolTip(components);
+            chkColor = new CheckBox();
             fmePalette.SuspendLayout();
             SuspendLayout();
             // 
             // btnColor
             // 
             btnColor.BackColor = Color.Gold;
+            btnColor.CausesValidation = false;
             btnColor.FlatStyle = FlatStyle.Flat;
+            btnColor.Font = new Font("Segoe UI", 6F);
             btnColor.Location = new Point(8, 27);
             btnColor.Margin = new Padding(0);
             btnColor.Name = "btnColor";
@@ -80,6 +87,7 @@
             // 
             // fmePalette
             // 
+            fmePalette.Controls.Add(chkColor);
             fmePalette.Controls.Add(btnColor);
             fmePalette.Location = new Point(12, 72);
             fmePalette.Name = "fmePalette";
@@ -100,28 +108,29 @@
             // btnAdd
             // 
             btnAdd.ImeMode = ImeMode.NoControl;
-            btnAdd.Location = new Point(303, 80);
+            btnAdd.Location = new Point(303, 170);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(137, 30);
             btnAdd.TabIndex = 260;
-            btnAdd.Text = "&Add...";
+            btnAdd.Text = "&Add";
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
             // btnDelete
             // 
             btnDelete.ImeMode = ImeMode.NoControl;
-            btnDelete.Location = new Point(303, 200);
+            btnDelete.Location = new Point(303, 207);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(137, 30);
             btnDelete.TabIndex = 262;
             btnDelete.Text = "&Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnCopyFrom
             // 
             btnCopyFrom.ImeMode = ImeMode.NoControl;
-            btnCopyFrom.Location = new Point(303, 236);
+            btnCopyFrom.Location = new Point(303, 244);
             btnCopyFrom.Name = "btnCopyFrom";
             btnCopyFrom.Size = new Size(137, 30);
             btnCopyFrom.TabIndex = 263;
@@ -153,11 +162,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(303, 124);
+            label1.Location = new Point(303, 72);
             label1.Name = "label1";
             label1.Size = new Size(62, 15);
             label1.TabIndex = 266;
-            label1.Text = "#aarrggbb";
+            label1.Text = "&#aarrggbb";
             // 
             // dlgColor
             // 
@@ -167,7 +176,7 @@
             // 
             // txtColor
             // 
-            txtColor.Location = new Point(303, 142);
+            txtColor.Location = new Point(303, 90);
             txtColor.MaxLength = 9;
             txtColor.Name = "txtColor";
             txtColor.Size = new Size(102, 23);
@@ -177,7 +186,7 @@
             // 
             btnColorPicker.BackColor = SystemColors.Control;
             btnColorPicker.FlatStyle = FlatStyle.Flat;
-            btnColorPicker.Location = new Point(408, 142);
+            btnColorPicker.Location = new Point(408, 90);
             btnColorPicker.Margin = new Padding(0);
             btnColorPicker.Name = "btnColorPicker";
             btnColorPicker.Size = new Size(32, 23);
@@ -187,12 +196,57 @@
             btnColorPicker.UseVisualStyleBackColor = false;
             btnColorPicker.Click += btnColorPicker_Click;
             // 
+            // txtName
+            // 
+            txtName.Location = new Point(303, 134);
+            txtName.MaxLength = 12;
+            txtName.Name = "txtName";
+            txtName.Size = new Size(137, 23);
+            txtName.TabIndex = 270;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(303, 116);
+            label2.Name = "label2";
+            label2.Size = new Size(39, 15);
+            label2.TabIndex = 269;
+            label2.Text = "&Name";
+            // 
+            // ttpTips
+            // 
+            ttpTips.AutoPopDelay = 5000;
+            ttpTips.InitialDelay = 333;
+            ttpTips.ReshowDelay = 100;
+            ttpTips.UseAnimation = false;
+            ttpTips.UseFading = false;
+            // 
+            // chkColor
+            // 
+            chkColor.Appearance = Appearance.Button;
+            chkColor.AutoCheck = false;
+            chkColor.BackColor = Color.LightCoral;
+            chkColor.FlatAppearance.BorderColor = SystemColors.ControlText;
+            chkColor.FlatAppearance.CheckedBackColor = Color.LightCoral;
+            chkColor.FlatStyle = FlatStyle.Flat;
+            chkColor.Location = new Point(24, 27);
+            chkColor.Margin = new Padding(0);
+            chkColor.Name = "chkColor";
+            chkColor.Size = new Size(15, 15);
+            chkColor.TabIndex = 1;
+            chkColor.TextAlign = ContentAlignment.MiddleCenter;
+            chkColor.UseMnemonic = false;
+            chkColor.UseVisualStyleBackColor = false;
+            chkColor.Visible = false;
+            // 
             // frmMaterialPalette
             // 
             AcceptButton = btnSave;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(452, 440);
+            Controls.Add(txtName);
+            Controls.Add(label2);
             Controls.Add(btnColorPicker);
             Controls.Add(txtColor);
             Controls.Add(label1);
@@ -235,5 +289,9 @@
         private ColorDialog dlgColor;
         private TextBox txtColor;
         private Button btnColorPicker;
+        private TextBox txtName;
+        private Label label2;
+        private ToolTip ttpTips;
+        private CheckBox chkColor;
     }
 }
