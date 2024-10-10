@@ -387,3 +387,13 @@
 78	en	The palette for this material is full, no room for more
 78	fi	TODO:
 78	ua	TODO:
+
+79	de	Im Primärmedium "{0}" hat das Material "{1}" bereits die Farbe {2}. Farben müssen je Set eindeutig sein
+79	en	The "{0}" medium already defines material "{1}" with color {2}. Colors must be unique in each set
+79	fi	TODO:
+79	ua	TODO:
+
+80	de	Das Material "{0}" in dieser Palette hat bereits die Farbe {1}. Farben müssen je Set eindeutig sein
+80	en	The "{0}" material in this palette already has the {1} color. Colors must be unique in each set
+80	fi	TODO:
+80	ua	TODO:

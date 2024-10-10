@@ -1,5 +1,4 @@
-﻿using ScorchGore.Constants;
-using ScorchGore.Forms;
+﻿using ScorchGore.Forms;
 using Xlat = ScorchGore.Translation.Translation;
 
 namespace ScorchGore.Leved;
@@ -14,6 +13,7 @@ public partial class frmMaterials : Form
     private void frmMaterials_Load(object sender, EventArgs e)
     {
         tvSets.Nodes.Clear();
+        DesignWorkspace.EnsureDesignWorkspace();
 
         var builtInSets = tvSets.Nodes.Add(
             "1",
@@ -21,16 +21,24 @@ public partial class frmMaterials : Form
             null
         );
 
-        var firstSet = builtInSets.Nodes.Add(
-            "1.WOTMSTD",
-            "WOTMSTD", // TODO: xlat/dynamically load
-            "mat",
-            "mat"
-        );
+        TreeNode? firstSet = null;
+
+        foreach (var theme in DesignWorkspace.MaterialThemes)
+        {
+            firstSet = builtInSets.Nodes.Add(
+                $"1.{theme.Name}",
+                theme.Name,
+                "mat",
+                "mat"
+            );
+        }
 
         builtInSets.ExpandAll();
-        tvSets.SelectedNode = firstSet;
-        firstSet.EnsureVisible();
+        if (firstSet != null)
+        {
+            tvSets.SelectedNode = firstSet;
+            firstSet.EnsureVisible();
+        }
 
         var customSets = tvSets.Nodes.Add(
             "69",
@@ -48,25 +56,22 @@ public partial class frmMaterials : Form
 
     private void tvSets_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
     {
-        var matSetId = MaterialSetIdentifierFromNode(e.Node);
+        var themeId = MaterialThemeIdentifierFromNode(e.Node);
 
-        if (matSetId != null)
+        if (themeId != null)
         {
             using var matSetEditor = new frmMaterialPalette();
+            var theme = DesignWorkspace.MaterialThemes.Where(t => t.Name == themeId).SingleOrDefault();
 
-            matSetEditor.Prepare(
-            [
-                new(Medium.Cave,
-                [
-                    new("EGA0", Color.FromArgb(0,0,0))
-                ])
-            ]);
-
-            matSetEditor.ShowDialog(this);
+            if (theme != null)
+            {
+                matSetEditor.Prepare(theme);
+                matSetEditor.ShowDialog(this);
+            }
         }
     }
 
-    private static string? MaterialSetIdentifierFromNode(TreeNode node)
+    private static string? MaterialThemeIdentifierFromNode(TreeNode node)
     {
         var parts = node.Name.Split('.', StringSplitOptions.RemoveEmptyEntries);
 

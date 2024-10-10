@@ -363,6 +363,12 @@
   <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 6</value>
   </data>
+  <data name="mnuFileSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 22</value>
+  </data>
+  <data name="mnuFileSave.Text" xml:space="preserve">
+    <value>&amp;Save</value>
+  </data>
   <data name="mnuFileBackup.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 22</value>
   </data>
@@ -447,7 +453,7 @@
   <data name="mnuToolsLevelDesigner.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAAZFJREFUOE9joApQUFZ7rqio+J9E/ACqnYEBJMAQu+s/Y9SWQ8zhq5tZA+fGycnJ
+        vgAADr4B6kKxwAAAAZFJREFUOE9joApQUFZ7rqio+J9E/ACqnYEBJMAQu+s/Y9SWQ8zhq5tZA+fGycnJ
         SQL5exhidv7kdam3APF5PFut+d0qjEEYrAcGYAZADdnL7tHpLKOqKs0YuWkjj3erLQgLm0SrM0ZvO8EQ
         ve0+0NAfuA2I2XaGMWrTDsaw1b2ysupSIJuF7JI1Wf3nxAINXAvU/AukDqcBYByz/QVrwKwwkGYQFjPx
         VmKM2ryLIXr7E8bo7ecYY7ZfwmbAH4jmHe943RstYZpBGMQHeu0AS+iSQqDLJoPUYhgAlJgAkmR3b3YQ
@@ -458,13 +464,13 @@
 </value>
   </data>
   <data name="mnuToolsLevelDesigner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuToolsLevelDesigner.Text" xml:space="preserve">
     <value>&amp;Level Manager...</value>
   </data>
   <data name="mnuToolsMaterials.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuToolsMaterials.Text" xml:space="preserve">
     <value>&amp;Materials...</value>
@@ -473,7 +479,7 @@
     <value>F24</value>
   </data>
   <data name="mnuToolsBossKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuToolsBossKey.Text" xml:space="preserve">
     <value>&amp;Boss Key</value>
@@ -4348,6 +4354,12 @@
   </data>
   <data name="&gt;&gt;toolStripProgressBar1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFileSave.Name" xml:space="preserve">
+    <value>mnuFileSave</value>
+  </data>
+  <data name="&gt;&gt;mnuFileSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

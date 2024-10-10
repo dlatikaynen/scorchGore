@@ -49,6 +49,9 @@
     <Compile Update="Leved\frmMaterials.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Leved\frmPickMediumMaterialsPalette.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -371,4 +371,10 @@ public partial class MainWindow : Form
     {
         PlatformWindows.RunScr();
     }
+
+    private void mnuFileSave_Click(object sender, EventArgs e)
+    {
+        DesignWorkspace.EnsureDesignWorkspace();
+        DesignWorkspace.SaveWorkspace();
+    }
 }

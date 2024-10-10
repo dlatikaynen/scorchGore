@@ -17,14 +17,14 @@ public partial class frmMaterialPalette : Form
 
     private Material? SelectedItem => selectedItems.SingleOrDefault();
 
-    internal void Prepare(List<SetOfMaterials> sets)
+    internal void Prepare(MaterialTheme theme)
     {
         lstBehavior.Items.Clear();
 
         var contentfulMedia = new List<Medium>();
         var mentionedMedia = new List<Medium>();
 
-        foreach (var set in sets)
+        foreach (var set in theme.SetsOfMaterials)
         {
             if (!mentionedMedia.Contains(set.Medium))
             {
@@ -42,11 +42,11 @@ public partial class frmMaterialPalette : Form
         {
             if (!mentionedMedia.Contains(existingMedium))
             {
-                sets.Add(new(existingMedium, []));
+                theme.SetsOfMaterials.Add(new(existingMedium, []));
             }
         }
 
-        lstBehavior.Items.AddRange([.. sets]);
+        lstBehavior.Items.AddRange([.. theme.SetsOfMaterials]);
 
         // preselect the first behavior with any entries
         foreach (SetOfMaterials entry in lstBehavior.Items)
@@ -139,6 +139,10 @@ public partial class frmMaterialPalette : Form
                 // set of materials because they are the only
                 // thing the engine looks at when determining
                 // a material from an arena pixel
+                if (IsDuplicateColor(color.Value, self: null, suppressMessage: false))
+                {
+                    return;
+                }
 
                 ClearError();
 
@@ -262,6 +266,46 @@ public partial class frmMaterialPalette : Form
         }
 
         return null;
+    }
+
+    private bool IsDuplicateColor(Color color, Material? self, bool suppressMessage)
+    {
+        foreach (SetOfMaterials set in lstBehavior.Items)
+        {
+            foreach(var existing in set.Materials)
+            {
+                if(color.Equals(existing.Color))
+                {
+                    if(self == null || !ReferenceEquals(self, existing))
+                    {
+                        if (!suppressMessage)
+                        {
+                            if (lstBehavior.SelectedItem is SetOfMaterials current && current.Medium == set.Medium)
+                            {
+                                lblInfo.Text = Xlat.µ(
+                                    80, // The "{0}" material in this palette already has the {1} color. Colors must be unique in each set
+                                    existing.Name,
+                                    $"#{color}"
+                                );
+                            }
+                            else
+                            {
+                                lblInfo.Text = Xlat.µ(
+                                  79, // The "{0}" medium already defines material "{1}" with color {2}. Colors must be unique per each set
+                                  set.Medium.ToString(),
+                                  existing.Name,
+                                  $"#{color}"
+                                );
+                            }
+                        }
+
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     private bool IsValidMaterialName(string name, bool suppressMessage)

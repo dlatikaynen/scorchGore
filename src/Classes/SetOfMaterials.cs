@@ -20,3 +20,11 @@ internal class SetOfMaterials(Medium medium, List<Material> materials)
     }
 }
 
+internal class MaterialTheme(string name, List<SetOfMaterials> setsOfMaterials)
+{
+    public string Name => name;
+    public List<SetOfMaterials> SetsOfMaterials => setsOfMaterials;
+
+    public override string ToString() => Name;
+}
+
