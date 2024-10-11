@@ -1,6 +1,8 @@
 ﻿using ScorchGore.Classes;
 using ScorchGore.Constants;
 using System.Buffers.Binary;
+using System.IO.Compression;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace ScorchGore.Leved;
@@ -12,6 +14,19 @@ internal static class DesignWorkspace
     public static List<LevelBeschreibung> Levels = [];
 
     private const string WorkspaceFilename = "workspace.sugma";
+
+    // the first nine of that form the usual signature
+    private static readonly IReadOnlyList<byte> RgbKey = [
+        0x03, 0x4a, 0x4d, 0x4c, 0x05, 0x4c, 0x53, 0x4c,
+        0x04, 0xab, 0x74, 0xfe, 0xba, 0xdf, 0xf0, 0x0d,
+        0xac, 0xab, 0xca, 0x7b, 0xba, 0xdf, 0xf0, 0x0d,
+        0x1e, 0x47, 0x91, 0xc2, 0x05, 0x5e, 0xaa, 0x33
+    ];
+
+    private static readonly IReadOnlyList<byte> RgbIV = [
+        0xca, 0xfe, 0xac, 0xab, 0xc0, 0xff, 0xef, 0xfe,
+        0x00, 0x4a, 0x5c, 0xb9, 0x17, 0xf7, 0x22, 0x0d
+    ];
 
     private static bool IsWorkspaceOpen = false;
 
@@ -32,9 +47,22 @@ internal static class DesignWorkspace
 
     public static void LoadWorkspace()
     {
-        using var inStream = new FileStream(WorkspaceFilename, FileMode.Open, FileAccess.Read, FileShare.Read);
+        using var fis = new FileStream(WorkspaceFilename, FileMode.Open, FileAccess.Read, FileShare.Read);
+        var signature = new byte[9];
 
-        LoadMaterialThemes(inStream);
+        fis.ReadExactly(signature, 0, 9);
+        if (!signature.SequenceEqual(RgbKey.Take(9)))
+        {
+            throw new IOException(@$"Invalid signature on ""{WorkspaceFilename}""");
+        }
+
+        using var aes = Aes.Create();
+        using var enc = aes.CreateDecryptor([.. RgbKey], [.. RgbIV]);
+        using var cys = new CryptoStream(fis, enc, CryptoStreamMode.Read);
+        using var dec = new GZipStream(cys, CompressionMode.Decompress);
+        using var brd = new BinaryReader(dec);
+
+        LoadMaterialThemes(brd);
         LoadPrefabs();
 
         if (MaterialThemes.Count == 0)
@@ -50,18 +78,23 @@ internal static class DesignWorkspace
             throw new ArgumentOutOfRangeException(nameof(IsWorkspaceOpen), IsWorkspaceOpen, "no open workspace");
         }
 
-        using var oStream = new FileStream(WorkspaceFilename, FileMode.Create, FileAccess.Write, FileShare.Read);
+        using var fos = new FileStream(WorkspaceFilename, FileMode.Create, FileAccess.Write, FileShare.Read);
 
-        SaveMaterialThemes(oStream);
-        SavePrefabs(oStream);
+        fos.Write([.. RgbKey], 0, 9);
+        
+        using var aes = Aes.Create();
+        using var enc = aes.CreateEncryptor([.. RgbKey], [.. RgbIV]);
+        using var cys = new CryptoStream(fos, enc, CryptoStreamMode.Write);
+        using var zip = new GZipStream(cys, CompressionMode.Compress);
+        using var bwr = new BinaryWriter(zip);
+
+        SaveMaterialThemes(bwr);
+        SavePrefabs(bwr);
     }
 
-    private static void LoadMaterialThemes(Stream inStream)
+    private static void LoadMaterialThemes(BinaryReader inStream)
     {
-        var bnmth = new byte[2];
-
-        inStream.ReadExactly(bnmth, 0, 2);
-
+        var bnmth = inStream.ReadBytes(2);
         var nmth = BinaryPrimitives.ReadUInt16LittleEndian(bnmth);
 
         for (var i = 0; i < nmth; ++i)
@@ -70,14 +103,11 @@ internal static class DesignWorkspace
         }
     }
 
-    private static void LoadMaterialTheme(Stream inStream)
+    private static void LoadMaterialTheme(BinaryReader inStream)
     {
         var slname = inStream.ReadByte();
-        var bsname = new byte[slname];
-
-        inStream.ReadExactly(bsname, 0, slname);
-
-        var name = Encoding.UTF8.GetString(bsname);
+        var bname = inStream.ReadBytes(slname);
+        var name = Encoding.UTF8.GetString(bname);
         var sets = new List<SetOfMaterials>();
 
         LoadSetsOfMaterials(inStream, sets);
@@ -87,12 +117,9 @@ internal static class DesignWorkspace
         MaterialThemes.Add(theme);
     }
 
-    private static void LoadSetsOfMaterials(Stream inStream, List<SetOfMaterials> sets)
+    private static void LoadSetsOfMaterials(BinaryReader inStream, List<SetOfMaterials> sets)
     {
-        var bnsom = new byte[2];
-
-        inStream.ReadExactly(bnsom, 0, 2);
-
+        var bnsom = inStream.ReadBytes(2);
         var nsom = BinaryPrimitives.ReadUInt16LittleEndian(bnsom);
 
         for (var i = 0; i < nsom; ++i)
@@ -101,35 +128,22 @@ internal static class DesignWorkspace
         }
     }
 
-    private static void LoadSetOfMaterials(Stream inStream, List<SetOfMaterials> sets)
+    private static void LoadSetOfMaterials(BinaryReader inStream, List<SetOfMaterials> sets)
     {
         var slmedium = inStream.ReadByte();
-        var bsmedium = new byte[slmedium];
-
-        inStream.ReadExactly(bsmedium, 0, slmedium);
-
+        var bsmedium = inStream.ReadBytes(slmedium);
         var smedium = Encoding.UTF8.GetString(bsmedium);
         var medium = Enum.Parse<Medium>(smedium);
         var set = new SetOfMaterials(medium, []);
-
-        var bnmat = new byte[2];
-
-        inStream.ReadExactly(bnmat, 0, 2);
-
+        var bnmat = inStream.ReadBytes(2);
         var nmat = BinaryPrimitives.ReadUInt16LittleEndian(bnmat);
 
         for (var i = 0; i < nmat; ++i)
         {
             var bslname = inStream.ReadByte();
-            var bsname = new byte[bslname];
-
-            inStream.ReadExactly(bsname, 0, bslname);
-
+            var bsname = inStream.ReadBytes(bslname);
             var sname = Encoding.UTF8.GetString(bsname);
-            var bcolor = new byte[4];
-
-            inStream.ReadExactly(bcolor, 0, 4);
-
+            var bcolor = inStream.ReadBytes(4);
             var icolor = BinaryPrimitives.ReadInt32LittleEndian(bcolor);
             var color = Color.FromArgb(icolor);
             var mat = new Material(sname, color);
@@ -150,7 +164,7 @@ internal static class DesignWorkspace
 
     }
 
-    private static void SaveMaterialThemes(Stream oStream)
+    private static void SaveMaterialThemes(BinaryWriter oStream)
     {
         var bnmth = new byte[2];
 
@@ -163,18 +177,18 @@ internal static class DesignWorkspace
         }
     }
 
-    private static void SaveMaterialTheme(MaterialTheme theme, Stream oStream)
+    private static void SaveMaterialTheme(MaterialTheme theme, BinaryWriter oStream)
     {
         var bname = Encoding.UTF8.GetBytes(theme.Name);
         var slname = (byte)bname.Length;
 
-        oStream.WriteByte(slname);
+        oStream.Write(slname);
         oStream.Write(bname, 0, slname);
 
         SaveSetsOfMaterials(theme, oStream);
     }
 
-    private static void SaveSetsOfMaterials(MaterialTheme theme, Stream oStream)
+    private static void SaveSetsOfMaterials(MaterialTheme theme, BinaryWriter oStream)
     {
         var bnsom = new byte[2];
 
@@ -187,13 +201,13 @@ internal static class DesignWorkspace
         }
     }
 
-    private static void SaveSetOfMaterials(SetOfMaterials set, Stream oStream)
+    private static void SaveSetOfMaterials(SetOfMaterials set, BinaryWriter oStream)
     {
         var smedium = set.Medium.ToString();
         var bmedium = Encoding.UTF8.GetBytes(smedium);
         var slmedium = (byte)bmedium.Length;
 
-        oStream.WriteByte(slmedium);
+        oStream.Write(slmedium);
         oStream.Write(bmedium, 0, slmedium);
 
         var bnmat = new byte[2];
@@ -206,7 +220,7 @@ internal static class DesignWorkspace
             var bname = Encoding.UTF8.GetBytes(mat.Name);
             var slname = (byte)bname.Length;
 
-            oStream.WriteByte(slname);
+            oStream.Write(slname);
             oStream.Write(bname, 0, slname);
 
             var icolor = mat.Color.ToArgb();
@@ -217,12 +231,12 @@ internal static class DesignWorkspace
         }
     }
 
-    private static void SavePrefabs(Stream oStream)
+    private static void SavePrefabs(BinaryWriter oStream)
     {
 
     }
 
-    private static void SavePrefab(Stream oStream)
+    private static void SavePrefab(BinaryWriter oStream)
     {
 
     }
