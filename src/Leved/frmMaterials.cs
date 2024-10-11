@@ -42,13 +42,13 @@ public partial class frmMaterials : Form
 
         var customSets = tvSets.Nodes.Add(
             "69",
-            Xlat.µ(70), // My material sets
+            Xlat.µ(70), // My material themes
             null
         );
 
         _ = customSets.Nodes.Add(
             "69.*",
-            Xlat.µ(71), // My set of materials
+            Xlat.µ(71), // My material theme
             "mat",
             "mat"
         );

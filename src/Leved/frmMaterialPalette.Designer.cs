@@ -267,7 +267,7 @@
             Name = "frmMaterialPalette";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Set of materials";
+            Text = "Material Theme";
             fmePalette.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();

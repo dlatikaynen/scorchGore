@@ -22,6 +22,7 @@ public partial class frmLevelManager : Form
     private void frmLevelManager_Load(object sender, EventArgs e)
     {
         tvLevels.Nodes.Clear();
+        DesignWorkspace.EnsureDesignWorkspace();
 
         var installmentOne = tvLevels.Nodes.Add(
             "1",

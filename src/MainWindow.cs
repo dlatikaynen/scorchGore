@@ -14,29 +14,34 @@ public partial class MainWindow : Form
     private readonly frmApiMessages apiMessagePane;
     private readonly frmLevelManager levelManager;
     private readonly frmMaterials materialsManager;
+    private readonly frmAssets assetsManager;
 
     private bool isFirstActivate = true;
 
     public MainWindow()
     {
         InitializeComponent();
-        outputPane = new frmOutputPane()
+        outputPane = new()
         {
             MdiParent = this
         };
 
-        apiMessagePane = new frmApiMessages()
+        apiMessagePane = new()
         {
             MdiParent = this
         };
 
-
-        levelManager = new frmLevelManager()
+        levelManager = new()
         {
             MdiParent = this
         };
 
-        materialsManager = new frmMaterials()
+        materialsManager = new()
+        {
+            MdiParent = this
+        };
+
+        assetsManager = new()
         {
             MdiParent = this
         };
@@ -359,6 +364,19 @@ public partial class MainWindow : Form
         {
             materialsManager.MdiParent = this;
             materialsManager.Show();
+        }
+    }
+
+    private void mnuToolsAssetMgr_Click(object sender, EventArgs e)
+    {
+        if (assetsManager.Visible)
+        {
+            assetsManager.BringToFront();
+        }
+        else
+        {
+            assetsManager.MdiParent = this;
+            assetsManager.Show();
         }
     }
 

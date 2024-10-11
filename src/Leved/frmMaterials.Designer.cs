@@ -30,10 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMaterials));
-            TreeNode treeNode1 = new TreeNode("I.1 Blue Mountains");
-            TreeNode treeNode2 = new TreeNode("I. Blue Mountains", new TreeNode[] { treeNode1 });
-            TreeNode treeNode3 = new TreeNode("Built-in levels", new TreeNode[] { treeNode2 });
-            TreeNode treeNode4 = new TreeNode("dlatikay's levels");
+            TreeNode treeNode1 = new TreeNode("themes");
             ilTreeview = new ImageList(components);
             scMaterials = new SplitContainer();
             tvSets = new TreeView();
@@ -84,15 +81,9 @@
             tvSets.LabelEdit = true;
             tvSets.Location = new Point(0, 0);
             tvSets.Name = "tvSets";
-            treeNode1.Name = "Node3";
-            treeNode1.Text = "I.1 Blue Mountains";
-            treeNode2.Name = "Node2";
-            treeNode2.Text = "I. Blue Mountains";
-            treeNode3.Name = "Node0";
-            treeNode3.Text = "Built-in levels";
-            treeNode4.Name = "Node1";
-            treeNode4.Text = "dlatikay's levels";
-            tvSets.Nodes.AddRange(new TreeNode[] { treeNode3, treeNode4 });
+            treeNode1.Name = "Node1";
+            treeNode1.Text = "themes";
+            tvSets.Nodes.AddRange(new TreeNode[] { treeNode1 });
             tvSets.PathSeparator = "|";
             tvSets.SelectedImageKey = "folder_open";
             tvSets.Size = new Size(251, 150);
@@ -107,7 +98,7 @@
             lblHint.Name = "lblHint";
             lblHint.Size = new Size(251, 57);
             lblHint.TabIndex = 3;
-            lblHint.Text = "Every set of materials defines a palette for each type of material. Multiple levels can use the same set of materials.";
+            lblHint.Text = "Every material theme defines a palette for each type of material. Multiple levels can use the same set of materials.";
             lblHint.UseMnemonic = false;
             // 
             // frmMaterials
@@ -118,7 +109,7 @@
             Controls.Add(scMaterials);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmMaterials";
-            Text = "Material Sets";
+            Text = "Material Themes";
             Load += frmMaterials_Load;
             scMaterials.Panel1.ResumeLayout(false);
             scMaterials.Panel2.ResumeLayout(false);

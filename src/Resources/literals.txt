@@ -333,8 +333,8 @@
 67	fi	TODO:
 67	ua	TODO:
 
-68	de	Mitgelieferte Material-Sets
-68	en	Built-in sets of materials
+68	de	Mitgelieferte Material-Stile
+68	en	Built-in material themes
 68	fi	TODO:
 68	ua	TODO:
 
@@ -343,13 +343,13 @@
 69	fi	TODO:
 69	ua	TODO:
 
-70	de	Meine Material-Sets
-70	en	My sets of materials
+70	de	Meine Material-Stile
+70	en	My material themes
 70	fi	TODO:
 70	ua	TODO:
 
-71	de	Mein Material-Set
-71	en	My set of materials
+71	de	Mein Material-Stil
+71	en	My material theme
 71	fi	TODO:
 71	ua	TODO:
 
@@ -397,3 +397,28 @@
 80	en	The "{0}" material in this palette already has the {1} color. Colors must be unique in each set
 80	fi	TODO:
 80	ua	TODO:
+
+81	de	Mitgeliefertes Zeugs
+81	en	Built-in assets
+81	fi	TODO:
+81	ua	TODO:
+
+82	de	Eigenes Zeugs
+82	en	My assets
+82	fi	TODO:
+82	ua	TODO:
+
+83	de	Sfx
+83	en	Sfx
+83	fi	TODO:
+83	ua	TODO:
+
+84	de	Dinger
+84	en	Prefabs
+84	fi	TODO:
+84	ua	TODO:
+
+85	de	CSG
+85	en	CSG
+85	fi	TODO:
+85	ua	TODO:

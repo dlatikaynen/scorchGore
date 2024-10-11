@@ -34,6 +34,9 @@
     <Compile Update="Forms\frmJoinGame.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Leved\frmAssets.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Leved\frmLevelManager.cs">
       <SubType>Form</SubType>
     </Compile>
