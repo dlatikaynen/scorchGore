@@ -122,4 +122,27 @@ internal static class Translation
             }
         }
     }
+
+    public static void TranslateTreeview(TreeView treeView, TreeNode? node = null)
+    {
+        if (node == null)
+        {
+            foreach (TreeNode rootNode in treeView.Nodes)
+            {
+                TranslateTreeview(treeView, rootNode);
+            }
+        }
+        else
+        {
+            if (node.Tag is Dynaµte dyn)
+            {
+                dyn.Update();
+            }
+
+            foreach (TreeNode cnode in node.Nodes)
+            {
+                TranslateTreeview(treeView, cnode);
+            }
+        }
+    }
 }

@@ -93,7 +93,7 @@ partial class MainWindow
         toolStripMenuItem3 = new ToolStripMenuItem();
         toolStripMenuItem1 = new ToolStripSeparator();
         mnuHelpAbout = new ToolStripMenuItem();
-        statusStrip1 = new StatusStrip();
+        MdiStatusStrip = new StatusStrip();
         toolStripStatusLabel1 = new ToolStripStatusLabel();
         toolStripStatusLabel4 = new ToolStripStatusLabel();
         toolStripStatusLabel2 = new ToolStripStatusLabel();
@@ -102,7 +102,7 @@ partial class MainWindow
         MainToolbar.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)MdiError).BeginInit();
         MainMenu.SuspendLayout();
-        statusStrip1.SuspendLayout();
+        MdiStatusStrip.SuspendLayout();
         SuspendLayout();
         // 
         // MainToolbar
@@ -448,14 +448,14 @@ partial class MainWindow
         resources.ApplyResources(mnuHelpAbout, "mnuHelpAbout");
         mnuHelpAbout.Click += mnuHelpAbout_Click;
         // 
-        // statusStrip1
+        // MdiStatusStrip
         // 
-        statusStrip1.AllowItemReorder = true;
-        statusStrip1.GripStyle = ToolStripGripStyle.Visible;
-        statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabel4, toolStripStatusLabel2, toolStripStatusLabel3, toolStripProgressBar1 });
-        resources.ApplyResources(statusStrip1, "statusStrip1");
-        statusStrip1.Name = "statusStrip1";
-        statusStrip1.RenderMode = ToolStripRenderMode.Professional;
+        MdiStatusStrip.AllowItemReorder = true;
+        MdiStatusStrip.GripStyle = ToolStripGripStyle.Visible;
+        MdiStatusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabel4, toolStripStatusLabel2, toolStripStatusLabel3, toolStripProgressBar1 });
+        resources.ApplyResources(MdiStatusStrip, "MdiStatusStrip");
+        MdiStatusStrip.Name = "MdiStatusStrip";
+        MdiStatusStrip.RenderMode = ToolStripRenderMode.Professional;
         // 
         // toolStripStatusLabel1
         // 
@@ -497,7 +497,7 @@ partial class MainWindow
         AccessibleRole = AccessibleRole.Application;
         resources.ApplyResources(this, "$this");
         AutoScaleMode = AutoScaleMode.Font;
-        Controls.Add(statusStrip1);
+        Controls.Add(MdiStatusStrip);
         Controls.Add(MainToolbar);
         Controls.Add(MainMenu);
         DoubleBuffered = true;
@@ -511,8 +511,8 @@ partial class MainWindow
         ((System.ComponentModel.ISupportInitialize)MdiError).EndInit();
         MainMenu.ResumeLayout(false);
         MainMenu.PerformLayout();
-        statusStrip1.ResumeLayout(false);
-        statusStrip1.PerformLayout();
+        MdiStatusStrip.ResumeLayout(false);
+        MdiStatusStrip.PerformLayout();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -521,7 +521,7 @@ partial class MainWindow
     private HelpProvider MdiHelp;
     private ErrorProvider MdiError;
     private System.ComponentModel.BackgroundWorker MdiBkg;
-    private StatusStrip statusStrip1;
+    private StatusStrip MdiStatusStrip;
     private ToolStripStatusLabel toolStripStatusLabel1;
     private ToolStripStatusLabel toolStripStatusLabel2;
     private ToolStripProgressBar toolStripProgressBar1;

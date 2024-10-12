@@ -27,4 +27,3 @@ internal class MaterialTheme(string name, List<SetOfMaterials> setsOfMaterials)
 
     public override string ToString() => Name;
 }
-

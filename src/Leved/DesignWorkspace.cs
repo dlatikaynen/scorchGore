@@ -10,7 +10,7 @@ namespace ScorchGore.Leved;
 internal static class DesignWorkspace
 {
     public static List<MaterialTheme> MaterialThemes = [];
-    public static List<object> Prefabs = [];
+    public static List<Asset> Assets = [];
     public static List<LevelBeschreibung> Levels = [];
 
     private const string WorkspaceFilename = "workspace.sugma";
@@ -62,8 +62,13 @@ internal static class DesignWorkspace
         using var dec = new GZipStream(cys, CompressionMode.Decompress);
         using var brd = new BinaryReader(dec);
 
+        Levels.Clear();
+        Assets.Clear();
+        MaterialThemes.Clear();
+
         LoadMaterialThemes(brd);
-        LoadPrefabs();
+        LoadAssets(brd);
+        LoadLevels(brd);
 
         if (MaterialThemes.Count == 0)
         {
@@ -89,7 +94,8 @@ internal static class DesignWorkspace
         using var bwr = new BinaryWriter(zip);
 
         SaveMaterialThemes(bwr);
-        SavePrefabs(bwr);
+        SaveAssets(bwr);
+        SaveLevels(bwr);
     }
 
     private static void LoadMaterialThemes(BinaryReader inStream)
@@ -154,12 +160,61 @@ internal static class DesignWorkspace
         sets.Add(set);
     }
 
-    private static void LoadPrefabs()
+    private static void LoadAssets(BinaryReader inStream)
     {
+        var bnass = inStream.ReadBytes(2);
+        var nass = BinaryPrimitives.ReadUInt16LittleEndian(bnass);
 
+        for (var i = 0; i < nass; ++i)
+        {
+            LoadAsset(inStream);
+        }
     }
 
-    private static void LoadPrefab()
+    private static void LoadAsset(BinaryReader inStream)
+    {
+        var slAssetClass = inStream.ReadByte();
+        var bsAssetClass = inStream.ReadBytes(slAssetClass);
+        var sAssetClass = Encoding.UTF8.GetString(bsAssetClass);
+        var assetClass = Enum.Parse<AssetClass>(sAssetClass);
+        var assetId = inStream.ReadBytes(16);
+        var slAssetName = inStream.ReadByte();
+        var bsAssetName = inStream.ReadBytes(slAssetName);
+        var assetName = Encoding.UTF8.GetString(bsAssetName);
+        var asset = new Asset(assetClass, new(assetId), assetName);
+        var blIcon = inStream.ReadBytes(2);
+        var lIcon = BinaryPrimitives.ReadUInt16LittleEndian(blIcon);
+        var bIcon = inStream.ReadBytes(lIcon);
+
+        if (bIcon?.Length > 0)
+        {
+            asset.Icon = bIcon;
+        }
+
+        var blThumb = inStream.ReadBytes(2);
+        var lThumb = BinaryPrimitives.ReadUInt16LittleEndian(blThumb);
+        var bThumb = inStream.ReadBytes(lThumb);
+
+        if (bThumb?.Length > 0)
+        {
+            asset.Thumb = bThumb;
+        }
+
+        Assets.Add(asset);
+    }
+
+    private static void LoadLevels(BinaryReader inStream)
+    {
+        var bnlvl = inStream.ReadBytes(2);
+        var nlvl = BinaryPrimitives.ReadUInt16LittleEndian(bnlvl);
+
+        for (var i = 0; i < nlvl; ++i)
+        {
+            LoadLevel(inStream);
+        }
+    }
+
+    private static void LoadLevel(BinaryReader inStream)
     {
 
     }
@@ -231,12 +286,70 @@ internal static class DesignWorkspace
         }
     }
 
-    private static void SavePrefabs(BinaryWriter oStream)
+    private static void SaveAssets(BinaryWriter oStream)
     {
+        var bnass = new byte[2];
 
+        BinaryPrimitives.WriteUInt16LittleEndian(bnass, (ushort)Assets.Count);
+        oStream.Write(bnass, 0, 2);
+
+        foreach (var ass in Assets)
+        {
+            SaveAsset(ass, oStream);
+        }
     }
 
-    private static void SavePrefab(BinaryWriter oStream)
+    private static void SaveAsset(Asset ass, BinaryWriter oStream)
+    {
+        var sAssetClass = ass.Class.ToString();
+        var bAssetClass = Encoding.UTF8.GetBytes(sAssetClass);
+        var slAssetClass = (byte)bAssetClass.Length;
+
+        oStream.Write(slAssetClass);
+        oStream.Write(bAssetClass, 0, slAssetClass);
+        oStream.Write(ass.Id.ToByteArray(), 0, 16);
+
+        var bname = Encoding.UTF8.GetBytes(ass.Name);
+        var slname = (byte)bname.Length;
+
+        oStream.Write(slname);
+        oStream.Write(bname, 0, slname);
+
+        var blIcon = new byte[2];
+        var blThumb = new byte[2];
+
+        BinaryPrimitives.WriteUInt16LittleEndian(blIcon, (ushort)ass.Icon.Length);
+        BinaryPrimitives.WriteUInt16LittleEndian(blThumb, (ushort)ass.Thumb.Length);
+
+        oStream.Write(blIcon, 0, 2);
+
+        if (ass.Icon.Length != 0)
+        {
+            oStream.Write(ass.Icon, 0, ass.Icon.Length);
+        }
+
+        oStream.Write(blThumb, 0, 2);
+
+        if (ass.Thumb.Length != 0)
+        {
+            oStream.Write(ass.Thumb, 0, ass.Thumb.Length);
+        }
+    }
+
+    private static void SaveLevels(BinaryWriter oStream)
+    {
+        var bnlvl = new byte[2];
+
+        BinaryPrimitives.WriteUInt16LittleEndian(bnlvl, (ushort)Levels.Count);
+        oStream.Write(bnlvl, 0, 2);
+
+        foreach (var level in Levels)
+        {
+            SaveLevel(level, oStream);
+        }
+    }
+
+    private static void SaveLevel(LevelBeschreibung level, BinaryWriter oStream)
     {
 
     }

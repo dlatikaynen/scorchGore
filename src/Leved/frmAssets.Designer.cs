@@ -33,6 +33,18 @@
             TreeNode treeNode2 = new TreeNode("assets");
             ilTreeview = new ImageList(components);
             tvAssets = new TreeView();
+            mnuAssets = new MenuStrip();
+            mnuTools = new ToolStripMenuItem();
+            mnuAssetsAddSoundEffect = new ToolStripMenuItem();
+            mnuAssetAddMusic = new ToolStripMenuItem();
+            mnuAssetAddPrefab = new ToolStripMenuItem();
+            mnuAssetDelete = new ToolStripMenuItem();
+            mnuAssetEdit = new ToolStripMenuItem();
+            mnuAssetAddCsg = new ToolStripMenuItem();
+            mnuAssetAddBackdrop = new ToolStripMenuItem();
+            mnuAssetView = new ToolStripMenuItem();
+            mnuAssetSeparator = new ToolStripSeparator();
+            mnuAssets.SuspendLayout();
             SuspendLayout();
             // 
             // ilTreeview
@@ -64,23 +76,112 @@
             tvAssets.Size = new Size(251, 211);
             tvAssets.TabIndex = 3;
             // 
+            // mnuAssets
+            // 
+            mnuAssets.AccessibleRole = AccessibleRole.MenuBar;
+            mnuAssets.Items.AddRange(new ToolStripItem[] { mnuTools });
+            mnuAssets.Location = new Point(0, 0);
+            mnuAssets.Name = "mnuAssets";
+            mnuAssets.Size = new Size(251, 24);
+            mnuAssets.TabIndex = 4;
+            mnuAssets.Visible = false;
+            // 
+            // mnuTools
+            // 
+            mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuAssetAddCsg, mnuAssetAddPrefab, mnuAssetAddBackdrop, mnuAssetsAddSoundEffect, mnuAssetAddMusic, mnuAssetSeparator, mnuAssetView, mnuAssetEdit, mnuAssetDelete });
+            mnuTools.MergeAction = MergeAction.Insert;
+            mnuTools.MergeIndex = 3;
+            mnuTools.Name = "mnuTools";
+            mnuTools.Size = new Size(55, 20);
+            mnuTools.Text = "&Design";
+            // 
+            // mnuAssetsAddSoundEffect
+            // 
+            mnuAssetsAddSoundEffect.Name = "mnuAssetsAddSoundEffect";
+            mnuAssetsAddSoundEffect.Size = new Size(180, 22);
+            mnuAssetsAddSoundEffect.Text = "Add sound effect...";
+            // 
+            // mnuAssetAddMusic
+            // 
+            mnuAssetAddMusic.Name = "mnuAssetAddMusic";
+            mnuAssetAddMusic.Size = new Size(180, 22);
+            mnuAssetAddMusic.Text = "Add music...";
+            // 
+            // mnuAssetAddPrefab
+            // 
+            mnuAssetAddPrefab.Name = "mnuAssetAddPrefab";
+            mnuAssetAddPrefab.Size = new Size(180, 22);
+            mnuAssetAddPrefab.Text = "Add prefab...";
+            // 
+            // mnuAssetDelete
+            // 
+            mnuAssetDelete.Name = "mnuAssetDelete";
+            mnuAssetDelete.Size = new Size(180, 22);
+            mnuAssetDelete.Text = "&Delete";
+            // 
+            // mnuAssetEdit
+            // 
+            mnuAssetEdit.Image = Properties.Resources.properties;
+            mnuAssetEdit.Name = "mnuAssetEdit";
+            mnuAssetEdit.Size = new Size(180, 22);
+            mnuAssetEdit.Text = "&Edit...";
+            // 
+            // mnuAssetAddCsg
+            // 
+            mnuAssetAddCsg.Name = "mnuAssetAddCsg";
+            mnuAssetAddCsg.Size = new Size(180, 22);
+            mnuAssetAddCsg.Text = "Add CSG...";
+            // 
+            // mnuAssetAddBackdrop
+            // 
+            mnuAssetAddBackdrop.Name = "mnuAssetAddBackdrop";
+            mnuAssetAddBackdrop.Size = new Size(180, 22);
+            mnuAssetAddBackdrop.Text = "Add backdrop...";
+            mnuAssetAddBackdrop.Click += mnuAssetAddBackdrop_Click;
+            // 
+            // mnuAssetView
+            // 
+            mnuAssetView.Name = "mnuAssetView";
+            mnuAssetView.Size = new Size(180, 22);
+            mnuAssetView.Text = "&View...";
+            // 
+            // mnuAssetSeparator
+            // 
+            mnuAssetSeparator.Name = "mnuAssetSeparator";
+            mnuAssetSeparator.Size = new Size(177, 6);
+            // 
             // frmAssets
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(251, 211);
+            Controls.Add(mnuAssets);
             Controls.Add(tvAssets);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmAssets";
             ShowInTaskbar = false;
             Text = "Asset Manager";
             Load += frmAssets_Load;
+            mnuAssets.ResumeLayout(false);
+            mnuAssets.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private ImageList ilTreeview;
         private TreeView tvAssets;
+        private MenuStrip mnuAssets;
+        private ToolStripMenuItem mnuTools;
+        private ToolStripMenuItem mnuAssetsAddSoundEffect;
+        private ToolStripMenuItem mnuAssetAddMusic;
+        private ToolStripMenuItem mnuAssetAddPrefab;
+        private ToolStripMenuItem mnuAssetDelete;
+        private ToolStripMenuItem mnuAssetEdit;
+        private ToolStripMenuItem mnuAssetAddCsg;
+        private ToolStripMenuItem mnuAssetAddBackdrop;
+        private ToolStripSeparator mnuAssetSeparator;
+        private ToolStripMenuItem mnuAssetView;
     }
 }

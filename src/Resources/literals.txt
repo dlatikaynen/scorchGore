@@ -410,21 +410,35 @@
 
 83	de	Sfx
 83	en	Sfx
-83	fi	TODO:
-83	ua	TODO:
+83	fi	Äänitehosteet
+83	ua	Звукові ефекти
 
 84	de	Dinger
 84	en	Prefabs
-84	fi	TODO:
-84	ua	TODO:
+84	fi	Esivalmistetut
+84	ua	Збірні вироби
 
 85	de	CSG
 85	en	CSG
-85	fi	TODO:
-85	ua	TODO:
+85	fi	RKG
+85	ua	КГТ
 
 86	de	Zeugs verwalten
 86	en	Asset Manager
 86	fi	TODO:
 86	ua	TODO:
 
+87	de	Hintergründiges
+87	en	Backdrops
+87	fi	Taustat
+87	ua	Фони
+
+88	de	Musikalisches
+88	en	Moosic
+88	fi	Musiikki
+88	ua	Музика
+
+89	de	Sind drei Bäume schon ein Wald?
+89	en	Do three trees make a forest?
+89	fi	Isä, onko kolme puuta metsää?
+89	ua	Татко, а троє дерев – це вже ліс?

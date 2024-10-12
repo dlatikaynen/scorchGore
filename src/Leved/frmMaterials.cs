@@ -1,4 +1,5 @@
-﻿using ScorchGore.Forms;
+﻿using ScorchGore.Extensions;
+using ScorchGore.Forms;
 using Xlat = ScorchGore.Translation.Translation;
 
 namespace ScorchGore.Leved;
@@ -15,11 +16,7 @@ public partial class frmMaterials : Form
         tvSets.Nodes.Clear();
         DesignWorkspace.EnsureDesignWorkspace();
 
-        var builtInSets = tvSets.Nodes.Add(
-            "1",
-            Xlat.µ(68), // Built-in sets of materials
-            null
-        );
+        var builtInSets = tvSets.Nodes.AddTranslatableNode(key: "1", µ: 68); // Built-in sets of materials
 
         TreeNode? firstSet = null;
 
@@ -40,18 +37,19 @@ public partial class frmMaterials : Form
             firstSet.EnsureVisible();
         }
 
-        var customSets = tvSets.Nodes.Add(
-            "69",
-            Xlat.µ(70), // My material themes
-            null
-        );
+        var customSets = tvSets.Nodes.AddTranslatableNode(key: "69", µ: 70); // My material themes
+        var customTheme = customSets.Nodes.AddTranslatableNode(key: "69.*", µ: 71); // My material theme
 
-        _ = customSets.Nodes.Add(
-            "69.*",
-            Xlat.µ(71), // My material theme
-            "mat",
-            "mat"
-        );
+        customTheme.ImageKey = "mat";
+        customTheme.SelectedImageKey = "mat";
+
+        Xlat.RegisterForTranslation(frmMaterials_TranslationChanged);
+    }
+
+    private void frmMaterials_TranslationChanged(object sender, Xlat.TranslationChangedEventArgs e)
+    {
+        Text = Xlat.µ(86); // Asset Manager
+        Xlat.TranslateTreeview(tvSets);
     }
 
     private void tvSets_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

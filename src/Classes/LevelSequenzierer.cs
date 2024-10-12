@@ -249,12 +249,21 @@ internal static class LevelSequenzierer
                 levelBeschreibung.Width = 862;
                 levelBeschreibung.Height = 518;
                 levelBeschreibung.MissionsNummer = 4;
-                levelBeschreibung.LevelNummerInMission = 7;
-                levelBeschreibung.NameEn = "Wake up and Live";
+                levelBeschreibung.LevelNummerInMission = 8;
+                levelBeschreibung.NameUa = "Татко, а троє дерев – це вже ліс?";
 
                 break;
 
             case 24:
+                levelBeschreibung.Width = 862;
+                levelBeschreibung.Height = 518;
+                levelBeschreibung.MissionsNummer = 4;
+                levelBeschreibung.LevelNummerInMission = 8;
+                levelBeschreibung.NameEn = "Wake up and Live";
+
+                break;
+
+            case 25:
                 levelBeschreibung.Width = 862;
                 levelBeschreibung.Height = 518;
                 levelBeschreibung.MissionsNummer = 5;
@@ -263,7 +272,7 @@ internal static class LevelSequenzierer
 
                 break;
 
-            case 25:
+            case 26:
                 levelBeschreibung.Width = 862;
                 levelBeschreibung.Height = 518;
                 levelBeschreibung.MissionsNummer = 5;
@@ -272,7 +281,7 @@ internal static class LevelSequenzierer
 
                 break;
 
-            case 26:
+            case 27:
                 levelBeschreibung.Width = 862;
                 levelBeschreibung.Height = 518;
                 levelBeschreibung.MissionsNummer = 5;
@@ -281,21 +290,12 @@ internal static class LevelSequenzierer
 
                 break;
 
-            case 27:
+            case 28:
                 levelBeschreibung.Width = 862;
                 levelBeschreibung.Height = 518;
                 levelBeschreibung.MissionsNummer = 5;
                 levelBeschreibung.LevelNummerInMission = 4;
                 levelBeschreibung.NameEn = "This Corrosion";
-
-                break;
-
-            case 28:
-                levelBeschreibung.Width = 862;
-                levelBeschreibung.Height = 518;
-                levelBeschreibung.MissionsNummer = 5;
-                levelBeschreibung.LevelNummerInMission = 5;
-                levelBeschreibung.NameEn = "Garden of Ridiculously Poisonous Plants";
 
                 break;
 

@@ -137,9 +137,6 @@
   <data name="MainToolbar.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="MainToolbar.Text" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="&gt;&gt;MainToolbar.Name" xml:space="preserve">
     <value>MainToolbar</value>
   </data>
@@ -267,28 +264,28 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>624, 441</value>
   </data>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 63</value>
+  <metadata name="MdiStatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 34</value>
   </metadata>
-  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="MdiStatusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 419</value>
   </data>
-  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="MdiStatusStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>624, 22</value>
   </data>
-  <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
+  <data name="MdiStatusStrip.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;statusStrip1.Name" xml:space="preserve">
-    <value>statusStrip1</value>
+  <data name="&gt;&gt;MdiStatusStrip.Name" xml:space="preserve">
+    <value>MdiStatusStrip</value>
   </data>
-  <data name="&gt;&gt;statusStrip1.Type" xml:space="preserve">
+  <data name="&gt;&gt;MdiStatusStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;statusStrip1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;MdiStatusStrip.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;MdiStatusStrip.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="MainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -305,49 +302,6 @@
   </data>
   <data name="mnuView.Text" xml:space="preserve">
     <value>View</value>
-  </data>
-  <data name="mnuToolsLevelDesigner.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAZFJREFUOE9joApQUFZ7rqio+J9E/ACqnYEBJMAQu+s/Y9SWQ8zhq5tZA+fGycnJ
-        SQL5exhidv7kdam3APF5PFut+d0qjEEYrAcGYAZADdnL7tHpLKOqKs0YuWkjj3erLQgLm0SrM0ZvO8EQ
-        ve0+0NAfuA2I2XaGMWrTDsaw1b2ysupSIJuF7JI1Wf3nxAINXAvU/AukDqcBYByz/QVrwKwwkGYQFjPx
-        VmKM2ryLIXr7E8bo7ecYY7ZfwmbAH4jmHe943RstYZpBGMQHeu0AS+iSQqDLJoPUYhgAlJgAkmR3b3YQ
-        NQxVQTaAMWLjGrjrYnf+A4bDPQwDQIEGdHYkm9+UEJbQ5SUipuFqCAPWLwT6/SvckOjt4GiHaocYAFPM
-        ErwkD6wIFA7B85Jg4mCDoreeBMmBXITTAJB/QeEAVhiz7TyKAZEbloHEWYIXZuA0AKJw00qgX3+zefZ7
-        IouzhCwrBqaF09IqujKEDFgLDIcqZDEQBoUTLG3gNwAYGyBbkMXQMboBD0ACJGJEZiIfMDAAAJI39eMp
-        l0zUAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="mnuToolsLevelDesigner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="mnuToolsLevelDesigner.Text" xml:space="preserve">
-    <value>&amp;Level Manager...</value>
-  </data>
-  <data name="mnuToolsMaterials.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="mnuToolsMaterials.Text" xml:space="preserve">
-    <value>&amp;Material Themes...</value>
-  </data>
-  <data name="mnuToolsAssetMgr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="mnuToolsAssetMgr.Text" xml:space="preserve">
-    <value>&amp;Assets...</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
-  </data>
-  <data name="mnuToolsBossKey.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>F24</value>
-  </data>
-  <data name="mnuToolsBossKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="mnuToolsBossKey.Text" xml:space="preserve">
-    <value>&amp;Boss Key</value>
   </data>
   <data name="mnuTools.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
@@ -381,9 +335,6 @@
   </data>
   <data name="MainMenu.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
-  </data>
-  <data name="MainMenu.Text" xml:space="preserve">
-    <value>menuStrip1</value>
   </data>
   <data name="&gt;&gt;MainMenu.Name" xml:space="preserve">
     <value>MainMenu</value>
@@ -4292,6 +4243,49 @@
   <data name="mnuViewShowGrid.Text" xml:space="preserve">
     <value>Show &amp;grid</value>
   </data>
+  <data name="mnuToolsLevelDesigner.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAZFJREFUOE9joApQUFZ7rqio+J9E/ACqnYEBJMAQu+s/Y9SWQ8zhq5tZA+fGycnJ
+        SQL5exhidv7kdam3APF5PFut+d0qjEEYrAcGYAZADdnL7tHpLKOqKs0YuWkjj3erLQgLm0SrM0ZvO8EQ
+        ve0+0NAfuA2I2XaGMWrTDsaw1b2ysupSIJuF7JI1Wf3nxAINXAvU/AukDqcBYByz/QVrwKwwkGYQFjPx
+        VmKM2ryLIXr7E8bo7ecYY7ZfwmbAH4jmHe943RstYZpBGMQHeu0AS+iSQqDLJoPUYhgAlJgAkmR3b3YQ
+        NQxVQTaAMWLjGrjrYnf+A4bDPQwDQIEGdHYkm9+UEJbQ5SUipuFqCAPWLwT6/SvckOjt4GiHaocYAFPM
+        ErwkD6wIFA7B85Jg4mCDoreeBMmBXITTAJB/QeEAVhiz7TyKAZEbloHEWYIXZuA0AKJw00qgX3+zefZ7
+        IouzhCwrBqaF09IqujKEDFgLDIcqZDEQBoUTLG3gNwAYGyBbkMXQMboBD0ACJGJEZiIfMDAAAJI39eMp
+        l0zUAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="mnuToolsLevelDesigner.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuToolsLevelDesigner.Text" xml:space="preserve">
+    <value>&amp;Level Manager...</value>
+  </data>
+  <data name="mnuToolsMaterials.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuToolsMaterials.Text" xml:space="preserve">
+    <value>&amp;Material Themes...</value>
+  </data>
+  <data name="mnuToolsAssetMgr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuToolsAssetMgr.Text" xml:space="preserve">
+    <value>&amp;Assets...</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
+  </data>
+  <data name="mnuToolsBossKey.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F24</value>
+  </data>
+  <data name="mnuToolsBossKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuToolsBossKey.Text" xml:space="preserve">
+    <value>&amp;Boss Key</value>
+  </data>
   <data name="mnuCommunityEditPlayerProfile.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
@@ -4401,7 +4395,7 @@
     <value>SHAREWARE EDITION</value>
   </data>
   <data name="toolStripStatusLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 17</value>
+    <value>134, 17</value>
   </data>
   <data name="toolStripStatusLabel3.Text" xml:space="preserve">
     <value>Loading</value>

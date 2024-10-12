@@ -98,7 +98,7 @@
             // 
             mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsAddLevel, mnuToolsEditLevel, mnuToolsPlaytestLevel, mnuToolsDeleteLevel, mnuToolsLevelProperties });
             mnuTools.MergeAction = MergeAction.Insert;
-            mnuTools.MergeIndex = 2;
+            mnuTools.MergeIndex = 3;
             mnuTools.Name = "mnuTools";
             mnuTools.Size = new Size(55, 20);
             mnuTools.Text = "&Design";

@@ -1,5 +1,7 @@
 ﻿using ScorchGore.Configuration;
 using ScorchGore.Constants;
+using ScorchGore.Leved;
+using System.ComponentModel;
 using Xlat = ScorchGore.Translation.Translation;
 
 namespace ScorchGore.Classes;
@@ -15,7 +17,7 @@ public class LevelBeschreibung
         Materials = new();
     }
 
-    [System.ComponentModel.Browsable(false)]
+    [Browsable(false)]
     public Materials Materials { get; set; }
 
     #region Editable Properties
@@ -52,9 +54,12 @@ public class LevelBeschreibung
     public Color ColorMountain { get; set; } = Color.Empty;
 
     public Color ColorCave { get; set; } = Color.Empty;
+
+    [TypeConverter(typeof(BackdropAssetDropdownTypeConverter))]
+    public string BackdropAssetKey { get; set; } = string.Empty;
     #endregion
 
-    [System.ComponentModel.Browsable(false)]
+    [Browsable(false)]
     public bool IstGeskriptet => BeschreibungsSkript != null;
 
     /* Besonderheiten der Topologie */
@@ -62,17 +67,17 @@ public class LevelBeschreibung
     public LevelBeschreibungsSkript BeschreibungsSkript { get; set; } = new();
 
     /* Beschreibung für ein Missionslevel */
-    [System.ComponentModel.Browsable(false)]
+    [Browsable(false)]
     public int MissionsNummer { get; set; } = 0;
 
-    [System.ComponentModel.Browsable(false)]
+    [Browsable(false)]
     public string MissionsName { get; set; } = string.Empty;
 
 
-    [System.ComponentModel.Browsable(false)]
+    [Browsable(false)]
     public int LevelNummer { get; set; } = 0;
 
-    [System.ComponentModel.Browsable(false)]
+    [Browsable(false)]
     public int LevelNummerInMission { get; set; } = 0;
 
     public Point SpielerPosition1 { get; set; }
@@ -82,16 +87,16 @@ public class LevelBeschreibung
 
     internal void Plateau(int bodenHoehe, int startX, int endetX) => Plateaus.Add(startX, new Plateau { Elevation = bodenHoehe, StartX = startX, EndetX = endetX });
 
-    [System.ComponentModel.Browsable(false)]
+    [Browsable(false)]
     public uint MinHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleMinHoeheProzent : BergMinHoeheProzent;
 
-    [System.ComponentModel.Browsable(false)]
+    [Browsable(false)]
     public uint MaxHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleMaxHoeheProzent : BergMaxHoeheProzent;
 
-    [System.ComponentModel.Browsable(false)]
+    [Browsable(false)]
     public uint RauhheitProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleRauhheitProzent : BergRauhheitProzent;
 
-    [System.ComponentModel.Browsable(false)]
+    [Browsable(false)]
     internal string LevelName
     {
         get
@@ -130,5 +135,21 @@ public class LevelBeschreibung
                 "1-?"
             )
         };
+    }
+
+    public class BackdropAssetDropdownTypeConverter : TypeConverter
+    {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) => true;
+        
+        public override StandardValuesCollection? GetStandardValues(ITypeDescriptorContext? context)
+        {
+            var list = DesignWorkspace
+                .Assets
+                .Where(a => a.Class == AssetClass.Backdrop)
+                .Select(a => a.Name)
+                .ToList();
+
+            return new StandardValuesCollection(list);
+        }
     }
 }
