@@ -75,6 +75,7 @@ public partial class MainWindow : Form
     public bool Prepare()
     {
         SetLanguageMenuState(InstanceSettings.Language, complainAlready: false);
+        Translation.RegisterForTranslation(MainWindow_TranslationChanged);
 
         var sharewarePart = InstanceSettings.Edition == "S"
             ? $" | {Translation.µ(2).ToUpper()}" // SHAREWARE EDITION
@@ -168,13 +169,11 @@ public partial class MainWindow : Form
                 break;
         }
 
-        ApplyTranslation(language);
-    }
-
-    private void ApplyTranslation(string lcid)
-    {
-        InstanceSettings.Language = lcid;
-        mnuFile.Text = Translation.µ(1); /* File */
+        if (InstanceSettings.Language != language)
+        {
+            InstanceSettings.Language = language;
+            Translation.OnTranslationChanged(new());
+        }
     }
 
     private void NotGermanEnough()
@@ -203,6 +202,11 @@ public partial class MainWindow : Form
         using var alreadyFinnish = new frmAlreadyFinnish();
 
         alreadyFinnish.ShowDialog(this);
+    }
+
+    private void MainWindow_TranslationChanged(object sender, Translation.TranslationChangedEventArgs e)
+    {
+        mnuFile.Text = Translation.µ(1); /* File */
     }
 
     private void mnuFilePractice_Click(object sender, EventArgs e)

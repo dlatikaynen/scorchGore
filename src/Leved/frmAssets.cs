@@ -16,10 +16,11 @@ public partial class frmAssets : Form
 
         var builtInAssets = tvAssets.Nodes.Add(
             "1",
-            Xlat.µ(81), // Built-in assets
+            "?", //Xlat.µ(81), // Built-in assets
             null
         );
 
+        builtInAssets.Tag = new Xlat.Dynaµte(81, s => builtInAssets.Text = s);
         builtInAssets.Nodes.Add(
             "1.csg",
             Xlat.µ(85), // CSG
@@ -43,5 +44,20 @@ public partial class frmAssets : Form
             Xlat.µ(82), // My assets
             null
         );
+
+        Xlat.RegisterForTranslation(frmAssets_TranslationChanged);
+    }
+
+    private void frmAssets_TranslationChanged(object sender, Xlat.TranslationChangedEventArgs e)
+    {
+        Text = Xlat.µ(86); // Asset Manager
+
+        foreach(TreeNode node in tvAssets.Nodes)
+        {
+            if(node.Tag is Xlat.Dynaµte dyn)
+            {
+                dyn.Update();
+            }
+        }
     }
 }

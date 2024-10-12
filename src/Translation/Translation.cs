@@ -7,8 +7,20 @@ namespace ScorchGore.Translation;
 
 internal static class Translation
 {
-    private static readonly Dictionary<uint, Dictionary<string, string>> _translations = [];  
-    
+    private static readonly Dictionary<uint, Dictionary<string, string>> _translations = [];
+    private static readonly object TranslationChangedEventRoot = new();
+
+    public delegate void TranslationChangedEventHandler(object sender, TranslationChangedEventArgs e);
+
+    public class TranslationChangedEventArgs : EventArgs { }
+
+    internal static event TranslationChangedEventHandler? TranslationChanged;
+
+    internal static void OnTranslationChanged(TranslationChangedEventArgs e)
+    {
+        TranslationChanged?.Invoke(TranslationChangedEventRoot, e);
+    }
+
     internal static string µ(uint µ, params string[] args)
     {
         if(_translations.Count == 0)
@@ -82,5 +94,32 @@ internal static class Translation
         }
 
         return $"µ{µ}";
+    }
+
+    internal static void RegisterForTranslation(TranslationChangedEventHandler translate)
+    {
+        // call once for initial translation
+        translate(TranslationChangedEventRoot, new());
+
+        // register to be called back whenever the language setting changes
+        TranslationChanged += translate;
+    }
+
+    public class Dynaµte(uint literal, Action<string> setter, string[]? args = null)
+    {
+        private uint µ => literal;
+        private string[]? Arguments => args;
+
+        public void Update()
+        {
+            if (args?.Length > 0)
+            {
+                setter(Translation.µ(µ, args));
+            }
+            else
+            {
+                setter(Translation.µ(µ));
+            }
+        }
     }
 }

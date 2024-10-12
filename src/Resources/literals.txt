@@ -422,3 +422,9 @@
 85	en	CSG
 85	fi	TODO:
 85	ua	TODO:
+
+86	de	Zeugs verwalten
+86	en	Asset Manager
+86	fi	TODO:
+86	ua	TODO:
+
