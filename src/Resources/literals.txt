@@ -437,8 +437,3 @@
 88	en	Moosic
 88	fi	Musiikki
 88	ua	Музика
-
-89	de	Sind drei Bäume schon ein Wald?
-89	en	Do three trees make a forest?
-89	fi	Isä, onko kolme puuta metsää?
-89	ua	Татко, а троє дерев – це вже ліс?

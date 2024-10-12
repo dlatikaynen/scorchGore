@@ -149,6 +149,8 @@ public class LevelBeschreibung
                 .Select(a => a.Name)
                 .ToList();
 
+            list.Insert(0, string.Empty);
+
             return new StandardValuesCollection(list);
         }
     }

@@ -250,6 +250,9 @@ internal static class LevelSequenzierer
                 levelBeschreibung.Height = 518;
                 levelBeschreibung.MissionsNummer = 4;
                 levelBeschreibung.LevelNummerInMission = 8;
+                levelBeschreibung.NameDe = "Sind drei Bäume schon ein Wald?";
+                levelBeschreibung.NameEn = "Do three trees make a forest?";
+                levelBeschreibung.NameFi = "Isä, onko kolme puuta metsää?";
                 levelBeschreibung.NameUa = "Татко, а троє дерев – це вже ліс?";
 
                 break;

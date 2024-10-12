@@ -7,6 +7,7 @@ namespace ScorchGore.Leved;
 
 public partial class frmLeved : Form
 {
+    public Bitmap? Backdrop = null;
     public Bitmap Image;
     public Graphics BackBuffer;
 
@@ -36,7 +37,7 @@ public partial class frmLeved : Form
 
     public void SetupBackbuffer(int width, int height)
     {
-        Image = new(width, height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+        Image = new(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         BackBuffer = Graphics.FromImage(Image);
     }
 
@@ -48,6 +49,18 @@ public partial class frmLeved : Form
     protected async override void OnPaint(PaintEventArgs e)
     {
         stopWatch.Restart();
+        if (Backdrop != null)
+        {
+            int bW = Backdrop.Width, bH = Backdrop.Height;
+
+            e.Graphics.DrawImage(
+                Backdrop,
+                destRect: new(0, 0, bW, bH),
+                srcRect: new(viewportOffsetX, viewportOffsetY, bW, bH),
+                GraphicsUnit.Pixel
+            );
+        }
+
         var color = Random.Shared.Next(3) switch
         {
             0 => Brushes.SaddleBrown,
@@ -57,21 +70,20 @@ public partial class frmLeved : Form
         };
 
         BackBuffer.FillRectangle(color, 10, 10, 30, 30);
+        int iW = Image.Width, iH = Image.Height;
+
         e.Graphics.DrawImage(
             Image,
-            destRect: new(0, 0, Image.Width, Image.Height),
-            srcRect: new(viewportOffsetX, viewportOffsetY, Image.Width, Image.Height),
+            destRect: new(0, 0, iW, iH),
+            srcRect: new(viewportOffsetX, viewportOffsetY, iW, iH),
             GraphicsUnit.Pixel
         );
-
-        var w = Image.Width;
-        var h = Image.Height;
 
         if (MainWindow.ShowGrid)
         {
             if (gridPoints.Length == 0)
             {
-                SetupGrid(w, h);
+                SetupGrid(iW, iH);
             }
 
             e.Graphics.DrawLines(gridPen, gridPoints);
@@ -117,7 +129,7 @@ public partial class frmLeved : Form
             points.Add(new(w + 1, y + 49));
         }
 
-        gridPoints = points.ToArray();
+        gridPoints = [.. points];
     }
 
     private void frmLeved_Load(object sender, EventArgs e)

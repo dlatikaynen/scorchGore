@@ -35,6 +35,25 @@ public class GoreLeved
 
         EditedLevel.Materials.Bergfarbe = EditedLevel.ColorMountain;
 
+        var backDrop = false;
+        if (!string.IsNullOrEmpty(EditedLevel.BackdropAssetKey))
+        {
+            var bkdr = DesignWorkspace.Assets.SingleOrDefault(a => a.Name == EditedLevel.BackdropAssetKey);
+
+            if(bkdr != null)
+            {
+                using var inFile = File.OpenRead($@".\{bkdr.Id:D}.lump");
+                Target.Backdrop = new(Image.FromStream(inFile, useEmbeddedColorManagement: true, validateImageData: true));
+                backDrop = true;
+            }
+        }
+
+        if (!backDrop)
+        {
+            Target.Backdrop?.Dispose();
+            Target.Backdrop = null;
+        }
+
         LevelZeichner.Zeichne(Target.Image, EditedLevel, Target.BackBuffer);
     }
 }
