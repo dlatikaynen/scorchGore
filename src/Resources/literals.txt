@@ -21,7 +21,7 @@
 5	de	Still und starr
 5	en	Stealth and Silence
 5	fi	Hiljaisuus²
-5	ua	Zatychlo pid snihom
+5	ua	Затихло під снігом
 
 6	de	Fallschirmjäger
 6	en	Paratrouper
@@ -30,13 +30,13 @@
 
 7	de	Zeitlos
 7	en	Only Time
-7	fi	TODO:
-7	ua	TODO: Dzvonyat' dzvony
+7	fi	Kellot soivat
+7	ua	Дзвонять дзвони
 
 8	de	Gift
 8	en	Deadly Nightshade
-8	fi	TODO:
-8	ua	TODO:
+8	fi	Belladonna
+8	ua	Отрута
 
 9	de	Eigenes und Fremdes
 9	en	Usses and Thems
@@ -45,8 +45,8 @@
 
 10	de	Mittelgroße Alpträume
 10	en	Mid-size Nightmares
-10	fi	TODO:
-10	ua	TODO:
+10	fi	Keskikokoisia painajaisia
+10	ua	Кошмари середнього розміру
 
 11	de	Staffel 1: Wrath of the Mild
 11	en	Instalment 1: Wrath of the Mild
@@ -437,3 +437,43 @@
 88	en	Moosic
 88	fi	Musiikki
 88	ua	Музика
+
+89	de	Hausübung
+89	en	Boss key
+89	fi	Boss-painike
+89	ua	Ключ боса
+
+90	de	Ansicht
+90	en	View
+90	fi	Näytä
+90	ua	Вигляд
+
+91	de	Werkzeuge
+91	en	Tools
+91	fi	Työkalut
+91	ua	Інструменти
+
+92	de	Community
+92	en	Community
+92	fi	Yhteisö
+92	ua	Спільнота
+
+93	de	Fenster
+93	en	Window
+93	fi	Ikkuna
+93	ua	Вікно
+
+94	de	Hilfe
+94	en	Help
+94	fi	Ohje
+94	ua	Довідка
+
+95	de	Hintergrund
+95	en	Backdrop
+95	fi	Tausta
+95	ua	Фон
+
+96	de	Ding aus der Zeugsverwaltung, das als Hintergrundbild dient. Sollte mindestens 640 x 480 haben. Überstand scrollt langsamer als die Arena
+96	en	One of the backdrops defined in the asset manager. Should be 640 x 480 at least. Excess will scroll slower than arena content
+96	fi	Yksi määritellyistä taustoista. Pitäisi olla vähintään 640 x 480. Rullaa hitaammin kuin areenan sisältö
+96	ua	Один із фонів, визначених у менеджері активів. Має принаймні 640 x 480. Надлишок прокручуваться повільніше ніж вміст арени

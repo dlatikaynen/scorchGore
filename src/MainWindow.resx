@@ -309,10 +309,10 @@
   <data name="mnuTools.Text" xml:space="preserve">
     <value>Tools</value>
   </data>
-  <data name="contributeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuCommunity.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 20</value>
   </data>
-  <data name="contributeToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuCommunity.Text" xml:space="preserve">
     <value>Community</value>
   </data>
   <data name="mnuWindow.Size" type="System.Drawing.Size, System.Drawing">
@@ -321,10 +321,10 @@
   <data name="mnuWindow.Text" xml:space="preserve">
     <value>Window</value>
   </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
   </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuHelp.Text" xml:space="preserve">
     <value>Help</value>
   </data>
   <data name="MainMenu.Location" type="System.Drawing.Point, System.Drawing">
@@ -3814,10 +3814,10 @@
   <data name="&gt;&gt;mnuFilePractice.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem7.Name" xml:space="preserve">
-    <value>toolStripMenuItem7</value>
+  <data name="&gt;&gt;mnuFileSeparator1.Name" xml:space="preserve">
+    <value>mnuFileSeparator1</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem7.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuFileSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuFileJoinGame.Name" xml:space="preserve">
@@ -3832,11 +3832,17 @@
   <data name="&gt;&gt;mnuFileLoadSavegame.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem5.Name" xml:space="preserve">
-    <value>toolStripMenuItem5</value>
+  <data name="&gt;&gt;mnuFileSeparator2.Name" xml:space="preserve">
+    <value>mnuFileSeparator2</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem5.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuFileSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFileOpenWorkspace.Name" xml:space="preserve">
+    <value>mnuFileOpenWorkspace</value>
+  </data>
+  <data name="&gt;&gt;mnuFileOpenWorkspace.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuFileSave.Name" xml:space="preserve">
     <value>mnuFileSave</value>
@@ -3844,22 +3850,16 @@
   <data name="&gt;&gt;mnuFileSave.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuFileBackup.Name" xml:space="preserve">
-    <value>mnuFileBackup</value>
+  <data name="&gt;&gt;mnuFileSaveAs.Name" xml:space="preserve">
+    <value>mnuFileSaveAs</value>
   </data>
-  <data name="&gt;&gt;mnuFileBackup.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuFileSaveAs.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuFileRestore.Name" xml:space="preserve">
-    <value>mnuFileRestore</value>
+  <data name="&gt;&gt;mnuFileSeparator3.Name" xml:space="preserve">
+    <value>mnuFileSeparator3</value>
   </data>
-  <data name="&gt;&gt;mnuFileRestore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem6.Name" xml:space="preserve">
-    <value>toolStripMenuItem6</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem6.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuFileSeparator3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuFileQuit.Name" xml:space="preserve">
@@ -3922,16 +3922,22 @@
   <data name="&gt;&gt;toolStripMenuItem10.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
-    <value>toolStripSeparator3</value>
+  <data name="&gt;&gt;mnuViewSeparator.Name" xml:space="preserve">
+    <value>mnuViewSeparator</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuViewSeparator.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuViewShowGrid.Name" xml:space="preserve">
     <value>mnuViewShowGrid</value>
   </data>
   <data name="&gt;&gt;mnuViewShowGrid.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuViewStickToGrid.Name" xml:space="preserve">
+    <value>mnuViewStickToGrid</value>
+  </data>
+  <data name="&gt;&gt;mnuViewStickToGrid.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuTools.Name" xml:space="preserve">
@@ -3958,10 +3964,10 @@
   <data name="&gt;&gt;mnuToolsAssetMgr.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
-    <value>toolStripSeparator2</value>
+  <data name="&gt;&gt;mnuToolsSeparator.Name" xml:space="preserve">
+    <value>mnuToolsSeparator</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuToolsSeparator.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuToolsBossKey.Name" xml:space="preserve">
@@ -3970,10 +3976,10 @@
   <data name="&gt;&gt;mnuToolsBossKey.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;contributeToolStripMenuItem.Name" xml:space="preserve">
-    <value>contributeToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuCommunity.Name" xml:space="preserve">
+    <value>mnuCommunity</value>
   </data>
-  <data name="&gt;&gt;contributeToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuCommunity.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuCommunityEditPlayerProfile.Name" xml:space="preserve">
@@ -3982,22 +3988,22 @@
   <data name="&gt;&gt;mnuCommunityEditPlayerProfile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem8.Name" xml:space="preserve">
-    <value>toolStripMenuItem8</value>
+  <data name="&gt;&gt;mnuCommunitySeparator.Name" xml:space="preserve">
+    <value>mnuCommunitySeparator</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem8.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuCommunitySeparator.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;discordToolStripMenuItem.Name" xml:space="preserve">
-    <value>discordToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuCommunityDiscord.Name" xml:space="preserve">
+    <value>mnuCommunityDiscord</value>
   </data>
-  <data name="&gt;&gt;discordToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuCommunityDiscord.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;forumToolStripMenuItem.Name" xml:space="preserve">
-    <value>forumToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuCommunityForum.Name" xml:space="preserve">
+    <value>mnuCommunityForum</value>
   </data>
-  <data name="&gt;&gt;forumToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuCommunityForum.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuWindow.Name" xml:space="preserve">
@@ -4006,40 +4012,40 @@
   <data name="&gt;&gt;mnuWindow.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;closeToolStripMenuItem.Name" xml:space="preserve">
-    <value>closeToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuWindowClose.Name" xml:space="preserve">
+    <value>mnuWindowClose</value>
   </data>
-  <data name="&gt;&gt;closeToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuWindowClose.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;arrangeToolStripMenuItem.Name" xml:space="preserve">
-    <value>arrangeToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuWindowArrange.Name" xml:space="preserve">
+    <value>mnuWindowArrange</value>
   </data>
-  <data name="&gt;&gt;arrangeToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuWindowArrange.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;minimizeAllToolStripMenuItem.Name" xml:space="preserve">
-    <value>minimizeAllToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuWindowMinimizeAll.Name" xml:space="preserve">
+    <value>mnuWindowMinimizeAll</value>
   </data>
-  <data name="&gt;&gt;minimizeAllToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuWindowMinimizeAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem4.Name" xml:space="preserve">
-    <value>toolStripMenuItem4</value>
+  <data name="&gt;&gt;mnuWindowSeparator.Name" xml:space="preserve">
+    <value>mnuWindowSeparator</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem4.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuWindowSeparator.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
-    <value>helpToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuHelp.Name" xml:space="preserve">
+    <value>mnuHelp</value>
   </data>
-  <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuHelp.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buyFullVersionToolStripMenuItem.Name" xml:space="preserve">
-    <value>buyFullVersionToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuHelpGetFullVersion.Name" xml:space="preserve">
+    <value>mnuHelpGetFullVersion</value>
   </data>
-  <data name="&gt;&gt;buyFullVersionToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuHelpGetFullVersion.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;payAndRegisterToolStripMenuItem.Name" xml:space="preserve">
@@ -4054,22 +4060,22 @@
   <data name="&gt;&gt;enterProductkeyToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;onlineHelpToolStripMenuItem.Name" xml:space="preserve">
-    <value>onlineHelpToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuHelpOnline.Name" xml:space="preserve">
+    <value>mnuHelpOnline</value>
   </data>
-  <data name="&gt;&gt;onlineHelpToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuHelpOnline.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem2.Name" xml:space="preserve">
-    <value>toolStripMenuItem2</value>
+  <data name="&gt;&gt;mnuHelpToC.Name" xml:space="preserve">
+    <value>mnuHelpToC</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem2.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuHelpToC.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem3.Name" xml:space="preserve">
-    <value>toolStripMenuItem3</value>
+  <data name="&gt;&gt;mnuHelpPrivacy.Name" xml:space="preserve">
+    <value>mnuHelpPrivacy</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem3.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuHelpPrivacy.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
@@ -4124,64 +4130,64 @@
     <value>17, 13</value>
   </metadata>
   <data name="mnuFileInitiateTournamentOnline.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>218, 22</value>
   </data>
   <data name="mnuFileInitiateTournamentOnline.Text" xml:space="preserve">
     <value>&amp;Tournament online...</value>
   </data>
   <data name="mnuFileInitiateTournamentLocal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>218, 22</value>
   </data>
   <data name="mnuFileInitiateTournamentLocal.Text" xml:space="preserve">
     <value>Tournament &amp;local</value>
   </data>
   <data name="mnuFilePractice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>218, 22</value>
   </data>
   <data name="mnuFilePractice.Text" xml:space="preserve">
     <value>&amp;Practice</value>
   </data>
-  <data name="toolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 6</value>
+  <data name="mnuFileSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 6</value>
   </data>
   <data name="mnuFileJoinGame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>218, 22</value>
   </data>
   <data name="mnuFileJoinGame.Text" xml:space="preserve">
     <value>&amp;Join Game...</value>
   </data>
   <data name="mnuFileLoadSavegame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>218, 22</value>
   </data>
   <data name="mnuFileLoadSavegame.Text" xml:space="preserve">
     <value>&amp;Load savegame...</value>
   </data>
-  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 6</value>
+  <data name="mnuFileSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 6</value>
+  </data>
+  <data name="mnuFileOpenWorkspace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 22</value>
+  </data>
+  <data name="mnuFileOpenWorkspace.Text" xml:space="preserve">
+    <value>&amp;Open design workspace...</value>
   </data>
   <data name="mnuFileSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>218, 22</value>
   </data>
   <data name="mnuFileSave.Text" xml:space="preserve">
-    <value>&amp;Save</value>
+    <value>&amp;Save design workspace</value>
   </data>
-  <data name="mnuFileBackup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+  <data name="mnuFileSaveAs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 22</value>
   </data>
-  <data name="mnuFileBackup.Text" xml:space="preserve">
-    <value>&amp;Backup...</value>
+  <data name="mnuFileSaveAs.Text" xml:space="preserve">
+    <value>Save design workspace &amp;as...</value>
   </data>
-  <data name="mnuFileRestore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
-  </data>
-  <data name="mnuFileRestore.Text" xml:space="preserve">
-    <value>&amp;Restore...</value>
-  </data>
-  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 6</value>
+  <data name="mnuFileSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 6</value>
   </data>
   <data name="mnuFileQuit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>218, 22</value>
   </data>
   <data name="mnuFileQuit.Text" xml:space="preserve">
     <value>&amp;Quit</value>
@@ -4234,7 +4240,7 @@
   <data name="toolStripMenuItem10.Text" xml:space="preserve">
     <value>Toolbo&amp;x</value>
   </data>
-  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuViewSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 6</value>
   </data>
   <data name="mnuViewShowGrid.Size" type="System.Drawing.Size, System.Drawing">
@@ -4242,6 +4248,12 @@
   </data>
   <data name="mnuViewShowGrid.Text" xml:space="preserve">
     <value>Show &amp;grid</value>
+  </data>
+  <data name="mnuViewStickToGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuViewStickToGrid.Text" xml:space="preserve">
+    <value>Sti&amp;ck to grid</value>
   </data>
   <data name="mnuToolsLevelDesigner.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4257,31 +4269,31 @@
 </value>
   </data>
   <data name="mnuToolsLevelDesigner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="mnuToolsLevelDesigner.Text" xml:space="preserve">
     <value>&amp;Level Manager...</value>
   </data>
   <data name="mnuToolsMaterials.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="mnuToolsMaterials.Text" xml:space="preserve">
     <value>&amp;Material Themes...</value>
   </data>
   <data name="mnuToolsAssetMgr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="mnuToolsAssetMgr.Text" xml:space="preserve">
     <value>&amp;Assets...</value>
   </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+  <data name="mnuToolsSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 6</value>
   </data>
   <data name="mnuToolsBossKey.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F24</value>
   </data>
   <data name="mnuToolsBossKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="mnuToolsBossKey.Text" xml:space="preserve">
     <value>&amp;Boss Key</value>
@@ -4292,46 +4304,46 @@
   <data name="mnuCommunityEditPlayerProfile.Text" xml:space="preserve">
     <value>Edit player &amp;profile...</value>
   </data>
-  <data name="toolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuCommunitySeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 6</value>
   </data>
-  <data name="discordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuCommunityDiscord.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="discordToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuCommunityDiscord.Text" xml:space="preserve">
     <value>&amp;Discord</value>
   </data>
-  <data name="forumToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuCommunityForum.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="forumToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuCommunityForum.Text" xml:space="preserve">
     <value>&amp;Forum</value>
   </data>
-  <data name="closeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuWindowClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 22</value>
   </data>
-  <data name="closeToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuWindowClose.Text" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="arrangeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuWindowArrange.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 22</value>
   </data>
-  <data name="arrangeToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuWindowArrange.Text" xml:space="preserve">
     <value>Arrange</value>
   </data>
-  <data name="minimizeAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuWindowMinimizeAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 22</value>
   </data>
-  <data name="minimizeAllToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuWindowMinimizeAll.Text" xml:space="preserve">
     <value>Minimize all</value>
   </data>
-  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuWindowSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 6</value>
   </data>
-  <data name="buyFullVersionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+  <data name="mnuHelpGetFullVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="buyFullVersionToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuHelpGetFullVersion.Text" xml:space="preserve">
     <value>Get &amp;full version</value>
   </data>
   <data name="payAndRegisterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -4346,29 +4358,29 @@
   <data name="enterProductkeyToolStripMenuItem.Text" xml:space="preserve">
     <value>Enter product &amp;key</value>
   </data>
-  <data name="onlineHelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+  <data name="mnuHelpOnline.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="onlineHelpToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuHelpOnline.Text" xml:space="preserve">
     <value>Online &amp;Help</value>
   </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+  <data name="mnuHelpToC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="toolStripMenuItem2.Text" xml:space="preserve">
+  <data name="mnuHelpToC.Text" xml:space="preserve">
     <value>Terms &amp;&amp; &amp;Conditions</value>
   </data>
-  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+  <data name="mnuHelpPrivacy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="toolStripMenuItem3.Text" xml:space="preserve">
+  <data name="mnuHelpPrivacy.Text" xml:space="preserve">
     <value>&amp;Privacy statement</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuHelpAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuHelpAbout.Text" xml:space="preserve">
     <value>&amp;About...</value>
@@ -4395,7 +4407,7 @@
     <value>SHAREWARE EDITION</value>
   </data>
   <data name="toolStripStatusLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 17</value>
+    <value>165, 17</value>
   </data>
   <data name="toolStripStatusLabel3.Text" xml:space="preserve">
     <value>Loading</value>

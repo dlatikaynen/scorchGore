@@ -43,3 +43,6 @@ A turn lasts until the shot is complete.
 An egress is like a shot in that regard that it is active and part of
 the current player's turn as long as the creature(s) that have departed
 the craft are in motion.
+
+A rather interesting byproduct of having leved and arena in the same process,
+is that you can change a level's physics whilst playing it.

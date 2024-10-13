@@ -1,5 +1,6 @@
 ﻿using ScorchGore.Classes;
 using Xlat = ScorchGore.Translation.Translation;
+
 namespace ScorchGore.Leved;
 
 public partial class frmLevelProp : Form
@@ -55,6 +56,11 @@ public partial class frmLevelProp : Form
         dtp = dp.Properties[nameof(LevelBeschreibung.Height)] as RuntimePropertyDescriptor.DynamicProperty;
         dtp?.SetDisplayName(Xlat.µ(40)); // Height
         dtp?.SetDescription(Xlat.µ(22)); // The height of the level canvas' rectangular bounding box
+        dtp?.SetCategory(categoryBasics);
+
+        dtp = dp.Properties[nameof(LevelBeschreibung.BackdropAssetKey)] as RuntimePropertyDescriptor.DynamicProperty;
+        dtp?.SetDisplayName(Xlat.µ(95)); // Backdrop
+        dtp?.SetDescription(Xlat.µ(96)); // One of the backdrops defined in the asset manager. Should be 640 x 480 at least. Excess will scroll slower than arena content
         dtp?.SetCategory(categoryBasics);
 
         dtp = dp.Properties[nameof(LevelBeschreibung.BergZufallszahl)] as RuntimePropertyDescriptor.DynamicProperty;

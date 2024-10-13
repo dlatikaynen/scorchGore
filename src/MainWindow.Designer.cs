@@ -48,14 +48,14 @@ partial class MainWindow
         mnuFileInitiateTournamentOnline = new ToolStripMenuItem();
         mnuFileInitiateTournamentLocal = new ToolStripMenuItem();
         mnuFilePractice = new ToolStripMenuItem();
-        toolStripMenuItem7 = new ToolStripSeparator();
+        mnuFileSeparator1 = new ToolStripSeparator();
         mnuFileJoinGame = new ToolStripMenuItem();
         mnuFileLoadSavegame = new ToolStripMenuItem();
-        toolStripMenuItem5 = new ToolStripSeparator();
+        mnuFileSeparator2 = new ToolStripSeparator();
+        mnuFileOpenWorkspace = new ToolStripMenuItem();
         mnuFileSave = new ToolStripMenuItem();
-        mnuFileBackup = new ToolStripMenuItem();
-        mnuFileRestore = new ToolStripMenuItem();
-        toolStripMenuItem6 = new ToolStripSeparator();
+        mnuFileSaveAs = new ToolStripMenuItem();
+        mnuFileSeparator3 = new ToolStripSeparator();
         mnuFileQuit = new ToolStripMenuItem();
         mnuView = new ToolStripMenuItem();
         mnuViewSwitchLanguage = new ToolStripMenuItem();
@@ -66,31 +66,32 @@ partial class MainWindow
         mnuViewServerTraffic = new ToolStripMenuItem();
         mnuViewApiMessages = new ToolStripMenuItem();
         toolStripMenuItem10 = new ToolStripMenuItem();
-        toolStripSeparator3 = new ToolStripSeparator();
+        mnuViewSeparator = new ToolStripSeparator();
         mnuViewShowGrid = new ToolStripMenuItem();
+        mnuViewStickToGrid = new ToolStripMenuItem();
         mnuTools = new ToolStripMenuItem();
         mnuToolsLevelDesigner = new ToolStripMenuItem();
         mnuToolsMaterials = new ToolStripMenuItem();
         mnuToolsAssetMgr = new ToolStripMenuItem();
-        toolStripSeparator2 = new ToolStripSeparator();
+        mnuToolsSeparator = new ToolStripSeparator();
         mnuToolsBossKey = new ToolStripMenuItem();
-        contributeToolStripMenuItem = new ToolStripMenuItem();
+        mnuCommunity = new ToolStripMenuItem();
         mnuCommunityEditPlayerProfile = new ToolStripMenuItem();
-        toolStripMenuItem8 = new ToolStripSeparator();
-        discordToolStripMenuItem = new ToolStripMenuItem();
-        forumToolStripMenuItem = new ToolStripMenuItem();
+        mnuCommunitySeparator = new ToolStripSeparator();
+        mnuCommunityDiscord = new ToolStripMenuItem();
+        mnuCommunityForum = new ToolStripMenuItem();
         mnuWindow = new ToolStripMenuItem();
-        closeToolStripMenuItem = new ToolStripMenuItem();
-        arrangeToolStripMenuItem = new ToolStripMenuItem();
-        minimizeAllToolStripMenuItem = new ToolStripMenuItem();
-        toolStripMenuItem4 = new ToolStripSeparator();
-        helpToolStripMenuItem = new ToolStripMenuItem();
-        buyFullVersionToolStripMenuItem = new ToolStripMenuItem();
+        mnuWindowClose = new ToolStripMenuItem();
+        mnuWindowArrange = new ToolStripMenuItem();
+        mnuWindowMinimizeAll = new ToolStripMenuItem();
+        mnuWindowSeparator = new ToolStripSeparator();
+        mnuHelp = new ToolStripMenuItem();
+        mnuHelpGetFullVersion = new ToolStripMenuItem();
         payAndRegisterToolStripMenuItem = new ToolStripMenuItem();
         enterProductkeyToolStripMenuItem = new ToolStripMenuItem();
-        onlineHelpToolStripMenuItem = new ToolStripMenuItem();
-        toolStripMenuItem2 = new ToolStripMenuItem();
-        toolStripMenuItem3 = new ToolStripMenuItem();
+        mnuHelpOnline = new ToolStripMenuItem();
+        mnuHelpToC = new ToolStripMenuItem();
+        mnuHelpPrivacy = new ToolStripMenuItem();
         toolStripMenuItem1 = new ToolStripSeparator();
         mnuHelpAbout = new ToolStripMenuItem();
         MdiStatusStrip = new StatusStrip();
@@ -163,14 +164,14 @@ partial class MainWindow
         // 
         // MainMenu
         // 
-        MainMenu.Items.AddRange(new ToolStripItem[] { mnuFile, mnuView, mnuTools, contributeToolStripMenuItem, mnuWindow, helpToolStripMenuItem });
+        MainMenu.Items.AddRange(new ToolStripItem[] { mnuFile, mnuView, mnuTools, mnuCommunity, mnuWindow, mnuHelp });
         resources.ApplyResources(MainMenu, "MainMenu");
         MainMenu.MdiWindowListItem = mnuWindow;
         MainMenu.Name = "MainMenu";
         // 
         // mnuFile
         // 
-        mnuFile.DropDownItems.AddRange(new ToolStripItem[] { mnuFileInitiateTournamentOnline, mnuFileInitiateTournamentLocal, mnuFilePractice, toolStripMenuItem7, mnuFileJoinGame, mnuFileLoadSavegame, toolStripMenuItem5, mnuFileSave, mnuFileBackup, mnuFileRestore, toolStripMenuItem6, mnuFileQuit });
+        mnuFile.DropDownItems.AddRange(new ToolStripItem[] { mnuFileInitiateTournamentOnline, mnuFileInitiateTournamentLocal, mnuFilePractice, mnuFileSeparator1, mnuFileJoinGame, mnuFileLoadSavegame, mnuFileSeparator2, mnuFileOpenWorkspace, mnuFileSave, mnuFileSaveAs, mnuFileSeparator3, mnuFileQuit });
         mnuFile.Name = "mnuFile";
         resources.ApplyResources(mnuFile, "mnuFile");
         // 
@@ -192,10 +193,10 @@ partial class MainWindow
         resources.ApplyResources(mnuFilePractice, "mnuFilePractice");
         mnuFilePractice.Click += mnuFilePractice_Click;
         // 
-        // toolStripMenuItem7
+        // mnuFileSeparator1
         // 
-        toolStripMenuItem7.Name = "toolStripMenuItem7";
-        resources.ApplyResources(toolStripMenuItem7, "toolStripMenuItem7");
+        mnuFileSeparator1.Name = "mnuFileSeparator1";
+        resources.ApplyResources(mnuFileSeparator1, "mnuFileSeparator1");
         // 
         // mnuFileJoinGame
         // 
@@ -208,10 +209,15 @@ partial class MainWindow
         mnuFileLoadSavegame.Name = "mnuFileLoadSavegame";
         resources.ApplyResources(mnuFileLoadSavegame, "mnuFileLoadSavegame");
         // 
-        // toolStripMenuItem5
+        // mnuFileSeparator2
         // 
-        toolStripMenuItem5.Name = "toolStripMenuItem5";
-        resources.ApplyResources(toolStripMenuItem5, "toolStripMenuItem5");
+        mnuFileSeparator2.Name = "mnuFileSeparator2";
+        resources.ApplyResources(mnuFileSeparator2, "mnuFileSeparator2");
+        // 
+        // mnuFileOpenWorkspace
+        // 
+        mnuFileOpenWorkspace.Name = "mnuFileOpenWorkspace";
+        resources.ApplyResources(mnuFileOpenWorkspace, "mnuFileOpenWorkspace");
         // 
         // mnuFileSave
         // 
@@ -219,20 +225,15 @@ partial class MainWindow
         resources.ApplyResources(mnuFileSave, "mnuFileSave");
         mnuFileSave.Click += mnuFileSave_Click;
         // 
-        // mnuFileBackup
+        // mnuFileSaveAs
         // 
-        mnuFileBackup.Name = "mnuFileBackup";
-        resources.ApplyResources(mnuFileBackup, "mnuFileBackup");
+        mnuFileSaveAs.Name = "mnuFileSaveAs";
+        resources.ApplyResources(mnuFileSaveAs, "mnuFileSaveAs");
         // 
-        // mnuFileRestore
+        // mnuFileSeparator3
         // 
-        mnuFileRestore.Name = "mnuFileRestore";
-        resources.ApplyResources(mnuFileRestore, "mnuFileRestore");
-        // 
-        // toolStripMenuItem6
-        // 
-        toolStripMenuItem6.Name = "toolStripMenuItem6";
-        resources.ApplyResources(toolStripMenuItem6, "toolStripMenuItem6");
+        mnuFileSeparator3.Name = "mnuFileSeparator3";
+        resources.ApplyResources(mnuFileSeparator3, "mnuFileSeparator3");
         // 
         // mnuFileQuit
         // 
@@ -242,7 +243,7 @@ partial class MainWindow
         // 
         // mnuView
         // 
-        mnuView.DropDownItems.AddRange(new ToolStripItem[] { mnuViewSwitchLanguage, mnuViewServerTraffic, mnuViewApiMessages, toolStripMenuItem10, toolStripSeparator3, mnuViewShowGrid });
+        mnuView.DropDownItems.AddRange(new ToolStripItem[] { mnuViewSwitchLanguage, mnuViewServerTraffic, mnuViewApiMessages, toolStripMenuItem10, mnuViewSeparator, mnuViewShowGrid, mnuViewStickToGrid });
         mnuView.Name = "mnuView";
         resources.ApplyResources(mnuView, "mnuView");
         // 
@@ -296,10 +297,10 @@ partial class MainWindow
         toolStripMenuItem10.Name = "toolStripMenuItem10";
         resources.ApplyResources(toolStripMenuItem10, "toolStripMenuItem10");
         // 
-        // toolStripSeparator3
+        // mnuViewSeparator
         // 
-        toolStripSeparator3.Name = "toolStripSeparator3";
-        resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
+        mnuViewSeparator.Name = "mnuViewSeparator";
+        resources.ApplyResources(mnuViewSeparator, "mnuViewSeparator");
         // 
         // mnuViewShowGrid
         // 
@@ -310,9 +311,15 @@ partial class MainWindow
         resources.ApplyResources(mnuViewShowGrid, "mnuViewShowGrid");
         mnuViewShowGrid.Click += mnuViewShowGrid_Click;
         // 
+        // mnuViewStickToGrid
+        // 
+        mnuViewStickToGrid.CheckOnClick = true;
+        mnuViewStickToGrid.Name = "mnuViewStickToGrid";
+        resources.ApplyResources(mnuViewStickToGrid, "mnuViewStickToGrid");
+        // 
         // mnuTools
         // 
-        mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsLevelDesigner, mnuToolsMaterials, mnuToolsAssetMgr, toolStripSeparator2, mnuToolsBossKey });
+        mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsLevelDesigner, mnuToolsMaterials, mnuToolsAssetMgr, mnuToolsSeparator, mnuToolsBossKey });
         mnuTools.Name = "mnuTools";
         resources.ApplyResources(mnuTools, "mnuTools");
         // 
@@ -336,10 +343,10 @@ partial class MainWindow
         resources.ApplyResources(mnuToolsAssetMgr, "mnuToolsAssetMgr");
         mnuToolsAssetMgr.Click += mnuToolsAssetMgr_Click;
         // 
-        // toolStripSeparator2
+        // mnuToolsSeparator
         // 
-        toolStripSeparator2.Name = "toolStripSeparator2";
-        resources.ApplyResources(toolStripSeparator2, "toolStripSeparator2");
+        mnuToolsSeparator.Name = "mnuToolsSeparator";
+        resources.ApplyResources(mnuToolsSeparator, "mnuToolsSeparator");
         // 
         // mnuToolsBossKey
         // 
@@ -347,11 +354,11 @@ partial class MainWindow
         resources.ApplyResources(mnuToolsBossKey, "mnuToolsBossKey");
         mnuToolsBossKey.Click += mnuToolsBossKey_Click;
         // 
-        // contributeToolStripMenuItem
+        // mnuCommunity
         // 
-        contributeToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuCommunityEditPlayerProfile, toolStripMenuItem8, discordToolStripMenuItem, forumToolStripMenuItem });
-        contributeToolStripMenuItem.Name = "contributeToolStripMenuItem";
-        resources.ApplyResources(contributeToolStripMenuItem, "contributeToolStripMenuItem");
+        mnuCommunity.DropDownItems.AddRange(new ToolStripItem[] { mnuCommunityEditPlayerProfile, mnuCommunitySeparator, mnuCommunityDiscord, mnuCommunityForum });
+        mnuCommunity.Name = "mnuCommunity";
+        resources.ApplyResources(mnuCommunity, "mnuCommunity");
         // 
         // mnuCommunityEditPlayerProfile
         // 
@@ -359,58 +366,58 @@ partial class MainWindow
         resources.ApplyResources(mnuCommunityEditPlayerProfile, "mnuCommunityEditPlayerProfile");
         mnuCommunityEditPlayerProfile.Click += mnuCommunityEditPlayerProfile_Click;
         // 
-        // toolStripMenuItem8
+        // mnuCommunitySeparator
         // 
-        toolStripMenuItem8.Name = "toolStripMenuItem8";
-        resources.ApplyResources(toolStripMenuItem8, "toolStripMenuItem8");
+        mnuCommunitySeparator.Name = "mnuCommunitySeparator";
+        resources.ApplyResources(mnuCommunitySeparator, "mnuCommunitySeparator");
         // 
-        // discordToolStripMenuItem
+        // mnuCommunityDiscord
         // 
-        discordToolStripMenuItem.Name = "discordToolStripMenuItem";
-        resources.ApplyResources(discordToolStripMenuItem, "discordToolStripMenuItem");
+        mnuCommunityDiscord.Name = "mnuCommunityDiscord";
+        resources.ApplyResources(mnuCommunityDiscord, "mnuCommunityDiscord");
         // 
-        // forumToolStripMenuItem
+        // mnuCommunityForum
         // 
-        forumToolStripMenuItem.Name = "forumToolStripMenuItem";
-        resources.ApplyResources(forumToolStripMenuItem, "forumToolStripMenuItem");
+        mnuCommunityForum.Name = "mnuCommunityForum";
+        resources.ApplyResources(mnuCommunityForum, "mnuCommunityForum");
         // 
         // mnuWindow
         // 
-        mnuWindow.DropDownItems.AddRange(new ToolStripItem[] { closeToolStripMenuItem, arrangeToolStripMenuItem, minimizeAllToolStripMenuItem, toolStripMenuItem4 });
+        mnuWindow.DropDownItems.AddRange(new ToolStripItem[] { mnuWindowClose, mnuWindowArrange, mnuWindowMinimizeAll, mnuWindowSeparator });
         mnuWindow.Name = "mnuWindow";
         resources.ApplyResources(mnuWindow, "mnuWindow");
         // 
-        // closeToolStripMenuItem
+        // mnuWindowClose
         // 
-        closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-        resources.ApplyResources(closeToolStripMenuItem, "closeToolStripMenuItem");
+        mnuWindowClose.Name = "mnuWindowClose";
+        resources.ApplyResources(mnuWindowClose, "mnuWindowClose");
         // 
-        // arrangeToolStripMenuItem
+        // mnuWindowArrange
         // 
-        arrangeToolStripMenuItem.Name = "arrangeToolStripMenuItem";
-        resources.ApplyResources(arrangeToolStripMenuItem, "arrangeToolStripMenuItem");
+        mnuWindowArrange.Name = "mnuWindowArrange";
+        resources.ApplyResources(mnuWindowArrange, "mnuWindowArrange");
         // 
-        // minimizeAllToolStripMenuItem
+        // mnuWindowMinimizeAll
         // 
-        minimizeAllToolStripMenuItem.Name = "minimizeAllToolStripMenuItem";
-        resources.ApplyResources(minimizeAllToolStripMenuItem, "minimizeAllToolStripMenuItem");
+        mnuWindowMinimizeAll.Name = "mnuWindowMinimizeAll";
+        resources.ApplyResources(mnuWindowMinimizeAll, "mnuWindowMinimizeAll");
         // 
-        // toolStripMenuItem4
+        // mnuWindowSeparator
         // 
-        toolStripMenuItem4.Name = "toolStripMenuItem4";
-        resources.ApplyResources(toolStripMenuItem4, "toolStripMenuItem4");
+        mnuWindowSeparator.Name = "mnuWindowSeparator";
+        resources.ApplyResources(mnuWindowSeparator, "mnuWindowSeparator");
         // 
-        // helpToolStripMenuItem
+        // mnuHelp
         // 
-        helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { buyFullVersionToolStripMenuItem, onlineHelpToolStripMenuItem, toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem1, mnuHelpAbout });
-        helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-        resources.ApplyResources(helpToolStripMenuItem, "helpToolStripMenuItem");
+        mnuHelp.DropDownItems.AddRange(new ToolStripItem[] { mnuHelpGetFullVersion, mnuHelpOnline, mnuHelpToC, mnuHelpPrivacy, toolStripMenuItem1, mnuHelpAbout });
+        mnuHelp.Name = "mnuHelp";
+        resources.ApplyResources(mnuHelp, "mnuHelp");
         // 
-        // buyFullVersionToolStripMenuItem
+        // mnuHelpGetFullVersion
         // 
-        buyFullVersionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { payAndRegisterToolStripMenuItem, enterProductkeyToolStripMenuItem });
-        buyFullVersionToolStripMenuItem.Name = "buyFullVersionToolStripMenuItem";
-        resources.ApplyResources(buyFullVersionToolStripMenuItem, "buyFullVersionToolStripMenuItem");
+        mnuHelpGetFullVersion.DropDownItems.AddRange(new ToolStripItem[] { payAndRegisterToolStripMenuItem, enterProductkeyToolStripMenuItem });
+        mnuHelpGetFullVersion.Name = "mnuHelpGetFullVersion";
+        resources.ApplyResources(mnuHelpGetFullVersion, "mnuHelpGetFullVersion");
         // 
         // payAndRegisterToolStripMenuItem
         // 
@@ -422,20 +429,20 @@ partial class MainWindow
         enterProductkeyToolStripMenuItem.Name = "enterProductkeyToolStripMenuItem";
         resources.ApplyResources(enterProductkeyToolStripMenuItem, "enterProductkeyToolStripMenuItem");
         // 
-        // onlineHelpToolStripMenuItem
+        // mnuHelpOnline
         // 
-        onlineHelpToolStripMenuItem.Name = "onlineHelpToolStripMenuItem";
-        resources.ApplyResources(onlineHelpToolStripMenuItem, "onlineHelpToolStripMenuItem");
+        mnuHelpOnline.Name = "mnuHelpOnline";
+        resources.ApplyResources(mnuHelpOnline, "mnuHelpOnline");
         // 
-        // toolStripMenuItem2
+        // mnuHelpToC
         // 
-        toolStripMenuItem2.Name = "toolStripMenuItem2";
-        resources.ApplyResources(toolStripMenuItem2, "toolStripMenuItem2");
+        mnuHelpToC.Name = "mnuHelpToC";
+        resources.ApplyResources(mnuHelpToC, "mnuHelpToC");
         // 
-        // toolStripMenuItem3
+        // mnuHelpPrivacy
         // 
-        toolStripMenuItem3.Name = "toolStripMenuItem3";
-        resources.ApplyResources(toolStripMenuItem3, "toolStripMenuItem3");
+        mnuHelpPrivacy.Name = "mnuHelpPrivacy";
+        resources.ApplyResources(mnuHelpPrivacy, "mnuHelpPrivacy");
         // 
         // toolStripMenuItem1
         // 
@@ -531,12 +538,11 @@ partial class MainWindow
     private ToolStripMenuItem mnuFileQuit;
     private ToolStripMenuItem mnuView;
     private ToolStripMenuItem mnuTools;
-    private ToolStripMenuItem contributeToolStripMenuItem;
-    private ToolStripMenuItem helpToolStripMenuItem;
+    private ToolStripMenuItem mnuHelp;
     private ToolStripStatusLabel toolStripStatusLabel4;
-    private ToolStripMenuItem onlineHelpToolStripMenuItem;
+    private ToolStripMenuItem mnuHelpOnline;
     private ToolStripMenuItem mnuHelpAbout;
-    private ToolStripMenuItem buyFullVersionToolStripMenuItem;
+    private ToolStripMenuItem mnuHelpGetFullVersion;
     private ToolStripMenuItem payAndRegisterToolStripMenuItem;
     private ToolStripMenuItem enterProductkeyToolStripMenuItem;
     private ToolStripSeparator toolStripMenuItem1;
@@ -545,15 +551,10 @@ partial class MainWindow
     private ToolStripMenuItem mnuViewSwitchLanguageEn;
     private ToolStripMenuItem mnuViewSwitchLanguageFi;
     private ToolStripMenuItem mnuViewSwitchLanguageUa;
-    private ToolStripMenuItem toolStripMenuItem2;
-    private ToolStripMenuItem toolStripMenuItem3;
+    private ToolStripMenuItem mnuHelpToC;
+    private ToolStripMenuItem mnuHelpPrivacy;
     private ToolStripMenuItem mnuWindow;
-    private ToolStripMenuItem closeToolStripMenuItem;
-    private ToolStripMenuItem arrangeToolStripMenuItem;
-    private ToolStripMenuItem minimizeAllToolStripMenuItem;
-    private ToolStripSeparator toolStripMenuItem4;
     private ToolStripMenuItem mnuFileJoinGame;
-    private ToolStripSeparator toolStripMenuItem5;
     private ToolStripMenuItem mnuCommunityEditPlayerProfile;
     private ToolStrip MainToolbar;
     private ToolStripButton tbbInitiate;
@@ -563,14 +564,7 @@ partial class MainWindow
     private ToolStripMenuItem mnuFileInitiateTournamentOnline;
     private ToolStripMenuItem mnuFileInitiateTournamentLocal;
     private ToolStripMenuItem mnuFilePractice;
-    private ToolStripSeparator toolStripMenuItem7;
     private ToolStripMenuItem mnuFileLoadSavegame;
-    private ToolStripMenuItem mnuFileBackup;
-    private ToolStripMenuItem mnuFileRestore;
-    private ToolStripSeparator toolStripMenuItem6;
-    private ToolStripSeparator toolStripMenuItem8;
-    private ToolStripMenuItem discordToolStripMenuItem;
-    private ToolStripMenuItem forumToolStripMenuItem;
     private ToolStripMenuItem mnuViewServerTraffic;
     private ToolStripMenuItem mnuViewApiMessages;
     private ToolStripMenuItem mnuToolsLevelDesigner;
@@ -581,7 +575,21 @@ partial class MainWindow
     private ToolStripMenuItem mnuToolsBossKey;
     private ToolStripMenuItem mnuFileSave;
     private ToolStripMenuItem toolStripMenuItem10;
-    private ToolStripSeparator toolStripSeparator3;
     private ToolStripMenuItem mnuToolsAssetMgr;
-    private ToolStripSeparator toolStripSeparator2;
+    private ToolStripSeparator mnuViewSeparator;
+    private ToolStripSeparator mnuToolsSeparator;
+    private ToolStripMenuItem mnuCommunity;
+    private ToolStripSeparator mnuCommunitySeparator;
+    private ToolStripMenuItem mnuCommunityDiscord;
+    private ToolStripMenuItem mnuCommunityForum;
+    private ToolStripMenuItem mnuWindowClose;
+    private ToolStripMenuItem mnuWindowArrange;
+    private ToolStripMenuItem mnuWindowMinimizeAll;
+    private ToolStripSeparator mnuWindowSeparator;
+    private ToolStripSeparator mnuFileSeparator1;
+    private ToolStripSeparator mnuFileSeparator2;
+    private ToolStripMenuItem mnuFileOpenWorkspace;
+    private ToolStripMenuItem mnuFileSaveAs;
+    private ToolStripSeparator mnuFileSeparator3;
+    private ToolStripMenuItem mnuViewStickToGrid;
 }

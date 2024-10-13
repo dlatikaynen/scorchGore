@@ -2,7 +2,7 @@ using ScorchGore.Configuration;
 using ScorchGore.Forms;
 using ScorchGore.Leved;
 using ScorchGore.Platform;
-using ScorchGore.Translation;
+using Xlat = ScorchGore.Translation.Translation;
 
 namespace Fso.ScorchGore;
 
@@ -75,19 +75,19 @@ public partial class MainWindow : Form
     public bool Prepare()
     {
         SetLanguageMenuState(InstanceSettings.Language, complainAlready: false);
-        Translation.RegisterForTranslation(MainWindow_TranslationChanged);
+        Xlat.RegisterForTranslation(MainWindow_TranslationChanged);
 
         var sharewarePart = InstanceSettings.Edition == "S"
-            ? $" | {Translation.µ(2).ToUpper()}" // SHAREWARE EDITION
+            ? $" | {Xlat.µ(2).ToUpper()}" // SHAREWARE EDITION
             : string.Empty;
 
         if (Program.WhichInstanceAmI > 1)
         {
-            Text = $"{Translation.µ(3)} (#{Program.WhichInstanceAmI}){sharewarePart}"; // scorchgore
+            Text = $"{Xlat.µ(3)} (#{Program.WhichInstanceAmI}){sharewarePart}"; // scorchgore
         }
         else
         {
-            Text = $"{Translation.µ(3)}{sharewarePart}"; // scorchgore
+            Text = $"{Xlat.µ(3)}{sharewarePart}"; // scorchgore
         }
 
         return true;
@@ -172,7 +172,7 @@ public partial class MainWindow : Form
         if (InstanceSettings.Language != language)
         {
             InstanceSettings.Language = language;
-            Translation.OnTranslationChanged(new());
+            Xlat.OnTranslationChanged(new());
         }
     }
 
@@ -204,9 +204,15 @@ public partial class MainWindow : Form
         alreadyFinnish.ShowDialog(this);
     }
 
-    private void MainWindow_TranslationChanged(object sender, Translation.TranslationChangedEventArgs e)
+    private void MainWindow_TranslationChanged(object sender, Xlat.TranslationChangedEventArgs e)
     {
-        mnuFile.Text = Translation.µ(1); /* File */
+        mnuFile.Text = Xlat.µ(1); /* File */
+        mnuView.Text = Xlat.µ(90); /* View */
+        mnuTools.Text = Xlat.µ(91); /* Tools */
+        mnuCommunity.Text = Xlat.µ(92); /* Community */
+        mnuWindow.Text = Xlat.µ(93); /* Window */
+        mnuHelp.Text = Xlat.µ(94); /* Help */
+        mnuToolsBossKey.Text = Xlat.µ(89); // Boss key
     }
 
     private void mnuFilePractice_Click(object sender, EventArgs e)
