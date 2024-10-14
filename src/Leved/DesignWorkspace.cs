@@ -1,6 +1,7 @@
 ﻿using ScorchGore.Classes;
 using ScorchGore.Constants;
 using System.Buffers.Binary;
+using System.Diagnostics;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,6 +13,9 @@ internal static class DesignWorkspace
     public static List<MaterialTheme> MaterialThemes = [];
     public static List<Asset> Assets = [];
     public static List<LevelBeschreibung> Levels = [];
+    public static List<MissionDef> Missions = [];
+
+    private static bool IsDirty = false;
 
     private const string WorkspaceFilename = "workspace.sugma";
 
@@ -28,7 +32,7 @@ internal static class DesignWorkspace
         0x00, 0x4a, 0x5c, 0xb9, 0x17, 0xf7, 0x22, 0x0d
     ];
 
-    private static bool IsWorkspaceOpen = false;
+    private static bool IsWorkspaceOpen = false;    
 
     public static void EnsureDesignWorkspace()
     {
@@ -69,10 +73,19 @@ internal static class DesignWorkspace
         LoadMaterialThemes(brd);
         LoadAssets(brd);
         LoadLevels(brd);
+        LoadMissions(brd);
 
         if (MaterialThemes.Count == 0)
         {
             MaterialThemes.Add(new("WOTMSTD", []));
+        }
+    }
+
+    public static void SetDirty()
+    {
+        if (!IsDirty)
+        {
+            IsDirty = true;
         }
     }
 
@@ -93,9 +106,30 @@ internal static class DesignWorkspace
         using var zip = new GZipStream(cys, CompressionMode.Compress);
         using var bwr = new BinaryWriter(zip);
 
+        WriteEverything(bwr);
+
+#if DEBUG
+        if(Debugger.IsAttached)
+        {
+            var debugOutputFile = $"{WorkspaceFilename}.txt";
+
+            using var fos_dgb = new FileStream(debugOutputFile, FileMode.Create, FileAccess.Write, FileShare.Read);
+
+            fos_dgb.Write([.. RgbKey], 0, 9);
+
+            using var bwr_dgb = new BinaryWriter(fos_dgb);
+
+            WriteEverything(bwr_dgb);
+        }
+#endif
+    }
+
+    private static void WriteEverything(BinaryWriter bwr)
+    {
         SaveMaterialThemes(bwr);
         SaveAssets(bwr);
         SaveLevels(bwr);
+        SaveMissions(bwr);
     }
 
     private static void LoadMaterialThemes(BinaryReader inStream)
@@ -216,7 +250,51 @@ internal static class DesignWorkspace
 
     private static void LoadLevel(BinaryReader inStream)
     {
+        //bool IsBuiltin;
 
+        //int MissionsNummer;
+        //int LevelNummer;
+        //int LevelNummerInMission;
+
+        //uint Width;
+        //uint Height;
+        //uint BergZufallszahl;
+
+        //Point SpielerPosition1;
+        //Point SpielerPosition2;
+
+        //Color ColorBackground
+
+        //string NameEn;
+        //string NameDe;
+        //string NameFi;
+        //string NameUa;
+        //string Author;
+        //string BackdropAssetKey;
+        //string BeschreibungsSkript;
+    }
+
+    private static void LoadMissions(BinaryReader inStream)
+    {
+        var bnmis = inStream.ReadBytes(2);
+        var nmis = BinaryPrimitives.ReadUInt16LittleEndian(bnmis);
+
+        for (var i = 0; i < nmis; ++i)
+        {
+            LoadMission(inStream);
+        }
+    }
+
+    private static void LoadMission(BinaryReader inStream)
+    {
+        /*
+    bool IsBuiltin;
+    int MissionsNummer;
+    string NameEn;
+    string NameDe;
+    string NameFi;
+    string NameUa;
+        */
     }
 
     private static void SaveMaterialThemes(BinaryWriter oStream)
@@ -351,6 +429,134 @@ internal static class DesignWorkspace
 
     private static void SaveLevel(LevelBeschreibung level, BinaryWriter oStream)
     {
+        var bIsBuiltin = (byte)((level.IsBuiltin ? 1 : 0) << 4);
+        var bMissionsNummer = new byte[4];
+        var bLevelNummer = new byte[4];
+        var bLevelNummerInMission = new byte[4];
 
+        BinaryPrimitives.WriteInt32LittleEndian(bMissionsNummer, level.MissionsNummer);
+        BinaryPrimitives.WriteInt32LittleEndian(bLevelNummer, level.LevelNummer);
+        BinaryPrimitives.WriteInt32LittleEndian(bLevelNummerInMission, level.LevelNummerInMission);
+
+        oStream.Write(bIsBuiltin);     
+        oStream.Write(bMissionsNummer, 0, 4);
+        oStream.Write(bLevelNummer, 0, 4);
+        oStream.Write(bLevelNummerInMission, 0, 4);
+
+        var bWidth = new byte[4];
+        var bHeight = new byte[4];
+        var bBergZufallszahl = new byte[4];
+
+        BinaryPrimitives.WriteUInt32LittleEndian(bWidth, level.Width);
+        BinaryPrimitives.WriteUInt32LittleEndian(bHeight, level.Height);
+        BinaryPrimitives.WriteUInt32LittleEndian(bBergZufallszahl, level.BergZufallszahl);
+
+        oStream.Write(bWidth, 0, 4);
+        oStream.Write(bHeight, 0, 4);
+        oStream.Write(bBergZufallszahl, 0, 4);
+
+        var bSpielerPosition1X = new byte[4];
+        var bSpielerPosition1Y = new byte[4];
+        var bSpielerPosition2X = new byte[4];
+        var bSpielerPosition2Y = new byte[4];
+
+        BinaryPrimitives.WriteInt32LittleEndian(bSpielerPosition1X, level.SpielerPosition1.X);
+        BinaryPrimitives.WriteInt32LittleEndian(bSpielerPosition1Y, level.SpielerPosition1.Y);
+        BinaryPrimitives.WriteInt32LittleEndian(bSpielerPosition2X, level.SpielerPosition2.X);
+        BinaryPrimitives.WriteInt32LittleEndian(bSpielerPosition2Y, level.SpielerPosition2.Y);
+
+        oStream.Write(bSpielerPosition1X, 0, 4);
+        oStream.Write(bSpielerPosition1Y, 0, 4);
+        oStream.Write(bSpielerPosition2X, 0, 4);
+        oStream.Write(bSpielerPosition2Y, 0, 4);
+
+        var icolor = level.ColorBackground.ToArgb();
+        var bicolor = new byte[4];
+
+        BinaryPrimitives.WriteInt32LittleEndian(bicolor, icolor);
+        oStream.Write(bicolor, 0, 4);
+
+        var bNameEn = Encoding.UTF8.GetBytes(level.NameEn);
+        var slNameEn = (byte)bNameEn.Length;
+        var bNameDe = Encoding.UTF8.GetBytes(level.NameDe);
+        var slNameDe = (byte)bNameDe.Length;
+        var bNameFi = Encoding.UTF8.GetBytes(level.NameFi);
+        var slNameFi = (byte)bNameFi.Length;
+        var bNameUa = Encoding.UTF8.GetBytes(level.NameUa);
+        var slNameUa = (byte)bNameUa.Length;
+        var bAuthor = Encoding.UTF8.GetBytes(level.Author);
+        var slAuthor = (byte)bAuthor.Length;
+        var bBackdropAssetKey = Encoding.UTF8.GetBytes(level.BackdropAssetKey);
+        var slBackdropAssetKey = (byte)bBackdropAssetKey.Length;
+        var bBeschreibungsSkript = Encoding.UTF8.GetBytes(level.BeschreibungsSkript.Source);
+        var slBeschreibungsSkript = (byte)bBeschreibungsSkript.Length;
+
+        oStream.Write(slNameEn);
+        oStream.Write(bNameEn, 0, slNameEn);
+        oStream.Write(slNameDe);
+        oStream.Write(bNameDe, 0, slNameDe);
+        oStream.Write(slNameFi);
+        oStream.Write(bNameFi, 0, slNameFi);
+        oStream.Write(slNameUa);
+        oStream.Write(bNameUa, 0, slNameUa);
+        oStream.Write(slAuthor);
+        oStream.Write(bAuthor, 0, slAuthor);
+        oStream.Write(slBackdropAssetKey);
+        oStream.Write(bBackdropAssetKey, 0, slBackdropAssetKey);
+        oStream.Write(slBeschreibungsSkript);
+        oStream.Write(bBeschreibungsSkript, 0, slBeschreibungsSkript);
+
+        /* placeholder for extension propertybag */
+        var bPropertyCount = new byte[2];
+
+        BinaryPrimitives.WriteUInt16LittleEndian(bPropertyCount, 0);
+        oStream.Write(bPropertyCount, 0, 2);
+    }
+
+    private static void SaveMissions(BinaryWriter oStream)
+    {
+        var bnlvl = new byte[2];
+
+        BinaryPrimitives.WriteUInt16LittleEndian(bnlvl, (ushort)Missions.Count);
+        oStream.Write(bnlvl, 0, 2);
+
+        foreach (var mission in Missions)
+        {
+            SaveMission(mission, oStream);
+        }
+    }
+
+    private static void SaveMission(MissionDef mission, BinaryWriter oStream)
+    {
+        var bIsBuiltin = (byte)((mission.IsBuiltin ? 1 : 0) << 4);
+        var bMissionsNummer = new byte[4];
+
+        BinaryPrimitives.WriteInt32LittleEndian(bMissionsNummer, mission.MissionsNummer);
+        oStream.Write(bIsBuiltin);
+        oStream.Write(bMissionsNummer, 0, 4);
+
+        var bNameEn = Encoding.UTF8.GetBytes(mission.NameEn);
+        var slNameEn = (byte)bNameEn.Length;
+        var bNameDe = Encoding.UTF8.GetBytes(mission.NameDe);
+        var slNameDe = (byte)bNameDe.Length;
+        var bNameFi = Encoding.UTF8.GetBytes(mission.NameFi);
+        var slNameFi = (byte)bNameFi.Length;
+        var bNameUa = Encoding.UTF8.GetBytes(mission.NameUa);
+        var slNameUa = (byte)bNameUa.Length;
+
+        oStream.Write(slNameEn);
+        oStream.Write(bNameEn, 0, slNameEn);
+        oStream.Write(slNameDe);
+        oStream.Write(bNameDe, 0, slNameDe);
+        oStream.Write(slNameFi);
+        oStream.Write(bNameFi, 0, slNameFi);
+        oStream.Write(slNameUa);
+        oStream.Write(bNameUa, 0, slNameUa);
+
+        /* placeholder for extension propertybag */
+        var bPropertyCount = new byte[2];
+
+        BinaryPrimitives.WriteUInt16LittleEndian(bPropertyCount, 0);
+        oStream.Write(bPropertyCount, 0, 2);
     }
 }

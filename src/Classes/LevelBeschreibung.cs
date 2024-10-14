@@ -18,7 +18,7 @@ public class LevelBeschreibung
     }
 
     [Browsable(false)]
-    public Materials Materials { get; set; }
+    public bool IsBuiltin { get; set; } = false;
 
     #region Editable Properties
     public string NameEn { get; set; } = string.Empty;
@@ -29,11 +29,17 @@ public class LevelBeschreibung
 
     public string NameUa { get; set; } = string.Empty;
 
+    public string Author { get; set; } = string.Empty;
+    
     public uint Width { get; set; } = 640;
 
     public uint Height { get; set; } = 480;
 
     public uint BergZufallszahl { get; set; } = 58008;
+
+    public Point SpielerPosition1 { get; set; }
+
+    public Point SpielerPosition2 { get; set; }
 
     public bool IsMountain { get; set; } = false;
 
@@ -51,6 +57,8 @@ public class LevelBeschreibung
 
     public uint HoehleRauhheitProzent { get; set; } = 50;
 
+    public Color ColorBackground { get; set; } = Color.Empty;
+
     public Color ColorMountain { get; set; } = Color.Empty;
 
     public Color ColorCave { get; set; } = Color.Empty;
@@ -59,12 +67,15 @@ public class LevelBeschreibung
     public string BackdropAssetKey { get; set; } = string.Empty;
     #endregion
 
-    [Browsable(false)]
-    public bool IstGeskriptet => BeschreibungsSkript != null;
-
     /* Besonderheiten der Topologie */
     public Dictionary<int, Plateau> Plateaus { get; private set; }
     public LevelBeschreibungsSkript BeschreibungsSkript { get; set; } = new();
+
+    [Browsable(false)]
+    public Materials Materials { get; set; }
+
+    [Browsable(false)]
+    public bool IstGeskriptet => BeschreibungsSkript != null;
 
     /* Beschreibung für ein Missionslevel */
     [Browsable(false)]
@@ -73,15 +84,11 @@ public class LevelBeschreibung
     [Browsable(false)]
     public string MissionsName { get; set; } = string.Empty;
 
-
     [Browsable(false)]
     public int LevelNummer { get; set; } = 0;
 
     [Browsable(false)]
     public int LevelNummerInMission { get; set; } = 0;
-
-    public Point SpielerPosition1 { get; set; }
-    public Point SpielerPosition2 { get; set; }
 
     internal void MisisonsnameSetzen() => MissionsName = MissionsnameBestimmen(MissionsNummer);
 

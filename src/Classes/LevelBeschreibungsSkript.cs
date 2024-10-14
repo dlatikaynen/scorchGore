@@ -19,6 +19,8 @@ public class LevelBeschreibungsSkript
         Pfade = [];
     }
 
+    public string Source => string.Empty;
+
     internal static LevelBeschreibungsSkript Laden(LevelBeschreibung levelBeschreibung)
     {
         var levelSkript = new LevelBeschreibungsSkript();
