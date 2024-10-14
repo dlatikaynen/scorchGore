@@ -33,7 +33,7 @@ public class GoreLeved
             return;
         }
 
-        EditedLevel.Materials.Bergfarbe = EditedLevel.ColorMountain;
+        //EditedLevel.Materials.Bergfarbe = EditedLevel.ColorMountain;
 
         var backDrop = false;
         if (!string.IsNullOrEmpty(EditedLevel.BackdropAssetKey))

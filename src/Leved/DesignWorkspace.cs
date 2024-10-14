@@ -66,6 +66,7 @@ internal static class DesignWorkspace
         using var dec = new GZipStream(cys, CompressionMode.Decompress);
         using var brd = new BinaryReader(dec);
 
+        Missions.Clear();
         Levels.Clear();
         Assets.Clear();
         MaterialThemes.Clear();
@@ -78,6 +79,16 @@ internal static class DesignWorkspace
         if (MaterialThemes.Count == 0)
         {
             MaterialThemes.Add(new("WOTMSTD", []));
+        }
+
+        if (Missions.Count == 0)
+        {
+
+        }
+
+        if (Levels.Count == 0)
+        {
+
         }
     }
 
@@ -250,28 +261,84 @@ internal static class DesignWorkspace
 
     private static void LoadLevel(BinaryReader inStream)
     {
-        //bool IsBuiltin;
+        var flags = inStream.ReadByte();
+        var builtinFlag = 1 << 4;
+        var isBuiltin = (flags & builtinFlag) == builtinFlag;
+        var bMissionsNummer = new byte[4];
+        var bLevelNummer = new byte[4];
+        var bLevelNrInMission = new byte[4];
+        var bHeight = new byte[4];
+        var bWidth = new byte[4];
+        var bBergZufallszahl = new byte[4];
+        var bSpielerPosition1X = new byte[4];
+        var bSpielerPosition1Y = new byte[4];
+        var bSpielerPosition2X = new byte[4];
+        var bSpielerPosition2Y = new byte[4];
+        var bColorBackground = new byte[4];
 
-        //int MissionsNummer;
-        //int LevelNummer;
-        //int LevelNummerInMission;
+        inStream.Read(bMissionsNummer, 0, 4);
+        inStream.Read(bLevelNummer, 0, 4);
+        inStream.Read(bLevelNrInMission, 0, 4);
+        inStream.Read(bWidth, 0, 4);
+        inStream.Read(bHeight, 0, 4);
+        inStream.Read(bBergZufallszahl, 0, 4);
+        inStream.Read(bSpielerPosition1X, 0, 4);
+        inStream.Read(bSpielerPosition1Y, 0, 4);
+        inStream.Read(bSpielerPosition2X, 0, 4);
+        inStream.Read(bSpielerPosition2Y, 0, 4);
+        inStream.Read(bColorBackground, 0, 4);
 
-        //uint Width;
-        //uint Height;
-        //uint BergZufallszahl;
+        var missionsNummer = BinaryPrimitives.ReadInt32LittleEndian(bMissionsNummer);
+        var levelNummer = BinaryPrimitives.ReadInt32LittleEndian(bLevelNummer);
+        var levelNummerInMission = BinaryPrimitives.ReadInt32LittleEndian(bLevelNrInMission);
+        var width = BinaryPrimitives.ReadUInt32LittleEndian(bWidth);
+        var height = BinaryPrimitives.ReadUInt32LittleEndian(bHeight);
+        var bergZufallszahl = BinaryPrimitives.ReadUInt32LittleEndian(bBergZufallszahl);
+        var spielerPosition1X = BinaryPrimitives.ReadInt32LittleEndian(bSpielerPosition1X);
+        var spielerPosition1Y = BinaryPrimitives.ReadInt32LittleEndian(bSpielerPosition1Y);
+        var spielerPosition2X = BinaryPrimitives.ReadInt32LittleEndian(bSpielerPosition2X);
+        var spielerPosition2Y = BinaryPrimitives.ReadInt32LittleEndian(bSpielerPosition2Y);
+        var icolorBackground = BinaryPrimitives.ReadInt32LittleEndian(bColorBackground);
+        var colorBackground = Color.FromArgb(icolorBackground);
+        var slNameEn = inStream.ReadByte();
+        var bsNameEn = inStream.ReadBytes(slNameEn);
+        var nameEn = Encoding.UTF8.GetString(bsNameEn);
+        var slNameDe = inStream.ReadByte();
+        var bsNameDe = inStream.ReadBytes(slNameDe);
+        var nameDe = Encoding.UTF8.GetString(bsNameDe);
+        var slNameFi = inStream.ReadByte();
+        var bsNameFi = inStream.ReadBytes(slNameFi);
+        var nameFi = Encoding.UTF8.GetString(bsNameFi);
+        var slNameUa = inStream.ReadByte();
+        var bsNameUa = inStream.ReadBytes(slNameUa);
+        var nameUa = Encoding.UTF8.GetString(bsNameUa);
+        var slAuthor = inStream.ReadByte();
+        var bsAuthor = inStream.ReadBytes(slAuthor);
+        var author = Encoding.UTF8.GetString(bsAuthor);
+        var slBackdropAssetKey = inStream.ReadByte();
+        var bsBackdropAssetKey = inStream.ReadBytes(slBackdropAssetKey);
+        var backdropAssetKey = Encoding.UTF8.GetString(bsBackdropAssetKey);
+        var slBeschreibungsSkript = inStream.ReadByte();
+        var bsBeschreibungsSkript = inStream.ReadBytes(slBeschreibungsSkript);
+        var beschreibungsSkript = Encoding.UTF8.GetString(bsBeschreibungsSkript);
+        var lvl = new LevelBeschreibung
+        {
+            IsBuiltin = isBuiltin,
+            MissionsNummer = missionsNummer,
+            LevelNummer = levelNummer,
+            LevelNummerInMission = levelNummerInMission,
+            NameEn = nameEn,
+            NameDe = nameDe,
+            NameFi = nameFi,
+            NameUa = nameUa,
+            Author = author,
+            BackdropAssetKey = backdropAssetKey,
+            //BeschreibungsSkript=beschreibungsSkript
+        };
 
-        //Point SpielerPosition1;
-        //Point SpielerPosition2;
+        lvl.SetScriptSource(beschreibungsSkript);
 
-        //Color ColorBackground
-
-        //string NameEn;
-        //string NameDe;
-        //string NameFi;
-        //string NameUa;
-        //string Author;
-        //string BackdropAssetKey;
-        //string BeschreibungsSkript;
+        Levels.Add(lvl);
     }
 
     private static void LoadMissions(BinaryReader inStream)
@@ -287,14 +354,37 @@ internal static class DesignWorkspace
 
     private static void LoadMission(BinaryReader inStream)
     {
-        /*
-    bool IsBuiltin;
-    int MissionsNummer;
-    string NameEn;
-    string NameDe;
-    string NameFi;
-    string NameUa;
-        */
+        var flags = inStream.ReadByte();
+        var builtinFlag = 1 << 4;
+        var isBuiltin = (flags & builtinFlag) == builtinFlag;
+        var bMissionsNummer = new byte[4];
+
+        inStream.Read(bMissionsNummer, 0, 4);
+
+        var missionsNummer = BinaryPrimitives.ReadInt32LittleEndian(bMissionsNummer);
+        var slNameEn = inStream.ReadByte();
+        var bsNameEn = inStream.ReadBytes(slNameEn);
+        var nameEn = Encoding.UTF8.GetString(bsNameEn);
+        var slNameDe = inStream.ReadByte();
+        var bsNameDe = inStream.ReadBytes(slNameDe);
+        var nameDe = Encoding.UTF8.GetString(bsNameDe);
+        var slNameFi = inStream.ReadByte();
+        var bsNameFi = inStream.ReadBytes(slNameFi);
+        var nameFi = Encoding.UTF8.GetString(bsNameFi);
+        var slNameUa = inStream.ReadByte();
+        var bsNameUa = inStream.ReadBytes(slNameUa);
+        var nameUa = Encoding.UTF8.GetString(bsNameUa);
+        var mission = new MissionDef
+        {
+            IsBuiltin = isBuiltin,
+            MissionsNummer = missionsNummer,
+            NameEn = nameEn,
+            NameDe = nameDe,
+            NameFi = nameFi,
+            NameUa = nameUa
+        };
+
+        Missions.Add(mission);
     }
 
     private static void SaveMaterialThemes(BinaryWriter oStream)
@@ -449,7 +539,7 @@ internal static class DesignWorkspace
 
         BinaryPrimitives.WriteUInt32LittleEndian(bWidth, level.Width);
         BinaryPrimitives.WriteUInt32LittleEndian(bHeight, level.Height);
-        BinaryPrimitives.WriteUInt32LittleEndian(bBergZufallszahl, level.BergZufallszahl);
+        BinaryPrimitives.WriteUInt32LittleEndian(bBergZufallszahl, level.Zufallszahl);
 
         oStream.Write(bWidth, 0, 4);
         oStream.Write(bHeight, 0, 4);

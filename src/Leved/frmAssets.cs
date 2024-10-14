@@ -32,7 +32,6 @@ public partial class frmAssets : Form
         _ = customAssets.Nodes.AddTranslatableNode(key: "69.sfx", µ: 83); // Sfx
 
         builtInAssets.Expand();
-        Xlat.RegisterForTranslation(frmAssets_TranslationChanged);
         foreach(var asset in DesignWorkspace.Assets)
         {
             switch(asset.Class)
@@ -54,6 +53,8 @@ public partial class frmAssets : Form
                     break;
             }
         }
+
+        Xlat.RegisterForTranslation(frmAssets_TranslationChanged);
     }
 
     private void frmAssets_TranslationChanged(object sender, Xlat.TranslationChangedEventArgs e)

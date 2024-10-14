@@ -66,6 +66,9 @@
     <EmbeddedResource Update="Forms\frmAlreadyFinnish.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Update="Leved\frmLevelManager.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="MainWindow.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

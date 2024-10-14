@@ -19,6 +19,4 @@ public class MissionDef
 
     public string NameUa { get; set; } = string.Empty;
     #endregion
-
-    public List<LevelBeschreibung> Levels = [];
 }

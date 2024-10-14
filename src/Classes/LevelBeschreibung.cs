@@ -2,6 +2,7 @@
 using ScorchGore.Constants;
 using ScorchGore.Leved;
 using System.ComponentModel;
+using System.Reflection;
 using Xlat = ScorchGore.Translation.Translation;
 
 namespace ScorchGore.Classes;
@@ -13,9 +14,20 @@ public class LevelBeschreibung
         SpielerPosition1 = Point.Empty;
         SpielerPosition2 = Point.Empty;
         Plateaus = [];
-        IsMountain = true;
         Materials = new();
     }
+
+    [Browsable(false)]
+    private static string? BergAssetKey => typeof(CsgAssetBerg).GetCustomAttribute<BuiltInAssetCsgAttribute>()?.AssetKey;
+
+    [Browsable(false)]
+    private static string? HoehleAssetKey => typeof(CsgAssetHoehlendecke).GetCustomAttribute<BuiltInAssetCsgAttribute>()?.AssetKey;
+
+    [Browsable(false)]
+    public bool IsMountain => AssetPlacement.Any(p => p.AssetKey == BergAssetKey);
+
+    [Browsable(false)]
+    public bool IsCave => AssetPlacement.Any(p => p.AssetKey == HoehleAssetKey);
 
     [Browsable(false)]
     public bool IsBuiltin { get; set; } = false;
@@ -35,40 +47,23 @@ public class LevelBeschreibung
 
     public uint Height { get; set; } = 480;
 
-    public uint BergZufallszahl { get; set; } = 58008;
+    public uint Zufallszahl { get; set; } = 58008;
 
     public Point SpielerPosition1 { get; set; }
 
     public Point SpielerPosition2 { get; set; }
 
-    public bool IsMountain { get; set; } = false;
-
-    public uint BergMinHoeheProzent { get; set; } = 10;
-
-    public uint BergMaxHoeheProzent { get; set; } = 39;
-
-    public uint BergRauhheitProzent { get; set; } = 19;
-
-    public bool IsCave { get; set; } = false;
-
-    public uint HoehleMinHoeheProzent { get; set; } = 13;
-
-    public uint HoehleMaxHoeheProzent { get; set; } = 48;
-
-    public uint HoehleRauhheitProzent { get; set; } = 50;
-
     public Color ColorBackground { get; set; } = Color.Empty;
-
-    public Color ColorMountain { get; set; } = Color.Empty;
-
-    public Color ColorCave { get; set; } = Color.Empty;
 
     [TypeConverter(typeof(BackdropAssetDropdownTypeConverter))]
     public string BackdropAssetKey { get; set; } = string.Empty;
     #endregion
 
+    public List<AssetPlacement> AssetPlacement { get; set; } = new();
+
     /* Besonderheiten der Topologie */
     public Dictionary<int, Plateau> Plateaus { get; private set; }
+
     public LevelBeschreibungsSkript BeschreibungsSkript { get; set; } = new();
 
     [Browsable(false)]
@@ -92,16 +87,31 @@ public class LevelBeschreibung
 
     internal void MisisonsnameSetzen() => MissionsName = MissionsnameBestimmen(MissionsNummer);
 
+    internal void SetScriptSource(string scriptSource)
+    {
+        BeschreibungsSkript ??= new();
+        BeschreibungsSkript.SetSource(scriptSource);
+    }
+
     internal void Plateau(int bodenHoehe, int startX, int endetX) => Plateaus.Add(startX, new Plateau { Elevation = bodenHoehe, StartX = startX, EndetX = endetX });
 
     [Browsable(false)]
-    public uint MinHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleMinHoeheProzent : BergMinHoeheProzent;
+    private AssetPlacement? Berg => AssetPlacement.SingleOrDefault(p => p.AssetKey == BergAssetKey);
 
     [Browsable(false)]
-    public uint MaxHoeheProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleMaxHoeheProzent : BergMaxHoeheProzent;
+    private AssetPlacement? Hoehle => AssetPlacement.SingleOrDefault(p => p.AssetKey == HoehleAssetKey);
 
     [Browsable(false)]
-    public uint RauhheitProzent(ObenUnten obenUnten) => obenUnten == ObenUnten.HoehlenTeil ? HoehleRauhheitProzent : BergRauhheitProzent;
+    public uint BergZufallszahl => Berg?.ParamsUInt[nameof(CsgAssetBerg.BergZufallszahl)] ?? Zufallszahl;
+
+    [Browsable(false)]
+    public uint MinHoeheProzent(ObenUnten obenUnten) => (obenUnten == ObenUnten.HoehlenTeil ? Hoehle?.ParamsUInt[nameof(CsgAssetHoehlendecke.HoehleMinHoeheProzent)] : Berg?.ParamsUInt[nameof(CsgAssetBerg.BergMinHoeheProzent)]) ?? 0;
+
+    [Browsable(false)]
+    public uint MaxHoeheProzent(ObenUnten obenUnten) => (obenUnten == ObenUnten.HoehlenTeil ? Hoehle?.ParamsUInt[nameof(CsgAssetHoehlendecke.HoehleMaxHoeheProzent)] : Berg?.ParamsUInt[nameof(CsgAssetBerg.BergMaxHoeheProzent)]) ?? 0;
+
+    [Browsable(false)]
+    public uint RauhheitProzent(ObenUnten obenUnten) => (obenUnten == ObenUnten.HoehlenTeil ? Hoehle?.ParamsUInt[nameof(CsgAssetHoehlendecke.HoehleRauhheitProzent)] : Berg?.ParamsUInt[nameof(CsgAssetBerg.BergRauhheitProzent)]) ?? 0;
 
     [Browsable(false)]
     internal string LevelName

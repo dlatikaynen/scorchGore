@@ -77,6 +77,22 @@ public partial class frmLevelManager : Form
             "map",
             "map"
         );
+
+        Xlat.RegisterForTranslation(frmLevelManager_TranslationChanged);
+    }
+
+    private void frmLevelManager_TranslationChanged(object sender, Xlat.TranslationChangedEventArgs e)
+    {
+        Text = Xlat.µ(103); // Level Manager
+        mnuTools.Text = Xlat.µ(104); // Design
+        mnuToolsAddLevel.Text = Xlat.µ(97); // Add level...
+        mnuToolsDeleteLevel.Text = Xlat.µ(98); // Delete level
+        mnuToolsEditLevel.Text = Xlat.µ(99); // Edit level...
+        mnuToolsLevelProperties.Text = Xlat.µ(100); // Level properties...
+        mnuToolsPlaytestLevel.Text = Xlat.µ(101); // Playtest
+        mnuToolsToolbox.Text = Xlat.µ(102); // Toolbox
+
+        Xlat.TranslateTreeview(tvLevels);
     }
 
     private void tvLevels_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

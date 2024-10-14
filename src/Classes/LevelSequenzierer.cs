@@ -24,16 +24,23 @@ internal static class LevelSequenzierer
                 levelBeschreibung.MissionsNummer = 1;
                 levelBeschreibung.LevelNummerInMission = 1;
                 levelBeschreibung.NameEn = "The Blue Mountains";
-                levelBeschreibung.BergMinHoeheProzent = 13;
-                levelBeschreibung.BergMaxHoeheProzent = 48;
-                levelBeschreibung.BergRauhheitProzent = 21;
-                levelBeschreibung.BergZufallszahl = zufallsZahlenGenerator;
-                levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
-                levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
+                //levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
+                //levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
                 levelBeschreibung.Plateau(645 - 460, 82, 200);
                 levelBeschreibung.SpielerPosition1 = new Point(112, (int)levelBeschreibung.Height - 185);
                 levelBeschreibung.Plateau(645 - 415, 638, 700);
                 levelBeschreibung.SpielerPosition2 = new Point(673, (int)levelBeschreibung.Height - 230);
+                levelBeschreibung.AssetPlacement.Add(new()
+                {
+                    AssetKey = "WOTM_BERG",
+                    ParamsUInt = {
+                        { nameof(CsgAssetBerg.BergZufallszahl), zufallsZahlenGenerator },
+                        { nameof(CsgAssetBerg.BergMinHoeheProzent), 13 },
+                        { nameof(CsgAssetBerg.BergMaxHoeheProzent), 48 },
+                        { nameof(CsgAssetBerg.BergRauhheitProzent), 21 }
+                    }
+                });
+
                 break;
 
             case 2:
@@ -42,18 +49,33 @@ internal static class LevelSequenzierer
                 levelBeschreibung.MissionsNummer = 1;
                 levelBeschreibung.LevelNummerInMission = 2;
                 levelBeschreibung.NameEn = "The Blue Cave";
-                levelBeschreibung.BergMinHoeheProzent = 10;
-                levelBeschreibung.BergMaxHoeheProzent = 39;
-                levelBeschreibung.BergRauhheitProzent = 19;
-                levelBeschreibung.HoehleMinHoeheProzent = 13;
-                levelBeschreibung.HoehleMaxHoeheProzent = 48;
-                levelBeschreibung.HoehleRauhheitProzent = 50;
-                levelBeschreibung.IsCave = true;
-                levelBeschreibung.BergZufallszahl = zufallsZahlenGenerator;
-                levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
-                levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
+                levelBeschreibung.Zufallszahl = zufallsZahlenGenerator;
+                //levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
+                //levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
                 levelBeschreibung.SpielerPosition1 = new Point(GameLogicConstants.SpielerBreite, 300);
                 levelBeschreibung.SpielerPosition2 = new Point(800 - GameLogicConstants.SpielerBreite, 300);
+                levelBeschreibung.AssetPlacement.Add(new()
+                {
+                    AssetKey = "WOTM_BERG",
+                    ParamsUInt = {
+                        { nameof(CsgAssetBerg.BergZufallszahl), zufallsZahlenGenerator },
+                        { nameof(CsgAssetBerg.BergMinHoeheProzent), 10 },
+                        { nameof(CsgAssetBerg.BergMaxHoeheProzent), 39 },
+                        { nameof(CsgAssetBerg.BergRauhheitProzent), 19 }
+                    }
+                });
+
+                levelBeschreibung.AssetPlacement.Add(new()
+                {
+                    AssetKey = "WOTM_CAVECEIL",
+                    ParamsUInt = {
+                        { nameof(CsgAssetHoehlendecke.HoehleZufallszahl), zufallsZahlenGenerator },
+                        { nameof(CsgAssetHoehlendecke.HoehleMinHoeheProzent), 13 },
+                        { nameof(CsgAssetHoehlendecke.HoehleMaxHoeheProzent), 48 },
+                        { nameof(CsgAssetHoehlendecke.HoehleRauhheitProzent), 50 }
+                    }
+                });
+
                 break;
 
             case 3:
@@ -62,16 +84,23 @@ internal static class LevelSequenzierer
                 levelBeschreibung.MissionsNummer = 1;
                 levelBeschreibung.LevelNummerInMission = 3;
                 levelBeschreibung.NameEn = "Rock Bottom";
-                levelBeschreibung.IsMountain = true;
-                levelBeschreibung.BergZufallszahl = zufallsZahlenGenerator;
-                levelBeschreibung.BergMinHoeheProzent = 3;
-                levelBeschreibung.BergMaxHoeheProzent = 17;
-                levelBeschreibung.BergRauhheitProzent = 8;
-                levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
-                levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
+                levelBeschreibung.Zufallszahl = zufallsZahlenGenerator;
+                //levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
+                //levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
                 levelBeschreibung.BeschreibungsSkript = LevelBeschreibungsSkript.Laden(levelBeschreibung);
                 levelBeschreibung.SpielerPosition1 = new Point(112, GameLogicConstants.SpielerBasisHoehe);
                 levelBeschreibung.SpielerPosition2 = new Point(673, GameLogicConstants.SpielerBasisHoehe);
+                levelBeschreibung.AssetPlacement.Add(new()
+                {
+                    AssetKey = "WOTM_BERG",
+                    ParamsUInt = {
+                        { nameof(CsgAssetBerg.BergZufallszahl), zufallsZahlenGenerator },
+                        { nameof(CsgAssetBerg.BergMinHoeheProzent), 3 },
+                        { nameof(CsgAssetBerg.BergMaxHoeheProzent), 17 },
+                        { nameof(CsgAssetBerg.BergRauhheitProzent), 8 }
+                    }
+                });
+                
                 break;
 
             case 4:

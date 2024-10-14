@@ -63,60 +63,60 @@ public partial class frmLevelProp : Form
         dtp?.SetDescription(Xlat.µ(96)); // One of the backdrops defined in the asset manager. Should be 640 x 480 at least. Excess will scroll slower than arena content
         dtp?.SetCategory(categoryBasics);
 
-        dtp = dp.Properties[nameof(LevelBeschreibung.BergZufallszahl)] as RuntimePropertyDescriptor.DynamicProperty;
+        dtp = dp.Properties[nameof(LevelBeschreibung.Zufallszahl)] as RuntimePropertyDescriptor.DynamicProperty;
         dtp?.SetDisplayName(Xlat.µ(41)); // MountainRandomSeed
         dtp?.SetDescription(Xlat.µ(23)); // Randomizer seed for procedural terrain generators
         dtp?.SetCategory(categoryBasics);
 
-        dtp = dp.Properties[nameof(LevelBeschreibung.IsMountain)] as RuntimePropertyDescriptor.DynamicProperty;
-        dtp?.SetDisplayName(Xlat.µ(42)); // Mountain ridge
-        dtp?.SetDescription(Xlat.µ(24)); // Activate to generate a mountain range
-        dtp?.SetCategory(categoryBasics);
+        //dtp = dp.Properties[nameof(LevelBeschreibung.IsMountain)] as RuntimePropertyDescriptor.DynamicProperty;
+        //dtp?.SetDisplayName(Xlat.µ(42)); // Mountain ridge
+        //dtp?.SetDescription(Xlat.µ(24)); // Activate to generate a mountain range
+        //dtp?.SetCategory(categoryBasics);
 
-        dtp = dp.Properties[nameof(LevelBeschreibung.BergMinHoeheProzent)] as RuntimePropertyDescriptor.DynamicProperty;
-        dtp?.SetDisplayName(Xlat.µ(43)); // Mountain min height %
-        dtp?.SetDescription(Xlat.µ(25)); // Minimum mountain range height in percent of available height
-        dtp?.SetCategory(categoryBasics);
+        //dtp = dp.Properties[nameof(LevelBeschreibung.BergMinHoeheProzent)] as RuntimePropertyDescriptor.DynamicProperty;
+        //dtp?.SetDisplayName(Xlat.µ(43)); // Mountain min height %
+        //dtp?.SetDescription(Xlat.µ(25)); // Minimum mountain range height in percent of available height
+        //dtp?.SetCategory(categoryBasics);
 
-        dtp = dp.Properties[nameof(LevelBeschreibung.BergMaxHoeheProzent)] as RuntimePropertyDescriptor.DynamicProperty;
-        dtp?.SetDisplayName(Xlat.µ(44)); // Mountain max height %
-        dtp?.SetDescription(Xlat.µ(26)); // Maximum mountain range height in percent of available height
-        dtp?.SetCategory(categoryBasics);
+        //dtp = dp.Properties[nameof(LevelBeschreibung.BergMaxHoeheProzent)] as RuntimePropertyDescriptor.DynamicProperty;
+        //dtp?.SetDisplayName(Xlat.µ(44)); // Mountain max height %
+        //dtp?.SetDescription(Xlat.µ(26)); // Maximum mountain range height in percent of available height
+        //dtp?.SetCategory(categoryBasics);
 
-        dtp = dp.Properties[nameof(LevelBeschreibung.BergRauhheitProzent)] as RuntimePropertyDescriptor.DynamicProperty;
-        dtp?.SetDisplayName(Xlat.µ(45)); // Mountain ruggedness %
-        dtp?.SetDescription(Xlat.µ(27)); // Mountain range ruggedness factor as a percentage of something I don't remember
-        dtp?.SetCategory(categoryBasics);
+        //dtp = dp.Properties[nameof(LevelBeschreibung.BergRauhheitProzent)] as RuntimePropertyDescriptor.DynamicProperty;
+        //dtp?.SetDisplayName(Xlat.µ(45)); // Mountain ruggedness %
+        //dtp?.SetDescription(Xlat.µ(27)); // Mountain range ruggedness factor as a percentage of something I don't remember
+        //dtp?.SetCategory(categoryBasics);
 
-        dtp = dp.Properties[nameof(LevelBeschreibung.IsCave)] as RuntimePropertyDescriptor.DynamicProperty;
-        dtp?.SetDisplayName(Xlat.µ(46)); // Cave ceiling
-        dtp?.SetDescription(Xlat.µ(28)); // Activate to generate a cave roof
-        dtp?.SetCategory(categoryBasics);
+        //dtp = dp.Properties[nameof(LevelBeschreibung.IsCave)] as RuntimePropertyDescriptor.DynamicProperty;
+        //dtp?.SetDisplayName(Xlat.µ(46)); // Cave ceiling
+        //dtp?.SetDescription(Xlat.µ(28)); // Activate to generate a cave roof
+        //dtp?.SetCategory(categoryBasics);
 
-        dtp = dp.Properties[nameof(LevelBeschreibung.HoehleMinHoeheProzent)] as RuntimePropertyDescriptor.DynamicProperty;
-        dtp?.SetDisplayName(Xlat.µ(47)); // Cave min height %
-        dtp?.SetDescription(Xlat.µ(29)); // Cave roof minimum height measured from the top, in percent of available height
-        dtp?.SetCategory(categoryBasics);
+        //dtp = dp.Properties[nameof(LevelBeschreibung.HoehleMinHoeheProzent)] as RuntimePropertyDescriptor.DynamicProperty;
+        //dtp?.SetDisplayName(Xlat.µ(47)); // Cave min height %
+        //dtp?.SetDescription(Xlat.µ(29)); // Cave roof minimum height measured from the top, in percent of available height
+        //dtp?.SetCategory(categoryBasics);
 
-        dtp = dp.Properties[nameof(LevelBeschreibung.HoehleMaxHoeheProzent)] as RuntimePropertyDescriptor.DynamicProperty;
-        dtp?.SetDisplayName(Xlat.µ(48)); // Cave max height %
-        dtp?.SetDescription(Xlat.µ(30)); // Cave roof maximum height measured from the top, in percent of available height
-        dtp?.SetCategory(categoryBasics);
+        //dtp = dp.Properties[nameof(LevelBeschreibung.HoehleMaxHoeheProzent)] as RuntimePropertyDescriptor.DynamicProperty;
+        //dtp?.SetDisplayName(Xlat.µ(48)); // Cave max height %
+        //dtp?.SetDescription(Xlat.µ(30)); // Cave roof maximum height measured from the top, in percent of available height
+        //dtp?.SetCategory(categoryBasics);
 
-        dtp = dp.Properties[nameof(LevelBeschreibung.HoehleRauhheitProzent)] as RuntimePropertyDescriptor.DynamicProperty;
-        dtp?.SetDisplayName(Xlat.µ(49)); // Cave ruggedness %
-        dtp?.SetDescription(Xlat.µ(31)); // Cave roof ruggedness factor as a percentage of something I don't remember
-        dtp?.SetCategory(categoryBasics);
+        //dtp = dp.Properties[nameof(LevelBeschreibung.HoehleRauhheitProzent)] as RuntimePropertyDescriptor.DynamicProperty;
+        //dtp?.SetDisplayName(Xlat.µ(49)); // Cave ruggedness %
+        //dtp?.SetDescription(Xlat.µ(31)); // Cave roof ruggedness factor as a percentage of something I don't remember
+        //dtp?.SetCategory(categoryBasics);
 
-        dtp = dp.Properties[nameof(LevelBeschreibung.ColorMountain)] as RuntimePropertyDescriptor.DynamicProperty;
-        dtp?.SetDisplayName(Xlat.µ(50)); // Mountain color
-        dtp?.SetDescription(Xlat.µ(33)); // Define the color of the mountain range
-        dtp?.SetCategory(categoryColors);
+        //dtp = dp.Properties[nameof(LevelBeschreibung.ColorMountain)] as RuntimePropertyDescriptor.DynamicProperty;
+        //dtp?.SetDisplayName(Xlat.µ(50)); // Mountain color
+        //dtp?.SetDescription(Xlat.µ(33)); // Define the color of the mountain range
+        //dtp?.SetCategory(categoryColors);
 
-        dtp = dp.Properties[nameof(LevelBeschreibung.ColorCave)] as RuntimePropertyDescriptor.DynamicProperty;
-        dtp?.SetDisplayName(Xlat.µ(51)); // Cave ceiling color
-        dtp?.SetDescription(Xlat.µ(34)); // Define the color of the cave roof
-        dtp?.SetCategory(categoryColors);
+        //dtp = dp.Properties[nameof(LevelBeschreibung.ColorCave)] as RuntimePropertyDescriptor.DynamicProperty;
+        //dtp?.SetDisplayName(Xlat.µ(51)); // Cave ceiling color
+        //dtp?.SetDescription(Xlat.µ(34)); // Define the color of the cave roof
+        //dtp?.SetCategory(categoryColors);
 
         // now tell that the property grid
         ppgTable.SelectedObjects = [dp];

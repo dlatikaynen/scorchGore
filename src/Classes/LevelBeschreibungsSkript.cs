@@ -1,6 +1,7 @@
 ﻿using ScorchGore.Constants;
 using ScorchGore.Resources;
 using System.Reflection;
+using System.Text;
 
 namespace ScorchGore.Classes;
 
@@ -12,6 +13,8 @@ public class LevelBeschreibungsSkript
     private const string abschnittHIMMEL = "HIMMEL";
     private const string abschnittSPIELER = "SPIELER";
 
+    private StringBuilder _source = new();
+
     public List<LevelArchitekturPfad> Pfade { get; protected set; }
 
     public LevelBeschreibungsSkript()
@@ -19,7 +22,13 @@ public class LevelBeschreibungsSkript
         Pfade = [];
     }
 
-    public string Source => string.Empty;
+    public string Source => _source.ToString();
+
+    internal void SetSource(string source)
+    {
+        _source.Clear();
+        _source.Append(source);
+    }
 
     internal static LevelBeschreibungsSkript Laden(LevelBeschreibung levelBeschreibung)
     {
@@ -43,6 +52,7 @@ public class LevelBeschreibungsSkript
             string levelZeile;
             var aktuellesMaterial = Medium.Berg;
 
+            _source.Clear();
             while (!string.IsNullOrEmpty((levelZeile = levelReader.ReadLine() ?? string.Empty)))
             {
                 levelZeile = levelZeile.Trim();
@@ -58,6 +68,8 @@ public class LevelBeschreibungsSkript
                         Pfade.Add(LevelArchitekturPfad.AusLevelDatei(levelBeschreibung.Materials, aktuellesMaterial, levelZeile));
                     }
                 }
+
+                _source.AppendLine(levelZeile);
             }
         }
     }

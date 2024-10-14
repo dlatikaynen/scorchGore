@@ -40,9 +40,10 @@
             mnuTools = new ToolStripMenuItem();
             mnuToolsAddLevel = new ToolStripMenuItem();
             mnuToolsEditLevel = new ToolStripMenuItem();
+            mnuToolsLevelProperties = new ToolStripMenuItem();
+            mnuToolsToolbox = new ToolStripMenuItem();
             mnuToolsPlaytestLevel = new ToolStripMenuItem();
             mnuToolsDeleteLevel = new ToolStripMenuItem();
-            mnuToolsLevelProperties = new ToolStripMenuItem();
             mnuLeved.SuspendLayout();
             SuspendLayout();
             // 
@@ -96,7 +97,7 @@
             // 
             // mnuTools
             // 
-            mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsAddLevel, mnuToolsEditLevel, mnuToolsPlaytestLevel, mnuToolsDeleteLevel, mnuToolsLevelProperties });
+            mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsAddLevel, mnuToolsEditLevel, mnuToolsLevelProperties, mnuToolsToolbox, mnuToolsPlaytestLevel, mnuToolsDeleteLevel });
             mnuTools.MergeAction = MergeAction.Insert;
             mnuTools.MergeIndex = 3;
             mnuTools.Name = "mnuTools";
@@ -116,6 +117,20 @@
             mnuToolsEditLevel.Text = "Edit level";
             mnuToolsEditLevel.Click += mnuToolsEditLevel_Click;
             // 
+            // mnuToolsLevelProperties
+            // 
+            mnuToolsLevelProperties.Image = Properties.Resources.properties;
+            mnuToolsLevelProperties.Name = "mnuToolsLevelProperties";
+            mnuToolsLevelProperties.Size = new Size(157, 22);
+            mnuToolsLevelProperties.Text = "Level properties";
+            mnuToolsLevelProperties.Click += mnuToolsLevelProperties_Click;
+            // 
+            // mnuToolsToolbox
+            // 
+            mnuToolsToolbox.Name = "mnuToolsToolbox";
+            mnuToolsToolbox.Size = new Size(157, 22);
+            mnuToolsToolbox.Text = "Toolbox";
+            // 
             // mnuToolsPlaytestLevel
             // 
             mnuToolsPlaytestLevel.Name = "mnuToolsPlaytestLevel";
@@ -127,14 +142,6 @@
             mnuToolsDeleteLevel.Name = "mnuToolsDeleteLevel";
             mnuToolsDeleteLevel.Size = new Size(157, 22);
             mnuToolsDeleteLevel.Text = "Delete level";
-            // 
-            // mnuToolsLevelProperties
-            // 
-            mnuToolsLevelProperties.Image = Properties.Resources.properties;
-            mnuToolsLevelProperties.Name = "mnuToolsLevelProperties";
-            mnuToolsLevelProperties.Size = new Size(157, 22);
-            mnuToolsLevelProperties.Text = "Level properties";
-            mnuToolsLevelProperties.Click += mnuToolsLevelProperties_Click;
             // 
             // frmLevelManager
             // 
@@ -166,5 +173,6 @@
         private ToolStripMenuItem mnuToolsPlaytestLevel;
         private ToolStripMenuItem mnuToolsDeleteLevel;
         private ToolStripMenuItem mnuToolsLevelProperties;
+        private ToolStripMenuItem mnuToolsToolbox;
     }
 }

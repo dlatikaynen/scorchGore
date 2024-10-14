@@ -477,3 +477,43 @@
 96	en	One of the backdrops defined in the asset manager. Should be 640 x 480 at least. Excess will scroll slower than arena content
 96	fi	Yksi määritellyistä taustoista. Pitäisi olla vähintään 640 x 480. Rullaa hitaammin kuin areenan sisältö
 96	ua	Один із фонів, визначених у менеджері активів. Має принаймні 640 x 480. Надлишок прокручуваться повільніше ніж вміст арени
+
+97	de	Neues Level...
+97	en	Add level...
+97	fi	TODO:
+97	ua	TODO:
+
+98	de	Level löschen
+98	en	Delete level
+98	fi	TODO:
+98	ua	TODO:
+
+99	de	Level bearbeiten...
+99	en	Edit level...
+99	fi	TODO:
+99	ua	TODO:
+
+100	de	Leveleigenschaften...
+100	en	Level properties...
+100	fi	TODO:
+100	ua	TODO:
+
+101	de	Testhalber starten
+101	en	Playtest
+101	fi	TODO:
+101	ua	TODO:
+
+102	de	Werkzeugkasten
+102	en	Toolbox
+102	fi	TODO:
+102	ua	TODO:
+
+103	de	Levelverwaltung
+103	en	Level Manager
+103	fi	TODO:
+103	ua	TODO:
+
+104	de	Design
+104	en	Design
+104	fi	TODO:
+104	ua	TODO:
