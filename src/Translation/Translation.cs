@@ -23,7 +23,34 @@ internal static class Translation
 
     internal static string µ(uint µ, params string[] args)
     {
-        if(_translations.Count == 0)
+        return GetSpecificTranslation(InstanceSettings.Language, µ, args);
+    }
+
+    internal static string GetSpecificTranslation(string lcid, uint µ, params string[] args)
+    {
+        EnsureTranslationsLoaded();
+
+        if (_translations.TryGetValue(µ, out var entry))
+        {
+            if (entry.TryGetValue(lcid, out var literal))
+            {
+                if (args.Length == 0)
+                {
+                    return literal;
+                }
+                else
+                {
+                    return string.Format(literal, args);
+                }
+            }
+        }
+
+        return $"µ{µ}";
+    }
+
+    private static void EnsureTranslationsLoaded()
+    {
+        if (_translations.Count == 0)
         {
             using var literalStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 typeof(ResourceProxy),
@@ -77,23 +104,6 @@ internal static class Translation
                 }
             }
         }
-
-        if (_translations.TryGetValue(µ, out var entry))
-        {
-            if (entry.TryGetValue(InstanceSettings.Language, out var literal))
-            {
-                if (args.Length == 0)
-                {
-                    return literal;
-                }
-                else
-                {
-                    return string.Format(literal, args);
-                }
-            }
-        }
-
-        return $"µ{µ}";
     }
 
     internal static void RegisterForTranslation(TranslationChangedEventHandler translate)

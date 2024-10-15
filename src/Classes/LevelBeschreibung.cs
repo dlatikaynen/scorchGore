@@ -102,7 +102,10 @@ public class LevelBeschreibung
     private AssetPlacement? Hoehle => AssetPlacement.SingleOrDefault(p => p.AssetKey == HoehleAssetKey);
 
     [Browsable(false)]
-    public uint BergZufallszahl => Berg?.ParamsUInt[nameof(CsgAssetBerg.BergZufallszahl)] ?? Zufallszahl;
+    private uint BergAssetZufallszahl => Berg?.ParamsUInt[nameof(CsgAssetBerg.BergZufallszahl)] ?? 0;
+
+    [Browsable(false)]
+    public uint BergZufallszahl => BergAssetZufallszahl == 0 ? Zufallszahl : BergAssetZufallszahl;
 
     [Browsable(false)]
     public uint MinHoeheProzent(ObenUnten obenUnten) => (obenUnten == ObenUnten.HoehlenTeil ? Hoehle?.ParamsUInt[nameof(CsgAssetHoehlendecke.HoehleMinHoeheProzent)] : Berg?.ParamsUInt[nameof(CsgAssetBerg.BergMinHoeheProzent)]) ?? 0;
@@ -135,17 +138,17 @@ public class LevelBeschreibung
         }
     }
 
-    internal static string MissionsnameBestimmen(int missionsNummer)
+    internal static string MissionsnameBestimmen(int missionsNummer, string? lcid = null)
     {
         return missionsNummer switch
         {
-            1 => Xlat.µ(4),  // Siniset vuoret
-            2 => Xlat.µ(5),  // Zatychlo pid snihom
-            3 => Xlat.µ(6),  // Paratrouper
-            4 => Xlat.µ(7),  // Dzvonyat' dzvony
-            5 => Xlat.µ(8),  // Deadly Nightshade
-            6 => Xlat.µ(9),  // Usses and Thems
-            7 => Xlat.µ(10), // Mid-size Nightmares
+            1 => Xlat.GetSpecificTranslation(lcid ?? InstanceSettings.Language, 4), // Siniset vuoret
+            2 => Xlat.GetSpecificTranslation(lcid ?? InstanceSettings.Language, 5),  // Zatychlo pid snihom
+            3 => Xlat.GetSpecificTranslation(lcid ?? InstanceSettings.Language, 6),  // Paratrouper
+            4 => Xlat.GetSpecificTranslation(lcid ?? InstanceSettings.Language, 7),  // Dzvonyat' dzvony
+            5 => Xlat.GetSpecificTranslation(lcid ?? InstanceSettings.Language, 8),  // Deadly Nightshade
+            6 => Xlat.GetSpecificTranslation(lcid ?? InstanceSettings.Language, 9),  // Usses and Thems
+            7 => Xlat.GetSpecificTranslation(lcid ?? InstanceSettings.Language, 10), // Mid-size Nightmares
             _ => throw new ArgumentOutOfRangeException(
                 nameof(missionsNummer),
                 missionsNummer,

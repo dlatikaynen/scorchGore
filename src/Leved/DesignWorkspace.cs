@@ -2,6 +2,7 @@
 using ScorchGore.Constants;
 using System.Buffers.Binary;
 using System.Diagnostics;
+using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
@@ -81,15 +82,36 @@ internal static class DesignWorkspace
             MaterialThemes.Add(new("WOTMSTD", []));
         }
 
-        if (Missions.Count == 0)
+#if DEBUG
+        if (Missions.Count == 0 && Levels.Count == 0)
         {
+            var levelNr = 1;
 
+            for (var mission = 1; mission <= 7; ++mission)
+            {
+                Missions.Add(new()
+                {
+                    IsBuiltin = true,
+                    MissionsNummer = mission,
+                    NameDe = LevelBeschreibung.MissionsnameBestimmen(mission, "de"),
+                    NameEn = LevelBeschreibung.MissionsnameBestimmen(mission, "en"),
+                    NameFi = LevelBeschreibung.MissionsnameBestimmen(mission, "fi"),
+                    NameUa = LevelBeschreibung.MissionsnameBestimmen(mission, "ua")
+                });
+
+                var levelInfo = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
+                while (levelInfo.MissionsNummer == mission)
+                {
+                    levelInfo.IsBuiltin = true;
+                    levelInfo.Author = "fso::dlatikay";
+                    Levels.Add(levelInfo);
+
+                    ++levelNr;
+                    levelInfo = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
+                }
+            }
         }
-
-        if (Levels.Count == 0)
-        {
-
-        }
+#endif
     }
 
     public static void SetDirty()
@@ -166,6 +188,9 @@ internal static class DesignWorkspace
         var theme = new MaterialTheme(name, sets);
 
         MaterialThemes.Add(theme);
+
+        // placeholder for extension propertybag
+        _ = inStream.ReadUInt16();
     }
 
     private static void LoadSetsOfMaterials(BinaryReader inStream, List<SetOfMaterials> sets)
@@ -203,6 +228,9 @@ internal static class DesignWorkspace
         }
 
         sets.Add(set);
+
+        // placeholder for extension propertybag
+        _ = inStream.ReadUInt16();
     }
 
     private static void LoadAssets(BinaryReader inStream)
@@ -246,6 +274,9 @@ internal static class DesignWorkspace
         }
 
         Assets.Add(asset);
+
+        // placeholder for extension propertybag
+        _ = inStream.ReadUInt16();
     }
 
     private static void LoadLevels(BinaryReader inStream)
@@ -269,7 +300,7 @@ internal static class DesignWorkspace
         var bLevelNrInMission = new byte[4];
         var bHeight = new byte[4];
         var bWidth = new byte[4];
-        var bBergZufallszahl = new byte[4];
+        var bZufallszahl = new byte[4];
         var bSpielerPosition1X = new byte[4];
         var bSpielerPosition1Y = new byte[4];
         var bSpielerPosition2X = new byte[4];
@@ -281,7 +312,7 @@ internal static class DesignWorkspace
         inStream.Read(bLevelNrInMission, 0, 4);
         inStream.Read(bWidth, 0, 4);
         inStream.Read(bHeight, 0, 4);
-        inStream.Read(bBergZufallszahl, 0, 4);
+        inStream.Read(bZufallszahl, 0, 4);
         inStream.Read(bSpielerPosition1X, 0, 4);
         inStream.Read(bSpielerPosition1Y, 0, 4);
         inStream.Read(bSpielerPosition2X, 0, 4);
@@ -293,7 +324,7 @@ internal static class DesignWorkspace
         var levelNummerInMission = BinaryPrimitives.ReadInt32LittleEndian(bLevelNrInMission);
         var width = BinaryPrimitives.ReadUInt32LittleEndian(bWidth);
         var height = BinaryPrimitives.ReadUInt32LittleEndian(bHeight);
-        var bergZufallszahl = BinaryPrimitives.ReadUInt32LittleEndian(bBergZufallszahl);
+        var zufallszahl = BinaryPrimitives.ReadUInt32LittleEndian(bZufallszahl);
         var spielerPosition1X = BinaryPrimitives.ReadInt32LittleEndian(bSpielerPosition1X);
         var spielerPosition1Y = BinaryPrimitives.ReadInt32LittleEndian(bSpielerPosition1Y);
         var spielerPosition2X = BinaryPrimitives.ReadInt32LittleEndian(bSpielerPosition2X);
@@ -327,18 +358,52 @@ internal static class DesignWorkspace
             MissionsNummer = missionsNummer,
             LevelNummer = levelNummer,
             LevelNummerInMission = levelNummerInMission,
+            Width = width,
+            Height = height,
+            ColorBackground = colorBackground,
+            Zufallszahl = zufallszahl,
+            SpielerPosition1 = new(spielerPosition1X, spielerPosition1Y),
+            SpielerPosition2 = new(spielerPosition2X, spielerPosition2Y),
             NameEn = nameEn,
             NameDe = nameDe,
             NameFi = nameFi,
             NameUa = nameUa,
             Author = author,
             BackdropAssetKey = backdropAssetKey,
-            //BeschreibungsSkript=beschreibungsSkript
         };
 
         lvl.SetScriptSource(beschreibungsSkript);
 
+        // load asset placements
+        var nPlacements = inStream.ReadUInt16();
+        for (int i = 0; i < nPlacements; ++i)
+        {
+            var slAssetKey = inStream.ReadByte();
+            var bAssetKey = inStream.ReadBytes(slAssetKey);
+            var assetKey = Encoding.UTF8.GetString(bAssetKey);
+            var locationX = inStream.ReadInt32();
+            var locationY = inStream.ReadInt32();
+            var orientRtl = inStream.ReadByte() == 0xff;
+            var placement = new AssetPlacement
+            {
+                AssetKey = assetKey,
+                Location = new Point(locationX, locationY),
+                OrientedRtl = orientRtl
+            };
+
+            // placements have sets of properties grouped by data type
+
+
+            lvl.AssetPlacement.Add(placement);
+
+            // placeholder for extension propertybag
+            _ = inStream.ReadUInt16();
+        }
+
         Levels.Add(lvl);
+    
+        // placeholder for extension propertybag
+        _ = inStream.ReadUInt16();
     }
 
     private static void LoadMissions(BinaryReader inStream)
@@ -385,6 +450,9 @@ internal static class DesignWorkspace
         };
 
         Missions.Add(mission);
+
+        // placeholder for extension propertybag
+        _ = inStream.ReadUInt16();
     }
 
     private static void SaveMaterialThemes(BinaryWriter oStream)
@@ -596,9 +664,80 @@ internal static class DesignWorkspace
         oStream.Write(slBeschreibungsSkript);
         oStream.Write(bBeschreibungsSkript, 0, slBeschreibungsSkript);
 
-        /* placeholder for extension propertybag */
+        var bPlacementCount = new byte[2];
         var bPropertyCount = new byte[2];
 
+        BinaryPrimitives.WriteUInt16LittleEndian(bPlacementCount, (ushort)level.AssetPlacement.Count);
+        oStream.Write(bPlacementCount, 0, 2);
+        foreach(var placement in level.AssetPlacement)
+        {
+            var bAssetKey = Encoding.UTF8.GetBytes(placement.AssetKey);
+            var slAssetKey = (byte)bAssetKey.Length;
+
+            oStream.Write(slAssetKey);
+            oStream.Write(bAssetKey, 0, slAssetKey);
+
+            var bLocationX = new byte[4];
+            var bLocationY = new byte[4];
+
+            BinaryPrimitives.WriteInt32LittleEndian(bLocationX, placement.Location.X);
+            BinaryPrimitives.WriteInt32LittleEndian(bLocationY, placement.Location.Y);
+
+            oStream.Write(bLocationX, 0, 4);
+            oStream.Write(bLocationY, 0, 4);
+            oStream.Write((byte)(placement.OrientedRtl ? 0xff : 0));
+
+            /* every placements has multiple (typed) property bags */
+            var bnParamsUInt = new byte[2];
+            var bnParamsInt = new byte[2];
+            var bnParamsFlags = new byte[2];
+            var bnParamsString = new byte[2];
+
+            BinaryPrimitives.WriteUInt16LittleEndian(bnParamsUInt, (ushort)placement.ParamsUInt.Count);
+            BinaryPrimitives.WriteUInt16LittleEndian(bnParamsInt, (ushort)placement.ParamsInt.Count);
+            BinaryPrimitives.WriteUInt16LittleEndian(bnParamsFlags, (ushort)placement.ParamsFlags.Count);
+            BinaryPrimitives.WriteUInt16LittleEndian(bnParamsString, (ushort)placement.ParamsString.Count);
+
+            oStream.Write(bnParamsUInt, 0, 2);
+            oStream.Write(bnParamsInt, 0, 2);
+            oStream.Write(bnParamsFlags, 0, 2);
+            oStream.Write(bnParamsString, 0, 2);
+
+            //for (var i = 0; i < placement.ParamsUInt.Count; ++i)
+            //{
+            //    var bUInt = new byte[4];
+
+            //    BinaryPrimitives.WriteUInt32LittleEndian(bUInt, placement.ParamsUInt[i]);
+
+            //    oStream.Write(bUInt, 0, 4);
+            //}
+
+            //for (var i = 0; i < placement.ParamsInt.Count; ++i)
+            //{
+            //    var bInt = new byte[4];
+
+            //    BinaryPrimitives.WriteInt32LittleEndian(bInt, placement.ParamsInt[i]);
+
+            //    oStream.Write(bInt, 0, 4);
+            //}
+
+            //for (var i = 0; i < placement.ParamsFlags.Count; ++i)
+            //{
+            //    oStream.Write((byte)(placement.ParamsFlags[i] ? 0xff : 0));
+            //}
+
+            //for (var i = 0; i < placement.ParamsString.Count; ++i)
+            //{
+            //    var bString = Encoding.UTF8.GetBytes(placement.ParamsString[i]);
+
+            //}
+
+            /* placeholder for extension propertybag */
+            BinaryPrimitives.WriteUInt16LittleEndian(bPropertyCount, 0);
+            oStream.Write(bPropertyCount, 0, 2);
+        }
+
+        /* placeholder for extension propertybag */
         BinaryPrimitives.WriteUInt16LittleEndian(bPropertyCount, 0);
         oStream.Write(bPropertyCount, 0, 2);
     }

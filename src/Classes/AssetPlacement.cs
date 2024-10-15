@@ -6,6 +6,8 @@ public class AssetPlacement
 
     public Point Location { get; set; } = Point.Empty;
 
+    public bool OrientedRtl { get; set; } = false; // facing right
+
     public Dictionary<string, uint> ParamsUInt { get; set; } = [];
 
     public Dictionary<string, int> ParamsInt { get; set; } = [];
