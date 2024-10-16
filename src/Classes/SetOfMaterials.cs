@@ -22,6 +22,7 @@ internal class SetOfMaterials(Medium medium, List<Material> materials)
 
 internal class MaterialTheme(string name, List<SetOfMaterials> setsOfMaterials)
 {
+    public bool IsBuiltin { get; set; } = false;
     public string Name => name;
     public List<SetOfMaterials> SetsOfMaterials => setsOfMaterials;
 

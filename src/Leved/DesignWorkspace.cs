@@ -79,7 +79,7 @@ internal static class DesignWorkspace
 
         if (MaterialThemes.Count == 0)
         {
-            MaterialThemes.Add(new("WOTMSTD", []));
+            MaterialThemes.Add(new("WOTMSTD", []) { IsBuiltin = true });
         }
 
 #if DEBUG
@@ -178,6 +178,7 @@ internal static class DesignWorkspace
 
     private static void LoadMaterialTheme(BinaryReader inStream)
     {
+        var isBuiltin = inStream.ReadByte() == 0xff;
         var slname = inStream.ReadByte();
         var bname = inStream.ReadBytes(slname);
         var name = Encoding.UTF8.GetString(bname);
@@ -185,7 +186,10 @@ internal static class DesignWorkspace
 
         LoadSetsOfMaterials(inStream, sets);
 
-        var theme = new MaterialTheme(name, sets);
+        var theme = new MaterialTheme(name, sets)
+        {
+            IsBuiltin = isBuiltin
+        };
 
         MaterialThemes.Add(theme);
 
@@ -225,6 +229,9 @@ internal static class DesignWorkspace
             var mat = new Material(sname, color);
 
             set.Materials.Add(mat);
+
+            // placeholder for extension propertybag
+            _ = inStream.ReadUInt16();
         }
 
         sets.Add(set);
@@ -392,7 +399,67 @@ internal static class DesignWorkspace
             };
 
             // placements have sets of properties grouped by data type
+            var nParamsUInt = inStream.ReadUInt16();
+            var nParamsInt = inStream.ReadUInt16();
+            var nParamsFlags = inStream.ReadUInt16();
+            var nParamsString = inStream.ReadUInt16();
 
+            for (var j = 0; j < nParamsUInt; ++j)
+            {
+                var blKey = inStream.ReadByte();
+                var bKey = new byte[blKey];
+
+                inStream.Read(bKey, 0, blKey);
+
+                var key = Encoding.UTF8.GetString(bKey);
+                var value = inStream.ReadUInt32();
+
+                placement.ParamsUInt.Add(key, value);
+            }
+
+            for (var j = 0; j < nParamsInt; ++j)
+            {
+                var blKey = inStream.ReadByte();
+                var bKey = new byte[blKey];
+
+                inStream.Read(bKey, 0, blKey);
+
+                var key = Encoding.UTF8.GetString(bKey);
+                var value = inStream.ReadInt32();
+
+                placement.ParamsInt.Add(key, value);
+            }
+
+            for (var j = 0; j < nParamsFlags; ++j)
+            {
+                var blKey = inStream.ReadByte();
+                var bKey = new byte[blKey];
+
+                inStream.Read(bKey, 0, blKey);
+
+                var key = Encoding.UTF8.GetString(bKey);
+                var value = inStream.ReadByte() == 0xff;
+
+                placement.ParamsFlags.Add(key, value);
+            }
+
+            for (var j = 0; j < nParamsString; ++j)
+            {
+                var blKey = inStream.ReadByte();
+                var bKey = new byte[blKey];
+
+                inStream.Read(bKey, 0, blKey);
+
+                var key = Encoding.UTF8.GetString(bKey);
+                var blValue = inStream.ReadByte();
+                var bValue = new byte[blValue];
+
+                inStream.Read(bValue, 0, blValue);
+
+                var value = Encoding.UTF8.GetString(bValue);
+
+                placement.ParamsString.Add(key, value);
+            }
 
             lvl.AssetPlacement.Add(placement);
 
@@ -472,11 +539,17 @@ internal static class DesignWorkspace
     {
         var bname = Encoding.UTF8.GetBytes(theme.Name);
         var slname = (byte)bname.Length;
+        var bPropertyCount = new byte[2];
 
+        oStream.Write((byte)(theme.IsBuiltin ? 0xff : 0));
         oStream.Write(slname);
         oStream.Write(bname, 0, slname);
 
         SaveSetsOfMaterials(theme, oStream);
+
+        /* placeholder for extension propertybag */
+        BinaryPrimitives.WriteUInt16LittleEndian(bPropertyCount, 0);
+        oStream.Write(bPropertyCount, 0, 2);
     }
 
     private static void SaveSetsOfMaterials(MaterialTheme theme, BinaryWriter oStream)
@@ -497,6 +570,7 @@ internal static class DesignWorkspace
         var smedium = set.Medium.ToString();
         var bmedium = Encoding.UTF8.GetBytes(smedium);
         var slmedium = (byte)bmedium.Length;
+        var bPropertyCount = new byte[2];
 
         oStream.Write(slmedium);
         oStream.Write(bmedium, 0, slmedium);
@@ -519,7 +593,15 @@ internal static class DesignWorkspace
 
             BinaryPrimitives.WriteInt32LittleEndian(bicolor, icolor);
             oStream.Write(bicolor, 0, 4);
+
+            /* placeholder for extension propertybag */
+            BinaryPrimitives.WriteUInt16LittleEndian(bPropertyCount, 0);
+            oStream.Write(bPropertyCount, 0, 2);
         }
+
+        /* placeholder for extension propertybag */
+        BinaryPrimitives.WriteUInt16LittleEndian(bPropertyCount, 0);
+        oStream.Write(bPropertyCount, 0, 2);
     }
 
     private static void SaveAssets(BinaryWriter oStream)
@@ -570,6 +652,11 @@ internal static class DesignWorkspace
         {
             oStream.Write(ass.Thumb, 0, ass.Thumb.Length);
         }
+
+        /* placeholder for extension propertybag */
+        var bPropertyCount = new byte[2];
+        BinaryPrimitives.WriteUInt16LittleEndian(bPropertyCount, 0);
+        oStream.Write(bPropertyCount, 0, 2);
     }
 
     private static void SaveLevels(BinaryWriter oStream)
@@ -703,34 +790,49 @@ internal static class DesignWorkspace
             oStream.Write(bnParamsFlags, 0, 2);
             oStream.Write(bnParamsString, 0, 2);
 
-            //for (var i = 0; i < placement.ParamsUInt.Count; ++i)
-            //{
-            //    var bUInt = new byte[4];
+            foreach(var key in placement.ParamsUInt.Keys)
+            {
+                var bKey = Encoding.UTF8.GetBytes(key);
+                var bValue = new byte[4];
 
-            //    BinaryPrimitives.WriteUInt32LittleEndian(bUInt, placement.ParamsUInt[i]);
+                oStream.Write((byte)bKey.Length);
+                oStream.Write(bKey, 0, bKey.Length);
 
-            //    oStream.Write(bUInt, 0, 4);
-            //}
+                BinaryPrimitives.WriteUInt32LittleEndian(bValue, placement.ParamsUInt[key]);
+                oStream.Write(bValue, 0, 4);
+            }
 
-            //for (var i = 0; i < placement.ParamsInt.Count; ++i)
-            //{
-            //    var bInt = new byte[4];
+            foreach (var key in placement.ParamsInt.Keys)
+            {
+                var bKey = Encoding.UTF8.GetBytes(key);
+                var bValue = new byte[4];
 
-            //    BinaryPrimitives.WriteInt32LittleEndian(bInt, placement.ParamsInt[i]);
+                oStream.Write((byte)bKey.Length);
+                oStream.Write(bKey, 0, bKey.Length);
 
-            //    oStream.Write(bInt, 0, 4);
-            //}
+                BinaryPrimitives.WriteInt32LittleEndian(bValue, placement.ParamsInt[key]);
+                oStream.Write(bValue, 0, 4);
+            }
 
-            //for (var i = 0; i < placement.ParamsFlags.Count; ++i)
-            //{
-            //    oStream.Write((byte)(placement.ParamsFlags[i] ? 0xff : 0));
-            //}
+            foreach (var key in placement.ParamsFlags.Keys)
+            {
+                var bKey = Encoding.UTF8.GetBytes(key);
 
-            //for (var i = 0; i < placement.ParamsString.Count; ++i)
-            //{
-            //    var bString = Encoding.UTF8.GetBytes(placement.ParamsString[i]);
+                oStream.Write((byte)bKey.Length);
+                oStream.Write(bKey, 0, bKey.Length);
+                oStream.Write((byte)(placement.ParamsFlags[key] ? 0xff : 0));
+            }
 
-            //}
+            foreach (var key in placement.ParamsString.Keys)
+            {
+                var bKey = Encoding.UTF8.GetBytes(key);
+                var bValue = Encoding.UTF8.GetBytes(placement.ParamsString[key]);
+
+                oStream.Write((byte)bKey.Length);
+                oStream.Write(bKey, 0, bKey.Length);
+                oStream.Write((byte)bValue.Length);
+                oStream.Write(bValue, 0, bValue.Length);
+            }
 
             /* placeholder for extension propertybag */
             BinaryPrimitives.WriteUInt16LittleEndian(bPropertyCount, 0);
