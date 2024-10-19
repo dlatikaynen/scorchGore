@@ -542,3 +542,8 @@
 109	en	Color of the monochrome backdrop. It will be applied in case no backdrop picture asset has been selected
 109	fi	Yksivärisen taustaväri. Sitä käytetään jos taustakuvaa ei ole valittu
 109	ua	Колір монохромного фону. Буде застосовано, якщо не вибрано зображення
+
+110	de	Bild für Levelhintergrund importieren
+110	en	Import level backdrop picture
+110	fi	TODO:
+110	ua	TODO:

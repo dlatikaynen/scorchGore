@@ -2,6 +2,7 @@
 using ScorchGore.Constants;
 using ScorchGore.Extensions;
 using System.Drawing.Imaging;
+using System.Reflection;
 using Xlat = ScorchGore.Translation.Translation;
 
 namespace ScorchGore.Leved;
@@ -25,19 +26,44 @@ public partial class frmAssets : Form
         var moo = builtInAssets.Nodes.AddTranslatableNode(key: "1.moo", µ: 88); // Moosic
         var sfx = builtInAssets.Nodes.AddTranslatableNode(key: "1.sfx", µ: 83); // Sfx
         var customAssets = tvAssets.Nodes.AddTranslatableNode(key: "69", µ: 82); // My assets
-        _ = customAssets.Nodes.AddTranslatableNode(key: "69.csg", µ: 85); // CSG
-        _ = customAssets.Nodes.AddTranslatableNode(key: "69.prefab", µ: 84); // Prefabs
-        _ = customAssets.Nodes.AddTranslatableNode(key: "69.bkdr", µ: 87); // Backdrops
-        _ = customAssets.Nodes.AddTranslatableNode(key: "69.moo", µ: 88); // Moosic
-        _ = customAssets.Nodes.AddTranslatableNode(key: "69.sfx", µ: 83); // Sfx
+        var csg_custom = customAssets.Nodes.AddTranslatableNode(key: "69.csg", µ: 85); // CSG
+        var prefab_custom = customAssets.Nodes.AddTranslatableNode(key: "69.prefab", µ: 84); // Prefabs
+        var bkdr_custom = customAssets.Nodes.AddTranslatableNode(key: "69.bkdr", µ: 87); // Backdrops
+        var moo_custom = customAssets.Nodes.AddTranslatableNode(key: "69.moo", µ: 88); // Moosic
+        var sfx_custom = customAssets.Nodes.AddTranslatableNode(key: "69.sfx", µ: 83); // Sfx
 
         builtInAssets.Expand();
-        foreach(var asset in DesignWorkspace.Assets)
+
+        // hardcodedly-builtin assets (CSG berg, cave)
+        var assy = Assembly.GetExecutingAssembly()!;
+        var builtinCsgAssets = (
+            from t in assy
+            .GetTypes()
+            .AsParallel()
+            let attributes = t.GetCustomAttributes(typeof(BuiltInAssetCsgAttribute), true)
+            where attributes != null && attributes.Length > 0
+            select new
+            {
+                AssetClass = t,
+                AssetDescr = attributes.Cast<BuiltInAssetCsgAttribute>().Single()
+            }
+        ).ToList();
+
+        foreach (var assetClass in builtinCsgAssets)
+        {
+            var guid = assetClass.AssetDescr.Id;
+            var name = assetClass.AssetDescr.AssetKey;
+            var csgNode = csg.Nodes.Add(key: $"{csg.Name}.{guid:D}", text: name);
+        }
+
+        // design-workspace defined assets
+        foreach (var asset in DesignWorkspace.Assets)
         {
             switch(asset.Class)
             {
                 case AssetClass.Backdrop:
-                    var bkdrNode = bkdr.Nodes.Add(key: $"{bkdr.Name}.{asset.Id:D}", text: asset.Name);
+                    var container = asset.IsBuiltin ? bkdr : bkdr_custom;
+                    var bkdrNode = container.Nodes.Add(key: $"{container.Name}.{asset.Id:D}", text: asset.Name);
 
                     if (asset.Icon.Length != 0)
                     {
@@ -75,6 +101,7 @@ public partial class frmAssets : Form
         var keyParts = folder.Name.Split('.');
         var destKey = $"{keyParts[0]}.bkdr";
         var destNode = tvAssets.Nodes.Find(destKey, true).SingleOrDefault();
+        var isBuiltin = keyParts[0] == "1";
 
         if(destNode == null)
         {
@@ -97,7 +124,7 @@ public partial class frmAssets : Form
             ShowPreview = true,
             SupportMultiDottedExtensions = true,
             ValidateNames = true,
-            Title = "kjk"
+            Title = Xlat.µ(110) // Import level backdrop picture
         };
 
         if (ofd.ShowDialog(this) == DialogResult.OK)
@@ -133,7 +160,7 @@ public partial class frmAssets : Form
 
                     var assetId = Guid.NewGuid();
                     var assetName = UniqueAssetNameFromFile(Path.GetFileNameWithoutExtension(file));
-                    var asset = new Classes.Asset(Classes.AssetClass.Backdrop, assetId, assetName);
+                    var asset = new Asset(AssetClass.Backdrop, assetId, isBuiltin, assetName);
                     var imported = $"{assetId:D}.lump";
 
                     if (Path.GetFileName(file) != imported)

@@ -2,7 +2,6 @@
 using ScorchGore.Constants;
 using System.Buffers.Binary;
 using System.Diagnostics;
-using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
@@ -258,10 +257,11 @@ internal static class DesignWorkspace
         var sAssetClass = Encoding.UTF8.GetString(bsAssetClass);
         var assetClass = Enum.Parse<AssetClass>(sAssetClass);
         var assetId = inStream.ReadBytes(16);
+        var isBuiltin = inStream.ReadByte() == 0xff;
         var slAssetName = inStream.ReadByte();
         var bsAssetName = inStream.ReadBytes(slAssetName);
         var assetName = Encoding.UTF8.GetString(bsAssetName);
-        var asset = new Asset(assetClass, new(assetId), assetName);
+        var asset = new Asset(assetClass, new(assetId), isBuiltin, assetName);
         var blIcon = inStream.ReadBytes(2);
         var lIcon = BinaryPrimitives.ReadUInt16LittleEndian(blIcon);
         var bIcon = inStream.ReadBytes(lIcon);
@@ -630,6 +630,7 @@ internal static class DesignWorkspace
         oStream.Write(slAssetClass);
         oStream.Write(bAssetClass, 0, slAssetClass);
         oStream.Write(ass.Id.ToByteArray(), 0, 16);
+        oStream.Write((byte)(ass.IsBuiltin ? 0xff : 0));
 
         var bname = Encoding.UTF8.GetBytes(ass.Name);
         var slname = (byte)bname.Length;
