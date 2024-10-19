@@ -77,12 +77,12 @@ internal static class DesignWorkspace
         LoadLevels(brd);
         LoadMissions(brd);
 
+#if DEBUG
         if (MaterialThemes.Count == 0)
         {
             MaterialThemes.Add(new("WOTMSTD", []) { IsBuiltin = true });
         }
 
-#if DEBUG
         if (Missions.Count == 0 && Levels.Count == 0)
         {
             var levelNr = 1;
@@ -353,6 +353,9 @@ internal static class DesignWorkspace
         var slAuthor = inStream.ReadByte();
         var bsAuthor = inStream.ReadBytes(slAuthor);
         var author = Encoding.UTF8.GetString(bsAuthor);
+        var slMaterialThemeKey = inStream.ReadByte();
+        var bsMaterialThemeKey = inStream.ReadBytes(slMaterialThemeKey);
+        var materialThemeKey = Encoding.UTF8.GetString(bsMaterialThemeKey);
         var slBackdropAssetKey = inStream.ReadByte();
         var bsBackdropAssetKey = inStream.ReadBytes(slBackdropAssetKey);
         var backdropAssetKey = Encoding.UTF8.GetString(bsBackdropAssetKey);
@@ -376,6 +379,7 @@ internal static class DesignWorkspace
             NameFi = nameFi,
             NameUa = nameUa,
             Author = author,
+            MaterialThemeKey = materialThemeKey,
             BackdropAssetKey = backdropAssetKey,
         };
 
@@ -683,7 +687,7 @@ internal static class DesignWorkspace
         BinaryPrimitives.WriteInt32LittleEndian(bLevelNummer, level.LevelNummer);
         BinaryPrimitives.WriteInt32LittleEndian(bLevelNummerInMission, level.LevelNummerInMission);
 
-        oStream.Write(bIsBuiltin);     
+        oStream.Write(bIsBuiltin);
         oStream.Write(bMissionsNummer, 0, 4);
         oStream.Write(bLevelNummer, 0, 4);
         oStream.Write(bLevelNummerInMission, 0, 4);
@@ -731,6 +735,8 @@ internal static class DesignWorkspace
         var slNameUa = (byte)bNameUa.Length;
         var bAuthor = Encoding.UTF8.GetBytes(level.Author);
         var slAuthor = (byte)bAuthor.Length;
+        var bMaterialThemeKey = Encoding.UTF8.GetBytes(level.MaterialThemeKey);
+        var slMaterialThemeKey = (byte)bMaterialThemeKey.Length;
         var bBackdropAssetKey = Encoding.UTF8.GetBytes(level.BackdropAssetKey);
         var slBackdropAssetKey = (byte)bBackdropAssetKey.Length;
         var bBeschreibungsSkript = Encoding.UTF8.GetBytes(level.BeschreibungsSkript.Source);
@@ -746,6 +752,8 @@ internal static class DesignWorkspace
         oStream.Write(bNameUa, 0, slNameUa);
         oStream.Write(slAuthor);
         oStream.Write(bAuthor, 0, slAuthor);
+        oStream.Write(slMaterialThemeKey);
+        oStream.Write(bMaterialThemeKey, 0, slMaterialThemeKey);
         oStream.Write(slBackdropAssetKey);
         oStream.Write(bBackdropAssetKey, 0, slBackdropAssetKey);
         oStream.Write(slBeschreibungsSkript);

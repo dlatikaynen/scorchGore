@@ -517,3 +517,28 @@
 104	en	Design
 104	fi	TODO:
 104	ua	TODO:
+
+105	de	Stile verwalten
+105	en	Theme Manager
+105	fi	TODO:
+105	ua	TODO:
+
+106	de	Material-Stil
+106	en	Material Theme
+106	fi	TODO:
+106	ua	TODO:
+
+107	de	Einer der definierten Material-Stile. Bestimmt, wie die unterschiedlichen Materialien eingefärbt sind
+107	en	One of the defined material themes. Determines how the color palette is applied to the different materials
+107	fi	TODO:
+107	ua	TODO:
+
+108	de	Hintergrundfarbe
+108	en	Background color
+108	fi	Taustaväri
+108	ua	Фоновий колір
+
+109	de	Farbe des monochromen Hintergrundes. Kommt nur zum Tragen, wenn kein Hintergrundbild eingesetzt wird
+109	en	Color of the monochrome backdrop. It will be applied in case no backdrop picture asset has been selected
+109	fi	Yksivärisen taustaväri. Sitä käytetään jos taustakuvaa ei ole valittu
+109	ua	Колір монохромного фону. Буде застосовано, якщо не вибрано зображення

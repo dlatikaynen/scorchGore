@@ -58,6 +58,16 @@ public partial class frmLevelProp : Form
         dtp?.SetDescription(Xlat.µ(22)); // The height of the level canvas' rectangular bounding box
         dtp?.SetCategory(categoryBasics);
 
+        dtp = dp.Properties[nameof(LevelBeschreibung.ColorBackground)] as RuntimePropertyDescriptor.DynamicProperty;
+        dtp?.SetDisplayName(Xlat.µ(108)); // Background color
+        dtp?.SetDescription(Xlat.µ(109)); // Color of the monochrome backdrop. It will be applied in case no backdrop picture asset has been selected
+        dtp?.SetCategory(categoryColors);
+
+        dtp = dp.Properties[nameof(LevelBeschreibung.MaterialThemeKey)] as RuntimePropertyDescriptor.DynamicProperty;
+        dtp?.SetDisplayName(Xlat.µ(106)); // Material Theme
+        dtp?.SetDescription(Xlat.µ(107)); // One of the backdrops defined in the asset manager. Should be 640 x 480 at least. Excess will scroll slower than arena content
+        dtp?.SetCategory(categoryColors);
+
         dtp = dp.Properties[nameof(LevelBeschreibung.BackdropAssetKey)] as RuntimePropertyDescriptor.DynamicProperty;
         dtp?.SetDisplayName(Xlat.µ(95)); // Backdrop
         dtp?.SetDescription(Xlat.µ(96)); // One of the backdrops defined in the asset manager. Should be 640 x 480 at least. Excess will scroll slower than arena content

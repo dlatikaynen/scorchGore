@@ -53,6 +53,9 @@ public class LevelBeschreibung
 
     public Point SpielerPosition2 { get; set; }
 
+    [TypeConverter(typeof(MaterialThemeDropdownTypeConverter))]
+    public string MaterialThemeKey { get; set; } = string.Empty;
+
     public Color ColorBackground { get; set; } = Color.Empty;
 
     [TypeConverter(typeof(BackdropAssetDropdownTypeConverter))]
@@ -155,6 +158,21 @@ public class LevelBeschreibung
                 "1-?"
             )
         };
+    }
+
+    public class MaterialThemeDropdownTypeConverter : TypeConverter
+    {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) => true;
+
+        public override StandardValuesCollection? GetStandardValues(ITypeDescriptorContext? context)
+        {
+            var list = DesignWorkspace
+                .MaterialThemes
+                .Select(mt => mt.Name)
+                .ToList();
+
+            return new StandardValuesCollection(list);
+        }
     }
 
     public class BackdropAssetDropdownTypeConverter : TypeConverter

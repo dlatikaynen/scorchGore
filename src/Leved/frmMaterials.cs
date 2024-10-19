@@ -48,7 +48,7 @@ public partial class frmMaterials : Form
 
     private void frmMaterials_TranslationChanged(object sender, Xlat.TranslationChangedEventArgs e)
     {
-        Text = Xlat.µ(86); // Asset Manager
+        Text = Xlat.µ(105); // Theme Manager
         Xlat.TranslateTreeview(tvSets);
     }
 
