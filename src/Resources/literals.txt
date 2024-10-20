@@ -560,8 +560,8 @@
 
 113	de	Da ist Vergängliches, kleine Inseln der Ordnung in einem Ozean der Entropie, verhaftet in der Realität nur durch winzigkleine Ladungen in undichten Kondensatoren. Wollen wirs an einen etwas sichereren Ort schaffen?
 113	en	There is ephemeral stuff, little islands of order in a vast sea of entropy, only tethered to reality by infinitesimally small bits of charge in leaky capacitors. Shall we move those to a place where they are a little safer?
-113	fi	TODO:
-113	ua	TODO:
+113	fi	On ohimeneviä asioita, pieniä järjestyksen saaria valtavassa entropiameressä, joita sidovat todellisuuteen vain pienet varauspalat vuotavissa kondensaattoreissa. Pitäisikö meidän siirtää ne turvallisempaan paikkaan?
+113	ua	Є ефемерні речі, маленькі острівці порядку у величезному морі ентропії, прив’язані до реальності лише нескінченно малими шматочками заряду в негерметичних конденсаторах. Перевеземо їх у безпечніше місце?
 
 114	de	JETZT &SICHERN
 114	en	&SAVE IT NOW
@@ -577,3 +577,13 @@
 116	en	&Hold your horses
 116	fi	TODO:
 116	ua	TODO:
+
+117	de	Lava (Gesteinsschmelze)
+117	en	Lava (molten rock)
+117	fi	Laava (sula kivi)
+117	ua	Лава (розплавлена ​​порода)
+
+118	de	Himmel (Übergangszone am Außenrand der Atmosphäre)
+118	en	Sky (liminal zone at the outer edge of the atmosphere)
+118	fi	Taivas (siirtymävyöhyke ilmakehän ulkoreunalla)
+118	ua	Небо (гранична зона на краю атмосфери)

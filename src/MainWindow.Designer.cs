@@ -375,6 +375,7 @@ partial class MainWindow
         // 
         mnuCommunityDiscord.Name = "mnuCommunityDiscord";
         resources.ApplyResources(mnuCommunityDiscord, "mnuCommunityDiscord");
+        mnuCommunityDiscord.Click += mnuCommunityDiscord_Click;
         // 
         // mnuCommunityForum
         // 

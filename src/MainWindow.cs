@@ -1,4 +1,5 @@
 using ScorchGore.Configuration;
+using ScorchGore.Constants;
 using ScorchGore.Forms;
 using ScorchGore.Leved;
 using ScorchGore.Platform;
@@ -429,5 +430,10 @@ public partial class MainWindow : Form
                 e.Cancel = true;
             }
         }
+    }
+
+    private void mnuCommunityDiscord_Click(object sender, EventArgs e)
+    {
+        PlatformWindows.OpenUrlInBrowser(InfrastructureConstants.CommunityUrl);
     }
 }

@@ -28,6 +28,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "srv", "srv\", "{87FB34C9-7A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devlog", "devlog", "{75F7BF8E-7FB2-47AE-B727-C60815C2ABB2}"
 	ProjectSection(SolutionItems) = preProject
+		dev-log\design-workspace-file-format-early-draft.png = dev-log\design-workspace-file-format-early-draft.png
 		dev-log\wotm-20240929-early-signs-leved.png = dev-log\wotm-20240929-early-signs-leved.png
 	EndProjectSection
 EndProject

@@ -53,9 +53,7 @@ public partial class frmAssets : Form
         {
             var guid = assetClass.AssetDescr.Id;
             var name = assetClass.AssetDescr.AssetKey;
-            var csgNode = csg.Nodes.Add(key: $"{csg.Name}.{guid:D}", text: name);
-
-            csgNode.ImageKey = "asset";
+            _ = csg.Nodes.Add(key: $"{csg.Name}.{guid:D}", text: name, imageKey: "asset", selectedImageKey: "asset");
         }
 
         // design-workspace defined assets
@@ -76,6 +74,11 @@ public partial class frmAssets : Form
                         ilTreeview.Images.Add(iconKey, icon);
                         bkdrNode.ImageKey = iconKey;
                         bkdrNode.SelectedImageKey = iconKey;
+                    }
+                    else
+                    {
+                        bkdrNode.ImageKey = "asset";
+                        bkdrNode.SelectedImageKey = "asset";
                     }
 
                     break;

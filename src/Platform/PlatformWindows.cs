@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace ScorchGore.Platform;
 
@@ -55,5 +57,17 @@ internal static partial class PlatformWindows
             wParam: SC_SCREENSAVE,
             lParam: 0
         );
+    }
+
+    internal static void OpenUrlInBrowser(string slug)
+    {
+        var ruri = slug.Replace("-", "").Trim('{', '}');
+        var buri = Convert.FromBase64String($"{ruri}=");
+        var suri = Encoding.ASCII.GetString(buri);
+
+        Process.Start(new ProcessStartInfo(suri)
+        {
+            UseShellExecute = true
+        });
     }
 }

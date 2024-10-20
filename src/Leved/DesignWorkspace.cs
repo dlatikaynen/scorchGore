@@ -82,6 +82,7 @@ internal static class DesignWorkspace
         if (MaterialThemes.Count == 0)
         {
             MaterialThemes.Add(new("WOTMSTD", []) { IsBuiltin = true });
+            SetDirty();
         }
 
         if (Missions.Count == 0 && Levels.Count == 0)
@@ -99,6 +100,8 @@ internal static class DesignWorkspace
                     NameFi = LevelBeschreibung.MissionsnameBestimmen(mission, "fi"),
                     NameUa = LevelBeschreibung.MissionsnameBestimmen(mission, "ua")
                 });
+
+                SetDirty();
 
                 var levelInfo = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
                 while (levelInfo.MissionsNummer == mission)

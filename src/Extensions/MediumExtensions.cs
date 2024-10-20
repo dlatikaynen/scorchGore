@@ -43,10 +43,10 @@ internal static class MediumExtensions
                 return Xlat.µ(63); // Mirror (will easily break, but reflects laser almost perfectly without taking damage)
 
             case Medium.Lava:
-                return Xlat.µ(0);
+                return Xlat.µ(117); // Lava (molten rock)
 
             case Medium.Himmel:
-                return Xlat.µ(0);
+                return Xlat.µ(118); // Sky (liminal zone at the outer edge of the atmosphere)
 
             case Medium.Schnee:
                 return Xlat.µ(0);

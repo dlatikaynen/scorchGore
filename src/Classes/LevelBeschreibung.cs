@@ -56,7 +56,22 @@ public class LevelBeschreibung
     [TypeConverter(typeof(MaterialThemeDropdownTypeConverter))]
     public string MaterialThemeKey { get; set; } = string.Empty;
 
-    public Color ColorBackground { get; set; } = Color.Empty;
+    private Color _colorBackground = Color.Empty;
+    public Color ColorBackground 
+    { 
+        get 
+        {
+            return _colorBackground;
+        }
+        set
+        {
+            if (_colorBackground != value)
+            {
+                _colorBackground = value;
+                MaterialTheme.TryAllocateColor(MaterialThemeKey, Medium.Himmel, value, out _);
+            }
+        }
+    }
 
     [TypeConverter(typeof(BackdropAssetDropdownTypeConverter))]
     public string BackdropAssetKey { get; set; } = string.Empty;

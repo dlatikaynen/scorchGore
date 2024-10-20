@@ -1,5 +1,9 @@
 ﻿using ScorchGore.Constants;
 using ScorchGore.Extensions;
+using ScorchGore.Forms;
+using ScorchGore.Leved;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ScorchGore.Classes;
 
@@ -27,4 +31,57 @@ internal class MaterialTheme(string name, List<SetOfMaterials> setsOfMaterials)
     public List<SetOfMaterials> SetsOfMaterials => setsOfMaterials;
 
     public override string ToString() => Name;
+
+    internal static bool TryAllocateColor(string themeKey, Medium medium, Color color, [NotNullWhen(true)] out string? materialKey)
+    {
+        var theme = DesignWorkspace.MaterialThemes.SingleOrDefault(mt => mt.Name == themeKey);
+
+        materialKey = null;
+        if (theme == null)
+        {
+            return false;
+        }
+
+        var set = theme.SetsOfMaterials.SingleOrDefault(som => som.Medium == medium);
+
+        if (set == null)
+        {
+            set = new SetOfMaterials(medium, []);
+
+            theme.SetsOfMaterials.Add(set);
+            DesignWorkspace.SetDirty();
+        }
+
+        var existingEntry = set.Materials.SingleOrDefault(m => m.Color.ToArgb() == color.ToArgb());
+
+        if (existingEntry == null)
+        {
+            if (set.Materials.Count == 0xff)
+            {
+                // palette full
+                return false;
+            }
+
+            int ordinal = 1;
+            var candidateKey = string.Empty;
+
+            do
+            {
+                candidateKey = $"{medium.ToString().ToUpperInvariant()}{ordinal}";
+
+                ++ordinal;
+            } while (set.Materials.Any(m => m.Name == candidateKey));
+
+            materialKey = candidateKey;
+            set.Materials.Add(new(materialKey, color));
+            DesignWorkspace.SetDirty();
+        }
+        else
+        {
+            // TODO: colors must remain unique inside the entire theme!
+            materialKey = existingEntry.Name;
+        }
+
+        return true;
+    }
 }
