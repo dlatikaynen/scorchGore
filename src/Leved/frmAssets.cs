@@ -54,6 +54,8 @@ public partial class frmAssets : Form
             var guid = assetClass.AssetDescr.Id;
             var name = assetClass.AssetDescr.AssetKey;
             var csgNode = csg.Nodes.Add(key: $"{csg.Name}.{guid:D}", text: name);
+
+            csgNode.ImageKey = "asset";
         }
 
         // design-workspace defined assets

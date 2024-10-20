@@ -547,3 +547,33 @@
 110	en	Import level backdrop picture
 110	fi	TODO:
 110	ua	TODO:
+
+111	de	Zeugs anordnen...
+111	en	Asset placement...
+111	fi	TODO:...
+111	ua	TODO:...
+
+112	de	Ungesicherte Daten
+112	en	Unsaved Data
+112	fi	TODO:
+112	ua	TODO:
+
+113	de	Da ist Vergängliches, kleine Inseln der Ordnung in einem Ozean der Entropie, verhaftet in der Realität nur durch winzigkleine Ladungen in undichten Kondensatoren. Wollen wirs an einen etwas sichereren Ort schaffen?
+113	en	There is ephemeral stuff, little islands of order in a vast sea of entropy, only tethered to reality by infinitesimally small bits of charge in leaky capacitors. Shall we move those to a place where they are a little safer?
+113	fi	TODO:
+113	ua	TODO:
+
+114	de	JETZT &SICHERN
+114	en	&SAVE IT NOW
+114	fi	TODO:
+114	ua	TODO:
+
+115	de	Ver&loren
+115	en	&Lost, it will be
+115	fi	TODO:
+115	ua	TODO:
+
+116	de	Nic&ht so schnell
+116	en	&Hold your horses
+116	fi	TODO:
+116	ua	TODO:

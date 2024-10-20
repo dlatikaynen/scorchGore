@@ -513,6 +513,7 @@ partial class MainWindow
         MainMenuStrip = MainMenu;
         Name = "MainWindow";
         SizeGripStyle = SizeGripStyle.Show;
+        FormClosing += MainWindow_FormClosing;
         MainToolbar.ResumeLayout(false);
         MainToolbar.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)MdiError).EndInit();

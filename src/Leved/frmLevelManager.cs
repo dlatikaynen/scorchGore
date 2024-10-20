@@ -1,4 +1,5 @@
 ﻿using ScorchGore.Classes;
+using ScorchGore.Forms;
 using System.Diagnostics;
 using Xlat = ScorchGore.Translation.Translation;
 
@@ -8,6 +9,7 @@ public partial class frmLevelManager : Form
 {
     private readonly GoreLeved _leved;
     private readonly frmLeved _levedWindow;
+    private readonly frmAssetPlacement _assetPlacement;
     private readonly frmLevelProp _levelProp;
 
     public frmLevelManager()
@@ -16,6 +18,7 @@ public partial class frmLevelManager : Form
 
         _leved = new GoreLeved();
         _levedWindow = new frmLeved(_leved);
+        _assetPlacement = new frmAssetPlacement();
         _levelProp = new frmLevelProp();
     }
 
@@ -88,6 +91,7 @@ public partial class frmLevelManager : Form
         mnuToolsAddLevel.Text = Xlat.µ(97); // Add level...
         mnuToolsDeleteLevel.Text = Xlat.µ(98); // Delete level
         mnuToolsEditLevel.Text = Xlat.µ(99); // Edit level...
+        mnuToolsAssetPlacement.Text = Xlat.µ(111); // Asset placement...
         mnuToolsLevelProperties.Text = Xlat.µ(100); // Level properties...
         mnuToolsPlaytestLevel.Text = Xlat.µ(101); // Playtest
         mnuToolsToolbox.Text = Xlat.µ(102); // Toolbox
@@ -102,6 +106,7 @@ public partial class frmLevelManager : Form
         if (level != null)
         {
             _leved.Initialize(level);
+            _assetPlacement.Prepare(level);
             _levelProp.Prepare(level);
 
             if (_levedWindow.Visible)
@@ -145,6 +150,31 @@ public partial class frmLevelManager : Form
         ));
     }
 
+    private void mnuToolsAssetPlacement_Click(object sender, EventArgs e)
+    {
+        var level = LevelNrFromNode(tvLevels.SelectedNode);
+
+        if (level == null)
+        {
+            return;
+        }
+
+        if (!ReferenceEquals(_assetPlacement.EditedLevel, level))
+        {
+            _assetPlacement.Prepare(level);
+        }
+
+        if (_assetPlacement.Visible)
+        {
+            _assetPlacement.BringToFront();
+        }
+        else
+        {
+            _assetPlacement.MdiParent = MdiParent;
+            _assetPlacement.Show();
+        }
+    }
+
     private void mnuToolsLevelProperties_Click(object sender, EventArgs e)
     {
         var level = LevelNrFromNode(tvLevels.SelectedNode);
@@ -168,7 +198,6 @@ public partial class frmLevelManager : Form
             _levelProp.MdiParent = MdiParent;
             _levelProp.Show();
         }
-
     }
 
     private void frmLevelManager_FormClosing(object sender, FormClosingEventArgs e)

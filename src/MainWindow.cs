@@ -405,4 +405,29 @@ public partial class MainWindow : Form
         DesignWorkspace.EnsureDesignWorkspace();
         DesignWorkspace.SaveWorkspace();
     }
+
+    /// <summary>
+    /// Prevent accidential loss of unsaved data
+    /// </summary>
+    private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        if (e.CloseReason == CloseReason.TaskManagerClosing || e.CloseReason == CloseReason.ApplicationExitCall)
+        {
+            return;
+        }
+
+        if (DesignWorkspace.HasUnsavedData)
+        {
+            var decision = new frmUnsavedData().ShowDialog(this);
+
+            if (decision == DialogResult.Yes)
+            {
+                DesignWorkspace.SaveWorkspace();
+            }
+            else if (decision != DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+    }
 }

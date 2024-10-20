@@ -30,20 +30,20 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAssets));
-            TreeNode treeNode2 = new TreeNode("assets");
+            TreeNode treeNode1 = new TreeNode("assets");
             ilTreeview = new ImageList(components);
             tvAssets = new TreeView();
             mnuAssets = new MenuStrip();
             mnuTools = new ToolStripMenuItem();
+            mnuAssetAddCsg = new ToolStripMenuItem();
+            mnuAssetAddPrefab = new ToolStripMenuItem();
+            mnuAssetAddBackdrop = new ToolStripMenuItem();
             mnuAssetsAddSoundEffect = new ToolStripMenuItem();
             mnuAssetAddMusic = new ToolStripMenuItem();
-            mnuAssetAddPrefab = new ToolStripMenuItem();
-            mnuAssetDelete = new ToolStripMenuItem();
-            mnuAssetEdit = new ToolStripMenuItem();
-            mnuAssetAddCsg = new ToolStripMenuItem();
-            mnuAssetAddBackdrop = new ToolStripMenuItem();
-            mnuAssetView = new ToolStripMenuItem();
             mnuAssetSeparator = new ToolStripSeparator();
+            mnuAssetView = new ToolStripMenuItem();
+            mnuAssetEdit = new ToolStripMenuItem();
+            mnuAssetDelete = new ToolStripMenuItem();
             mnuAssets.SuspendLayout();
             SuspendLayout();
             // 
@@ -55,7 +55,7 @@
             ilTreeview.Images.SetKeyName(0, "folder_closed");
             ilTreeview.Images.SetKeyName(1, "folder_open");
             ilTreeview.Images.SetKeyName(2, "instalment");
-            ilTreeview.Images.SetKeyName(3, "assets.ico");
+            ilTreeview.Images.SetKeyName(3, "asset");
             // 
             // tvAssets
             // 
@@ -68,9 +68,9 @@
             tvAssets.LabelEdit = true;
             tvAssets.Location = new Point(0, 0);
             tvAssets.Name = "tvAssets";
-            treeNode2.Name = "Node1";
-            treeNode2.Text = "assets";
-            tvAssets.Nodes.AddRange(new TreeNode[] { treeNode2 });
+            treeNode1.Name = "Node1";
+            treeNode1.Text = "assets";
+            tvAssets.Nodes.AddRange(new TreeNode[] { treeNode1 });
             tvAssets.PathSeparator = "|";
             tvAssets.SelectedImageKey = "folder_open";
             tvAssets.Size = new Size(251, 211);
@@ -95,60 +95,60 @@
             mnuTools.Size = new Size(55, 20);
             mnuTools.Text = "&Design";
             // 
+            // mnuAssetAddCsg
+            // 
+            mnuAssetAddCsg.Name = "mnuAssetAddCsg";
+            mnuAssetAddCsg.Size = new Size(174, 22);
+            mnuAssetAddCsg.Text = "Add CSG...";
+            // 
+            // mnuAssetAddPrefab
+            // 
+            mnuAssetAddPrefab.Name = "mnuAssetAddPrefab";
+            mnuAssetAddPrefab.Size = new Size(174, 22);
+            mnuAssetAddPrefab.Text = "Add prefab...";
+            // 
+            // mnuAssetAddBackdrop
+            // 
+            mnuAssetAddBackdrop.Name = "mnuAssetAddBackdrop";
+            mnuAssetAddBackdrop.Size = new Size(174, 22);
+            mnuAssetAddBackdrop.Text = "Add backdrop...";
+            mnuAssetAddBackdrop.Click += mnuAssetAddBackdrop_Click;
+            // 
             // mnuAssetsAddSoundEffect
             // 
             mnuAssetsAddSoundEffect.Name = "mnuAssetsAddSoundEffect";
-            mnuAssetsAddSoundEffect.Size = new Size(180, 22);
+            mnuAssetsAddSoundEffect.Size = new Size(174, 22);
             mnuAssetsAddSoundEffect.Text = "Add sound effect...";
             // 
             // mnuAssetAddMusic
             // 
             mnuAssetAddMusic.Name = "mnuAssetAddMusic";
-            mnuAssetAddMusic.Size = new Size(180, 22);
+            mnuAssetAddMusic.Size = new Size(174, 22);
             mnuAssetAddMusic.Text = "Add music...";
             // 
-            // mnuAssetAddPrefab
+            // mnuAssetSeparator
             // 
-            mnuAssetAddPrefab.Name = "mnuAssetAddPrefab";
-            mnuAssetAddPrefab.Size = new Size(180, 22);
-            mnuAssetAddPrefab.Text = "Add prefab...";
+            mnuAssetSeparator.Name = "mnuAssetSeparator";
+            mnuAssetSeparator.Size = new Size(171, 6);
             // 
-            // mnuAssetDelete
+            // mnuAssetView
             // 
-            mnuAssetDelete.Name = "mnuAssetDelete";
-            mnuAssetDelete.Size = new Size(180, 22);
-            mnuAssetDelete.Text = "&Delete";
+            mnuAssetView.Name = "mnuAssetView";
+            mnuAssetView.Size = new Size(174, 22);
+            mnuAssetView.Text = "&View...";
             // 
             // mnuAssetEdit
             // 
             mnuAssetEdit.Image = Properties.Resources.properties;
             mnuAssetEdit.Name = "mnuAssetEdit";
-            mnuAssetEdit.Size = new Size(180, 22);
+            mnuAssetEdit.Size = new Size(174, 22);
             mnuAssetEdit.Text = "&Edit...";
             // 
-            // mnuAssetAddCsg
+            // mnuAssetDelete
             // 
-            mnuAssetAddCsg.Name = "mnuAssetAddCsg";
-            mnuAssetAddCsg.Size = new Size(180, 22);
-            mnuAssetAddCsg.Text = "Add CSG...";
-            // 
-            // mnuAssetAddBackdrop
-            // 
-            mnuAssetAddBackdrop.Name = "mnuAssetAddBackdrop";
-            mnuAssetAddBackdrop.Size = new Size(180, 22);
-            mnuAssetAddBackdrop.Text = "Add backdrop...";
-            mnuAssetAddBackdrop.Click += mnuAssetAddBackdrop_Click;
-            // 
-            // mnuAssetView
-            // 
-            mnuAssetView.Name = "mnuAssetView";
-            mnuAssetView.Size = new Size(180, 22);
-            mnuAssetView.Text = "&View...";
-            // 
-            // mnuAssetSeparator
-            // 
-            mnuAssetSeparator.Name = "mnuAssetSeparator";
-            mnuAssetSeparator.Size = new Size(177, 6);
+            mnuAssetDelete.Name = "mnuAssetDelete";
+            mnuAssetDelete.Size = new Size(174, 22);
+            mnuAssetDelete.Text = "&Delete";
             // 
             // frmAssets
             // 

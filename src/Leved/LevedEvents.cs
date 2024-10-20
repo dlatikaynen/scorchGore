@@ -17,6 +17,7 @@ static class LevedEvents
 
     internal static void OnLevedPropertyChanged(LevedPropertyChangedEventArgs e)
     {
+        DesignWorkspace.SetDirty();
         LevedPropertyChanged?.Invoke(LevedPropertyChangedEventRoot, e);
     }
 }

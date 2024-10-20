@@ -44,6 +44,8 @@
             mnuToolsToolbox = new ToolStripMenuItem();
             mnuToolsPlaytestLevel = new ToolStripMenuItem();
             mnuToolsDeleteLevel = new ToolStripMenuItem();
+            mnuToolsSeparator = new ToolStripSeparator();
+            mnuToolsAssetPlacement = new ToolStripMenuItem();
             mnuLeved.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,7 +58,7 @@
             tvLevels.ImageKey = "folder_closed";
             tvLevels.ImageList = ilTreeview;
             tvLevels.LabelEdit = true;
-            tvLevels.Location = new Point(0, 0);
+            tvLevels.Location = new Point(0, 24);
             tvLevels.Name = "tvLevels";
             treeNode1.Name = "Node3";
             treeNode1.Text = "I.1 Blue Mountains";
@@ -69,7 +71,7 @@
             tvLevels.Nodes.AddRange(new TreeNode[] { treeNode3, treeNode4 });
             tvLevels.PathSeparator = "|";
             tvLevels.SelectedImageKey = "folder_open";
-            tvLevels.Size = new Size(251, 211);
+            tvLevels.Size = new Size(251, 187);
             tvLevels.TabIndex = 0;
             tvLevels.NodeMouseDoubleClick += tvLevels_NodeMouseDoubleClick;
             // 
@@ -97,7 +99,7 @@
             // 
             // mnuTools
             // 
-            mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsAddLevel, mnuToolsEditLevel, mnuToolsLevelProperties, mnuToolsToolbox, mnuToolsPlaytestLevel, mnuToolsDeleteLevel });
+            mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuToolsAddLevel, mnuToolsEditLevel, mnuToolsAssetPlacement, mnuToolsLevelProperties, mnuToolsToolbox, mnuToolsPlaytestLevel, mnuToolsSeparator, mnuToolsDeleteLevel });
             mnuTools.MergeAction = MergeAction.Insert;
             mnuTools.MergeIndex = 3;
             mnuTools.Name = "mnuTools";
@@ -107,13 +109,13 @@
             // mnuToolsAddLevel
             // 
             mnuToolsAddLevel.Name = "mnuToolsAddLevel";
-            mnuToolsAddLevel.Size = new Size(157, 22);
+            mnuToolsAddLevel.Size = new Size(161, 22);
             mnuToolsAddLevel.Text = "Add level";
             // 
             // mnuToolsEditLevel
             // 
             mnuToolsEditLevel.Name = "mnuToolsEditLevel";
-            mnuToolsEditLevel.Size = new Size(157, 22);
+            mnuToolsEditLevel.Size = new Size(161, 22);
             mnuToolsEditLevel.Text = "Edit level";
             mnuToolsEditLevel.Click += mnuToolsEditLevel_Click;
             // 
@@ -121,27 +123,39 @@
             // 
             mnuToolsLevelProperties.Image = Properties.Resources.properties;
             mnuToolsLevelProperties.Name = "mnuToolsLevelProperties";
-            mnuToolsLevelProperties.Size = new Size(157, 22);
+            mnuToolsLevelProperties.Size = new Size(161, 22);
             mnuToolsLevelProperties.Text = "Level properties";
+            mnuToolsAssetPlacement.Click += mnuToolsAssetPlacement_Click;
             mnuToolsLevelProperties.Click += mnuToolsLevelProperties_Click;
             // 
             // mnuToolsToolbox
             // 
             mnuToolsToolbox.Name = "mnuToolsToolbox";
-            mnuToolsToolbox.Size = new Size(157, 22);
+            mnuToolsToolbox.Size = new Size(161, 22);
             mnuToolsToolbox.Text = "Toolbox";
             // 
             // mnuToolsPlaytestLevel
             // 
             mnuToolsPlaytestLevel.Name = "mnuToolsPlaytestLevel";
-            mnuToolsPlaytestLevel.Size = new Size(157, 22);
+            mnuToolsPlaytestLevel.Size = new Size(161, 22);
             mnuToolsPlaytestLevel.Text = "Playtest level";
             // 
             // mnuToolsDeleteLevel
             // 
             mnuToolsDeleteLevel.Name = "mnuToolsDeleteLevel";
-            mnuToolsDeleteLevel.Size = new Size(157, 22);
+            mnuToolsDeleteLevel.Size = new Size(161, 22);
             mnuToolsDeleteLevel.Text = "Delete level";
+            // 
+            // mnuToolsSeparator
+            // 
+            mnuToolsSeparator.Name = "mnuToolsSeparator";
+            mnuToolsSeparator.Size = new Size(158, 6);
+            // 
+            // mnuToolsAssetPlacement
+            // 
+            mnuToolsAssetPlacement.Name = "mnuToolsAssetPlacement";
+            mnuToolsAssetPlacement.Size = new Size(161, 22);
+            mnuToolsAssetPlacement.Text = "Asset Placement";
             // 
             // frmLevelManager
             // 
@@ -174,5 +188,7 @@
         private ToolStripMenuItem mnuToolsDeleteLevel;
         private ToolStripMenuItem mnuToolsLevelProperties;
         private ToolStripMenuItem mnuToolsToolbox;
+        private ToolStripMenuItem mnuToolsAssetPlacement;
+        private ToolStripSeparator mnuToolsSeparator;
     }
 }

@@ -34,6 +34,8 @@ internal static class DesignWorkspace
 
     private static bool IsWorkspaceOpen = false;    
 
+    public static bool HasUnsavedData => IsDirty;
+
     public static void EnsureDesignWorkspace()
     {
         if (!IsWorkspaceOpen)
@@ -139,6 +141,7 @@ internal static class DesignWorkspace
         using var bwr = new BinaryWriter(zip);
 
         WriteEverything(bwr);
+        IsDirty = false;
 
 #if DEBUG
         if(Debugger.IsAttached)

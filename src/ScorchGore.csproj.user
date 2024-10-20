@@ -22,6 +22,12 @@
     <Compile Update="Forms\frmAlreadyUkrainian.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\frmUnsavedData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Leved\frmAssetPlacement.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\frmEditPlayerProfile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +59,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Leved\frmPickMediumMaterialsPalette.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Leved\frmToolbox.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MainWindow.cs">

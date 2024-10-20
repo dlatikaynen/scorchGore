@@ -30,7 +30,12 @@ internal static class LevelZeichner
             if (obenUnten == ObenUnten.BergTeil)
             {
                 /* den himmel zeichnen wir nur beim ersten mal */
-                //zeichenFlaeche.FillRectangle(levelBeschreibung.Materials.Himmelsbuerste, zeichenFlaeche.ClipBounds);
+                if(string.IsNullOrEmpty(levelBeschreibung.BackdropAssetKey) && !levelBeschreibung.ColorBackground.IsEmpty)
+                {
+                    var backBrush = levelBeschreibung.Materials.BuersteVonMedium(Medium.Himmel);
+
+                    zeichenFlaeche.FillRectangle(backBrush, zeichenFlaeche.ClipBounds);
+                }
             }
             else
             {

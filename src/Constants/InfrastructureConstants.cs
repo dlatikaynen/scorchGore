@@ -7,5 +7,6 @@ internal static class InfrastructureConstants
     internal const string LiteralsFilename = "literals.txt";
     internal const string LocalApiUrl = "http://scorchgore.localhost";
     internal const string RemoteApiUrl = "https://en-software.com/scorchgore/";
+    internal const string CommunityUrl = "{aHR0cHM6-Ly9kaXNj-b3JkLmdn-L05BdzVt-bURaUTg}";
     internal static readonly Guid OfdBackdropPngGuid = new("5FDA6B7D-403E-4865-BDD5-A13DECE80DB8");
 }
