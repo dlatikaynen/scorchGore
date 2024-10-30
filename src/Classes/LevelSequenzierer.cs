@@ -30,8 +30,6 @@ internal static class LevelSequenzierer
                 levelBeschreibung.MissionsNummer = 1;
                 levelBeschreibung.LevelNummerInMission = 1;
                 levelBeschreibung.NameEn = "The Blue Mountains";
-                //levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
-                //levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
                 levelBeschreibung.Plateau(645 - 460, 82, 200);
                 levelBeschreibung.SpielerPosition1 = new Point(112, (int)levelBeschreibung.Height - 185);
                 levelBeschreibung.Plateau(645 - 415, 638, 700);
@@ -57,8 +55,6 @@ internal static class LevelSequenzierer
                 levelBeschreibung.LevelNummerInMission = 2;
                 levelBeschreibung.NameEn = "The Blue Cave";
                 levelBeschreibung.Zufallszahl = zufallsZahlenGenerator;
-                //levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
-                //levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
                 levelBeschreibung.SpielerPosition1 = new Point(GameLogicConstants.SpielerBreite, 300);
                 levelBeschreibung.SpielerPosition2 = new Point(800 - GameLogicConstants.SpielerBreite, 300);
                 levelBeschreibung.MaterialThemeKey = "WOTMSTD";
@@ -93,8 +89,6 @@ internal static class LevelSequenzierer
                 levelBeschreibung.LevelNummerInMission = 3;
                 levelBeschreibung.NameEn = "Rock Bottom";
                 levelBeschreibung.Zufallszahl = zufallsZahlenGenerator;
-                //levelBeschreibung.ColorMountain = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
-                //levelBeschreibung.ColorCave = levelBeschreibung.Materials.FarbeVonMedium(Medium.Berg);
                 levelBeschreibung.BeschreibungsSkript = LevelBeschreibungsSkript.Laden(levelBeschreibung);
                 levelBeschreibung.SpielerPosition1 = new Point(112, GameLogicConstants.SpielerBasisHoehe);
                 levelBeschreibung.SpielerPosition2 = new Point(673, GameLogicConstants.SpielerBasisHoehe);
@@ -109,7 +103,16 @@ internal static class LevelSequenzierer
                         { nameof(CsgAssetBerg.BergRauhheitProzent), 8 }
                     }
                 });
-                
+
+                levelBeschreibung.AssetPlacement.Add(new()
+                {
+                    AssetKey = "WOTM_GRAS",
+                    ParamsUInt = {
+                        { nameof(CsgAssetBerg.BergZufallszahl), zufallsZahlenGenerator }
+                    },
+                    Location = new Point(1,1)
+                });
+
                 break;
 
             case 4:

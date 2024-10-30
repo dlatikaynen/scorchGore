@@ -1,4 +1,6 @@
-﻿namespace ScorchGore.Classes;
+﻿using ScorchGore.Constants;
+
+namespace ScorchGore.Classes;
 
 internal interface IOncePerSceneAsset { }
 
@@ -26,7 +28,8 @@ internal class Asset(AssetClass assetClass, Guid id, bool isBuiltin, string name
     public bool IsBuiltin => isBuiltin;
     public string Name => name;
 
-    public virtual string MaterialKey { get; set; } = string.Empty;
+    public virtual Medium Medium { get; set; } = Medium.Berg;
+    public virtual string[] MaterialKeys { get; set; } = [];
 
     public byte[] Icon = [];
     public byte[] Thumb = [];
@@ -36,7 +39,7 @@ internal class Asset(AssetClass assetClass, Guid id, bool isBuiltin, string name
 internal class CsgAssetBerg(Guid id, string name) 
     : Asset(AssetClass.Csg, id, isBuiltin: true, name), IOncePerSceneAsset
 {
-    public override string MaterialKey { get => "MAT_BERG"; set => base.MaterialKey = value; }
+    public override string[] MaterialKeys { get => ["MAT_BERG"]; set => base.MaterialKeys = value; }
 
     /// <summary>
     /// 0 means inherit from level beschreibungs skript
@@ -54,7 +57,7 @@ internal class CsgAssetBerg(Guid id, string name)
 internal class CsgAssetHoehlendecke(Guid id, string name)
     : Asset(AssetClass.Csg, id, isBuiltin: true, name), IOncePerSceneAsset
 {
-    public override string MaterialKey { get => "MAT_CAVE"; set => base.MaterialKey = value; }
+    public override string[] MaterialKeys { get => ["MAT_CAVE"]; set => base.MaterialKeys = value; }
 
     /// <summary>
     /// 0 means inherit from level beschreibungs skript
@@ -66,4 +69,15 @@ internal class CsgAssetHoehlendecke(Guid id, string name)
     public uint HoehleMaxHoeheProzent { get; set; } = 48;
 
     public uint HoehleRauhheitProzent { get; set; } = 50;
+}
+
+[BuiltInAssetCsg("WOTM_GRAS", "{96E3DC6A-5140-4B64-AC65-1EBA50AD2401}")]
+internal class CsgAssetGras(Guid id, string name)
+    : Asset(AssetClass.Csg, id, isBuiltin: true, name)
+{
+    public override string[] MaterialKeys
+    { 
+        get => ["MAT_GRASH", "MAT_GRASM", "MAT_GRASD", "MAT_GRASA"]; 
+        set => base.MaterialKeys = value; 
+    }
 }

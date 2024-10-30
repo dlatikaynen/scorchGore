@@ -15,6 +15,7 @@ public class LevelArchitekturPfad
 
     protected internal readonly List<Point> promilleKoordinaten;
     protected internal Medium terrainMaterial = Medium.Berg;
+    protected internal string materialKey = string.Empty;
     protected internal ZeichnungsBefehl zeichnungBefehl = ZeichnungsBefehl.Pfad;
     protected internal bool wirdRechteck;
     protected internal bool hatFuellung;

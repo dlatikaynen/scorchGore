@@ -9,6 +9,7 @@ internal static class LevelZeichner
     public static void Zeichne(Bitmap woBinIch, LevelBeschreibung levelBeschreibung, Graphics zeichenFlaeche)
     {
         var verfuegbareBergHoehe = levelBeschreibung.Height - GameLogicConstants.ObererRand;
+        var zufallsZahl = new Random((int)levelBeschreibung.BergZufallszahl);
 
         for (
             var obenUnten = ObenUnten.BergTeil;
@@ -20,7 +21,6 @@ internal static class LevelZeichner
             var maximumHoehe = Convert.ToInt32(Convert.ToDecimal(verfuegbareBergHoehe) * Convert.ToDecimal(levelBeschreibung.MaxHoeheProzent(obenUnten)) / 100M);
             var steilHeit = Convert.ToInt32(5 + levelBeschreibung.RauhheitProzent(obenUnten));
             var rauhHeit = 10M - Convert.ToDecimal(levelBeschreibung.RauhheitProzent(obenUnten) / 20M);
-            var zufallsZahl = new Random((int)levelBeschreibung.BergZufallszahl);
             var maximumHoehenunterschied = maximumHoehe - minimumHoehe;
             var aktuelleHoehe = Convert.ToDecimal(minimumHoehe + zufallsZahl.Next(maximumHoehenunterschied));
             var aktuelleRichtung = (zufallsZahl.Next(100) % 2) == 0;
@@ -32,7 +32,7 @@ internal static class LevelZeichner
                 /* den himmel zeichnen wir nur beim ersten mal */
                 if(string.IsNullOrEmpty(levelBeschreibung.BackdropAssetKey) && !levelBeschreibung.ColorBackground.IsEmpty)
                 {
-                    var backBrush = levelBeschreibung.Materials.BuersteVonMedium(Medium.Himmel);
+                    var backBrush = levelBeschreibung.Materials.BuersteVonMedium(Medium.Himmel, "MAT_SKY");
 
                     zeichenFlaeche.FillRectangle(backBrush, zeichenFlaeche.ClipBounds);
                 }
@@ -92,7 +92,7 @@ internal static class LevelZeichner
                         }
                     }
 
-                    zeichenFlaeche.FillRectangle(levelBeschreibung.Materials.Bergbuerste, bergX, (float)woBinIch.Height - pixelHoehe, 2f, (float)woBinIch.Height);
+                    zeichenFlaeche.FillRectangle(levelBeschreibung.Materials.BuersteVonMedium(Medium.Berg, "MAT_BERG"), bergX, (float)woBinIch.Height - pixelHoehe, 2f, (float)woBinIch.Height);
 
                     /* zacken in den berg/in die stalaktitten machen */
                     if (--unveraenderteSteigung <= 0)
@@ -120,7 +120,7 @@ internal static class LevelZeichner
                 if (architekturPfad.terrainMaterial == Medium.Gras)
                 {
                     /* gras kann immer nur linien folgen */
-                    ZeichneGras(woBinIch, zeichenFlaeche, architekturPfad);
+                    ZeichneGras(woBinIch, zeichenFlaeche, zufallsZahl, architekturPfad);
                 }
                 else
                 {
@@ -165,7 +165,7 @@ internal static class LevelZeichner
         if (architekturPfad.IstPunkt)
         {
             zeichenFlaeche.DrawLine(
-                architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
                 grafikPfad.PathPoints[0],
                 grafikPfad.PathPoints[0]
             );
@@ -177,7 +177,7 @@ internal static class LevelZeichner
                 if (architekturPfad.IstGefuellt)
                 {
                     zeichenFlaeche.FillRectangle(
-                        architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial),
+                        architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey),
                         grafikPfad.PathPoints[0].X,
                         grafikPfad.PathPoints[0].Y,
                         Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
@@ -186,7 +186,7 @@ internal static class LevelZeichner
                 }
 
                 zeichenFlaeche.DrawRectangle(
-                    architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                    architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
                     grafikPfad.PathPoints[0].X,
                     grafikPfad.PathPoints[0].Y,
                     Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
@@ -196,7 +196,7 @@ internal static class LevelZeichner
             else
             {
                 zeichenFlaeche.DrawLine(
-                    architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                    architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
                     grafikPfad.PathPoints[0],
                     grafikPfad.PathPoints[1]
                 );
@@ -207,14 +207,14 @@ internal static class LevelZeichner
             if (architekturPfad.IstGefuellt)
             {
                 zeichenFlaeche.FillPath(
-                    architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial),
+                    architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey),
                     grafikPfad
                 );
             }
             else
             {
                 zeichenFlaeche.DrawPath(
-                    architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                    architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
                     grafikPfad
                 );
             }
@@ -227,7 +227,7 @@ internal static class LevelZeichner
         if (architekturPfad.IstGefuellt)
         {
             zeichenFlaeche.FillEllipse(
-                architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial),
+                architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey),
                 grafikPfad.PathPoints[0].X,
                 grafikPfad.PathPoints[0].Y,
                 Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
@@ -236,7 +236,7 @@ internal static class LevelZeichner
         }
 
         zeichenFlaeche.DrawEllipse(
-            architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+            architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
             grafikPfad.PathPoints[0].X,
             grafikPfad.PathPoints[0].Y,
             Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
@@ -253,7 +253,7 @@ internal static class LevelZeichner
             if (architekturPfad.IstGefuellt)
             {
                 zeichenFlaeche.FillClosedCurve(
-                    architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial),
+                    architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey),
                     grafikPfad.PathPoints,
                     FillMode.Alternate,
                     0.62f
@@ -261,7 +261,7 @@ internal static class LevelZeichner
             }
 
             zeichenFlaeche.DrawClosedCurve(
-                architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
                 grafikPfad.PathPoints,
                 0.62f,
                 FillMode.Alternate
@@ -270,18 +270,18 @@ internal static class LevelZeichner
         else
         {
             zeichenFlaeche.DrawCurve(
-                architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.StiftDicke),
+                architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
                 grafikPfad.PathPoints,
                 0.62f
             );
         }
     }
 
-    private static void ZeichneGras(Bitmap woBinIch, Graphics zeichenFlaeche, LevelArchitekturPfad architekturPfad)
+    private static void ZeichneGras(Bitmap woBinIch, Graphics zeichenFlaeche, Random zufallsZahl, LevelArchitekturPfad architekturPfad)
     {
         PointF grasPunktGenau;
-        var random = new Random();
         var grafikPfad = AlsPfad(woBinIch, architekturPfad);
+
         if (grafikPfad.PointCount == 2)
         {
             var sodeAnfang = grafikPfad.PathPoints[0];
@@ -289,6 +289,7 @@ internal static class LevelZeichner
             var letztesBlatt = PointF.Empty;
             var ueberLappung = PointF.Empty;
             var ersterDurchlauf = true;
+
             foreach (var grasPunkt in LinienFolger.Bresenham(
                 (int)sodeAnfang.X,
                 (int)sodeAnfang.Y,
@@ -304,7 +305,7 @@ internal static class LevelZeichner
                 }
                 else
                 {
-                    RechneBlattPosition(zeichenFlaeche, architekturPfad, random, grasPunktGenau, ref letztesBlatt, ref ueberLappung);
+                    RechneBlattPosition(zeichenFlaeche, architekturPfad, zufallsZahl, grasPunktGenau, ref letztesBlatt, ref ueberLappung);
                 }
             }
 
@@ -324,7 +325,7 @@ internal static class LevelZeichner
                 }
                 else
                 {
-                    RechneBlattPosition(zeichenFlaeche, architekturPfad, random, grasPunktGenau, ref letztesBlatt, ref ueberLappung);
+                    RechneBlattPosition(zeichenFlaeche, architekturPfad, zufallsZahl, grasPunktGenau, ref letztesBlatt, ref ueberLappung);
                 }
             }
 
@@ -377,8 +378,17 @@ internal static class LevelZeichner
 
         umrissPfad.CloseFigure();
         var grasFarbton = random.Next(4);
-        var grasStift = architekturPfad.Materials.GrasStift(grasFarbton);
-        var grasBuerste = architekturPfad.Materials.GrasBuerste(grasFarbton);
+        var materialKey = grasFarbton switch
+        {
+            0 => "MAT_GRASD",
+            1 => "MAT_GRASM",
+            2 => "MAT_GRASH",
+            3 => "MAT_GRASA",
+            _ => throw new ArgumentOutOfRangeException(nameof(grasFarbton), grasFarbton, "0-3")
+        };
+
+        var grasStift = architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, materialKey, 1);
+        var grasBuerste = architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, materialKey);
         zeichenFlaeche.FillPath(grasBuerste, umrissPfad);
         zeichenFlaeche.DrawPath(grasStift, umrissPfad);
 
