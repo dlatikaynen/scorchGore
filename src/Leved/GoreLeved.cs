@@ -22,6 +22,7 @@ public class GoreLeved
 
         EditedLevel = level;
         Target.SetupBackbuffer((int)EditedLevel.Width, (int)EditedLevel.Height);
+        EditedLevel.Materials.PrepareForLevel(EditedLevel);
         LevelZeichner.Zeichne(Target.Image, EditedLevel, Target.BackBuffer);
         LevedEvents.LevedPropertyChanged += ListenPropertyChange;
     }

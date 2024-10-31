@@ -2,7 +2,6 @@
 using ScorchGore.Constants;
 using ScorchGore.Extensions;
 using System.Drawing.Imaging;
-using System.Reflection;
 using Xlat = ScorchGore.Translation.Translation;
 
 namespace ScorchGore.Leved;
@@ -33,52 +32,38 @@ public partial class frmAssets : Form
         var sfx_custom = customAssets.Nodes.AddTranslatableNode(key: "69.sfx", µ: 83); // Sfx
 
         builtInAssets.Expand();
-
-        // hardcodedly-builtin assets (CSG berg, cave)
-        var assy = Assembly.GetExecutingAssembly()!;
-        var builtinCsgAssets = (
-            from t in assy
-            .GetTypes()
-            .AsParallel()
-            let attributes = t.GetCustomAttributes(typeof(BuiltInAssetCsgAttribute), true)
-            where attributes != null && attributes.Length > 0
-            select new
-            {
-                AssetClass = t,
-                AssetDescr = attributes.Cast<BuiltInAssetCsgAttribute>().Single()
-            }
-        ).ToList();
-
-        foreach (var assetClass in builtinCsgAssets)
-        {
-            var guid = assetClass.AssetDescr.Id;
-            var name = assetClass.AssetDescr.AssetKey;
-            _ = csg.Nodes.Add(key: $"{csg.Name}.{guid:D}", text: name, imageKey: "asset", selectedImageKey: "asset");
-        }
-
-        // design-workspace defined assets
         foreach (var asset in DesignWorkspace.Assets)
         {
             switch(asset.Class)
             {
-                case AssetClass.Backdrop:
-                    var container = asset.IsBuiltin ? bkdr : bkdr_custom;
-                    var bkdrNode = container.Nodes.Add(key: $"{container.Name}.{asset.Id:D}", text: asset.Name);
-
-                    if (asset.Icon.Length != 0)
+                case AssetClass.Csg:
                     {
-                        using var bIcon = new MemoryStream(asset.Icon);
-                        var icon = Image.FromStream(bIcon);
-                        var iconKey = $"{asset.Id:D}";
-
-                        ilTreeview.Images.Add(iconKey, icon);
-                        bkdrNode.ImageKey = iconKey;
-                        bkdrNode.SelectedImageKey = iconKey;
+                        var container = asset.IsBuiltin ? csg : csg_custom;
+                        _ = container.Nodes.Add(key: $"{csg.Name}.{asset.Id:D}", text: asset.Name, imageKey: "asset", selectedImageKey: "asset");
                     }
-                    else
+
+                    break;
+
+                case AssetClass.Backdrop:
                     {
-                        bkdrNode.ImageKey = "asset";
-                        bkdrNode.SelectedImageKey = "asset";
+                        var container = asset.IsBuiltin ? bkdr : bkdr_custom;
+                        var bkdrNode = container.Nodes.Add(key: $"{container.Name}.{asset.Id:D}", text: asset.Name);
+
+                        if (asset.Icon.Length != 0)
+                        {
+                            using var bIcon = new MemoryStream(asset.Icon);
+                            var icon = Image.FromStream(bIcon);
+                            var iconKey = $"{asset.Id:D}";
+
+                            ilTreeview.Images.Add(iconKey, icon);
+                            bkdrNode.ImageKey = iconKey;
+                            bkdrNode.SelectedImageKey = iconKey;
+                        }
+                        else
+                        {
+                            bkdrNode.ImageKey = "asset";
+                            bkdrNode.SelectedImageKey = "asset";
+                        }
                     }
 
                     break;
@@ -201,6 +186,7 @@ public partial class frmAssets : Form
                     assetNode.SelectedImageKey = assetNode.ImageKey;
 
                     DesignWorkspace.Assets.Add(asset);
+                    DesignWorkspace.SetDirty();
                     assetNode.EnsureVisible();
                 }
             }

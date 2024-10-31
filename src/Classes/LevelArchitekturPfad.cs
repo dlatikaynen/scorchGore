@@ -62,6 +62,7 @@ public class LevelArchitekturPfad
 
         var kommandoTeile = levelZeile.Split(kennzeichenFigur);
         string figurZeile;
+
         if (kommandoTeile.Length == 1)
         {
             figurZeile = kommandoTeile[0].Trim();
@@ -76,27 +77,29 @@ public class LevelArchitekturPfad
         }
 
         var figurTeile = figurZeile.Split(kennzeichenDicke);
+
         if (figurTeile.Length > 1 && int.TryParse(figurTeile[1].Trim(), out int stiftDicke))
         {
             architekturPfad.stiftDicke = stiftDicke;
         }
 
         var figurDefinition = figurTeile[0].Trim();
+
         if (figurDefinition.ToUpperInvariant().EndsWith(modifiziererVollesRechteck))
         {
             architekturPfad.wirdRechteck = true;
             architekturPfad.hatFuellung = true;
-            figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - LevelArchitekturPfad.modifiziererVollesRechteck.Length);
+            figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - modifiziererVollesRechteck.Length);
         }
         else if (figurDefinition.ToUpperInvariant().EndsWith(modifiziererRechteck))
         {
             architekturPfad.wirdRechteck = true;
-            figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - LevelArchitekturPfad.modifiziererRechteck.Length);
+            figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - modifiziererRechteck.Length);
         }
         else if (figurDefinition.ToUpperInvariant().EndsWith(modifiziererFuellung))
         {
             architekturPfad.hatFuellung = true;
-            figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - LevelArchitekturPfad.modifiziererFuellung.Length);
+            figurDefinition = figurDefinition.Substring(0, figurDefinition.Length - modifiziererFuellung.Length);
         }
 
         if (figurDefinition.EndsWith(";"))
@@ -107,6 +110,7 @@ public class LevelArchitekturPfad
         var geleseneKoordinaten = figurDefinition.Split(';').Select(koordinatenPaar =>
         {
             var koordinatenTeile = koordinatenPaar.Split(',');
+
             return new Point(int.Parse(koordinatenTeile[0]), int.Parse(koordinatenTeile[1]));
         });
 

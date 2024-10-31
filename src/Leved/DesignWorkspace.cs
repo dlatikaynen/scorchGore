@@ -3,6 +3,7 @@ using ScorchGore.Constants;
 using System.Buffers.Binary;
 using System.Diagnostics;
 using System.IO.Compression;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -249,6 +250,35 @@ internal static class DesignWorkspace
     {
         var bnass = inStream.ReadBytes(2);
         var nass = BinaryPrimitives.ReadUInt16LittleEndian(bnass);
+
+        // hardcodedly-builtin assets (CSG berg, cave)
+        var assy = Assembly.GetExecutingAssembly()!;
+        var builtinCsgAssets = (
+            from t in assy
+            .GetTypes()
+            .AsParallel()
+            let attributes = t.GetCustomAttributes(typeof(BuiltInAssetCsgAttribute), true)
+            where attributes != null && attributes.Length > 0
+            select new
+            {
+                AssetClass = t,
+                AssetDescr = attributes.Cast<BuiltInAssetCsgAttribute>().Single()
+            }
+        ).ToList();
+
+        foreach (var builtinCsgAsset in builtinCsgAssets)
+        {
+            var assetId = builtinCsgAsset.AssetDescr.Id;
+            var assetKey = builtinCsgAsset.AssetDescr.AssetKey;
+
+            // constructor signature: Guid id, string name
+            var csgAsset = Activator.CreateInstance(builtinCsgAsset.AssetClass, assetId, assetKey);
+
+            if (csgAsset is Asset asset)
+            {
+                Assets.Add(asset);
+            }
+        }
 
         for (var i = 0; i < nass; ++i)
         {
@@ -618,10 +648,23 @@ internal static class DesignWorkspace
     {
         var bnass = new byte[2];
 
-        BinaryPrimitives.WriteUInt16LittleEndian(bnass, (ushort)Assets.Count);
+        // filter out hardwired built-ins
+        var nonHardwired = new List<Asset>();
+
+        foreach (var asset in Assets)
+        {
+            if (asset.GetType().GetCustomAttributes<BuiltInAssetCsgAttribute>().Any())
+            {
+                continue;
+            }
+
+            nonHardwired.Add(asset);
+        }
+
+        BinaryPrimitives.WriteUInt16LittleEndian(bnass, (ushort)nonHardwired.Count);
         oStream.Write(bnass, 0, 2);
 
-        foreach (var ass in Assets)
+        foreach (var ass in nonHardwired)
         {
             SaveAsset(ass, oStream);
         }

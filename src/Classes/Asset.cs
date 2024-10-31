@@ -30,16 +30,34 @@ internal class Asset(AssetClass assetClass, Guid id, bool isBuiltin, string name
 
     public virtual Medium Medium { get; set; } = Medium.Berg;
     public virtual string[] MaterialKeys { get; set; } = [];
+    public virtual Color[] DefaultColors { get; set; } = [];
+
+    public Color DefaultColorOf(string materialKey)
+    {
+        var gotOne = Array.IndexOf(MaterialKeys, materialKey);
+
+        if (gotOne == -1)
+        {
+            return Color.Maroon;
+        }
+
+        return DefaultColors[gotOne];
+    }
 
     public byte[] Icon = [];
     public byte[] Thumb = [];
 }
 
 [BuiltInAssetCsg("WOTM_BERG", "{39B1E120-3AC5-44A0-9215-4BA741B4E507}")]
-internal class CsgAssetBerg(Guid id, string name) 
+internal sealed class CsgAssetBerg(Guid id, string name) 
     : Asset(AssetClass.Csg, id, isBuiltin: true, name), IOncePerSceneAsset
 {
     public override string[] MaterialKeys { get => ["MAT_BERG"]; set => base.MaterialKeys = value; }
+
+    public override Color[] DefaultColors 
+    {
+        get => [Color.SlateBlue];
+    }
 
     /// <summary>
     /// 0 means inherit from level beschreibungs skript
@@ -54,10 +72,18 @@ internal class CsgAssetBerg(Guid id, string name)
 }
 
 [BuiltInAssetCsg("WOTM_CAVECEIL", "{C5C2520C-1821-45BB-8D76-2AE1634E78B6}")]
-internal class CsgAssetHoehlendecke(Guid id, string name)
+internal sealed class CsgAssetHoehlendecke(Guid id, string name)
     : Asset(AssetClass.Csg, id, isBuiltin: true, name), IOncePerSceneAsset
 {
+    public override Medium Medium { get => Medium.Cave; }
+    
     public override string[] MaterialKeys { get => ["MAT_CAVE"]; set => base.MaterialKeys = value; }
+
+    public override Color[] DefaultColors
+    {
+        // canonically the same as berg. will collide and adjust in the set-of-materials
+        get => [Color.SlateBlue];
+    }
 
     /// <summary>
     /// 0 means inherit from level beschreibungs skript
@@ -72,12 +98,27 @@ internal class CsgAssetHoehlendecke(Guid id, string name)
 }
 
 [BuiltInAssetCsg("WOTM_GRAS", "{96E3DC6A-5140-4B64-AC65-1EBA50AD2401}")]
-internal class CsgAssetGras(Guid id, string name)
+internal sealed class CsgAssetGras(Guid id, string name)
     : Asset(AssetClass.Csg, id, isBuiltin: true, name)
 {
+    public override Medium Medium { get => Medium.Gras; }
+
     public override string[] MaterialKeys
-    { 
-        get => ["MAT_GRASH", "MAT_GRASM", "MAT_GRASD", "MAT_GRASA"]; 
-        set => base.MaterialKeys = value; 
+    {
+        get => [
+            "MAT_GRASH", "MAT_GRASFH",
+            "MAT_GRASD", "MAT_GRASFD",
+            "MAT_GRASM", "MAT_GRASFM",
+            "MAT_GRASA", "MAT_GRASFA"
+        ];
+    }
+
+    public override Color[] DefaultColors {
+        get => [
+            Color.GreenYellow, Color.Chartreuse, // H
+            Color.LimeGreen, Color.ForestGreen,  // D
+            Color.LawnGreen, Color.LightGreen,   // M
+            Color.Lime, Color.SpringGreen        // A
+        ];
     }
 }

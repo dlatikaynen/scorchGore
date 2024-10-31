@@ -76,7 +76,7 @@ public class GoreArena
             Ergebnis = SchussErgebnis.NixGetroffen
         };
 
-        var himmelsFarbe = CurrentLevel.Materials.GimmeColor(Medium.Himmel, "MAT_SKY").ToArgb();
+        var himmelsFarbe = CurrentLevel.Materials.FarbeVonMedium(Medium.Himmel, "MAT_SKY").ToArgb();
 
         /* von hier nach dort x laufen lassen */
         for (

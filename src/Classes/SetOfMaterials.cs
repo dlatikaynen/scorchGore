@@ -1,6 +1,5 @@
 ﻿using ScorchGore.Constants;
 using ScorchGore.Extensions;
-using ScorchGore.Forms;
 using ScorchGore.Leved;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -83,5 +82,33 @@ internal class MaterialTheme(string name, List<SetOfMaterials> setsOfMaterials)
         }
 
         return true;
+    }
+
+    internal Material AllocateMaterial(SetOfMaterials set, string materialKey, Color color)
+    {
+        var existing = set.Materials.SingleOrDefault(m=>m.Name == materialKey);
+
+        if (existing != null)
+        {
+            return existing;
+        }
+
+        // TODO: colors must remain unique inside the entire theme!
+        var mat = new Material(materialKey, color);
+
+        if (set.Materials.Count < 0xff)
+        {
+            set.Materials.Add(mat);
+            DesignWorkspace.SetDirty();
+        }
+#if DEBUG
+        else
+        {
+            // palette full!
+            Debugger.Break();
+        }
+#endif
+
+        return mat;
     }
 }

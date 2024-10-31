@@ -124,6 +124,15 @@ internal static class LevelZeichner
                 }
                 else
                 {
+                    if (architekturPfad.terrainMaterial == Medium.Berg && architekturPfad.materialKey.Length == 0)
+                    {
+                        architekturPfad.materialKey = "MAT_BERG";
+                    }
+                    else if (architekturPfad.terrainMaterial == Medium.Cave && architekturPfad.materialKey.Length == 0)
+                    {
+                        architekturPfad.materialKey = "MAT_CAVE";
+                    }
+
                     switch (architekturPfad.zeichnungBefehl)
                     {
                         case ZeichnungsBefehl.Bogen:
@@ -378,17 +387,26 @@ internal static class LevelZeichner
 
         umrissPfad.CloseFigure();
         var grasFarbton = random.Next(4);
-        var materialKey = grasFarbton switch
+        var stiftKey = grasFarbton switch
         {
-            0 => "MAT_GRASD",
-            1 => "MAT_GRASM",
-            2 => "MAT_GRASH",
+            0 => "MAT_GRASH",
+            1 => "MAT_GRASD",
+            2 => "MAT_GRASM",
             3 => "MAT_GRASA",
             _ => throw new ArgumentOutOfRangeException(nameof(grasFarbton), grasFarbton, "0-3")
         };
 
-        var grasStift = architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, materialKey, 1);
-        var grasBuerste = architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, materialKey);
+        var buersteKey = grasFarbton switch
+        {
+            0 => "MAT_GRASFH",
+            1 => "MAT_GRASFD",
+            2 => "MAT_GRASFM",
+            3 => "MAT_GRASFA",
+            _ => throw new ArgumentOutOfRangeException(nameof(grasFarbton), grasFarbton, "0-3")
+        };
+
+        var grasStift = architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, stiftKey, 1);
+        var grasBuerste = architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, buersteKey);
         zeichenFlaeche.FillPath(grasBuerste, umrissPfad);
         zeichenFlaeche.DrawPath(grasStift, umrissPfad);
 

@@ -42,6 +42,8 @@ public class Materials: IDisposable
             if (asset == null)
             {
 #if DEBUG
+                // no asset definition in design workspace.
+                // this is a problem, we cannot simply make one up
                 Debugger.Break();
 
 #endif
@@ -52,24 +54,22 @@ public class Materials: IDisposable
             {
                 var set = theme.SetsOfMaterials.SingleOrDefault(s => s.Medium == asset.Medium);
 
-                if(set == null)
+                if (set == null)
                 {
-#if DEBUG
-                    Debugger.Break();
-
-#endif
-                    continue;
+                    // now this is not a problem actually, we simply allocate it
+                    set = new SetOfMaterials(asset.Medium, []);
+                    theme.SetsOfMaterials.Add(set);
+                    DesignWorkspace.SetDirty();
                 }
 
                 var mat = set.Materials.SingleOrDefault(m => m.Name == materialKey);
 
-                if(mat == null)
+                if (mat == null)
                 {
-#if DEBUG
-                    Debugger.Break();
-
-#endif
-                    continue;
+                    // now this is not a problem really, we just allocate it
+                    // we might even know the correct color if it is a built-in
+                    var color = asset.DefaultColorOf(materialKey);
+                    mat = theme.AllocateMaterial(set, materialKey, color);
                 }
 
                 var nextIndex = penises.Count; // shame this is not an array
@@ -98,11 +98,6 @@ public class Materials: IDisposable
                 }
             }
         }
-    }
-
-    public Color GimmeColor(Medium medium, string materialKey)
-    {
-        return penises[catalog[medium][materialKey]].Color;
     }
 
     public Pen StiftVonMedium(Medium medium, string materialKey, int width)
