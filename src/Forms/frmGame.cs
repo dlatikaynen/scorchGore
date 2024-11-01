@@ -279,7 +279,6 @@ public partial class frmGame : Form
         else
         {
             _arenaWindow.Text = Text;
-            //_arenaWindow.MdiParent = MdiParent;
             _arenaWindow.Show();
         }
     }

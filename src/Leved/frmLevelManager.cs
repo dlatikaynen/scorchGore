@@ -148,6 +148,35 @@ public partial class frmLevelManager : Form
         ));
     }
 
+    private async void mnuToolsPlaytestLevel_Click(object sender, EventArgs e)
+    {
+        var level = LevelNrFromNode(tvLevels.SelectedNode);
+
+        if (level != null)
+        {
+            if (_levedWindow.Visible)
+            {
+                _levedWindow.Hide();
+            }
+
+            /* 1. make a shim session, which is always a local take-turns
+             *    single-player session for level playtesting purposes */
+            var playTestSession = new Sequencer.GoreSession()
+            {
+                AmITheInitiatorEven = true,
+                GameToken = Guid.Empty
+            };
+
+            /* 2. bring up the actual engine with that session */
+            var frmGame = new frmGame(playTestSession)
+            {
+                MdiParent = MdiParent
+            };
+
+            await frmGame.DoSomething();
+        }
+    }
+
     private void mnuToolsAssetPlacement_Click(object sender, EventArgs e)
     {
         var level = LevelNrFromNode(tvLevels.SelectedNode);

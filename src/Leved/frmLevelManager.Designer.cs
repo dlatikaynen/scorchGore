@@ -139,6 +139,7 @@
             mnuToolsPlaytestLevel.Name = "mnuToolsPlaytestLevel";
             mnuToolsPlaytestLevel.Size = new Size(161, 22);
             mnuToolsPlaytestLevel.Text = "Playtest level";
+            mnuToolsPlaytestLevel.Click += mnuToolsPlaytestLevel_Click;
             // 
             // mnuToolsDeleteLevel
             // 
