@@ -53,6 +53,7 @@ public class GoreLeved
             Target.Backdrop = null;
         }
 
+        EditedLevel.Materials.PrepareForLevel(EditedLevel);
         LevelZeichner.Zeichne(Target.Image, EditedLevel, Target.BackBuffer);
     }
 }

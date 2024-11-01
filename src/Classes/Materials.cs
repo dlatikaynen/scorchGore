@@ -20,6 +20,7 @@ public class Materials: IDisposable
     /// </summary>
     public void PrepareForLevel(LevelBeschreibung lvl)
     {
+        FreeGdiRessources();
         var theme = DesignWorkspace.MaterialThemes.Single(mt => mt.Name == lvl.MaterialThemeKey);
 
         if(theme == null)
@@ -48,7 +49,18 @@ public class Materials: IDisposable
             skyPen = new Pen(lvl.ColorBackground);
         }
 
+        // some required material keys may come from the level beschreibungs script,
+        // which can mention some without using an asset ("STAHL MAT_KEY #colorname" syntax)
+        var sceneMaterials = LevelBeschreibungsSkript.GetBOM(lvl);
+
+        foreach ((var medium, var materialKey) in sceneMaterials)
+        {
+            ProvisionMaterial(theme, medium, materialKey, Color.Empty);
+        }
+
+        // the rest of the material keys that we need will come from the placed assets
         var assetKeysOfRelevance = lvl.AssetPlacement.Select(ap => ap.AssetKey);
+
         foreach (var assetKey in assetKeysOfRelevance)
         {
             var asset = DesignWorkspace.Assets.SingleOrDefault(a => a.Name == assetKey);
@@ -66,47 +78,52 @@ public class Materials: IDisposable
 
             foreach (var materialKey in asset.MaterialKeys)
             {
-                var set = theme.SetsOfMaterials.SingleOrDefault(s => s.Medium == asset.Medium);
-
-                if (set == null)
-                {
-                    // now this is not a problem actually, we simply allocate it
-                    set = new SetOfMaterials(asset.Medium, []);
-                    theme.SetsOfMaterials.Add(set);
-                    DesignWorkspace.SetDirty();
-                }
-
-                var mat = set.Materials.SingleOrDefault(m => m.Name == materialKey);
-
-                if (mat == null)
-                {
-                    // now this is not a problem really, we just allocate it
-                    // we might even know the correct color if it is a built-in
-                    var color = asset.DefaultColorOf(materialKey);
-                    mat = theme.AllocateMaterial(set, materialKey, color);
-                }
-
-                var nextIndex = penises.Count; // shame this is not an array
-                var doAdd = true;
-
-                if(catalog.TryGetValue(asset.Medium, out var palette))
-                {
-                    if (!palette.TryAdd(materialKey, nextIndex))
-                    {
-                        doAdd = false;
-                    }
-                }
-                else
-                {
-                    catalog.Add(asset.Medium, new Dictionary<string, int>() { { materialKey, nextIndex } });
-                }
-
-                if (doAdd)
-                {
-                    penises.Add(new Pen(mat.Color));
-                    bushes.Add(new SolidBrush(mat.Color));
-                }
+                ProvisionMaterial(theme, asset.Medium, materialKey, asset.DefaultColorOf(materialKey));
             }
+        }
+    }
+
+    private void ProvisionMaterial(MaterialTheme theme, Medium medium, string materialKey, Color desiredColor)
+    {
+        var set = theme.SetsOfMaterials.SingleOrDefault(s => s.Medium == medium);
+
+        if (set == null)
+        {
+            // now this is not a problem actually, we simply allocate it
+            set = new SetOfMaterials(medium, []);
+            theme.SetsOfMaterials.Add(set);
+            DesignWorkspace.SetDirty();
+        }
+
+        var mat = set.Materials.SingleOrDefault(m => m.Name == materialKey);
+
+        if (mat == null)
+        {
+            // now this is not a problem really, we just allocate it
+            // we might even know the correct color if it is a built-in
+            var color = desiredColor;
+            mat = MaterialTheme.AllocateMaterial(set, materialKey, color);
+        }
+
+        var nextIndex = penises.Count; // shame this is not an array
+        var doAdd = true;
+
+        if (catalog.TryGetValue(medium, out var palette))
+        {
+            if (!palette.TryAdd(materialKey, nextIndex))
+            {
+                doAdd = false;
+            }
+        }
+        else
+        {
+            catalog.Add(medium, new Dictionary<string, int>() { { materialKey, nextIndex } });
+        }
+
+        if (doAdd)
+        {
+            penises.Add(new Pen(mat.Color));
+            bushes.Add(new SolidBrush(mat.Color));
         }
     }
 
@@ -162,24 +179,29 @@ public class Materials: IDisposable
         {
             if (disposing)
             {
-                skyPen?.Dispose();
-                skyBrush?.Dispose();
-
-                foreach(var pen in penises)
-                {
-                    pen.Dispose();
-                }
-
-                foreach (var bush in bushes)
-                {
-                    bush.Dispose();
-                }
-
-                catalog.Clear();
+                FreeGdiRessources();
             }
 
             disposedValue = true;
         }
+    }
+
+    private void FreeGdiRessources()
+    {
+        skyPen?.Dispose();
+        skyBrush?.Dispose();
+
+        foreach (var pen in penises)
+        {
+            pen.Dispose();
+        }
+
+        foreach (var bush in bushes)
+        {
+            bush.Dispose();
+        }
+
+        catalog.Clear();
     }
 
     public void Dispose()

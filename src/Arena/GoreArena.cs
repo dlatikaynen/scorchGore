@@ -28,6 +28,7 @@ public class GoreArena
 
         CurrentLevel = level;
         Target.SetupBackbuffer((int)CurrentLevel.Width, (int)CurrentLevel.Height);
+        CurrentLevel.Materials.PrepareForLevel(CurrentLevel);
         LevelZeichner.Zeichne(Target.Image, CurrentLevel, Target.BackBuffer);
 
         Player1.AnchorX = CurrentLevel.SpielerPosition1.X;

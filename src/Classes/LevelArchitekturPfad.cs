@@ -14,7 +14,7 @@ public class LevelArchitekturPfad
     protected internal const string modifiziererVollesRechteck = "BF";
 
     protected internal readonly List<Point> promilleKoordinaten;
-    protected internal Medium terrainMaterial = Medium.Berg;
+    protected internal Medium medium = Medium.Berg;
     protected internal string materialKey = string.Empty;
     protected internal ZeichnungsBefehl zeichnungBefehl = ZeichnungsBefehl.Pfad;
     protected internal bool wirdRechteck;
@@ -53,11 +53,12 @@ public class LevelArchitekturPfad
         return grafikPfad;
     }
 
-    internal static LevelArchitekturPfad AusLevelDatei(Materials materials, Medium aktuellesMaterial, string levelZeile)
+    internal static LevelArchitekturPfad AusLevelDatei(Materials materials, Medium aktuellesMedium, string aktuellesMaterial, string levelZeile)
     {
         var architekturPfad = new LevelArchitekturPfad(materials)
         {
-            terrainMaterial = aktuellesMaterial
+            medium = aktuellesMedium,
+            materialKey = aktuellesMaterial
         };
 
         var kommandoTeile = levelZeile.Split(kennzeichenFigur);

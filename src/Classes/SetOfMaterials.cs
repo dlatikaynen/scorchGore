@@ -41,16 +41,7 @@ internal class MaterialTheme(string name, List<SetOfMaterials> setsOfMaterials)
             return false;
         }
 
-        var set = theme.SetsOfMaterials.SingleOrDefault(som => som.Medium == medium);
-
-        if (set == null)
-        {
-            set = new SetOfMaterials(medium, []);
-
-            theme.SetsOfMaterials.Add(set);
-            DesignWorkspace.SetDirty();
-        }
-
+        var set = AllocateSetOfMaterialFor(theme, medium);
         var existingEntry = set.Materials.SingleOrDefault(m => m.Color.ToArgb() == color.ToArgb());
 
         if (existingEntry == null)
@@ -84,7 +75,29 @@ internal class MaterialTheme(string name, List<SetOfMaterials> setsOfMaterials)
         return true;
     }
 
-    internal Material AllocateMaterial(SetOfMaterials set, string materialKey, Color color)
+    private static SetOfMaterials AllocateSetOfMaterialFor(MaterialTheme theme, Medium medium)
+    {
+        var set = theme.SetsOfMaterials.SingleOrDefault(som => som.Medium == medium);
+
+        if (set == null)
+        {
+            set = new SetOfMaterials(medium, []);
+
+            theme.SetsOfMaterials.Add(set);
+            DesignWorkspace.SetDirty();
+        }
+
+        return set;
+    }
+
+    internal static Material AllocateMaterial(MaterialTheme theme, Medium medium, string materialKey, Color color)
+    {
+        var set = AllocateSetOfMaterialFor(theme, medium);
+
+        return AllocateMaterial(set, materialKey, color);
+    }
+
+    internal static Material AllocateMaterial(SetOfMaterials set, string materialKey, Color color)
     {
         var existing = set.Materials.SingleOrDefault(m=>m.Name == materialKey);
 

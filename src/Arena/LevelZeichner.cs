@@ -118,18 +118,18 @@ internal static class LevelZeichner
             zeichenFlaeche.PixelOffsetMode = PixelOffsetMode.Half;
             foreach (var architekturPfad in script.Pfade)
             {
-                if (architekturPfad.terrainMaterial == Medium.Gras)
+                if (architekturPfad.medium == Medium.Gras)
                 {
                     /* gras kann immer nur linien folgen */
                     ZeichneGras(woBinIch, zeichenFlaeche, zufallsZahl, architekturPfad);
                 }
                 else
                 {
-                    if (architekturPfad.terrainMaterial == Medium.Berg && architekturPfad.materialKey.Length == 0)
+                    if (architekturPfad.medium == Medium.Berg && architekturPfad.materialKey.Length == 0)
                     {
                         architekturPfad.materialKey = "MAT_BERG";
                     }
-                    else if (architekturPfad.terrainMaterial == Medium.Cave && architekturPfad.materialKey.Length == 0)
+                    else if (architekturPfad.medium == Medium.Cave && architekturPfad.materialKey.Length == 0)
                     {
                         architekturPfad.materialKey = "MAT_CAVE";
                     }
@@ -175,7 +175,7 @@ internal static class LevelZeichner
         if (architekturPfad.IstPunkt)
         {
             zeichenFlaeche.DrawLine(
-                architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
+                architekturPfad.Materials.StiftVonMedium(architekturPfad.medium, architekturPfad.materialKey, architekturPfad.StiftDicke),
                 grafikPfad.PathPoints[0],
                 grafikPfad.PathPoints[0]
             );
@@ -187,7 +187,7 @@ internal static class LevelZeichner
                 if (architekturPfad.IstGefuellt)
                 {
                     zeichenFlaeche.FillRectangle(
-                        architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey),
+                        architekturPfad.Materials.BuersteVonMedium(architekturPfad.medium, architekturPfad.materialKey),
                         grafikPfad.PathPoints[0].X,
                         grafikPfad.PathPoints[0].Y,
                         Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
@@ -196,7 +196,7 @@ internal static class LevelZeichner
                 }
 
                 zeichenFlaeche.DrawRectangle(
-                    architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
+                    architekturPfad.Materials.StiftVonMedium(architekturPfad.medium, architekturPfad.materialKey, architekturPfad.StiftDicke),
                     grafikPfad.PathPoints[0].X,
                     grafikPfad.PathPoints[0].Y,
                     Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
@@ -206,7 +206,7 @@ internal static class LevelZeichner
             else
             {
                 zeichenFlaeche.DrawLine(
-                    architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
+                    architekturPfad.Materials.StiftVonMedium(architekturPfad.medium, architekturPfad.materialKey, architekturPfad.StiftDicke),
                     grafikPfad.PathPoints[0],
                     grafikPfad.PathPoints[1]
                 );
@@ -217,14 +217,14 @@ internal static class LevelZeichner
             if (architekturPfad.IstGefuellt)
             {
                 zeichenFlaeche.FillPath(
-                    architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey),
+                    architekturPfad.Materials.BuersteVonMedium(architekturPfad.medium, architekturPfad.materialKey),
                     grafikPfad
                 );
             }
             else
             {
                 zeichenFlaeche.DrawPath(
-                    architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
+                    architekturPfad.Materials.StiftVonMedium(architekturPfad.medium, architekturPfad.materialKey, architekturPfad.StiftDicke),
                     grafikPfad
                 );
             }
@@ -237,7 +237,7 @@ internal static class LevelZeichner
         if (architekturPfad.IstGefuellt)
         {
             zeichenFlaeche.FillEllipse(
-                architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey),
+                architekturPfad.Materials.BuersteVonMedium(architekturPfad.medium, architekturPfad.materialKey),
                 grafikPfad.PathPoints[0].X,
                 grafikPfad.PathPoints[0].Y,
                 Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
@@ -246,7 +246,7 @@ internal static class LevelZeichner
         }
 
         zeichenFlaeche.DrawEllipse(
-            architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
+            architekturPfad.Materials.StiftVonMedium(architekturPfad.medium, architekturPfad.materialKey, architekturPfad.StiftDicke),
             grafikPfad.PathPoints[0].X,
             grafikPfad.PathPoints[0].Y,
             Math.Abs(grafikPfad.PathPoints[1].X - grafikPfad.PathPoints[0].X) + 1,
@@ -263,7 +263,7 @@ internal static class LevelZeichner
             if (architekturPfad.IstGefuellt)
             {
                 zeichenFlaeche.FillClosedCurve(
-                    architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey),
+                    architekturPfad.Materials.BuersteVonMedium(architekturPfad.medium, architekturPfad.materialKey),
                     grafikPfad.PathPoints,
                     FillMode.Alternate,
                     0.62f
@@ -271,7 +271,7 @@ internal static class LevelZeichner
             }
 
             zeichenFlaeche.DrawClosedCurve(
-                architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
+                architekturPfad.Materials.StiftVonMedium(architekturPfad.medium, architekturPfad.materialKey, architekturPfad.StiftDicke),
                 grafikPfad.PathPoints,
                 0.62f,
                 FillMode.Alternate
@@ -280,7 +280,7 @@ internal static class LevelZeichner
         else
         {
             zeichenFlaeche.DrawCurve(
-                architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, architekturPfad.materialKey, architekturPfad.StiftDicke),
+                architekturPfad.Materials.StiftVonMedium(architekturPfad.medium, architekturPfad.materialKey, architekturPfad.StiftDicke),
                 grafikPfad.PathPoints,
                 0.62f
             );
@@ -406,8 +406,8 @@ internal static class LevelZeichner
             _ => throw new ArgumentOutOfRangeException(nameof(grasFarbton), grasFarbton, "0-3")
         };
 
-        var grasStift = architekturPfad.Materials.StiftVonMedium(architekturPfad.terrainMaterial, stiftKey, 1);
-        var grasBuerste = architekturPfad.Materials.BuersteVonMedium(architekturPfad.terrainMaterial, buersteKey);
+        var grasStift = architekturPfad.Materials.StiftVonMedium(architekturPfad.medium, stiftKey, 1);
+        var grasBuerste = architekturPfad.Materials.BuersteVonMedium(architekturPfad.medium, buersteKey);
         zeichenFlaeche.FillPath(grasBuerste, umrissPfad);
         zeichenFlaeche.DrawPath(grasStift, umrissPfad);
 
