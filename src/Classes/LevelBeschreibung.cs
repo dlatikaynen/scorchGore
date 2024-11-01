@@ -82,13 +82,13 @@ public class LevelBeschreibung
     /* Besonderheiten der Topologie */
     public Dictionary<int, Plateau> Plateaus { get; private set; }
 
-    public LevelBeschreibungsSkript BeschreibungsSkript { get; set; } = new();
+    public string BeschreibungsSkript { get; set; } = string.Empty;
 
     [Browsable(false)]
     public Materials Materials { get; set; }
 
     [Browsable(false)]
-    public bool IstGeskriptet => BeschreibungsSkript != null;
+    public bool IstGeskriptet => !string.IsNullOrWhiteSpace(BeschreibungsSkript);
 
     /* Beschreibung für ein Missionslevel */
     [Browsable(false)]
@@ -104,12 +104,6 @@ public class LevelBeschreibung
     public int LevelNummerInMission { get; set; } = 0;
 
     internal void MisisonsnameSetzen() => MissionsName = MissionsnameBestimmen(MissionsNummer);
-
-    internal void SetScriptSource(string scriptSource)
-    {
-        BeschreibungsSkript ??= new();
-        BeschreibungsSkript.SetSource(scriptSource);
-    }
 
     internal void Plateau(int bodenHoehe, int startX, int endetX) => Plateaus.Add(startX, new Plateau { Elevation = bodenHoehe, StartX = startX, EndetX = endetX });
 

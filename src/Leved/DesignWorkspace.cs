@@ -408,6 +408,7 @@ internal static class DesignWorkspace
             Height = height,
             ColorBackground = colorBackground,
             Zufallszahl = zufallszahl,
+            BeschreibungsSkript = beschreibungsSkript,
             SpielerPosition1 = new(spielerPosition1X, spielerPosition1Y),
             SpielerPosition2 = new(spielerPosition2X, spielerPosition2Y),
             NameEn = nameEn,
@@ -418,8 +419,6 @@ internal static class DesignWorkspace
             MaterialThemeKey = materialThemeKey,
             BackdropAssetKey = backdropAssetKey,
         };
-
-        lvl.SetScriptSource(beschreibungsSkript);
 
         // load asset placements
         var nPlacements = inStream.ReadUInt16();
@@ -789,7 +788,7 @@ internal static class DesignWorkspace
         var slMaterialThemeKey = (byte)bMaterialThemeKey.Length;
         var bBackdropAssetKey = Encoding.UTF8.GetBytes(level.BackdropAssetKey);
         var slBackdropAssetKey = (byte)bBackdropAssetKey.Length;
-        var bBeschreibungsSkript = Encoding.UTF8.GetBytes(level.BeschreibungsSkript.Source);
+        var bBeschreibungsSkript = Encoding.UTF8.GetBytes(level.BeschreibungsSkript);
         var slBeschreibungsSkript = (byte)bBeschreibungsSkript.Length;
 
         oStream.Write(slNameEn);

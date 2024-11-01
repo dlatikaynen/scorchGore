@@ -1,5 +1,6 @@
 ﻿using ScorchGore.Arena;
 using ScorchGore.Constants;
+using ScorchGore.Leved;
 using ScorchGore.Sequencer;
 
 namespace ScorchGore.Forms;
@@ -185,7 +186,7 @@ public partial class frmGame : Form
                 break;
 
             case SequencerCommands.CANVAS_THE_CITY_AND_BRUSH_THE_BACKDROP:
-                _arena.Initialize(1);
+                _arena.Initialize(DesignWorkspace.Levels.First());
                 break;
 
             case SequencerCommands.INITIATORS_TURN:

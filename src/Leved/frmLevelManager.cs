@@ -33,32 +33,30 @@ public partial class frmLevelManager : Form
             null
         );
 
-        var levelNr = 1;
+        var mission = 0;
+        TreeNode? missionNode = null;
 
-        for (var mission = 1; mission <= 7; ++mission)
+        foreach (var levelInfo in DesignWorkspace.Levels)
         {
-            var missionNode = installmentOne.Nodes.Add(
-                $"1.{mission}",
-                LevelBeschreibung.MissionsnameBestimmen(mission),
-                "mission",
-                "mission"
+            if (levelInfo.MissionsNummer != mission)
+            {
+                mission = levelInfo.MissionsNummer;
+                missionNode = installmentOne.Nodes.Add(
+                    $"1.{mission}",
+                    LevelBeschreibung.MissionsnameBestimmen(mission),
+                    "mission",
+                    "mission"
+                );
+            }
+
+            var levelNode = missionNode!.Nodes.Add(
+                $"1.{mission}.{levelInfo.LevelNummer}",
+                levelInfo.LevelName,
+                "map",
+                "map"
             );
 
-            var levelInfo = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
-            while (levelInfo.MissionsNummer == mission)
-            {
-                var levelNode = missionNode.Nodes.Add(
-                    $"1.{mission}.{levelInfo.LevelNummer}",
-                    levelInfo.LevelName,
-                    "map",
-                    "map"
-                );
-
-                levelNode.Tag = levelInfo;
-
-                ++levelNr;
-                levelInfo = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
-            }
+            levelNode.Tag = levelInfo;
         }
 
         var customLevels = tvLevels.Nodes.Add(

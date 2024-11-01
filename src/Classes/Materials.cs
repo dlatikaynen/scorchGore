@@ -8,14 +8,11 @@ public class Materials: IDisposable
 {
     private bool disposedValue;
 
+    private Pen? skyPen;
+    private SolidBrush? skyBrush;
     private readonly List<Pen> penises = [];
     private readonly List<SolidBrush> bushes = [];
     private readonly Dictionary<Medium, Dictionary<string, int>> catalog = [];
-
-/*
-        penGrasDunkler = new Pen(Color.LimeGreen);
-        brushGrasDunkler = new SolidBrush(Color.ForestGreen);
-*/
 
     /// <summary>
     /// Creates a pen and a brush for every material
@@ -32,6 +29,23 @@ public class Materials: IDisposable
 
 #endif
             return;
+        }
+
+        if (string.IsNullOrEmpty(lvl.BackdropAssetKey) && lvl.ColorBackground != Color.Empty)
+        {
+            if (!theme.SetsOfMaterials.Any(som => som.Medium == Medium.Himmel))
+            {
+                theme.SetsOfMaterials.Add(new SetOfMaterials(Medium.Himmel, []));
+                DesignWorkspace.SetDirty();
+            }
+
+            if (!catalog.ContainsKey(Medium.Himmel))
+            {
+                catalog.Add(Medium.Himmel, []);
+            }
+
+            skyBrush = new SolidBrush(lvl.ColorBackground);
+            skyPen = new Pen(lvl.ColorBackground);
         }
 
         var assetKeysOfRelevance = lvl.AssetPlacement.Select(ap => ap.AssetKey);
@@ -77,13 +91,9 @@ public class Materials: IDisposable
 
                 if(catalog.TryGetValue(asset.Medium, out var palette))
                 {
-                    if (palette.ContainsKey(materialKey))
+                    if (!palette.TryAdd(materialKey, nextIndex))
                     {
                         doAdd = false;
-                    }
-                    else
-                    {
-                        palette.Add(materialKey, nextIndex);
                     }
                 }
                 else
@@ -102,7 +112,22 @@ public class Materials: IDisposable
 
     public Pen StiftVonMedium(Medium medium, string materialKey, int width)
     {
-        var pen = penises[catalog[medium][materialKey]];
+        Pen pen;
+
+        var materials = catalog[medium];
+
+        if(materials.TryGetValue(materialKey, out var material))
+        {
+            pen = penises[material];
+        }
+        else if (medium == Medium.Himmel)
+        {
+            pen = skyPen!;
+        }
+        else
+        {
+            pen = penises[materials[materialKey]];
+        }
 
         pen.Width = width;
 
@@ -111,12 +136,24 @@ public class Materials: IDisposable
 
     public SolidBrush BuersteVonMedium(Medium medium, string materialKey)
     {
-        return bushes[catalog[medium][materialKey]];
+        var materials = catalog[medium];
+
+        if (materials.TryGetValue(materialKey, out var material))
+        {
+            return bushes[material];
+        }
+
+        if (medium == Medium.Himmel)
+        {
+            return skyBrush!;
+        }
+
+        return bushes[materials[materialKey]];
     }
 
     public Color FarbeVonMedium(Medium vonMedium, string materialKey)
     {
-        return penises[catalog[vonMedium][materialKey]].Color;
+        return BuersteVonMedium(vonMedium, materialKey).Color;
     }
 
     private void Dispose(bool disposing)
@@ -125,6 +162,9 @@ public class Materials: IDisposable
         {
             if (disposing)
             {
+                skyPen?.Dispose();
+                skyBrush?.Dispose();
+
                 foreach(var pen in penises)
                 {
                     pen.Dispose();

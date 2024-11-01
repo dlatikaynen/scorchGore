@@ -30,6 +30,8 @@ internal static class LevelSequenzierer
                 levelBeschreibung.MissionsNummer = 1;
                 levelBeschreibung.LevelNummerInMission = 1;
                 levelBeschreibung.NameEn = "The Blue Mountains";
+                levelBeschreibung.Zufallszahl = zufallsZahlenGenerator;
+                levelBeschreibung.ColorBackground = Color.DarkSlateBlue;
                 levelBeschreibung.Plateau(645 - 460, 82, 200);
                 levelBeschreibung.SpielerPosition1 = new Point(112, (int)levelBeschreibung.Height - 185);
                 levelBeschreibung.Plateau(645 - 415, 638, 700);
@@ -55,6 +57,7 @@ internal static class LevelSequenzierer
                 levelBeschreibung.LevelNummerInMission = 2;
                 levelBeschreibung.NameEn = "The Blue Cave";
                 levelBeschreibung.Zufallszahl = zufallsZahlenGenerator;
+                levelBeschreibung.ColorBackground = Color.DarkSlateBlue;
                 levelBeschreibung.SpielerPosition1 = new Point(GameLogicConstants.SpielerBreite, 300);
                 levelBeschreibung.SpielerPosition2 = new Point(800 - GameLogicConstants.SpielerBreite, 300);
                 levelBeschreibung.MaterialThemeKey = "WOTMSTD";
@@ -89,7 +92,8 @@ internal static class LevelSequenzierer
                 levelBeschreibung.LevelNummerInMission = 3;
                 levelBeschreibung.NameEn = "Rock Bottom";
                 levelBeschreibung.Zufallszahl = zufallsZahlenGenerator;
-                levelBeschreibung.BeschreibungsSkript = LevelBeschreibungsSkript.Laden(levelBeschreibung);
+                levelBeschreibung.BeschreibungsSkript = LevelBeschreibungsSkript.LoadLevelBeschreibungSourceCode(3);
+                levelBeschreibung.ColorBackground = Color.DarkSlateBlue;
                 levelBeschreibung.SpielerPosition1 = new Point(112, GameLogicConstants.SpielerBasisHoehe);
                 levelBeschreibung.SpielerPosition2 = new Point(673, GameLogicConstants.SpielerBasisHoehe);
                 levelBeschreibung.MaterialThemeKey = "WOTMSTD";

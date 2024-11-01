@@ -38,9 +38,10 @@ public class LevelBeschreibungsSkript
         return levelSkript;
     }
 
-    private void LevelDateiLaden(LevelBeschreibung levelBeschreibung)
+    public static string LoadLevelBeschreibungSourceCode(int levelNummer)
     {
-        var levelDateiName = GetLevelDateiname(levelBeschreibung.LevelNummer);
+        var levelDateiName = GetLevelDateiname(levelNummer);
+
         if (levelDateiName != null)
         {
             using var levelDatei = Assembly.GetExecutingAssembly().GetManifestResourceStream(
@@ -49,6 +50,18 @@ public class LevelBeschreibungsSkript
             )!;
 
             using var levelReader = new StreamReader(levelDatei);
+
+            return levelReader.ReadToEnd().Trim();
+        }
+
+        return string.Empty;
+    }
+
+    private void LevelDateiLaden(LevelBeschreibung levelBeschreibung)
+    {
+        if (!string.IsNullOrWhiteSpace(levelBeschreibung.BeschreibungsSkript))
+        {
+            using var levelReader = new StringReader(levelBeschreibung.BeschreibungsSkript);
             string levelZeile;
             var aktuellesMaterial = Medium.Berg;
 

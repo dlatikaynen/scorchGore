@@ -19,14 +19,14 @@ public class GoreArena
 
     private Materials Materials => CurrentLevel.Materials;
 
-    public void Initialize(int levelNr)
+    public void Initialize(LevelBeschreibung level)
     {
         if (Target == null)
         {
             throw new NullReferenceException(nameof(Target));
         }
 
-        CurrentLevel = LevelSequenzierer.ErzeugeLevelBeschreibung(levelNr);
+        CurrentLevel = level;
         Target.SetupBackbuffer((int)CurrentLevel.Width, (int)CurrentLevel.Height);
         LevelZeichner.Zeichne(Target.Image, CurrentLevel, Target.BackBuffer);
 

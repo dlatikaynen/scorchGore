@@ -30,7 +30,7 @@ internal static class LevelZeichner
             if (obenUnten == ObenUnten.BergTeil)
             {
                 /* den himmel zeichnen wir nur beim ersten mal */
-                if(string.IsNullOrEmpty(levelBeschreibung.BackdropAssetKey) && !levelBeschreibung.ColorBackground.IsEmpty)
+                if (string.IsNullOrEmpty(levelBeschreibung.BackdropAssetKey) && !levelBeschreibung.ColorBackground.IsEmpty)
                 {
                     var backBrush = levelBeschreibung.Materials.BuersteVonMedium(Medium.Himmel, "MAT_SKY");
 
@@ -109,13 +109,14 @@ internal static class LevelZeichner
 
         if (levelBeschreibung.IstGeskriptet)
         {
+            var script = LevelBeschreibungsSkript.Laden(levelBeschreibung);
             var zeichenAbschnitt = zeichenFlaeche.BeginContainer();
             ObenWirdUnten(woBinIch, zeichenFlaeche);
             zeichenFlaeche.ScaleTransform(2f, 2f);
             zeichenFlaeche.SmoothingMode = SmoothingMode.None;
             zeichenFlaeche.InterpolationMode = InterpolationMode.NearestNeighbor;
             zeichenFlaeche.PixelOffsetMode = PixelOffsetMode.Half;
-            foreach (var architekturPfad in levelBeschreibung.BeschreibungsSkript.Pfade)
+            foreach (var architekturPfad in script.Pfade)
             {
                 if (architekturPfad.terrainMaterial == Medium.Gras)
                 {
