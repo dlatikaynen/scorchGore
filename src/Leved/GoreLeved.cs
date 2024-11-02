@@ -8,6 +8,8 @@ public class GoreLeved
     public LevelBeschreibung EditedLevel = new();
     public frmLeved? Target { get; set; }
 
+    private bool backDrop = false;
+
     public void Initialize(LevelBeschreibung level)
     {
         if (Target == null)
@@ -23,8 +25,39 @@ public class GoreLeved
         EditedLevel = level;
         Target.SetupBackbuffer((int)EditedLevel.Width, (int)EditedLevel.Height);
         EditedLevel.Materials.PrepareForLevel(EditedLevel);
+        UpdateBackdrop();
         LevelZeichner.Zeichne(Target.Image, EditedLevel, Target.BackBuffer);
         LevedEvents.LevedPropertyChanged += ListenPropertyChange;
+    }
+
+    private void UpdateBackdrop()
+    {
+        if (Target == null)
+        {
+            return;
+        }
+
+        if (string.IsNullOrEmpty(EditedLevel.BackdropAssetKey))
+        {
+            backDrop = false;
+        }
+        else 
+        { 
+            var bkdr = DesignWorkspace.Assets.SingleOrDefault(a => a.Name == EditedLevel.BackdropAssetKey);
+
+            if (bkdr != null)
+            {
+                using var inFile = File.OpenRead($@".\{bkdr.Id:D}.lump");
+                Target.Backdrop = new(Image.FromStream(inFile, useEmbeddedColorManagement: true, validateImageData: true));
+                backDrop = true;
+            }
+        }
+
+        if (!backDrop && Target.Backdrop != null)
+        {
+            Target.Backdrop?.Dispose();
+            Target.Backdrop = null;
+        }
     }
 
     private void ListenPropertyChange(object sender, LevedEvents.LevedPropertyChangedEventArgs e)
@@ -34,23 +67,11 @@ public class GoreLeved
             return;
         }
 
-        var backDrop = false;
-        if (!string.IsNullOrEmpty(EditedLevel.BackdropAssetKey))
-        {
-            var bkdr = DesignWorkspace.Assets.SingleOrDefault(a => a.Name == EditedLevel.BackdropAssetKey);
+        var shouldHaveBackdrop = !string.IsNullOrEmpty(EditedLevel.BackdropAssetKey);
 
-            if(bkdr != null)
-            {
-                using var inFile = File.OpenRead($@".\{bkdr.Id:D}.lump");
-                Target.Backdrop = new(Image.FromStream(inFile, useEmbeddedColorManagement: true, validateImageData: true));
-                backDrop = true;
-            }
-        }
-
-        if (!backDrop)
+        if (shouldHaveBackdrop != backDrop)
         {
-            Target.Backdrop?.Dispose();
-            Target.Backdrop = null;
+            UpdateBackdrop();
         }
 
         EditedLevel.Materials.PrepareForLevel(EditedLevel);

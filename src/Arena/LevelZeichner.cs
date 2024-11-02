@@ -111,11 +111,13 @@ internal static class LevelZeichner
         {
             var script = LevelBeschreibungsSkript.Laden(levelBeschreibung);
             var zeichenAbschnitt = zeichenFlaeche.BeginContainer();
+            
             ObenWirdUnten(woBinIch, zeichenFlaeche);
             zeichenFlaeche.ScaleTransform(2f, 2f);
             zeichenFlaeche.SmoothingMode = SmoothingMode.None;
             zeichenFlaeche.InterpolationMode = InterpolationMode.NearestNeighbor;
             zeichenFlaeche.PixelOffsetMode = PixelOffsetMode.Half;
+            zeichenFlaeche.CompositingMode = CompositingMode.SourceCopy;
             foreach (var architekturPfad in script.Pfade)
             {
                 if (architekturPfad.medium == Medium.Gras)

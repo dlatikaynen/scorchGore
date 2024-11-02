@@ -1,6 +1,7 @@
 ﻿using Fso.ScorchGore;
 using Microsoft.VisualBasic.Devices;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using System.Reflection;
 
 namespace ScorchGore.Leved;
@@ -29,8 +30,10 @@ public partial class frmLeved : Form
         _viewport = viewport;
         InitializeComponent();
         _viewport.Target = this;
-        Image = new(1, 1, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+        Image = new(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
         BackBuffer = Graphics.FromImage(Image);
+        BackBuffer.CompositingMode = CompositingMode.SourceCopy;
+
         var gridColor = Color.FromKnownColor(KnownColor.AntiqueWhite);
         gridPen = new Pen(Color.FromArgb(0x33, gridColor.R, gridColor.G, gridColor.B));
     }
@@ -39,6 +42,7 @@ public partial class frmLeved : Form
     {
         Image = new(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         BackBuffer = Graphics.FromImage(Image);
+        BackBuffer.CompositingMode = CompositingMode.SourceCopy;
     }
 
     protected override void OnPaintBackground(PaintEventArgs e)

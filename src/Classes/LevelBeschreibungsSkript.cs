@@ -71,7 +71,7 @@ public class LevelBeschreibungsSkript
 
             using var levelReader = new StreamReader(levelDatei);
 
-            return levelReader.ReadToEnd().Trim();
+            return levelReader.ReadToEnd();
         }
 
         return string.Empty;

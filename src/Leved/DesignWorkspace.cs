@@ -395,7 +395,7 @@ internal static class DesignWorkspace
         var slBackdropAssetKey = inStream.ReadByte();
         var bsBackdropAssetKey = inStream.ReadBytes(slBackdropAssetKey);
         var backdropAssetKey = Encoding.UTF8.GetString(bsBackdropAssetKey);
-        var slBeschreibungsSkript = inStream.ReadByte();
+        var slBeschreibungsSkript = inStream.ReadInt32();
         var bsBeschreibungsSkript = inStream.ReadBytes(slBeschreibungsSkript);
         var beschreibungsSkript = Encoding.UTF8.GetString(bsBeschreibungsSkript);
         var lvl = new LevelBeschreibung
@@ -789,7 +789,7 @@ internal static class DesignWorkspace
         var bBackdropAssetKey = Encoding.UTF8.GetBytes(level.BackdropAssetKey);
         var slBackdropAssetKey = (byte)bBackdropAssetKey.Length;
         var bBeschreibungsSkript = Encoding.UTF8.GetBytes(level.BeschreibungsSkript);
-        var slBeschreibungsSkript = (byte)bBeschreibungsSkript.Length;
+        var slBeschreibungsSkript = bBeschreibungsSkript.Length;
 
         oStream.Write(slNameEn);
         oStream.Write(bNameEn, 0, slNameEn);

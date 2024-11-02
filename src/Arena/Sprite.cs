@@ -1,4 +1,5 @@
 ﻿using ScorchGore.Constants;
+using System.Drawing.Drawing2D;
 
 namespace ScorchGore.Arena;
 
@@ -89,6 +90,7 @@ internal abstract class Sprite : IDisposable
         BackingBitmap = new Bitmap(Width, Height);
         using (var g = Graphics.FromImage(BackingBitmap))
         {
+            g.CompositingMode = CompositingMode.SourceCopy;
             g.DrawImage(
                 arena.Image,
                 destRect: new Rectangle(0, 0, Width, Height),
@@ -102,6 +104,7 @@ internal abstract class Sprite : IDisposable
         DingPic = new Bitmap(Width, Height);
         using (var gd = Graphics.FromImage(DingPic))
         {
+            gd.CompositingMode = CompositingMode.SourceCopy;
             Draw(gd);
         }
 

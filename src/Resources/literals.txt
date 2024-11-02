@@ -587,3 +587,13 @@
 118	en	Sky (liminal zone at the outer edge of the atmosphere)
 118	fi	Taivas (siirtymävyöhyke ilmakehän ulkoreunalla)
 118	ua	Небо (гранична зона на краю атмосфери)
+
+119	de	Beschreibungsskript
+119	en	Scene script
+119	fi	TODO:
+119	ua	TODO:
+
+120	de	Programm, das den Aufbau des Levels steuert
+120	en	Program to control the composition of the level
+120	fi	TODO:
+120	ua	TODO:

@@ -2,6 +2,8 @@
 using ScorchGore.Constants;
 using ScorchGore.Leved;
 using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Drawing.Design;
 using System.Reflection;
 using Xlat = ScorchGore.Translation.Translation;
 
@@ -75,14 +77,16 @@ public class LevelBeschreibung
 
     [TypeConverter(typeof(BackdropAssetDropdownTypeConverter))]
     public string BackdropAssetKey { get; set; } = string.Empty;
-    #endregion
 
-    public List<AssetPlacement> AssetPlacement { get; set; } = new();
+    [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+    public string BeschreibungsSkript { get; set; } = string.Empty;
 
     /* Besonderheiten der Topologie */
     public Dictionary<int, Plateau> Plateaus { get; private set; }
+    #endregion
 
-    public string BeschreibungsSkript { get; set; } = string.Empty;
+    [Browsable(false)]
+    public List<AssetPlacement> AssetPlacement { get; set; } = new();
 
     [Browsable(false)]
     public Materials Materials { get; set; }

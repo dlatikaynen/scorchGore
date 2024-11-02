@@ -186,6 +186,7 @@ public partial class frmGame : Form
                 break;
 
             case SequencerCommands.CANVAS_THE_CITY_AND_BRUSH_THE_BACKDROP:
+                DesignWorkspace.EnsureDesignWorkspace();
                 _arena.Initialize(DesignWorkspace.Levels.First());
                 break;
 

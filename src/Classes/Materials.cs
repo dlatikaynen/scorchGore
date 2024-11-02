@@ -48,6 +48,14 @@ public class Materials: IDisposable
             skyBrush = new SolidBrush(lvl.ColorBackground);
             skyPen = new Pen(lvl.ColorBackground);
         }
+        else
+        {
+            // when we have a background bitmap, then the sky color will make that show through
+            var eraser = Color.FromArgb(0, Color.Black);
+
+            skyBrush = new SolidBrush(eraser);
+            skyPen = new Pen(eraser);
+        }
 
         // some required material keys may come from the level beschreibungs script,
         // which can mention some without using an asset ("STAHL MAT_KEY #colorname" syntax)
@@ -131,9 +139,7 @@ public class Materials: IDisposable
     {
         Pen pen;
 
-        var materials = catalog[medium];
-
-        if(materials.TryGetValue(materialKey, out var material))
+        if (catalog.TryGetValue(medium, out var materials) && materials.TryGetValue(materialKey, out var material))
         {
             pen = penises[material];
         }
@@ -143,7 +149,7 @@ public class Materials: IDisposable
         }
         else
         {
-            pen = penises[materials[materialKey]];
+            pen = penises[materials![materialKey]];
         }
 
         pen.Width = width;
@@ -153,9 +159,7 @@ public class Materials: IDisposable
 
     public SolidBrush BuersteVonMedium(Medium medium, string materialKey)
     {
-        var materials = catalog[medium];
-
-        if (materials.TryGetValue(materialKey, out var material))
+        if (catalog.TryGetValue(medium, out var materials) && materials.TryGetValue(materialKey, out var material))
         {
             return bushes[material];
         }
@@ -165,7 +169,7 @@ public class Materials: IDisposable
             return skyBrush!;
         }
 
-        return bushes[materials[materialKey]];
+        return bushes[materials![materialKey]];
     }
 
     public Color FarbeVonMedium(Medium vonMedium, string materialKey)

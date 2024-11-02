@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic.Devices;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using System.Reflection;
 
 namespace ScorchGore.Arena;
@@ -25,14 +26,16 @@ public partial class frmArena : Form
         _arena = arena;
         InitializeComponent();
         _arena.Target = this;
-        Image = new(1, 1, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+        Image = new(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
         BackBuffer = Graphics.FromImage(Image);
+        BackBuffer.CompositingMode = CompositingMode.SourceCopy;
     }
 
     public void SetupBackbuffer(int width, int height)
     {
-        Image = new(width, height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+        Image = new(width, height, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
         BackBuffer = Graphics.FromImage(Image);
+        BackBuffer.CompositingMode = CompositingMode.SourceCopy;
     }
 
     protected override void OnPaintBackground(PaintEventArgs e)
