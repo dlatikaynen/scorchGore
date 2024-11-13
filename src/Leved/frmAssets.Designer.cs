@@ -41,6 +41,8 @@
             mnuAssetsAddSoundEffect = new ToolStripMenuItem();
             mnuAssetAddMusic = new ToolStripMenuItem();
             mnuAssetSeparator = new ToolStripSeparator();
+            mnuAssetPlace = new ToolStripMenuItem();
+            mnuAssetSeparator2 = new ToolStripSeparator();
             mnuAssetView = new ToolStripMenuItem();
             mnuAssetEdit = new ToolStripMenuItem();
             mnuAssetDelete = new ToolStripMenuItem();
@@ -56,6 +58,8 @@
             ilTreeview.Images.SetKeyName(1, "folder_open");
             ilTreeview.Images.SetKeyName(2, "instalment");
             ilTreeview.Images.SetKeyName(3, "asset");
+            ilTreeview.Images.SetKeyName(4, "sfx");
+            ilTreeview.Images.SetKeyName(5, "music");
             // 
             // tvAssets
             // 
@@ -88,7 +92,7 @@
             // 
             // mnuTools
             // 
-            mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuAssetAddCsg, mnuAssetAddPrefab, mnuAssetAddBackdrop, mnuAssetsAddSoundEffect, mnuAssetAddMusic, mnuAssetSeparator, mnuAssetView, mnuAssetEdit, mnuAssetDelete });
+            mnuTools.DropDownItems.AddRange(new ToolStripItem[] { mnuAssetAddCsg, mnuAssetAddPrefab, mnuAssetAddBackdrop, mnuAssetsAddSoundEffect, mnuAssetAddMusic, mnuAssetSeparator, mnuAssetPlace, mnuAssetSeparator2, mnuAssetView, mnuAssetEdit, mnuAssetDelete });
             mnuTools.MergeAction = MergeAction.Insert;
             mnuTools.MergeIndex = 3;
             mnuTools.Name = "mnuTools";
@@ -100,12 +104,14 @@
             mnuAssetAddCsg.Name = "mnuAssetAddCsg";
             mnuAssetAddCsg.Size = new Size(174, 22);
             mnuAssetAddCsg.Text = "Add CSG...";
+            mnuAssetAddCsg.Click += mnuAssetAddCsg_Click;
             // 
             // mnuAssetAddPrefab
             // 
             mnuAssetAddPrefab.Name = "mnuAssetAddPrefab";
             mnuAssetAddPrefab.Size = new Size(174, 22);
             mnuAssetAddPrefab.Text = "Add prefab...";
+            mnuAssetAddPrefab.Click += mnuAssetAddPrefab_Click;
             // 
             // mnuAssetAddBackdrop
             // 
@@ -119,23 +125,38 @@
             mnuAssetsAddSoundEffect.Name = "mnuAssetsAddSoundEffect";
             mnuAssetsAddSoundEffect.Size = new Size(174, 22);
             mnuAssetsAddSoundEffect.Text = "Add sound effect...";
+            mnuAssetsAddSoundEffect.Click += mnuAssetAddSoundEffect_Click;
             // 
             // mnuAssetAddMusic
             // 
             mnuAssetAddMusic.Name = "mnuAssetAddMusic";
             mnuAssetAddMusic.Size = new Size(174, 22);
             mnuAssetAddMusic.Text = "Add music...";
+            mnuAssetAddMusic.Click += mnuAssetAddMusic_Click;
             // 
             // mnuAssetSeparator
             // 
             mnuAssetSeparator.Name = "mnuAssetSeparator";
             mnuAssetSeparator.Size = new Size(171, 6);
             // 
+            // mnuAssetPlace
+            // 
+            mnuAssetPlace.Name = "mnuAssetPlace";
+            mnuAssetPlace.Size = new Size(174, 22);
+            mnuAssetPlace.Text = "Place in level";
+            mnuAssetPlace.Click += mnuAssetPlace_Click;
+            // 
+            // mnuAssetSeparator2
+            // 
+            mnuAssetSeparator2.Name = "mnuAssetSeparator2";
+            mnuAssetSeparator2.Size = new Size(171, 6);
+            // 
             // mnuAssetView
             // 
             mnuAssetView.Name = "mnuAssetView";
             mnuAssetView.Size = new Size(174, 22);
             mnuAssetView.Text = "&View...";
+            mnuAssetView.Click += mnuAssetView_Click;
             // 
             // mnuAssetEdit
             // 
@@ -143,12 +164,14 @@
             mnuAssetEdit.Name = "mnuAssetEdit";
             mnuAssetEdit.Size = new Size(174, 22);
             mnuAssetEdit.Text = "&Edit...";
+            mnuAssetEdit.Click += mnuAssetEdit_Click;
             // 
             // mnuAssetDelete
             // 
             mnuAssetDelete.Name = "mnuAssetDelete";
             mnuAssetDelete.Size = new Size(174, 22);
             mnuAssetDelete.Text = "&Delete";
+            mnuAssetDelete.Click += mnuAssetDelete_Click;
             // 
             // frmAssets
             // 
@@ -183,5 +206,7 @@
         private ToolStripMenuItem mnuAssetAddBackdrop;
         private ToolStripSeparator mnuAssetSeparator;
         private ToolStripMenuItem mnuAssetView;
+        private ToolStripMenuItem mnuAssetPlace;
+        private ToolStripSeparator mnuAssetSeparator2;
     }
 }

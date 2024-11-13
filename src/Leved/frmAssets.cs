@@ -39,7 +39,8 @@ public partial class frmAssets : Form
                 case AssetClass.Csg:
                     {
                         var container = asset.IsBuiltin ? csg : csg_custom;
-                        _ = container.Nodes.Add(key: $"{csg.Name}.{asset.Id:D}", text: asset.Name, imageKey: "asset", selectedImageKey: "asset");
+
+                        AddAssetToTree(container, asset);
                     }
 
                     break;
@@ -47,23 +48,17 @@ public partial class frmAssets : Form
                 case AssetClass.Backdrop:
                     {
                         var container = asset.IsBuiltin ? bkdr : bkdr_custom;
-                        var bkdrNode = container.Nodes.Add(key: $"{container.Name}.{asset.Id:D}", text: asset.Name);
 
-                        if (asset.Icon.Length != 0)
-                        {
-                            using var bIcon = new MemoryStream(asset.Icon);
-                            var icon = Image.FromStream(bIcon);
-                            var iconKey = $"{asset.Id:D}";
+                        AddAssetToTree(container, asset);
+                    }
 
-                            ilTreeview.Images.Add(iconKey, icon);
-                            bkdrNode.ImageKey = iconKey;
-                            bkdrNode.SelectedImageKey = iconKey;
-                        }
-                        else
-                        {
-                            bkdrNode.ImageKey = "asset";
-                            bkdrNode.SelectedImageKey = "asset";
-                        }
+                    break;
+
+                case AssetClass.Prefab:
+                    {
+                        var container = asset.IsBuiltin ? prefab : prefab_custom;
+
+                        AddAssetToTree(container, asset);
                     }
 
                     break;
@@ -73,23 +68,164 @@ public partial class frmAssets : Form
         Xlat.RegisterForTranslation(frmAssets_TranslationChanged);
     }
 
+    private void AddAssetToTree(TreeNode container, Asset asset)
+    {
+        var bkdrNode = container.Nodes.Add(key: $"{container.Name}.{asset.Id:D}", text: asset.Name);
+
+        if (asset.Icon.Length != 0)
+        {
+            using var bIcon = new MemoryStream(asset.Icon);
+            var icon = Image.FromStream(bIcon);
+            var iconKey = $"{asset.Id:D}";
+
+            ilTreeview.Images.Add(iconKey, icon);
+            bkdrNode.ImageKey = iconKey;
+            bkdrNode.SelectedImageKey = iconKey;
+        }
+        else
+        {
+            var icon = "asset";
+
+            if (asset.Class == AssetClass.Sfx)
+            {
+                icon = "sfx";
+            }
+            else if (asset.Class == AssetClass.Moosic)
+            {
+                icon = "music";
+            }
+
+            bkdrNode.ImageKey = icon;
+            bkdrNode.SelectedImageKey = icon;
+        }
+    }
+
     private void frmAssets_TranslationChanged(object sender, Xlat.TranslationChangedEventArgs e)
     {
         Text = Xlat.µ(86); // Asset Manager
         Xlat.TranslateTreeview(tvAssets);
     }
 
+    private void mnuAssetAddCsg_Click(object sender, EventArgs e)
+    {
+
+    }
+
     private void mnuAssetAddBackdrop_Click(object sender, EventArgs e)
     {
+        AddImageAsset("bkdr", Xlat.µ(110), AssetClass.Backdrop); // Import level backdrop picture
+    }
+
+    private void mnuAssetAddPrefab_Click(object sender, EventArgs e)
+    {
+        AddImageAsset("prefab", Xlat.µ(121), AssetClass.Prefab); // Import prefab asset picture
+    }
+
+    private void mnuAssetAddSoundEffect_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void mnuAssetAddMusic_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void mnuAssetView_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void mnuAssetEdit_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void mnuAssetPlace_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void mnuAssetDelete_Click(object sender, EventArgs e)
+    {
+        var node = tvAssets.SelectedNode;
+
+        if (node == null)
+        {
+            return;
+        }
+
+        var keyParts = node.Name.Split('.');
+
+        if (keyParts.Length != 3)
+        {
+            return;
+        }
+
+        var folderKey = keyParts[1];
+        var assetId = Guid.Parse(keyParts[2]);
+        var asset = DesignWorkspace.Assets.Single(a => a.Id == assetId);
+
+        // where is it used?
+        var usages = new List<(int levelNr, int missionNr, string levelName, int countUsed)>();
+        foreach (var level in DesignWorkspace.Levels)
+        {
+            var countUsed = level.AssetPlacement.Count(p => p.AssetKey == asset.Name);
+
+            if (countUsed > 0)
+            {
+                usages.Add((level.LevelNummer, level.MissionsNummer, level.LevelName, countUsed));
+            }
+        }
+
+        var proceed = usages.Count == 0;
+        if (usages.Count > 0)
+        {
+            using var confirm = new frmConfirmDeleteUsedAsset();
+
+            confirm.Prepare(usages.Select(u =>
+            {
+                return $"{u.missionNr}/{u.levelNr}: {u.countUsed}x ({u.levelName})";
+            }).ToArray(), asset.Class, asset.Name);
+
+            var result = confirm.ShowDialog(this);
+
+            if (result == DialogResult.OK)
+            {
+                proceed = true;
+            }
+        }
+
+        if (proceed)
+        {
+            DesignWorkspace.Assets.Remove(asset);
+            DesignWorkspace.SetDirty();
+            tvAssets.Nodes.Remove(node);
+
+            var localLump = $@".\{assetId:D}.lump";
+
+            try
+            {
+                if (File.Exists(localLump))
+                {
+                    File.Delete(localLump);
+                }
+            }
+            catch { }
+        }
+    }
+
+    private void AddImageAsset(string folderKey, string ofdTitle, AssetClass assetClass)
+    {
         var folder = tvAssets.SelectedNode;
-        
+
         if (folder == null)
         {
             return;
         }
 
         var keyParts = folder.Name.Split('.');
-        var destKey = $"{keyParts[0]}.bkdr";
+        var destKey = $"{keyParts[0]}.{folderKey}";
         var destNode = tvAssets.Nodes.Find(destKey, true).SingleOrDefault();
         var isBuiltin = keyParts[0] == "1";
 
@@ -114,7 +250,7 @@ public partial class frmAssets : Form
             ShowPreview = true,
             SupportMultiDottedExtensions = true,
             ValidateNames = true,
-            Title = Xlat.µ(110) // Import level backdrop picture
+            Title = ofdTitle
         };
 
         if (ofd.ShowDialog(this) == DialogResult.OK)
@@ -150,7 +286,7 @@ public partial class frmAssets : Form
 
                     var assetId = Guid.NewGuid();
                     var assetName = UniqueAssetNameFromFile(Path.GetFileNameWithoutExtension(file));
-                    var asset = new Asset(AssetClass.Backdrop, assetId, isBuiltin, assetName);
+                    var asset = new Asset(assetClass, assetId, isBuiltin, assetName);
                     var imported = $"{assetId:D}.lump";
 
                     if (Path.GetFileName(file) != imported)
@@ -180,7 +316,7 @@ public partial class frmAssets : Form
 
                     asset.Thumb = thumbStream.ToArray();
 
-                    var assetNode = destNode.Nodes.Add(key: $"{keyParts[0]}.bkdr.{assetId}", text: assetName);
+                    var assetNode = destNode.Nodes.Add(key: $"{keyParts[0]}.{folderKey}.{assetId}", text: assetName);
 
                     assetNode.ImageKey = $"{assetId:D}";
                     assetNode.SelectedImageKey = assetNode.ImageKey;
@@ -188,6 +324,7 @@ public partial class frmAssets : Form
                     DesignWorkspace.Assets.Add(asset);
                     DesignWorkspace.SetDirty();
                     assetNode.EnsureVisible();
+                    tvAssets.SelectedNode = assetNode;
                 }
             }
             finally

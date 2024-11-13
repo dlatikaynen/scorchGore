@@ -597,3 +597,53 @@
 120	en	Program to control the composition of the level
 120	fi	TODO:
 120	ua	TODO:
+
+121	de	Bild für Prefab importieren
+121	en	Import prefab asset picture
+121	fi	TODO:
+121	ua	TODO:
+
+122	de	Das {0}-Asset "{1}" wird verwendet:
+122	en	The {0} asset "{1}" is used:
+122	fi	TODO:
+122	ua	TODO:
+
+123	de	Trotzdem löschen?
+123	en	Proceed to delete anyway?
+123	fi	TODO:
+123	ua	TODO:
+
+124	de	Asset in Verwendung
+124	en	Delete used asset
+124	fi	TODO:
+124	ua	TODO:
+
+125	de	&Ja
+125	en	&Yes
+125	fi	&Kyllä
+125	ua	TODO:
+
+126	de	&Abbrechen
+126	en	&Cancel
+126	fi	TODO:
+126	ua	TODO:
+
+127	de	Musik
+127	en	music
+127	fi	TODO:
+127	ua	TODO:
+
+128	de	Geräusch
+128	en	sound effect
+128	fi	TODO:
+128	ua	TODO:
+
+129	de	Hintergrund
+129	en	backdrop
+129	fi	TODO:
+129	ua	TODO:
+
+130	de	Ding
+130	en	pre-fab
+130	fi	TODO:
+130	ua	TODO:
