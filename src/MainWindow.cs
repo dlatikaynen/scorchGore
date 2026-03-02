@@ -1,3 +1,4 @@
+using ScorchGore.Classes;
 using ScorchGore.Configuration;
 using ScorchGore.Constants;
 using ScorchGore.Forms;
@@ -60,6 +61,9 @@ public partial class MainWindow : Form
         }
 
         isFirstActivate = false;
+        int cardsWidth = 200;
+        int cardsHeight = 320;
+        var cardsAvailable = Cards.CdtInit(ref cardsWidth, ref cardsHeight);
 
         // https://stackoverflow.com/a/23124456/1132334
         var handle = outputPane.Handle;
